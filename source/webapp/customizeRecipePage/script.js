@@ -49,9 +49,9 @@ function init() {
   }
 
   const savedIndex = localStorage.getItem("savedIndex");
-  //users entered this page by clicking savedRecipes
+  //users entered this page by clicking savedRecipesPage
   if (savedIndex) {
-    const allSaved = JSON.parse(localStorage.getItem("savedRecipes"))[
+    const allSaved = JSON.parse(localStorage.getItem("savedRecipesPage"))[
       savedIndex
     ];
 
@@ -120,7 +120,7 @@ function init() {
       localStorage.setItem("custom", newRecipe);
 
       // Go to review
-      window.location = "../reviewRecipe/reviewRecipe.html";
+      window.location = "../reviewRecipePage/reviewRecipe.html";
     }
   });
 }

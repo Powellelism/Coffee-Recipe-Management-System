@@ -29,7 +29,7 @@ function init() {
     //jumps to cutomize page when the "view" button is clicked
     reviewButtonEl.addEventListener("click", () => {
       localStorage.setItem("Condition", "Edit");
-      window.location = "../customizeRecipe/customizeRecipe.html";
+      window.location = "../customizeRecipePage/customizeRecipe.html";
       localStorage.setItem("savedIndex", i);
     });
     //deletes the recipe when the "delete" button is clicked
@@ -49,7 +49,7 @@ function init() {
  */
 function removeEachRecipes(name) {
   //defined and set all the needed elements
-  let savedArr = JSON.parse(localStorage.getItem("savedRecipes"));
+  let savedArr = JSON.parse(localStorage.getItem("savedRecipesPage"));
   let nameRecipes = localStorage.getItem("nameRecipes");
   let tbl = document.querySelector("table");
 
@@ -74,7 +74,7 @@ function removeEachRecipes(name) {
   } else {
     localStorage.removeItem("nameRecipes");
   }
-  localStorage.setItem("savedRecipes", JSON.stringify(savedArr));
+  localStorage.setItem("savedRecipesPage", JSON.stringify(savedArr));
 }
 
 /**
@@ -85,11 +85,11 @@ function scrollable() {
 }
 
 /**
- * Get data of coffee recipes whose key is "savedRecipes" from localStorage
+ * Get data of coffee recipes whose key is "savedRecipesPage" from localStorage
  * @returns {array} an array of all the coffee recipes from localStorage
  */
 function getRecipesFromStorage() {
-  return JSON.parse(window.localStorage.getItem("savedRecipes"));
+  return JSON.parse(window.localStorage.getItem("savedRecipesPage"));
 }
 
 /**

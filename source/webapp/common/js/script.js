@@ -13,17 +13,17 @@ async function init() {
   let createButtonEl = document.querySelectorAll("button")[0];
   // add click event to the button for create new recipes
   createButtonEl.addEventListener("click", () => {
-    window.location = "./presetCustomize/presetCustomize.html";
+    window.location = "../../presetCustomizePage/presetCustomize.html";
   });
   let saveButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
   saveButtonEl.addEventListener("click", () => {
-    window.location = "./savedRecipes/savedRecipes.html";
+    window.location = "../../savedRecipesPage/savedRecipes.html";
   });
   let aboutButtonEl = document.querySelectorAll("button")[2];
   //add click event to the button for view the saved recipes
   aboutButtonEl.addEventListener("click", () => {
-    window.location = "./aboutPage/aboutPage.html";
+    window.location = "../../aboutPage/aboutPage.html";
   });
 }
 

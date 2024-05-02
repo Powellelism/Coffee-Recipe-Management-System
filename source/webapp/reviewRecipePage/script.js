@@ -96,16 +96,16 @@ function init() {
 
       localStorage.setItem(newRecipeName, newRecipe);
 
-      let currentRecipes = localStorage.getItem("savedRecipes");
+      let currentRecipes = localStorage.getItem("savedRecipesPage");
       if (currentRecipes === null) {
         let recipeArray = [];
         recipeArray.push(review);
-        localStorage.setItem("savedRecipes", JSON.stringify(recipeArray));
+        localStorage.setItem("savedRecipesPage", JSON.stringify(recipeArray));
       } else {
         let currentRecipesArray = JSON.parse(currentRecipes);
         currentRecipesArray.push(review);
         localStorage.setItem(
-          "savedRecipes",
+          "savedRecipesPage",
           JSON.stringify(currentRecipesArray)
         );
       }
@@ -138,8 +138,8 @@ function init() {
         localStorage.setItem(newRecipeName, newRecipe);
       }
 
-      //update savedRecipes array
-      let currentRecipes = localStorage.getItem("savedRecipes");
+      //update savedRecipesPage array
+      let currentRecipes = localStorage.getItem("savedRecipesPage");
       let currentRecipesArray = JSON.parse(currentRecipes);
       for (recipe in currentRecipesArray) {
         const reciName = currentRecipesArray[recipe].recipeName;
@@ -148,10 +148,10 @@ function init() {
           break;
         }
       }
-      localStorage.setItem("savedRecipes", JSON.stringify(currentRecipesArray));
+      localStorage.setItem("savedRecipesPage", JSON.stringify(currentRecipesArray));
     }
 
     localStorage.setItem("review", JSON.stringify(review));
-    window.location = "../savedRecipes/savedRecipes.html";
+    window.location = "../savedRecipesPage/savedRecipes.html";
   });
 }
