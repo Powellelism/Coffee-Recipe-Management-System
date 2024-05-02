@@ -1,8 +1,9 @@
+import { loadHome } from '../common/js/common.js';
+
 window.addEventListener("DOMContentLoaded", init);
 window.onload = function () {
-  this.loadHome();
+  loadHome();
 };
-
 /**
  * add two buttons and one for choosing preset recipes and one for
  * customizing coffee recipes, and it helps to clean the existed data

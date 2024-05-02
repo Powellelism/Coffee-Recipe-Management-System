@@ -1,8 +1,9 @@
+import { loadHome } from '../common/js/common.js';
+
 window.addEventListener("DOMContentLoaded", init);
 window.onload = function () {
-  this.loadHome();
+  loadHome();
 };
-
 /**
  * add View/Edit and delete buttons for each recipes in allSavedRecipes
  * page. For View/Edit button, it will direct to CustomizeRecipe.html

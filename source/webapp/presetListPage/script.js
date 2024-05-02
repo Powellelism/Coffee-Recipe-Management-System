@@ -1,9 +1,9 @@
+import { loadHome } from '../common/js/common.js';
+
 window.addEventListener("DOMContentLoaded", init);
-
 window.onload = function () {
-  this.loadHome();
+  loadHome();
 };
-
 /**
  * read data of recipes and add events for buttons on preset-recipies.html
  */

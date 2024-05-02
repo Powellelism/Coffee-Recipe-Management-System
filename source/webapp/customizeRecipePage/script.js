@@ -1,6 +1,8 @@
+import { loadHome } from '../common/js/common.js';
+
 window.addEventListener("DOMContentLoaded", init);
 window.onload = function () {
-  this.loadHome();
+  loadHome();
 };
 /**
  * Load the data of coffee recipe from localStorage, and show them on
