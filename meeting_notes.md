@@ -1,19 +1,29 @@
 Constantly updated meeting notes! Find the most recent one on top.
 
-05/02:
+* 05/02:
+    * Need to put features into Github, link issues. Update workplan.md on repo.
+    * Familiarized ourselves with Justin's repo. 
 
-Need to put features into Github, link issues. Update workplan.md on repo.
-Familiarized ourselves with Justin's repo. 
+    * Hours available: 8-10 hours per person? People present voted that. So around 400 hours total?
 
-Hours available: 8-10 hours per person? People present voted that. So around 400 hours total?
+    * Draw out UI?
+    * Extending to "drinks", not just coffee.
+    * Vanilla JS for accessibility/compatibility, better backend for navigation setup.
+    * Couple images too big--we will likely use new images though.
+    * New logo--Lea.
 
-Draw out UI?
-Extending to "drinks", not just coffee.
-Vanilla JS for accessibility/compatibility, better backend for navigation setup.
-Couple images too big--we will likely use new images though.
-New logo--Lea.
+    * Creation of recipe: can they choose inappropriate things? ChatGPT checked: does not comply, so we're good.
 
-Creation of recipe: can they choose inappropriate things? ChatGPT checked: does not comply, so we're good.
+    * Wireframe diagram done for following scenarios
+        * User can browse popular and recent recipes without logging in
+        * User can register 
+        * User can login
+        * User can reset password
+        * User can see popular and recent recipes know logged in with save, add comment, and rate buttons
+        * User can create recipes
+        * User can choose to fill out a expanding list to write down a recipe
+        * User can choose to autogenerate a recipe based on responses to questions which is fed into a LLM
+
 
 05/01:
 
@@ -97,3 +107,5 @@ Team name: Will vote on Slack.
 
 Attendance (just so we know who to update):
 Jenny, Lea, Chau, Mark, Steven, Justin, Adarsh, Rahul
+
+
