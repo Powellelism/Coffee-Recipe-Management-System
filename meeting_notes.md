@@ -24,6 +24,7 @@ Constantly updated meeting notes! Find the most recent one on top.
         * User can choose to fill out a expanding list to write down a recipe
         * User can choose to autogenerate a recipe based on responses to questions which is fed into a LLM
 
+    * **Important** first sprint only to get the team accustomed to the repo we will assign tests to be written by everyone on the team. Please write tests to learn the repo and gauge understanding.
 
 * 05/01:
 
