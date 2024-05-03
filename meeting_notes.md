@@ -25,31 +25,31 @@ Constantly updated meeting notes! Find the most recent one on top.
         * User can choose to autogenerate a recipe based on responses to questions which is fed into a LLM
 
 
-05/01:
+* 05/01:
 
-What's been done: Github project has been set up. 
+    * What's been done: Github project has been set up. 
 
-Went over our to-do list:
-- Finalize our list of features for the project
-  - Please check out: https://docs.google.com/spreadsheets/d/1pB0eEN4R1vffWt2BwSEUpGWTNUPttBIS_8201fQf7qk/edit#gid=0
-- Get familiar with the repository: dig around, maybe create a diagram of the file structure. Justin said he could give us an in-depth review.
-- Planning poker: estimate time for features
-- Prioritize features: Based on what? Interest?
-- Start putting on Github, assigning people. Subteams possible. 
-    - Assignments: when people have chosen features to work on, they should break it down into tasks, add those tasks to Github, and include time estimates. Time estimate should be reviewed by Emin/I or another person on subteam.
-    - Tasks that all features should have: testing. Should be complete first.
-- Set up weekly meetings: It's been a bit tough to coordinate 10 people. Our plan is to have weekly meetings every Thursday at 6:30 p.m. on the top floor of the DIB. Our goal is to have at least two people working on each feature, so they would be your sub-team. If we all make sure at least one person from our sub-team is at the meeting, then we can update each other (like a buddy system). So sub-teams are repsonsible for keeping each other on track.
+    * Went over our to-do list:
+        * Finalize our list of features for the project
+        * Please check out: [To-Do Spreadsheet] (https://docs.google.com/spreadsheets/d/1pB0eEN4R1vffWt2BwSEUpGWTNUPttBIS_8201fQf7qk/edit#gid=0)
+    * Get familiar with the repository: dig around, maybe create a diagram of the file structure. Justin said he could give us an in-depth review.
+    * Planning poker: estimate time for features
+    * Prioritize features: Based on what? Interest?
+    * Start putting on Github, assigning people. Subteams possible. 
+        * Assignments: when people have chosen features to work on, they should break it down into tasks, add those tasks to Github, and include time estimates. Time estimate should be reviewed by Emin/I or another person on subteam.
+        * Tasks that all features should have: testing. Should be complete first.
+    * Set up weekly meetings: It's been a bit tough to coordinate 10 people. Our plan is to have weekly meetings every Thursday at 6:30 p.m. on the top floor of the DIB. Our goal is to have at least two people working on each feature, so they would be your sub-team. If we all make sure at least one person from our sub-team is at the meeting, then we can update each other (like a buddy system). So sub-teams are repsonsible for keeping each other on track.
 
-* Link tasks to features with issue #
-Github todo:
-- Add feature to Github
-    - Add to the description: Write out your testing scenario(s) for this feature. Ex: Given (example start state), when (the user takes example action), then (this should happen). Let’s write these tests first, then start implementing!
-- Break down into tasks, add to Github
-    - Link tasks to feature
-- Assign tasks to people
-- Add time estimates —> if you estimate a task time, ask Emin or I for review
+    * Link tasks to features with issue #
+    * Github todo:
+        * Add feature to Github
+        * Add to the description: Write out your testing scenario(s) for this feature. Ex: Given (example start state), when (the user takes example action), then (this should happen). Let’s write these tests first, then start implementing!
+        * Break down into tasks, add to Github
+            * Link tasks to feature
+        * Assign tasks to people
+        * Add time estimates —> if you estimate a task time, ask Emin or Lea for review
 
-- Keep the project coffee related? Emin feels it is limiting, so we should branch out into food.
+    * Keep the project coffee related? Emin feels it is limiting, so we should branch out into food.
 
 04/25:
 
