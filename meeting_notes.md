@@ -51,61 +51,61 @@ Constantly updated meeting notes! Find the most recent one on top.
 
     * Keep the project coffee related? Emin feels it is limiting, so we should branch out into food.
 
-04/25:
+* 04/25:
 
-Meeting with TA. We will need to do weekly workplans
+    * Meeting with TA. We will need to do weekly workplans
 
-04/21:
-Completed slides for project assessment. Created plan for reviewing projects: Everyone is randomly assigned one project and a second optional project for review. Canva slides have review specifications, and link to Google sheets on Slack for project assignment.
-Need to do: Finalize project selection after project review complete.
+* 04/21:
+    * Completed slides for project assessment. Created plan for reviewing projects: Everyone is randomly assigned one project and a second optional project for review. Canva slides have review specifications, and link to Google sheets on Slack for project assignment.
+    * Need to do: Finalize project selection after project review complete.
 
-04/12:
+* 04/12:
 
-Items: Narrow down our list of projects, discuss team video, code of conduct, and team name
+    * Items: Narrow down our list of projects, discuss team video, code of conduct, and team name
 
-Project selection: Went through each of our github repos and project demos (when available)
+    * Project selection: Went through each of our github repos and project demos (when available)
 
-Fortune Teller: Adarsh
-Pros: Works well, looks nice.
-Cons: Not many ideas for features or visual upgrades. Tests only work half the time, potentially a bit buggy.
+    * Fortune Teller: Adarsh
+        * Pros: Works well, looks nice.
+        * Cons: Not many ideas for features or visual upgrades. Tests only work half the time, potentially a bit buggy.
 
-To-Do List: Rahul
-Pros: Many potential features to add. Code is readable, well-named variables, MVP design pattern.
-Cons: Buggy. Some features don’t work, missing documentation and tests (currently only UI tests)
+    * To-Do List: Rahul
+        * Pros: Many potential features to add. Code is readable, well-named variables, MVP design pattern.
+        * Cons: Buggy. Some features don’t work, missing documentation and tests (currently only UI tests)
 
-Coffee Recipes: Justin
-Pros: Clean foundation, not buggy. Many features to add: Could add users/login, ability to share recipes with friends, hottest recipes/most liked lists, searching nearby coffee shops if they can make your coffee. 
-Cons: We need to be careful not to overshoot on features.
+    * Coffee Recipes: Justin
+        * Pros: Clean foundation, not buggy. Many features to add: Could add users/login, ability to share recipes with friends, hottest recipes/most liked lists, searching nearby coffee shops if they can make your coffee. 
+        * Cons: We need to be careful not to overshoot on features.
 
-To-Do List: Mark
-Pros: Many potential features to add.
-Cons: Quite buggy.
+    * To-Do List: Mark
+        * Pros: Many potential features to add.
+        * Cons: Quite buggy.
 
-Fortune Teller: Jenny and Steven
-Pros: Looks great, really cool animations. Could add features like user/login, potentially multiplayer- ability to compete with friends.
-Cons: Tests cover ~50% of code.
+    * Fortune Teller: Jenny and Steven
+        * Pros: Looks great, really cool animations. Could add features like user/login, potentially multiplayer- ability to compete with friends.
+        * Cons: Tests cover ~50% of code.
 
-PantryPal Recipe Generator: Chau
-Pros: Strong foundation with ChatGPT/DALL-E API. 
-Cons: Potential JavaFX learning curve.
+    * PantryPal Recipe Generator: Chau
+        * Pros: Strong foundation with ChatGPT/DALL-E API. 
+        * Cons: Potential JavaFX learning curve.
 
-PantryPal Recipe Generator: Lea
-Pros: Lots of features already in existence: user/login, external database, save/edit recipes, voice-to-text generation. Organized, not buggy.
-Cons: Potential JavaFX learning curve. Lots of code, backend heavy. New features to add?
+    * PantryPal Recipe Generator: Lea
+        * Pros: Lots of features already in existence: user/login, external database, save/edit recipes, voice-to-text generation. Organized, not buggy.
+        * Cons: Potential JavaFX learning curve. Lots of code, backend heavy. New features to add?
 
-Friend Finder: Emin*
-Pros: Sounds cool, space for new features to add.
-Cons: We couldn’t find a ReadMeeee
+    * Friend Finder: Emin
+        * Pros: Sounds cool, space for new features to add.
+        * Cons: We couldn’t find a ReadMeeee
 
-Idea from Jenny: Combining features like DALL-E or ChatGPT generation using APIs and adding to coffee recipe website.
+    * Idea from Jenny: Combining features like DALL-E or ChatGPT generation using APIs and adding to coffee recipe website.
 
-Final project vote will be on Slack.
+    * Final project vote will be on Slack.
 
-Team video: Settled on Adarsh’s idea. Link for inspo: https://youtu.be/SOwJJPZKIys?t=85. We’ll have photos of ourselves edited onto faces of the actors. Lea will send timestamps for 10 faces where we could add our photos and everyone can pick one.
+    * Team video: Settled on Adarsh’s idea. Link for inspo: https://youtu.be/SOwJJPZKIys?t=85. We’ll have photos of ourselves edited onto faces of the actors. Lea will send timestamps for 10 faces where we could add our photos and everyone can pick one.
 
-Team name: Will vote on Slack.
+    * Team name: Will vote on Slack.
 
-Attendance (just so we know who to update):
-Jenny, Lea, Chau, Mark, Steven, Justin, Adarsh, Rahul
+    * Attendance (just so we know who to update):
+    * Jenny, Lea, Chau, Mark, Steven, Justin, Adarsh, Rahul
 
 
