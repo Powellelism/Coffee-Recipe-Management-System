@@ -9,8 +9,7 @@ on:
       - stage
       - 5-fix-cicd
 
-permissions:
-  contents: write
+permissions: write-all
 
 jobs:
   prettier:
