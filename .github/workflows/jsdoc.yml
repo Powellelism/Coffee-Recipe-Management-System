@@ -6,7 +6,8 @@ on:
       - main
       - integrate-pipeline
       - stage
-      
+      - 5-fix-cicd
+
 permissions:
   contents: read
   pages: write
@@ -34,15 +35,15 @@ jobs:
           config_file: ./specs/docs/conf.json
           template: minami
           front_page: README.md
-          
+
       - name: Setup
         uses: actions/configure-pages@v2
-        
+
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: '/home/runner/work/cse110-fa22-group39/cse110-fa22-group39/source'
-      
+          path: "/home/runner/work/cse110-fa22-group39/cse110-fa22-group39/source"
+
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v1
