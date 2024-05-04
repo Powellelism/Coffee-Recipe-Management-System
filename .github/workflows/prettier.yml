@@ -8,6 +8,7 @@ on:
       - main
       - integrate-pipeline
       - stage
+      - 5-fix-cicd
 
 jobs:
   prettier:
