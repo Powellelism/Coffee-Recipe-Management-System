@@ -8,10 +8,10 @@ describe("Test customize recipe", () => {
   beforeAll(async () => {
     // to load shop localStorage
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/",
     );
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetCustomize/presetCustomize.html"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetCustomize/presetCustomize.html",
     );
 
     await page.click("body > div.row > div.column2 > div > button");
@@ -52,22 +52,22 @@ describe("Test customize recipe", () => {
     await page.waitForXPath(nameXPath);
 
     expect(
-      await page.evaluate(() => document.getElementById("coffee-name").value)
+      await page.evaluate(() => document.getElementById("coffee-name").value),
     ).toBe(COFFEE_NAME);
     expect(
       await page.evaluate(
-        () => document.getElementById("custom-coffee-name").value
-      )
+        () => document.getElementById("custom-coffee-name").value,
+      ),
     ).toBe(TYPE);
     expect(
       await page.evaluate(
-        () => document.getElementById("drink-type-input").value
-      )
+        () => document.getElementById("drink-type-input").value,
+      ),
     ).toBe(DRINK);
     expect(
       await page.evaluate(
-        () => document.getElementById("size-type-input").value
-      )
+        () => document.getElementById("size-type-input").value,
+      ),
     ).toBe(SIZE);
 
     const caramelCheckbox = await page.waitForXPath('//*[@id="caramel"]');
@@ -108,7 +108,7 @@ describe("Test customize recipe", () => {
 
     // test available shop
     expect(
-      await page.evaluate(() => document.getElementById("shopName1").value)
+      await page.evaluate(() => document.getElementById("shopName1").value),
     ).toBe("Starbucks");
 
     await page.waitForSelector("#content > button");
@@ -121,7 +121,7 @@ describe("Test customize recipe", () => {
 
     let name = await page.$eval(
       "body > table > tbody > tr:nth-child(2) > td:nth-child(1) > div",
-      (x) => x.innerText
+      (x) => x.innerText,
     );
     expect(name).toBe(COFFEE_NAME);
 
@@ -129,14 +129,14 @@ describe("Test customize recipe", () => {
     await (await page.$x(inputXPath))[0].type("");
     await page.click("#remove0");
     let tableHtml = await page.evaluate(
-      () => document.querySelector("body > table > tbody").innerHTML
+      () => document.querySelector("body > table > tbody").innerHTML,
     );
     expect(tableHtml).not.toContain(COFFEE_NAME);
 
     // search the deleted coffee again
     await (await page.$x(inputXPath))[0].type(COFFEE_NAME);
     tableHtml = await page.evaluate(
-      () => document.querySelector("body > table > tbody").innerHTML
+      () => document.querySelector("body > table > tbody").innerHTML,
     );
     expect(tableHtml).not.toContain(COFFEE_NAME);
   });

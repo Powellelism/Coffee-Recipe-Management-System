@@ -2,7 +2,7 @@ describe("Basic user flow for Website", () => {
   // First, visit the lab 8 website
   beforeAll(async () => {
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/",
     );
   });
 

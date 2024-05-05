@@ -1,7 +1,7 @@
 describe("check preset recipe1 can fill the input correctly", () => {
   beforeAll(async () => {
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetList/presetList.html"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetList/presetList.html",
     );
 
     const recipe1Ele = await page.waitForSelector("#recipe1");
@@ -11,7 +11,7 @@ describe("check preset recipe1 can fill the input correctly", () => {
   it('make sure coffee name is "Coffe Americano', async () => {
     const coffeeName = await page.evaluate(
       (x) => x.value,
-      await page.waitForXPath('//*[@id="name"]')
+      await page.waitForXPath('//*[@id="name"]'),
     );
     expect(coffeeName).toBe("Coffe Americano");
   });
@@ -33,7 +33,7 @@ describe("check preset recipe1 can fill the input correctly", () => {
   it('make sure drink is "Espresso"', async () => {
     const drink = await page.evaluate(
       (x) => x.value,
-      await page.waitForXPath('//*[@id="drinks-name"]')
+      await page.waitForXPath('//*[@id="drinks-name"]'),
     );
     expect(drink).toBe("Espresso");
   });
@@ -41,7 +41,7 @@ describe("check preset recipe1 can fill the input correctly", () => {
   it('make sure size is "M"', async () => {
     const size = await page.evaluate(
       (x) => x.value,
-      await page.waitForXPath('//*[@id="size-name"]')
+      await page.waitForXPath('//*[@id="size-name"]'),
     );
     expect(size).toBe("M");
   });

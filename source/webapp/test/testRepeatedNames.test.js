@@ -7,11 +7,11 @@ describe("Testing for repeated recipe names", () => {
   beforeAll(async () => {
     // first takes the test to the home page of app
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/",
     );
     // then takes the test to the create recipes page
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetCustomize/presetCustomize.html"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetCustomize/presetCustomize.html",
     );
 
     await (await page.$x("/html/body/div/div[2]/div/button"))[0].click();
