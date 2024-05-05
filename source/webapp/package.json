@@ -3,12 +3,12 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.2",
-    "@babel/preset-env": "^7.20.2",
-    "babel-jest": "^29.3.1",
-    "jest": "^29.3.1",
-    "jest-puppeteer": "^6.1.1",
-    "puppeteer": "^19.2.2"
+    "@babel/core": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-puppeteer": "^10.0.0",
+    "puppeteer": "^22.7.0"
   },
   "jest": {
     "preset": "jest-puppeteer"
