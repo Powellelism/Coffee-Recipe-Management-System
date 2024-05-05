@@ -1,8 +1,12 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 
-
-export default [
-  {languageOptions: { globals: globals.browser }},
-  pluginJs.configs.recommended,
-];
+export default {
+  ignorePatterns: ["test/"], // Ignore all files within the test directory
+  languageOptions: {
+    globals: globals.browser
+  },
+  extends: [
+    pluginJs.configs.recommended
+  ],
+};
