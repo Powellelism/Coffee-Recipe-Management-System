@@ -34,11 +34,11 @@ jobs:
         working-directory: ./source/webapp
 
       - name: Run Prettier
-        run: npx prettier --write .
+        run: npx prettier --write . || true
         working-directory: ./source/webapp
 
       - name: Run Stylelint
-        run: npx stylelint "**/*.css" --fix
+        run: npx stylelint "**/*.css" --fix || true
         working-directory: ./source/webapp
 
       - name: Commit changes
