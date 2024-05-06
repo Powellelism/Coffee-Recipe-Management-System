@@ -106,7 +106,7 @@ function init() {
         currentRecipesArray.push(review);
         localStorage.setItem(
           "savedRecipes",
-          JSON.stringify(currentRecipesArray),
+          JSON.stringify(currentRecipesArray)
         );
       }
     } else {
@@ -141,7 +141,7 @@ function init() {
       //update savedRecipes array
       let currentRecipes = localStorage.getItem("savedRecipes");
       let currentRecipesArray = JSON.parse(currentRecipes);
-      for (recipe in currentRecipesArray) {
+      for (let recipe in currentRecipesArray) {
         const reciName = currentRecipesArray[recipe].recipeName;
         if (findName === reciName) {
           currentRecipesArray[recipe] = review;
