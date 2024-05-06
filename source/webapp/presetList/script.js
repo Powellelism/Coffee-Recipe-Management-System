@@ -29,16 +29,31 @@ async function getRecipes() {
   let recipes = localStorage.getItem("recipes");
   if (recipes) return JSON.parse(recipes);
 
-  return new Promise(async (resolve, reject) => {
-    try {
-      recipes = await fetch("../presets.json");
-      recipes = await recipes.json();
-      saveRecipes(recipes);
-      resolve(recipes);
-    } catch (error) {
-      console.error(error);
-      reject(error);
-    }
+  return new Promise((resolve, reject) => {
+    fetch("../presets.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((recipes) => {
+        saveRecipes(recipes);
+        resolve(recipes);
+      })
+      .catch((error) => {
+        console.error(error);
+        reject(error);
+      });
+    // try {
+    //   recipes = await fetch("../presets.json");
+    //   recipes = await recipes.json();
+    //   saveRecipes(recipes);
+    //   resolve(recipes);
+    // } catch (error) {
+    //   console.error(error);
+    //   reject(error);
+    // }
   });
 }
 
