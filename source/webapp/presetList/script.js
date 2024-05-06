@@ -45,15 +45,6 @@ async function getRecipes() {
         console.error(error);
         reject(error);
       });
-    // try {
-    //   recipes = await fetch("../presets.json");
-    //   recipes = await recipes.json();
-    //   saveRecipes(recipes);
-    //   resolve(recipes);
-    // } catch (error) {
-    //   console.error(error);
-    //   reject(error);
-    // }
   });
 }
 
@@ -96,7 +87,7 @@ function addRecipesToDocument(recipes) {
   //in the correct index
   const buttons = document.querySelectorAll("button");
   for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", (event) => {
+    buttons[i].addEventListener("click", () => {
       localStorage.setItem("Condition", "Create");
       window.location = `../customizeRecipe/customizeRecipe.html`;
       localStorage.setItem("index", i);

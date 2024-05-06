@@ -36,16 +36,21 @@ async function getShops() {
   let shops = localStorage.getItem("shops");
   if (shops) return JSON.parse(shops);
   // if localStorage does not have data of shops
-  return new Promise(async (resolve, reject) => {
-    try {
-      //read the file
-      shops = await fetch("./shops.json");
-      shops = await shops.json();
-      localStorage.setItem("shops", JSON.stringify(shops));
-      resolve(shops);
-    } catch (error) {
-      console.error(error);
-      reject(error);
-    }
+  return new Promise((resolve, reject) => {
+    fetch("./shops.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((shops) => {
+        localStorage.setItem("shops", JSON.stringify(shops));
+        resolve(shops);
+      })
+      .catch((error) => {
+        console.error(error);
+        reject(error);
+      });
   });
 }
