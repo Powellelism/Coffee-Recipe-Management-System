@@ -30,15 +30,15 @@ jobs:
         working-directory: ./source/webapp
 
       - name: Run ESLint
-        run: npx eslint . --fix || true
+        run: npx eslint . --fix
         working-directory: ./source/webapp
 
       - name: Run Prettier
-        run: npx prettier --write . || true
+        run: npx prettier --write .
         working-directory: ./source/webapp
 
       - name: Run Stylelint
-        run: npx stylelint "**/*.css" --fix || true
+        run: npx stylelint "**/*.css" --fix
         working-directory: ./source/webapp
 
       - name: Commit changes
