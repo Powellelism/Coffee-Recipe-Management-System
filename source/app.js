@@ -11,13 +11,13 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-const indexRoutes = require('./routes/index');
-const authRoutes = require('./routes/auth');
-const feedRoutes = require('./routes/feed');
+const views = require('./routes/views');
+const authViews = require('./routes/auth');
+const api = require('./routes/api');
 
-app.use('/api', indexRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/feed', feedRoutes);
+app.use('/', views);
+app.use('/auth', authViews);
+app.use('/api', api);
 
 // Catch-all route to serve the index.html file
 app.get('*', (req, res) => {
