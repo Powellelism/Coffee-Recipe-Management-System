@@ -2,15 +2,12 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 
-// Load environment variables
 dotenv.config();
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 
-// Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
@@ -24,7 +21,7 @@ app.use('/api/feed', feedRoutes);
 
 // Catch-all route to serve the index.html file
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public/templates', 'index.html'));
 });
 
 // Error handling middleware
