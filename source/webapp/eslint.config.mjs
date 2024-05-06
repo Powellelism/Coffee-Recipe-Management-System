@@ -3,7 +3,6 @@ import pluginJs from "@eslint/js";
 
 export default [
   {
-    ignores: ["test/*"],
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -12,5 +11,6 @@ export default [
       },
     },
   },
+  { ignores: ["test/*"] },
   pluginJs.configs.recommended,
 ];
