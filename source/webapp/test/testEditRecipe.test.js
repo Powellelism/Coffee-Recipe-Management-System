@@ -8,11 +8,11 @@ describe("Testing for repeated recipe names", () => {
   beforeAll(async () => {
     // first takes the test to the home page of app
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/",
     );
     // then takes the test to the create recipes page
     await page.goto(
-      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetCustomize/presetCustomize.html"
+      "https://alien-traveler.github.io/cse110-fa22-group39/webapp/presetCustomize/presetCustomize.html",
     );
 
     await (await page.$x("/html/body/div/div[2]/div/button"))[0].click();
@@ -87,18 +87,18 @@ describe("Testing for repeated recipe names", () => {
 
     expect(
       await page.evaluate(
-        () => document.getElementById("custom-coffee-name").value
-      )
+        () => document.getElementById("custom-coffee-name").value,
+      ),
     ).toBe(TYPE);
     expect(
       await page.evaluate(
-        () => document.getElementById("drink-type-input").value
-      )
+        () => document.getElementById("drink-type-input").value,
+      ),
     ).toBe(DRINK);
     expect(
       await page.evaluate(
-        () => document.getElementById("size-type-input").value
-      )
+        () => document.getElementById("size-type-input").value,
+      ),
     ).toBe(SIZE);
 
     const caramelCheckbox = await page.waitForXPath('//*[@id="caramel"]');
@@ -138,7 +138,7 @@ describe("Testing for repeated recipe names", () => {
     expect(waterCheckboxVal).toBe(true);
 
     expect(
-      await page.evaluate(() => document.getElementById("shopName1").value)
+      await page.evaluate(() => document.getElementById("shopName1").value),
     ).toBe("Starbucks");
   });
 });

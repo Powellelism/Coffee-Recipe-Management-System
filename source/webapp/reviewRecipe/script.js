@@ -106,7 +106,7 @@ function init() {
         currentRecipesArray.push(review);
         localStorage.setItem(
           "savedRecipes",
-          JSON.stringify(currentRecipesArray)
+          JSON.stringify(currentRecipesArray),
         );
       }
     } else {

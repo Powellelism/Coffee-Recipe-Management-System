@@ -59,12 +59,12 @@ input {
   color: black;
 }
 
-.choose-drink{
+.choose-drink {
   font-size: 18px;
   color: black;
 }
 
-.size{
+.size {
   font-size: 18px;
   color: black;
 }
@@ -142,14 +142,12 @@ input {
   margin: auto;
   font-size: 16px;
   color: #573d06;
-
 }
 
 .extra-shot {
   margin: auto;
   font-size: 16px;
   color: #573d06;
-
 }
 
 .milk {
@@ -162,7 +160,6 @@ input {
   margin: auto;
   font-size: 16px;
   color: #573d06;
-
 }
 
 .water {
