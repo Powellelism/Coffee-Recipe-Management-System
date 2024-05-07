@@ -29,16 +29,22 @@ async function getRecipes() {
   let recipes = localStorage.getItem("recipes");
   if (recipes) return JSON.parse(recipes);
 
-  return new Promise(async (resolve, reject) => {
-    try {
-      recipes = await fetch("../presets.json");
-      recipes = await recipes.json();
-      saveRecipes(recipes);
-      resolve(recipes);
-    } catch (error) {
-      console.error(error);
-      reject(error);
-    }
+  return new Promise((resolve, reject) => {
+    fetch("../presets.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((recipes) => {
+        saveRecipes(recipes);
+        resolve(recipes);
+      })
+      .catch((error) => {
+        console.error(error);
+        reject(error);
+      });
   });
 }
 
@@ -81,7 +87,7 @@ function addRecipesToDocument(recipes) {
   //in the correct index
   const buttons = document.querySelectorAll("button");
   for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", (event) => {
+    buttons[i].addEventListener("click", () => {
       localStorage.setItem("Condition", "Create");
       window.location = `../customizeRecipe/customizeRecipe.html`;
       localStorage.setItem("index", i);

@@ -104,7 +104,7 @@ Constantly updated meeting notes! Find the most recent one on top.
 
     * Team video: Settled on Adarsh’s idea. Link for inspo: https://youtu.be/SOwJJPZKIys?t=85. We’ll have photos of ourselves edited onto faces of the actors. Lea will send timestamps for 10 faces where we could add our photos and everyone can pick one.
 
-    * Team name: Will vote on Slack.
+    * Team name: Will vote on Slack. 
 
     * Attendance (just so we know who to update):
     * Jenny, Lea, Chau, Mark, Steven, Justin, Adarsh, Rahul

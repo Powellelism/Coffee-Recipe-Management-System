@@ -73,7 +73,6 @@ input {
   display: grid;
   grid-template-columns: 400px 400px 400px;
   grid-template-rows: auto;
-
   box-sizing: border-box;
   width: 1000px;
   margin-left: auto;
@@ -88,7 +87,7 @@ input {
   height: 50px;
 }
 
-.coffeeShopsItem {
+.coffee-shops-item {
   box-sizing: border-box;
   width: 400px;
   height: 200px;
