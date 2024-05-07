@@ -4,8 +4,6 @@ window.addEventListener("DOMContentLoaded", init);
  * read data of coffee shops and add events for buttons on home page
  */
 async function init() {
-
-    let shops;
     try {
         getShops();
     }
@@ -49,21 +47,17 @@ async function getShops() {
   let shops = localStorage.getItem("shops");
   if (shops) return JSON.parse(shops);
   // if localStorage does not have data of shops
-  return new Promise(async (resolve, reject) => {
     try {
-      //read the file by fetching api/get/shops check the status of the response and alert if 401
-      shops = await fetch("/api/get/shops");
-      if (shops.status === 401) {
-        alert("Please login to view the shops");
-      }
-      else{
-        shops = await shops.json();
-        localStorage.setItem("shops", JSON.stringify(shops));
-        resolve(shops);
-      }
+        //read the file by fetching api/get/shops check the status of the response and alert if 401
+        shops = await fetch("/api/get/shops");
+        if (shops.status === 401) {
+            alert("Please login to view the shops");
+        }
+        else{
+            shops = await shops.json();
+            localStorage.setItem("shops", JSON.stringify(shops));
+        }
     } catch (error) {
-      console.error(error);
-      reject(error);
+        console.error(error);
     }
-  });
 }
