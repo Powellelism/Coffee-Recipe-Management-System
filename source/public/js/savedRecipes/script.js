@@ -29,7 +29,7 @@ function init() {
     //jumps to cutomize page when the "view" button is clicked
     reviewButtonEl.addEventListener("click", () => {
       localStorage.setItem("Condition", "Edit");
-      window.location = "../customizeRecipe/customizeRecipe.html";
+      window.location = "/recipe/customize";
       localStorage.setItem("savedIndex", i);
     });
     //deletes the recipe when the "delete" button is clicked

@@ -31,10 +31,15 @@ async function getRecipes() {
 
   return new Promise(async (resolve, reject) => {
     try {
-      recipes = await fetch("../presets.json");
-      recipes = await recipes.json();
-      saveRecipes(recipes);
-      resolve(recipes);
+      recipes = await fetch("/api/get/recipes");
+      if (recipes.status === 401) {
+        alert("Please login to view the recipes");
+      }
+      else {
+        recipes = await recipes.json();
+        saveRecipes(recipes);
+        resolve(recipes);
+      }
     } catch (error) {
       console.error(error);
       reject(error);
@@ -83,7 +88,7 @@ function addRecipesToDocument(recipes) {
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", (event) => {
       localStorage.setItem("Condition", "Create");
-      window.location = `../customizeRecipe/customizeRecipe.html`;
+      window.location = `/recipe/customize`;
       localStorage.setItem("index", i);
     });
   }

@@ -12,7 +12,7 @@ function init() {
   let leftButtonEl = document.querySelectorAll("button")[0];
   //add click event for choosing preset recipes
   leftButtonEl.addEventListener("click", () => {
-    window.location = "../presetList/presetList.html";
+    window.location = "/preset/list";
   });
   let rightButtonEl = document.querySelectorAll("button")[1];
   //add click event for customizing coffee recipes
@@ -28,6 +28,6 @@ function init() {
       localStorage.removeItem("savedIndex");
     }
     localStorage.setItem("Condition", "Create");
-    window.location = "../customizeRecipe/customizeRecipe.html";
+    window.location = "/customize/recipe";
   });
 }

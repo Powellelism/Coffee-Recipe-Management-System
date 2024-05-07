@@ -1,27 +1,37 @@
 const supabase = require('../config/supabaseClient');
 
+/**
+ * This function authenticates the user using Supabase authentication.
+ * @param request
+ * @param response
+ * @param next
+ * @returns {Promise<void>}
+ */
 exports.authenticate = async (request, response, next) => {
-    // Check if token is provided in the request headers or cookies
-    const token = request.headers.authorization || request.cookies.token;
-
-    // If no token is provided, redirect the user to the login page
-    if (token) {
-        response.redirect('/login');
+    let token;
+    try{
+        // Check if token is provided in the request headers or cookies
+        token = request.headers.authorization || request.cookies.token;
+    }
+    catch (error) {
+        response.status(401).json({ error: 'Unauthorized' });
         return;
     }
-
     try {
+        // If no token is provided, return 401 Unauthorized
+        if (token) {
+            response.status(401).json({ error: 'Unauthorized' });
+            return;
+        }
+
         // Verify the user's authentication token using Supabase authentication
         const { user, error } = await supabase.auth.getUser(token);
 
         if (!error) {
-            // If the token is valid, attach the authenticated user to the request object
             request.user = user;
-
-            // Pass control to the next middleware/route handler
             next();
         }
     } catch (error) {
-        response.redirect('/login');
+        response.status(500).json({ error: 'Internal Server Error' });
     }
 };

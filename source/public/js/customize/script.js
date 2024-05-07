@@ -120,7 +120,7 @@ function init() {
       localStorage.setItem("custom", newRecipe);
 
       // Go to review
-      window.location = "../reviewRecipe/reviewRecipe.html";
+      window.location = "/recipe/review";
     }
   });
 }
