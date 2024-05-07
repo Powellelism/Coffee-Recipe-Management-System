@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 8-fix-the-quality-issues-detected-in-the-fix-ci-cd-branch
+      - full-stack-conversion
 
 jobs:
   lint-and-format:
