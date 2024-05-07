@@ -18,7 +18,7 @@ async function init() {
   let saveButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
   saveButtonEl.addEventListener("click", () => {
-    window.location = "./savedRecipes/savedRecipes.html";
+    window.location = "../public/templates/savedRecipes.html";
   });
   let aboutButtonEl = document.querySelectorAll("button")[2];
   //add click event to the button for view the saved recipes

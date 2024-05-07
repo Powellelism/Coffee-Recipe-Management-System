@@ -152,6 +152,6 @@ function init() {
     }
 
     localStorage.setItem("review", JSON.stringify(review));
-    window.location = "../../../webapp/savedRecipes/savedRecipes.html";
+    window.location = "../../templates/savedRecipes.html";
   });
 }
