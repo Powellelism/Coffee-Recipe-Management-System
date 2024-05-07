@@ -33,8 +33,7 @@ async function getRecipes() {
     recipes = await fetch("/api/get/recipes");
     if (recipes.status === 401) {
       alert("Please login to view the recipes");
-    }
-    else {
+    } else {
       recipes = await recipes.json();
       saveRecipes(recipes);
     }
