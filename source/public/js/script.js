@@ -7,7 +7,7 @@ async function init() {
 
     let shops;
     try {
-        shops = getShops();
+        getShops();
     }
     catch (error) {
         console.log(error);

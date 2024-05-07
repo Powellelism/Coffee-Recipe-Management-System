@@ -29,22 +29,19 @@ async function getRecipes() {
   let recipes = localStorage.getItem("recipes");
   if (recipes) return JSON.parse(recipes);
 
-  return new Promise(async (resolve, reject) => {
-    try {
-      recipes = await fetch("/api/get/recipes");
-      if (recipes.status === 401) {
-        alert("Please login to view the recipes");
-      }
-      else {
-        recipes = await recipes.json();
-        saveRecipes(recipes);
-        resolve(recipes);
-      }
-    } catch (error) {
-      console.error(error);
-      reject(error);
+  try {
+    recipes = await fetch("/api/get/recipes");
+    if (recipes.status === 401) {
+      alert("Please login to view the recipes");
     }
-  });
+    else {
+      recipes = await recipes.json();
+      saveRecipes(recipes);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+  return recipes;
 }
 
 /**
@@ -86,7 +83,7 @@ function addRecipesToDocument(recipes) {
   //in the correct index
   const buttons = document.querySelectorAll("button");
   for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener("click", (event) => {
+    buttons[i].addEventListener("click", () => {
       localStorage.setItem("Condition", "Create");
       window.location = `/recipe/customize`;
       localStorage.setItem("index", i);
