@@ -13,7 +13,7 @@ async function init() {
   let createButtonEl = document.querySelectorAll("button")[0];
   // add click event to the button for create new recipes
   createButtonEl.addEventListener("click", () => {
-    window.location = "./presetCustomize/presetCustomize.html";
+    window.location = "../public/templates/presetCustomize.html";
   });
   let saveButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
