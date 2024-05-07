@@ -11,32 +11,27 @@ exports.getRecipes = async (request, response) => {
         const { data, error } = await supabase
             .from('recipes')
             .select(`
-        name,
-        coffee_type,
-        drink_types (
-          type
-        ),
-        sizes (
-          name
-        ),
-        recipe_add_ons (
-          add_ons (
-            name
-          )
-        )
-      `)
+                name,
+                coffee_type,
+                drink_type_id,
+                size_id,
+                recipe_add_ons (
+                  add_on_id
+                )
+              `)
             .order('name', { ascending: true });
 
         if (error) {
+            console.error('Error retrieving recipes:', error);
             throw new Error(error.message);
         }
 
         const formattedRecipes = data.map((recipe) => ({
             recipeName: recipe.name,
             coffeeType: recipe.coffee_type,
-            drinkType: recipe.drink_types.type,
-            size: recipe.sizes.name,
-            addOns: recipe.recipe_add_ons.map((addOn) => addOn.add_ons.name),
+            drinkType: recipe.drink_types_id,
+            size: recipe.size_id,
+            addOns: recipe.recipe_add_ons.map((addOn) => addOn.add_ons_id),
         }));
 
         response.json(formattedRecipes);

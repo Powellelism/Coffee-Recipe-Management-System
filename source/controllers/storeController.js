@@ -11,18 +11,19 @@ exports.getShops = async (request, response) => {
         const { data, error } = await supabase
             .from('shops')
             .select(`
-        name,
-        coffee_types (
-          type
-        ),
-        drink_types (
-          type,
-          size
-        )
-      `)
+                name,
+                coffee_types (
+                  type
+                ),
+                drink_types (
+                  type,
+                  size
+                )
+              `)
             .order('name', { ascending: true });
 
         if (error) {
+            console.error('Error retrieving shops:', error);
             throw new Error(error.message);
         }
 
