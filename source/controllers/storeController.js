@@ -8,24 +8,32 @@ const supabase = require('../config/supabaseClient');
  */
 exports.getShops = async (request, response) => {
     try {
-        const { data: shops, error } = await supabase
+        const { data, error } = await supabase
             .from('shops')
-            .select('*, coffee_types(*), drink_types(*)');
+            .select(`
+        name,
+        coffee_types (
+          type
+        ),
+        drink_types (
+          type,
+          size
+        )
+      `)
+            .order('name', { ascending: true });
 
-        if (!error) {
-            const formattedShops = shops.map((shop) => ({
-                shopName: shop.name,
-                coffeeType: shop.coffee_types.map((type) => type.type),
-                drinkType: shop.drink_types.map((type) => type.type),
-                size: [...new Set(shop.drink_types.map((type) => type.size))],
-            }));
+        if (error) {
+            throw new Error(error.message);
+        }
 
-            response.json(formattedShops);
-        }
-        else {
-            console.error('Error retrieving shops:', error);
-            response.status(500).json({ error: 'Internal Server Error' });
-        }
+        const formattedShops = data.map((shop) => ({
+            shopName: shop.name,
+            coffeeType: shop.coffee_types.map((type) => type.type),
+            drinkType: shop.drink_types.map((type) => type.type),
+            size: [...new Set(shop.drink_types.map((type) => type.size))],
+        }));
+
+        response.json(formattedShops);
     } catch (error) {
         console.error('Error retrieving shops:', error);
         response.status(500).json({ error: 'Internal Server Error' });

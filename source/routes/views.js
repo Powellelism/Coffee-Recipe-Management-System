@@ -22,6 +22,15 @@ router.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/templates', 'auth/register.html'))
 });
 
+// Serve common home view
+router.get('/common/home', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/templates', 'common.html'));
+});
+
+// Serve dashboard view
+router.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/templates', 'dashboard.html'));
+});
 // serve preset customize view
 router.get('/preset/customize', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/templates', 'presetCustomize.html'));
@@ -30,11 +39,6 @@ router.get('/preset/customize', (req, res) => {
 // serve preset list view
 router.get('/preset/list', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/templates', 'presetList.html'));
-});
-
-// serve recipe creation view
-router.get('/recipe/create', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/templates', 'createRecipe.html'));
 });
 
 // serve recipe customization view

@@ -42,7 +42,7 @@ div {
 }
 
 #input {
-  background-image: url(../images/search-icon.png); /* Add a search icon to input */
+  background-image: url(/images/search-icon.png); /* Add a search icon to input */
   background-size: 26px 26px;
   background-position: 7px 20px; /* Position the search icon */
   background-repeat: no-repeat; /* Do not repeat the icon image */
