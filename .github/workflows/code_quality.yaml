@@ -27,19 +27,19 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: ./source/webapp
+        working-directory: ./source
 
       - name: Run ESLint
         run: npx eslint . --fix
-        working-directory: ./source/webapp
+        working-directory: ./source
 
       - name: Run Prettier
         run: npx prettier --write .
-        working-directory: ./source/webapp
+        working-directory: ./source
 
       - name: Run Stylelint
         run: npx stylelint "**/*.css" --fix
-        working-directory: ./source/webapp
+        working-directory: ./source
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
