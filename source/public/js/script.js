@@ -5,6 +5,13 @@ window.addEventListener("DOMContentLoaded", init);
  */
 async function init() {
 
+    let shops;
+    try {
+        shops = getShops();
+    }
+    catch (error) {
+        console.log(error);
+    }
 
   let createButtonEl = document.querySelectorAll("button")[0];
   // add click event to the button for create new recipes

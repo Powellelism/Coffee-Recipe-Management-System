@@ -28,6 +28,6 @@ function init() {
       localStorage.removeItem("savedIndex");
     }
     localStorage.setItem("Condition", "Create");
-    window.location = "/customize/recipe";
+    window.location = "/recipe/customize";
   });
 }
