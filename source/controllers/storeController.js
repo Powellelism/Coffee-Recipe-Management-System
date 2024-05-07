@@ -6,7 +6,7 @@ const supabase = require('../config/supabaseClient');
  * @param response
  * @returns {Promise<void>}
  */
-exports.getFeed = async (request, response) => {
+exports.getShops = async (request, response) => {
     try {
         const { data: shops, error } = await supabase
             .from('shops')
