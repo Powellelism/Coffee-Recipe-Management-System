@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua&display=swap");
 
-html * {
-  font-family: Inknut Antiqua;
+* {
+  font-family: "Inknut Antiqua", sans-serif;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
   margin-left: 50%;
 }
 
-.asText {
+.as-text {
   width: 150px;
   height: 50px;
   background-color: #fffbf3;
@@ -26,7 +26,7 @@ body {
   left: 0%;
 }
 
-.asText:hover {
+.as-text:hover {
   font-weight: bold;
   color: black;
 }

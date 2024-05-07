@@ -102,7 +102,7 @@ function addRecipesToDocument(recipes) {
     return;
   }
   let tbl = document.querySelector("table");
-  for (var i = 0; i < recipes.length; i++) {
+  for (let i = 0; i < recipes.length; i++) {
     //add View/Edit and delete button for each recipe
     tbl.insertRow(-1).innerHTML = `<td><div>${recipes[i].recipeName}</div></td>
       <td>
@@ -117,10 +117,12 @@ function addRecipesToDocument(recipes) {
 /**
  * This function is used to create the search bar feature, ie this allows the users
  * to search all the saved recipes by the names
+ * Eslint can't parse HTML files, so we ignore the warning that this function is not used
  */
+/* eslint-disable no-unused-vars */
 function lookUp() {
   //define and set all needed variables
-  var input, filter, table, tr, td, i, txtValue;
+  let input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("input");
   filter = input.value.toUpperCase();
   table = document.querySelector("table");
@@ -131,22 +133,22 @@ function lookUp() {
     tr[0].style.display = "none";
     //when search bar has no character, display everything
   } else {
-    for (var i = 0; i < tr.length; i++) {
+    for (let i = 0; i < tr.length; i++) {
       tr[i].style.display = "";
     }
   }
 
   //traverse over all the saved recipes
-  for (var i = 1; i < tr.length; i++) {
+  for (let i = 1; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
     if (td) {
       //get the name of saved recipe
       txtValue = td.textContent.toUpperCase() || td.innerText.toUpperCase();
-      var match = true;
+      let match = true;
       //this "if" make sure the program won't crahsed when overloaded with search
       if (filter.length <= txtValue.length) {
         //traverse through all characters in the search bar
-        for (var j = 0; j < filter.length; j++) {
+        for (let j = 0; j < filter.length; j++) {
           //if any character unmatch, hide this recipe
           if (txtValue[j] != filter[j]) {
             tr[i].style.display = "none";
@@ -162,3 +164,4 @@ function lookUp() {
     }
   }
 }
+/* eslint-enable no-unused-vars */

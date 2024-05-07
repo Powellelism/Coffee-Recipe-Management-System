@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - main
-      - 5-fix-cicd
+      - 8-fix-the-quality-issues-detected-in-the-fix-ci-cd-branch
 
 jobs:
   lint-and-format:
@@ -23,29 +23,29 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install dependencies
         run: npm ci
         working-directory: ./source/webapp
 
       - name: Run ESLint
-        run: npx eslint . --fix || true
+        run: npx eslint . --fix
         working-directory: ./source/webapp
 
       - name: Run Prettier
-        run: npx prettier --write . || true
+        run: npx prettier --write .
         working-directory: ./source/webapp
 
       - name: Run Stylelint
-        run: npx stylelint "**/*.css" --fix || true
+        run: npx stylelint "**/*.css" --fix
         working-directory: ./source/webapp
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
 
   qodana:
-    needs: lint-and-format  # Ensure Qodana runs after linting and formatting
+    needs: lint-and-format # Ensure Qodana runs after linting and formatting
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -54,9 +54,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # A full history is required for proper analysis
+          fetch-depth: 0 # A full history is required for proper analysis
 
-      - name: 'Qodana Scan'
+      - name: "Qodana Scan"
         uses: JetBrains/qodana-action@v2024.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
