@@ -1,53 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
+  <head>
     <!--Inputting CSS in HTML FOR NOW ONLY, WILL FIX DURING CSS SPRINT-->
     <style>
-        form {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        input {
-            margin-bottom: 1rem;
-            width: 30%;
-            border: 2px solid black;
-            border-radius: 1rem;
-        }
-        label {
-            margin-bottom: 0.5rem;
-        }
-        #login-options {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 0.7rem;
-        }
-        button {
-            border: 2px solid black;
-            border-radius: 1rem;
-            width: auto;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
+      form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      input {
+        margin-bottom: 1rem;
+        width: 30%;
+        border: 2px solid black;
+        border-radius: 1rem;
+      }
+      label {
+        margin-bottom: 0.5rem;
+      }
+      #login-options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 0.7rem;
+      }
+      button {
+        border: 2px solid black;
+        border-radius: 1rem;
+        width: auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     </style>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Login</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Login</h1>
     <form action="/auth/login" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Login</button>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <button type="submit">Login</button>
     </form>
     <section id="login-options">
-        <a href="forgot.html">Forgot Password?</a> 
-        <a href="register.html">Create an Account!</a>
+      <a href="forgot.html">Forgot Password?</a>
+      <a href="register.html">Create an Account!</a>
     </section>
-</body>
+  </body>
 </html>
