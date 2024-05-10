@@ -26,9 +26,7 @@ router.get("/register", (req, res) => {
 
 // Serve forgot password view
 router.get("/forgot-password", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../public/templates", "auth/forgot.html"),
-  );
+  res.sendFile(path.join(__dirname, "../public/templates", "auth/forgot.html"));
 });
 
 // Serve common home view
