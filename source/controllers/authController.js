@@ -55,7 +55,7 @@ exports.register = async (request, response) => {
 
     if (error) {
       console.error("Registration error:", error);
-      response.status(400).json({ error: "Registration failed" });
+      response.status(400).json({ error: "Registration failed", details: error});
     } else {
       if (data.session && data.session.access_token) {
         const token = data.session.access_token;

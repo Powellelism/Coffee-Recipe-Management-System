@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+  <script src="../../js/register.js" type="module"></script>
   <style>
     body {
       margin: 0;
@@ -16,7 +17,7 @@
       align-items: center;
       --input-focus: #2d8cf0;
       --font-color: #323232;
-      --font-color-sub: #666;
+      --font-color-sub: #722222;
       --bg-color: #fff;
       --bg-color-alt: #666;
       --main-color: #323232;
@@ -239,7 +240,7 @@
           </div>
           <div class="flip-card__back">
             <div class="title">Sign up</div>
-            <form class="flip-card__form" action="">
+            <form class="flip-card__form" action="/auth/register" method="POST">
               <input class="flip-card__input" placeholder="Name" type="name" />
               <input
                 class="flip-card__input"
@@ -253,6 +254,13 @@
                 placeholder="Password"
                 type="password"
               />
+              <input
+                class="flip-card__input"
+                name="confirm_pass"
+                placeholder="Confirm Password"
+                type="password"
+              />
+              <div id="error_message" style="color: red;"></div>
               <button class="flip-card__btn">Confirm!</button>
             </form>
           </div>
@@ -260,4 +268,5 @@
       </label>
     </div>
   </div>
+  
 </html>
