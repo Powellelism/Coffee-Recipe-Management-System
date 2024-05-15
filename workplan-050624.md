@@ -14,14 +14,14 @@
 
 ### Teams and Member Assignments
 
-#### Team Interface (UI/UX Design)
+#### Team Interface
 - **Members**: Emin, Lea, Mark, Steven, Justin
 - **Responsibilities**: Design a page structure and build a UI diagram to solidify our feature details
   - **Task**: Redesign existing pages and features to make this a website we’d all like to use more
     - **Estimate**: 1 day
   - **Priority**: High
 
-#### Login and Sign Up Functionality (Feature Implementation) 
+#### Login and Sign Up Functionality
 - **Responsibilities**: Create sign-up and login pages
   - **Task**: Add necessarily input fields
     - **Estimate**: 1 day
