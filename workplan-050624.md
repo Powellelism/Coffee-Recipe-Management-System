@@ -1,12 +1,12 @@
 ### Spring 1, Week 2 Overview
 - **Duration**: 1 week
-- **Objective**: Create login and sign up functionality (#2), create backend router (#4), fix CI/CD pipeline (#5, #8), move everything to a backend server, add connection to Supabase, create UI diagram for new pages (diagram included below).
+- **Objective**: Solidfy UI/UX expectations and details, add user creation and login functionality, lay foundations for future features (adding router, connecting to database, CI/CD fix).
 - **Team**: 10 members, working in smaller teams.
 
 ### Sprint Goals
-1. **Implement User Authentication**: Develop login and sign-up functionality to enhance user access control (#2).
-2. **Create Backend Routes**: Establish backend routes for navigation (#4).
-3. **Optimize CI/CD Pipeline**: Fix issues in the CI/CD pipeline to ensure smooth deployment and integration (#5, #8).
+1. **Implement User Authentication**: Develop login and sign-up functionality to enhance user access control [#2].
+2. **Create Backend Routes**: Establish backend routes for navigation [#4].
+3. **Optimize CI/CD Pipeline**: Fix issues in the CI/CD pipeline to ensure smooth deployment and integration [#5, #8].
 4. **Backend Migration**: Transfer existing functionalities to the backend server.
 5. **Integrate with Supabase**: Establish a connection with Supabase to leverage its data management and authentication features.
 6. **UI Diagram for New Pages**: Create a comprehensive UI diagram for the upcoming pages to visualize the layout and flow of the application.
@@ -14,7 +14,7 @@
 
 ### Teams and Member Assignments
 
-#### Team Interface
+#### User Interface/Experience
 - **Responsibilities**: Design a page structure and build a UI diagram to solidify our feature details
   - **Task**: Redesign existing pages and features to make this a website we’d all like to use more
     - **Estimate**: 1 day
