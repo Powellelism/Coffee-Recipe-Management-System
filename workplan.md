@@ -1,30 +1,66 @@
-Week 1: Laying foundations.
+### Sprint Overview
+- **Duration**: 2 weeks
+- **Objective**: Enhance UX/UI, develop backend functionalities, implement a recipe rating system, expand documentation, and standardize the codebase.
+- **Tools**: GitHub for version control and project management.
+- **Team**: 10 members, working in pairs.
 
-Iteration Length:
-Given that we have six total weeks, we will divide this into three 2-week iterations. This length allows for progress to be made on features, but also allows the team to remain aware of time passing. More iterations will also allow us to check in and review our progress more frequently.
 
-Iteration Planning:
-Week 1: Hold an iteration planning meeting Thursdays as 6:30 p.m. During this meeting, we:
-- Review the backlog of features and prioritize them based on importance and dependencies, outlining the next two weeks of progress.
-- Break down selected features into smaller tasks, estimate the effort required for each task, and add them to Github as issues.
-  - Estimate hours based on prior experience with similar projects, and prioritizing tasks based on dependencies (e.g. account creation must come before login functionality, backend must be setup before user can save recipes, etc.)
-- Allow team members to pick tasks based on their skills and availability. We aim to have two people per sub-group working on closely related features.
+### Sprint Goals
+1. **Enhance User Interface (UI)**: Improve the aesthetics and functionality to enhance user experience.
+2. **Develop Backend Routes**: Create robust backend routes for managing recipes and shops.
+3. **Implement Recipe Rating System**: Develop a system for users to rate recipes.
+4. **Expand Documentation**: Provide detailed documentation for the new features and backend functionalities.
+5. **Standardize File Structure and Styling**: Organize the codebase to maintain consistency across the project.
 
-Iteration Execution:
-Weeks 1-2: Work on implementing the tasks.
-Track progress: Hold stand-up meetings after classes to discuss work and any issues. Weekly meeting on Thursdays at 6:30 p.m., top floor of DIB for regular in perosn checkins. During this time, we can work on the project together, help each other with challenges, answer questions.
+### Teams and Member Assignments
 
-Iteration Retrospective:
-End of Week 2: Hold an iteration retrospective meeting with the team to reflect on the iteration.
-Discuss what went well, what didn't, and areas for improvement.
-Make plans and adjustments for the following iteration: Identify any process bottlenecks or issues and come up with action items to address them in the next iteration. Gather feedback from our TA and incorporate necessary improvements.
-Celebrate successes and acknowledge team members' contributions! :)
+#### Team Interface (UI/UX Design)
+- **Members**: Jenny, Steven
+- **Responsibilities**: Focus on user interface design and user experience enhancements.
+  - **Task**: Redesign the homepage to be more visually appealing and user-friendly. Include elements such as featured recipes and a search bar.
+    - **Estimate**: 3 days
+  - **Task**: Improve the responsiveness of the application on tablets and mobile devices.
+    - **Estimate**: 2 days
+- **Priority**: Medium
 
-Reporting:
-Provide regular updates to subteam and co-leaders throughout the iteration on Slack, highlighting progress and any roadblocks. 
+#### Team Backend (API Development)
+- **Members**: Lea, Rahul
+- **Responsibilities**: Develop and integrate backend functionalities.
+  - **Task**: Create RESTful API routes for adding and retrieving recipes from the database.
+    - **Estimate**: 2 days
+  - **Task**: Develop API routes for shop management, allowing users to add and view shops.
+    - **Estimate**: 2 days
+- **Priority**: High
 
---------
-Work:
-- Settled on list of features for this upcoming week; created Github issues for these tasks, including priorities and time estimates. This week we will complete issues #1 - #7.
-- This upcoming week we're building foundations for our additional features, which include setting up an external database and adding login/create account functionality. To ensure our whole team is familiar with the project and these new feeatures, we agreed that everyone will write at least one test for the features made this week.
-- We created rough UI sketches so we have an idea of how everythign should look. We are setting up a flow chart to demonstrate connecton of new pages.
+#### Team Ratings (Feature Implementation)
+- **Members**: Chau, Jenny
+- **Responsibilities**: Implement the recipe rating system.
+  - **Task**: Design and implement a database schema for storing user ratings.
+    - **Estimate**: 1 day
+  - **Task**: Create API endpoints for submitting and retrieving ratings.
+    - **Estimate**: 2 days
+- **Priority**: Medium
+  
+#### Team Docs (Documentation)
+- **Members**: Mark, Sasha
+- **Responsibilities**: Update and maintain project documentation.
+  - **Task**: Document the newly created API routes and rating system functionalities.
+    - **Estimate**: 2 days
+  - **Task**: Revise and update the README file and contribution guidelines to reflect recent changes.
+    - **Estimate**: 1 day
+- **Priority**: High
+  
+#### Team Refactor (Codebase Organization)
+- **Members**: Emin, Adarsh
+- **Responsibilities**: Standardize and refactor the codebase.
+  - **Task**: Restructure the project directory to separate concerns clearly (e.g., separating API logic from UI components).
+    - **Estimate**: 2 days
+  - **Task**: Establish and enforce a consistent styling guideline for CSS/SCSS files.
+    - **Estimate**: 1 day
+- **Priority**: High
+  
+### Additional Considerations
+- **Twice Weekly Standup**: After Lecture
+- **Weekly Review**: Every thursday in-person
+- **End-of-Sprint Demo**: Last thursday of sprint
+- **Retrospective**: Last thursday of sprint
