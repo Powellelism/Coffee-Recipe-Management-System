@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', () => {
     const currentURL = window.location.pathname;
     const toggle = document.querySelector('.toggle');
 
