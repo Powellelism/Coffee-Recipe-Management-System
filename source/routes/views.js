@@ -14,7 +14,9 @@ router.get("/about", (req, res) => {
 
 // Serve login view
 router.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/templates", "auth/loginAndRegister.html"));
+  res.sendFile(
+    path.join(__dirname, "../public/templates", "auth/loginAndRegister.html"),
+  );
 });
 
 // Serve register view
