@@ -136,14 +136,6 @@ body {
   transform: rotateY(180deg);
 }
 
-.toggle:checked ~ .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.toggle:checked ~ .flip-card-front {
-  box-shadow: none;
-}
-
 .flip-card-front,
 .flip-card-back {
   padding: 20px;
@@ -159,6 +151,15 @@ body {
   border: 2px solid var(--main-color);
   box-shadow: 4px 4px var(--main-color);
 }
+
+.toggle:checked ~ .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.toggle:checked ~ .flip-card-front {
+  box-shadow: none;
+}
+
 
 .flip-card-form {
   display: flex;
