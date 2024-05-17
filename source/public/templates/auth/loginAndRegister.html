@@ -8,54 +8,54 @@
         <input type="checkbox" class="toggle" />
         <span class="slider"></span>
         <span class="card-side"></span>
-        <div class="flip-card__inner">
-          <div class="flip-card__front">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
             <div class="title">Log in</div>
-            <form class="flip-card__form" action="/auth/login" method="post">
+            <form class="flip-card-form" action="/auth/login" method="post">
               <input
-                class="flip-card__input"
+                class="flip-card-input"
                 name="email"
                 placeholder="Email"
                 type="email"
               />
               <input
-                class="flip-card__input"
+                class="flip-card-input"
                 name="password"
                 placeholder="Password"
                 type="password"
                 required
               />
-              <button class="flip-card__btn" type="submit">Let`s go!</button>
+              <button class="flip-card-btn" type="submit">Let`s go!</button>
             </form>
             <a href="/forgot-password">Forgot password?</a>
           </div>
-          <div class="flip-card__back">
+          <div class="flip-card-back">
             <div class="title">Sign up</div>
-            <form class="flip-card__form" action="/auth/register" method="POST">
-              <input class="flip-card__input" placeholder="Name" type="name" required/>
+            <form class="flip-card-form" action="/auth/register" method="POST">
+              <input class="flip-card-input" placeholder="Name" type="name" required/>
               <input
-                class="flip-card__input"
+                class="flip-card-input"
                 name="email"
                 placeholder="Email"
                 type="email"
                 required
               />
               <input
-                class="flip-card__input"
+                class="flip-card-input"
                 name="password"
                 placeholder="Password"
                 type="password"
                 required
               />
               <input
-                class="flip-card__input"
+                class="flip-card-input"
                 name="confirm_pass"
                 placeholder="Confirm Password"
                 type="password"
                 required
               />
-              <div class="error_message"></div>
-              <button class="flip-card__btn">Confirm!</button>
+              <div class="error-message"></div>
+              <button class="flip-card-btn">Confirm!</button>
             </form>
           </div>
         </div>
