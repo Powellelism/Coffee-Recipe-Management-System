@@ -55,9 +55,16 @@ exports.register = async (request, response) => {
 
     if (error) {
       console.error("Registration error:", error);
-      response
+      if(error.code === "user_already_exists"){
+        response
+		.status(401)
+		.json({ error: "Email already exists" });
+      }
+	  else{
+		response
         .status(400)
-        .json({ error: "Registration failed", details: error });
+        .json({ error: "Registration failed"});
+	  }
     } else {
       if (data.session && data.session.access_token) {
         const token = data.session.access_token;

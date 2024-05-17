@@ -6,15 +6,13 @@ window.addEventListener("DOMContentLoaded", () => {
   // If the route is '/login', open login form
   if (currentURL === "/register") {
     toggle.checked = true;
-  } else if (currentURL === "/login") {
-    toggle.checked = false;
-  }
+  } 
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   const back = document.querySelector(".flip-card__back");
   const register_form = back.querySelector(".flip-card__form");
-  let error_msg = document.getElementById("error_message");
+  let error_msg = document.querySelector(".error_message");
 
   register_form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -41,13 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (response.status === 200) {
           window.location.href = "/dashboard";
         }
-
-        const responseData = await response.json();
-
-        if (
-          responseData.details &&
-          responseData.details.code === "user_already_exists"
-        ) {
+        else if (response.status === 401) {
           error_msg.innerHTML = "Email address already in use";
         }
       } catch (error) {
