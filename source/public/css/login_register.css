@@ -9,11 +9,13 @@ body {
   height: 100vh;
   background-color: #fffbf3;
 }
+
 .wrapper {
   font-family: "Inknut Antiqua", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+
   --input-focus: #2d8cf0;
   --font-color: #323232;
   --font-color-sub: #722222;
@@ -21,6 +23,7 @@ body {
   --bg-color-alt: #666;
   --main-color: #323232;
 }
+
 /* switch card */
 .switch {
   transform: translateY(-250px);
@@ -71,15 +74,12 @@ body {
   box-shadow: 4px 4px var(--main-color);
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: var(--bg-colorcolor);
   transition: 0.3s;
 }
 
-.slider:before {
+.slider::before {
   box-sizing: border-box;
   position: absolute;
   content: "";
@@ -98,15 +98,15 @@ body {
   background-color: var(--input-focus);
 }
 
-.toggle:checked + .slider:before {
+.toggle:checked + .slider::before {
   transform: translateX(30px);
 }
 
-.toggle:checked ~ .card-side:before {
+.toggle:checked ~ .card-side::before {
   text-decoration: none;
 }
 
-.toggle:checked ~ .card-side:after {
+.toggle:checked ~ .card-side::after {
   text-decoration: underline;
 }
 
@@ -143,7 +143,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   backface-visibility: hidden;
   background: lightgrey;
   gap: 20px;
@@ -160,7 +160,6 @@ body {
   box-shadow: none;
 }
 
-
 .flip-card-form {
   display: flex;
   flex-direction: column;
@@ -169,7 +168,7 @@ body {
 }
 
 .title {
-  margin: 10px 0 10px 0;
+  margin: 10px 0;
   font-size: 25px;
   font-weight: 750;
   text-align: center;
@@ -200,7 +199,7 @@ body {
 }
 
 .flip-card-btn {
-  margin: 20px 0 18px 0;
+  margin: 20px 0 18px;
   width: 120px;
   height: 40px;
   border-radius: 5px;
@@ -215,7 +214,7 @@ body {
 
 .flip-card-btn:active,
 .button-confirm:active {
-  box-shadow: 0px 0px var(--main-color);
+  box-shadow: 0 0 var(--main-color);
   transform: translate(3px, 3px);
 }
 

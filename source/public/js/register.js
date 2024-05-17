@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // If the route is '/login', open login form
   if (currentURL === "/register") {
     toggle.checked = true;
-  } 
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -38,8 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         if (response.status === 200) {
           window.location.href = "/dashboard";
-        }
-        else if (response.status === 401) {
+        } else if (response.status === 401) {
           error_msg.innerHTML = "Email address already in use";
         }
       } catch (error) {
