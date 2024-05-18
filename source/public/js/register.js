@@ -41,8 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (response.status === 200) {
           window.location.href = "/dashboard";
-        }
-        else if (response.status === 402) {
+        } else if (response.status === 402) {
           error_msg.innerHTML = responseData.error;
         }
       } catch (error) {

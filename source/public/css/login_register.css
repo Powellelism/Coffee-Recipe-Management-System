@@ -144,7 +144,6 @@ body {
   flex-direction: column;
   justify-content: center;
   backface-visibility: hidden;
-  backface-visibility: hidden;
   background: lightgrey;
   gap: 20px;
   border-radius: 5px;
