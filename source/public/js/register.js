@@ -10,9 +10,9 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const back = document.querySelector(".flip-card__back");
-  const register_form = back.querySelector(".flip-card__form");
-  let error_msg = document.querySelector(".error_message");
+  const back = document.querySelector(".flip-card-back");
+  const register_form = back.querySelector(".flip-card-form");
+  let error_msg = document.querySelector(".error-message");
 
   register_form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -36,10 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify({ email, password }),
           headers: { "Content-Type": "application/json" },
         });
+
+        const responseData = await response.json();
+
         if (response.status === 200) {
           window.location.href = "/dashboard";
-        } else if (response.status === 401) {
-          error_msg.innerHTML = "Email address already in use";
+        }
+        else if (response.status === 402) {
+          error_msg.innerHTML = responseData.error;
         }
       } catch (error) {
         console.error("Error:", error);
