@@ -1,16 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua&display=swap");
 
+/* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+/* @link https://utopia.fyi/type/calculator?c=320,18,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
 :root {
-    --font-size-body: clamp(1rem, 1.2vw, 1.1rem);
-    --font-size-h1: clamp(1.5rem, 2.5vw, 2rem);
-    --margin-a: clamp(0.5rem, 1.5vw, 1rem);
-    --font-size-a: clamp(0.9rem, 1.5vw, 1.2rem);
-    --width-a: clamp(40%, 15vw, 20%);
-    --font-size-label: clamp(0.9rem, 1.5vw, 1rem);
-    --font-size-input: clamp(0.9rem, 1.5vw, 1rem);
-    --font-size-legend: clamp(1rem, 1.5vw, 1.2rem);
-    --padding-button: clamp(0.75rem, 1.5vw, 1.2rem);
-}
+    /* Step -2: 12.5px → 11.52px */
+    --step--2: clamp(0.72rem, 0.8026rem + -0.1065vi, 0.7813rem);
+    /* Step -1: 15px → 14.4px */
+    --step--1: clamp(0.9rem, 0.9505rem + -0.0652vi, 0.9375rem);
+    /* Step 0: 18px → 18px */
+    --step-0: clamp(1.125rem, 1.125rem + 0vi, 1.125rem);
+    /* Step 1: 21.6px → 22.5px */
+    --step-1: clamp(1.35rem, 1.3304rem + 0.0978vi, 1.4063rem);
+    /* Step 2: 25.92px → 28.125px */
+    --step-2: clamp(1.62rem, 1.5721rem + 0.2397vi, 1.7578rem);
+    /* Step 3: 31.104px → 35.1563px */
+    --step-3: clamp(1.944rem, 1.8559rem + 0.4405vi, 2.1973rem);
+    /* Step 4: 37.3248px → 43.9453px */
+    --step-4: clamp(2.3328rem, 2.1889rem + 0.7196vi, 2.7466rem);
+    /* Step 5: 44.7898px → 54.9316px */
+    --step-5: clamp(2.7994rem, 2.5789rem + 1.1024vi, 3.4332rem);
+
+    --fluid-16-24: clamp(1rem, 0.8261rem + 0.8696vi, 1.5rem);
+
+  }
 
 * {
     font-family: "Inknut Antiqua", sans-serif;
@@ -19,34 +33,11 @@
     padding: 0;
 }
 
-body {
-    background-color: #fffbf3;
-    font-size: var(--font-size-body);
-    line-height: 1.5;
-}
-
 h1 {
     text-align: center;
     color: #573d06;
-    font-size: var(--font-size-h1);
+    font-size: var(--step-4);
     margin: 2vh 0;
-}
-
-a#home_button {
-    display: inline-block;
-    margin: var(--margin-a);
-    text-decoration: none;
-    color: #573d06;
-    font-weight: bold;
-    font-size: var(--font-size-a);
-    width: var(--width-a);
-    background-color: #fffbf3;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1vh 2vw;
-    cursor: pointer;
 }
 
 form {
@@ -58,11 +49,11 @@ form {
     box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
 
-label {
+label[for="recipe-name"], legend, label[for="drinks-types"], label[for="size"] {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
-    font-size: var(--font-size-label);
+    font-size: var(--step-2);
     color: #573d06;
 }
 
@@ -72,7 +63,7 @@ input[type="text"], select {
     margin-bottom: 1rem;
     border: 1px solid #ccc;
     border-radius: 0.25rem;
-    font-size: var(--font-size-input);
+    font-size: var(--step--1);
 }
 
 fieldset {
@@ -81,30 +72,23 @@ fieldset {
     margin-bottom: 1.5rem;
 }
 
-legend {
-    font-size: var(--font-size-legend);
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #573d06;
-}
-
 input[type="radio"], input[type="checkbox"] {
     margin-right: 0.5rem;
 }
 
-label[for="hot-coffee"], label[for="cold-coffee"], label[for="sugar"], label[for="milk"], label[for="cream"], label[for="caramel"], label[for="extra_shot"] {
+fieldset label {
     display: inline-block;
     margin-right: 1rem;
 }
 
 button {
     width: 100%;
-    padding: var(--padding-button);
     background-color: #573d06;
+    padding: 0.5rem;
     color: #fffbf3;
     border: none;
     border-radius: 0.25rem;
-    font-size: var(--font-size-label);
+    font-size: var(--step--1);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -113,43 +97,7 @@ button:hover {
     background-color: #3d2b04;
 }
 
-
-@media only screen and (min-width: 280px) and (max-width: 1300px) {
-    form {
-        width: 80%;
-        padding: var(--step-0);
-        margin: 4vh auto;
-    }
-
-    label {
-        display: block;
-        margin-right: 0;
-        margin-bottom: var(--step-0);
-    }
-
-    input[type="text"], select {
-        font-size: var(--step-0);
-    }
-
-    button {
-        font-size: var(--step-0);
-        padding: var(--step-0);
-    }
-
-    a#home_button {
-        font-size: var(--step-0);
-        padding: 1vh 3vw;
-        width: 80%;
-    }
-
-    h1 {
-        font-size: var(--step-3);
-        margin: 4vh 0;
-    }
-
-    form-field {
-        display: flex;
-        align-items: center;
-        margin-bottom: var(--step-0);
-    }
+form-field {
+    display: flex;
+    align-items: center;
 }
