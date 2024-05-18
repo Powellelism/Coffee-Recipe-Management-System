@@ -2,72 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
-    <link rel="stylesheet" href="../css/customize/style2.css">
-    <link rel="stylesheet" href="../css/common.css">
-    <title>Customize Recipes</title>
+    <link rel=stylesheet href="../css/customize/style2.css">
+    <script src="../js/customize/script2.js" type="module"></script>
+    <title>Create New Recipe</title>
 </head>
 <body>
-    <a id="home_button" href="/">Home</a>
-    <h1>Customize Your Recipe!</h1>
+    <header>
+        <a href="#">Back to Dashboard</a>
+        <h1>Create New Recipe</h1>
+        <a href="#">Sign Out</a>
+    </header>
     <main>
-        <form method="post">
-            <label for="recipe-name">Recipe Name</label>
-            <input type="text" name="recipe-name" id="recipe-name" required autofocus>
-            
-            <fieldset>
-                <legend>Coffee Type</legend>
-                <form-field>
-                    <input type="radio" name="coffee-type" id="hot-coffee" value="Hot Coffee" required>
-                    <label for="hot-coffee">Hot Coffee</label>
-                </form-field>
-                <form-field>
-                    <input type="radio" name="coffee-type" id="cold-coffee" value="Cold Coffee">
-                    <label for="cold-coffee">Cold Coffee</label>
-                </form-field>
-            </fieldset>
-
-            <label for="drinks-types">Choose Your Drink</label>
-            <select name="drinks-types" id="drinks-types" required>
-                <option hidden disabled selected value></option>
-                <option value="Cappuccinos">Cappuccinos</option>
-                <option value="Latte">Latte</option>
-                <option value="Espresso">Espresso</option>
-            </select>
-
-            <label for="size">Choose Your Size</label>
-            <select name="size" id="size" required>
-                <option hidden disabled selected value></option>
-                <option value="Small">Small</option>
-                <option value="Medium">Medium</option>
-                <option value="Large">Large</option>
-            </select>
-
-            <fieldset>
-                <legend>Add-Ons</legend>
-                <form-field>
-                    <input type="checkbox" name="add-ons" id="sugar" value="sugar">
-                    <label for="sugar">Sugar</label>
-                </form-field>
-                <form-field>
-                    <input type="checkbox" name="add-ons" id="milk" value="milk">
-                    <label for="milk">Milk</label>
-                </form-field>
-                <form-field>
-                    <input type="checkbox" name="add-ons" id="cream" value="cream">
-                    <label for="cream">Cream</label>
-                </form-field>
-                <form-field>
-                    <input type="checkbox" name="add-ons" id="caramel" value="caramel">
-                    <label for="caramel">Caramel</label>
-                </form-field>
-                <form-field>
-                    <input type="checkbox" name="add-ons" id="extra_shot" value="extra_shot">
-                    <label for="extra_shot">Extra Shot</label>
-                </form-field>
-            </fieldset>
-
-            <button type="submit">Submit</button>
+        <img src="path/to/your/coffee-image.jpg" alt="Insert Coffe Pic Here">
+        <form action="your-backend-endpoint" method="post">
+            <form-field>
+                <label for="recipe-name">Recipe Name</label>
+                <input type="text" id="recipe-name" name="recipe_name" required>
+            </form-field>
+            <form-field>
+                <fieldset>
+                    <legend>Size</legend>
+                    <input type="radio" id="tall" name="size" value="TALL">
+                    <label for="tall">Tall</label>
+                    <input type="radio" id="grande" name="size" value="GRANDE">
+                    <label for="grande">Grande</label>
+                    <input type="radio" id="venti" name="size" value="VENTI">
+                    <label for="venti">Venti</label>
+                </fieldset>
+            </form-field>
+            <form-field>
+                <fieldset>
+                    <legend>Type</legend>
+                    <input type="radio" id="hot" name="type" value="HOT" required>
+                    <label for="hot">HOT</label>
+                    <input type="radio" id="cold" name="type" value="COLD">
+                    <label for="cold">COLD</label>
+                </fieldset>
+            </form-field>
+            <form-field id="ingredients-container">
+                <label for="ingredients">Ingredients</label>
+                <input type="text" name="ingredients" value="CINNAMON">
+                <button type="button" id="add-ingredient">+</button>
+            </form-field>
+            <form-field>
+                <label for="recipe">Recipe</label>
+                <textarea id="recipe" name="recipe" rows="4" cols="50" required></textarea>
+            </form-field>
+            <button type="submit">Save New Recipe</button>
         </form>
     </main>
 </body>
