@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="../css/customize/style2.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <title>Customize Recipes</title>
+</head>
+<body>
+    <a id="home_button" href="/">Home</a>
+    <h1>Customize Your Recipe!</h1>
+    <main>
+        <form method="post">
+            <label for="recipe-name">Recipe Name</label>
+            <input type="text" name="recipe-name" id="recipe-name" required autofocus>
+            
+            <fieldset>
+                <legend>Coffee Type</legend>
+                <form-field>
+                    <input type="radio" name="coffee-type" id="hot-coffee" value="Hot Coffee" required>
+                    <label for="hot-coffee">Hot Coffee</label>
+                </form-field>
+                <form-field>
+                    <input type="radio" name="coffee-type" id="cold-coffee" value="Cold Coffee">
+                    <label for="cold-coffee">Cold Coffee</label>
+                </form-field>
+            </fieldset>
+
+            <label for="drinks-types">Choose Your Drink</label>
+            <select name="drinks-types" id="drinks-types" required>
+                <option hidden disabled selected value></option>
+                <option value="Cappuccinos">Cappuccinos</option>
+                <option value="Latte">Latte</option>
+                <option value="Espresso">Espresso</option>
+            </select>
+
+            <label for="size">Choose Your Size</label>
+            <select name="size" id="size" required>
+                <option hidden disabled selected value></option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>
+
+            <fieldset>
+                <legend>Add-Ons</legend>
+                <form-field>
+                    <input type="checkbox" name="add-ons" id="sugar" value="sugar">
+                    <label for="sugar">Sugar</label>
+                </form-field>
+                <form-field>
+                    <input type="checkbox" name="add-ons" id="milk" value="milk">
+                    <label for="milk">Milk</label>
+                </form-field>
+                <form-field>
+                    <input type="checkbox" name="add-ons" id="cream" value="cream">
+                    <label for="cream">Cream</label>
+                </form-field>
+                <form-field>
+                    <input type="checkbox" name="add-ons" id="caramel" value="caramel">
+                    <label for="caramel">Caramel</label>
+                </form-field>
+                <form-field>
+                    <input type="checkbox" name="add-ons" id="extra_shot" value="extra_shot">
+                    <label for="extra_shot">Extra Shot</label>
+                </form-field>
+            </fieldset>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+</body>
+</html>
