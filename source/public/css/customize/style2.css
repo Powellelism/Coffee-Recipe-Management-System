@@ -1,8 +1,21 @@
+/* @link https://utopia.fyi/type/calculator?c=320,15,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+
+:root {
+    --step--2: clamp(0.651rem, 0.6271rem + 0.1199vi, 0.72rem);
+    --step--1: clamp(0.7813rem, 0.7399rem + 0.2065vi, 0.9rem);
+    --step-0: clamp(0.9375rem, 0.8723rem + 0.3261vi, 1.125rem);
+    --step-1: clamp(1.125rem, 1.0272rem + 0.4891vi, 1.4063rem);
+    --step-2: clamp(1.35rem, 1.2082rem + 0.7092vi, 1.7578rem);
+    --step-3: clamp(1.62rem, 1.4192rem + 1.0039vi, 2.1973rem);
+    --step-4: clamp(1.944rem, 1.6648rem + 1.3958vi, 2.7466rem);
+    --step-5: clamp(2.3328rem, 1.95rem + 1.9138vi, 3.4332rem);
+  }
+
 header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-evenly;
     background-color: #A4947C;
     flex-flow: nowrap;
     padding-left: 0.5rem;
@@ -23,24 +36,25 @@ dashboard-button {
     cursor: pointer;
     padding: 0.5rem;
     border: none;
-    font-size: 1rem;
+    font-size: var(--step--1);
 }
 
 dashboard-button svg {
-    margin-right: 0.5rem;
+    height: 0.85rem;
 }
 
 .dashboard-button span {
-    margin-left: 0.5rem;
+    margin-left: 0.25rem;
 }
 
 body {
     margin: 0;
     background-color: #FBFBF3;
+    font-size: var(--step-0);
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: var(--step-3);
     margin: 0;
 }
 
@@ -59,23 +73,14 @@ h1 {
 
 main {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content:space-between;
-    align-items: center;
-    margin-left: 0;
-}
-
-#coffee-image {
-    width: 20%;
-    height: 20%;
+    justify-content: center;
 }
 
 #recipe-name {
     border: none;
     border-bottom: 2px solid transparent;
     background-color: transparent;
-    font-size: 1.2rem;
+    font-size: var(--step-1);
     font-weight: bold;
     text-align: left;
     padding: 0;
@@ -144,7 +149,7 @@ main {
 }
 
 .size-option span {
-    font-size: 0.8rem;
+    font-size: var(--step--2);
     font-weight: bold;
     color: #573D06;
     transition: color 0.3s ease;
@@ -182,7 +187,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: var(--step--2);
     font-weight: bold;
     color: #573D06;
     padding: 1.2rem;
@@ -231,7 +236,7 @@ main {
     background-color: white;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    font-size: 0.8rem;
+    font-size: var(--step--1);
     font-weight: bold;
     color: #573D06;
     text-transform: uppercase;
@@ -260,7 +265,7 @@ main {
     background-color: white;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    font-size: 1.5rem;
+    font-size: var(--step-2);
     color: #573D06;
     cursor: pointer;
     display: flex;
@@ -297,7 +302,7 @@ main {
     background-color: white;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    font-size: 0.8rem;
+    font-size: var(--step--1);
     font-weight: bold;
     color: #573D06;
     resize: none;
@@ -324,6 +329,7 @@ form {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: left;
+    max-width: 50%;
 }
 
 form form-field, form button {
@@ -336,11 +342,70 @@ form button {
     border-radius: 1rem;
     background-color: #3A4F39;
     color: white;
-    font-size: 1rem;
+    font-size: var(--step--1);
     cursor: pointer;
     transition: background-color 0.5s ease-out;
 }
 
 form button:hover {
     background-color: #2A3F29;
+}
+
+@media only screen and (min-width: 280px) and (max-width: 1024px) {
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    #sign-out-button {
+        margin-bottom: 1rem;
+    }
+
+    #recipe-name {
+        text-align: center;
+    }
+
+    #size-container fieldset{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #type-container fieldset{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #ingredients-list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    #recipe-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    form-field, fieldset {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    fieldset legend {
+        text-align: center;
+    }
 }

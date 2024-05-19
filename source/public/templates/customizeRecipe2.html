@@ -21,8 +21,7 @@
         <a href="/login" id="sign-out-button">Sign Out</a>
     </header>
     <main>
-        <img id="coffee-image" src="../images/new_coffee.png" alt="Insert Coffe Pic Here">
-        <form action="your-backend-endpoint" method="post">
+        <form action="/recipe/review" method="post">
             <form-field>
                 <input type="text" id="recipe-name" name="recipe_name" value="Recipe Name"required>
             </form-field>
@@ -44,10 +43,10 @@
             <form-field id="type-container">
                 <fieldset>
                     <legend>Type</legend>
-                    <input type="radio" id="hot" name="type" value="HOT" required>
+                    <input type="radio" id="hot" name="drink-type" value="HOT" required>
                     <label class="type-option" for="hot">HOT</label>
             
-                    <input type="radio" id="cold" name="type" value="COLD">
+                    <input type="radio" id="cold" name="drink-type" value="COLD">
                     <label class="type-option" for="cold">COLD</label>
                 </fieldset>
             </form-field>
