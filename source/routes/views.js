@@ -53,7 +53,7 @@ router.get("/preset/list", (req, res) => {
 // serve recipe customization view
 router.get("/recipe/customize", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "../public/templates", "customizeRecipe.html"),
+    path.join(__dirname, "../public/templates", "customizeRecipe2.html"),
   );
 });
 
@@ -67,7 +67,7 @@ router.get("/recipe/saved", (req, res) => {
 // serve recipe review view
 router.get("/recipe/review", (req, res) => {
   res.sendFile(
-    path.join(__dirname, "../public/templates", "reviewRecipe.html"),
+    path.join(__dirname, "../public/templates", "reviewRecipe2.html"),
   );
 });
 module.exports = router;
