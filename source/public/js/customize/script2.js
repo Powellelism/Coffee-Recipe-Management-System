@@ -1,6 +1,6 @@
 // grabbers
 const addIngredientButton = document.getElementById('add-ingredient');
-let allIngredients = document.querySelectorAll('#ingredients-container input[type="text"]');
+let allIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
 
 // event listeners
 addIngredientButton.addEventListener('click', addIngredient);
@@ -10,7 +10,7 @@ allIngredients.forEach(input => {
 
 // functions for event listeners
 function addIngredient() {
-    const container = document.getElementById('ingredients-container');
+    const container = document.getElementById('ingredients-list');
     const input = document.createElement('input');
     input.type = 'text';
     input.name = 'ingredients';
@@ -19,7 +19,7 @@ function addIngredient() {
 }
 
 function updateIngredients() {
-    allIngredients = document.querySelectorAll('#ingredients-container input[type="text"]');
+    allIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
     allIngredients.forEach(input => {
         input.removeEventListener('input', removeInput);
         input.addEventListener('input', removeInput);
