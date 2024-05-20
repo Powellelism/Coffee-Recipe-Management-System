@@ -23,14 +23,14 @@
     <main>
         <form action="/recipe/review" method="post">
             <form-field>
-                <input type="text" id="recipe-name" name="recipe_name" value="Recipe Name"required>
+                <input type="text" id="recipe-name" name="recipe_name" value="Recipe Name" required autofocus>
             </form-field>
             <form-field id="size-container">
                 <fieldset>
                     <legend>Size</legend>
 
-                    <input type="radio" id="tall" name="size" value="TALL">
-                    <label class="size-option" for="tall" required><img src="../images/svgs/tall.svg"><span>TALL</span></label>
+                    <input type="radio" id="tall" name="size" value="TALL" required>
+                    <label class="size-option" for="tall"><img src="../images/svgs/tall.svg"><span>TALL</span></label>
             
                     <input type="radio" id="grande" name="size" value="GRANDE">
                     <label class="size-option" for="grande"><img src="../images/svgs/grande.svg"><span>GRANDE</span></label>
@@ -51,7 +51,7 @@
                 </fieldset>
             </form-field>
             <form-field id="ingredients-container">
-                <label for="ingredients">Ingredients</label>
+                <label>Ingredients</label>
                 <div id="ingredients-list">
                     <input type="text" name="ingredients" value="CREAMER" id="ingredients">
                     <button type="button" id="add-ingredient">+</button>

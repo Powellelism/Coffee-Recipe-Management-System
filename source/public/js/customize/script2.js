@@ -1,5 +1,4 @@
 window.addEventListener('DOMContentLoaded', init);
-window.addEventListener('pageshow', init);
 
 function init() {
     
@@ -83,13 +82,14 @@ function restorePopulatedForm() {
         }
 
         const ingredientsList = document.getElementById('ingredients-list');
-        ingredientsList.innerHTML = '';
+        const addIngredientButton = document.getElementById('add-ingredient');
+        document.querySelector('#ingredients-list input').remove();
         formData.ingredients.forEach(ingredient => {
             const ingredientInput = document.createElement('input');
             ingredientInput.type = 'text';
             ingredientInput.name = 'ingredients';
             ingredientInput.value = ingredient;
-            ingredientsList.appendChild(ingredientInput);
+            ingredientsList.insertBefore(ingredientInput, addIngredientButton);
         });
 
         let recipe = document.getElementById('recipe');
