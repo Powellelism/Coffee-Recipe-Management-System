@@ -30,3 +30,16 @@ body {
   font-weight: bold;
   color: black;
 }
+
+#home_button {
+  width: 300px;
+  background-color: #fffbf3;
+  color: #573d06;
+  border: none;
+  display: flex;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 20px;
+  padding: 0 20px 20px 60px;
+  cursor: pointer;
+}

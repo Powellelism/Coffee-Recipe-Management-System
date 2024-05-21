@@ -1,4 +1,5 @@
-const supabase = require("../config/supabaseClient");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 /**
  * This function retrieves the recipes with their associated data.
@@ -8,37 +9,113 @@ const supabase = require("../config/supabaseClient");
  */
 exports.getRecipes = async (request, response) => {
   try {
-    const { data, error } = await supabase
-      .from("recipes")
-      .select(
-        `
-                name,
-                coffee_type,
-                drink_type_id,
-                size_id,
-                recipe_add_ons (
-                  add_on_id
-                )
-              `,
-      )
-      .order("name", { ascending: true });
+    const recipes = await prisma.recipe.findMany({
+      include: {
+        food: {
+          select: {
+            name: true,
+            description: true,
+            price: true,
+            store: {
+              select: {
+                name: true,
+              },
+            },
+            type: true,
+            size: true,
+          },
+        },
+        ingredients: {
+          select: {
+            name: true,
+          },
+        },
+        ratings: {
+          select: {
+            score: true,
+          },
+        },
+        reviews: {
+          select: {
+            content: true,
+          },
+        },
+      },
+      orderBy: {
+        name: "asc",
+      },
+    });
 
-    if (error) {
-      console.error("Error retrieving recipes:", error);
-      throw new Error(error.message);
-    }
-
-    const formattedRecipes = data.map((recipe) => ({
+    const formattedRecipes = recipes.map((recipe) => ({
       recipeName: recipe.name,
-      coffeeType: recipe.coffee_type,
-      drinkType: recipe.drink_types_id,
-      size: recipe.size_id,
-      addOns: recipe.recipe_add_ons.map((addOn) => addOn.add_ons_id),
+      description: recipe.description,
+      food: {
+        name: recipe.food.name,
+        description: recipe.food.description,
+        price: recipe.food.price,
+        store: recipe.food.store.name,
+        type: recipe.food.type,
+        size: recipe.food.size,
+      },
+      ingredients: recipe.ingredients.map((ingredient) => ingredient.name),
+      size: recipe.size,
+      ratings: recipe.ratings.map((rating) => rating.score),
+      reviews: recipe.reviews.map((review) => review.content),
+      instructions: recipe.instructions,
+      totalTime: recipe.totalTime,
     }));
 
     response.json(formattedRecipes);
   } catch (error) {
     console.error("Error retrieving recipes:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+
+/**
+ * This function adds a new recipe.
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+exports.addRecipe = async (request, response) => {
+  try {
+    const {
+      name,
+      description,
+      foodId,
+      ingredients,
+      size,
+      instructions,
+      totalTime,
+    } = request.body;
+
+    // Create the recipe
+    const recipe = await prisma.recipe.create({
+      data: {
+        name,
+        description,
+        food: {
+          connect: {
+            id: foodId,
+          },
+        },
+        ingredients: {
+          connectOrCreate: ingredients.map((ingredient) => ({
+            where: { name: ingredient },
+            create: { name: ingredient },
+          })),
+        },
+        size,
+        instructions,
+        totalTime,
+      },
+    });
+
+    response.status(201).json(recipe);
+  } catch (error) {
+    console.error("Error adding recipe:", error);
     response.status(500).json({ error: "Internal Server Error" });
   }
 };

@@ -29,6 +29,7 @@ function init() {
 
   let drinkType = { 1: "Cappuccinos", 2: "Latte", 3: "Espresso" };
   let size = { 1: "S", 2: "M", 3: "L" };
+  let addOns = { 0: "Caramel", 1: "Sugar", 2: "Extra Shot", 3: "Milk", 4: "Cream", 5: "Water" };
 
   //fill the data to the attributes
   recipeName.value = custome["recipeName"];

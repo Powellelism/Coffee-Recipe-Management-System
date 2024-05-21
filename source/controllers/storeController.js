@@ -1,4 +1,5 @@
-const supabase = require("../config/supabaseClient");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 /**
  * This function retrieves the feed of coffee shops.
@@ -8,32 +9,35 @@ const supabase = require("../config/supabaseClient");
  */
 exports.getShops = async (request, response) => {
   try {
-    const { data, error } = await supabase
-      .from("shops")
-      .select(
-        `
-                name,
-                coffee_types (
-                  type
-                ),
-                drink_types (
-                  type,
-                  size
-                )
-              `,
-      )
-      .order("name", { ascending: true });
+    const shops = await prisma.store.findMany({
+      include: {
+        Food: {
+          select: {
+            name: true,
+            type: true,
+            size: true,
+          },
+        },
+      },
+      orderBy: {
+        name: "asc",
+      },
+    });
 
-    if (error) {
-      console.error("Error retrieving shops:", error);
-      throw new Error(error.message);
-    }
-
-    const formattedShops = data.map((shop) => ({
+    const formattedShops = shops.map((shop) => ({
       shopName: shop.name,
-      coffeeType: shop.coffee_types.map((type) => type.type),
-      drinkType: shop.drink_types.map((type) => type.type),
-      size: [...new Set(shop.drink_types.map((type) => type.size))],
+      description: shop.description,
+      address: shop.address,
+      city: shop.city,
+      state: shop.state,
+      zip: shop.zip,
+      phone: shop.phone,
+      email: shop.email,
+      foodItems: shop.Food.map((food) => ({
+        name: food.name,
+        type: food.type,
+        size: food.size,
+      })),
     }));
 
     response.json(formattedShops);

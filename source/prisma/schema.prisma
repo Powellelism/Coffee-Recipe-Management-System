@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Store {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String @default("")
+  address     String @default("")
+  city        String @default("")
+  state       String @default("")
+  zip         String @default("")
+  phone       String @default("")
+  email       String @default("")
+  Food        Food[]
+}
+
+enum SizeType {
+  SMALL
+  MEDIUM
+  LARGE
+}
+
+model Food {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String   @default("")
+  price       Float
+  store       Store    @relation(fields: [storeId], references: [id])
+  storeId     Int
+  type        String   @default("")
+  size        SizeType
+  Recipe      Recipe[]
+}
+
+model Recipe {
+  id           Int          @id @default(autoincrement())
+  name         String
+  description  String       @default("")
+  food         Food         @relation(fields: [foodId], references: [id])
+  foodId       Int
+  ingredients  Ingredient[]
+  size         SizeType
+  ratings      Rating[]
+  reviews      Review[]
+  instructions String       @default("")
+  totalTime    Int          @default(0)
+}
+
+model Ingredient {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
+  recipes Recipe[]
+  ratings Rating[]
+  reviews Review[]
+}
+
+model Rating {
+  id           Int         @id @default(autoincrement())
+  rateableId   Int
+  rateableType String
+  score        Int
+  Recipe       Recipe?     @relation(fields: [recipeId], references: [id])
+  recipeId     Int?
+  Ingredient   Ingredient? @relation(fields: [ingredientId], references: [id])
+  ingredientId Int?
+}
+
+model Review {
+  id             Int         @id @default(autoincrement())
+  reviewableId   Int
+  reviewableType String
+  content        String
+  Recipe         Recipe?     @relation(fields: [recipeId], references: [id])
+  recipeId       Int?
+  Ingredient     Ingredient? @relation(fields: [ingredientId], references: [id])
+  ingredientId   Int?
+}
