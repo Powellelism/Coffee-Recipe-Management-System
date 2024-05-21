@@ -1,23 +1,24 @@
-/* @link https://utopia.fyi/type/calculator?c=320,15,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+/*Import CSS vars*/
+@import url('vars.css');
 
-:root {
-    --step--2: clamp(0.651rem, 0.6271rem + 0.1199vi, 0.72rem);
-    --step--1: clamp(0.7813rem, 0.7399rem + 0.2065vi, 0.9rem);
-    --step-0: clamp(0.9375rem, 0.8723rem + 0.3261vi, 1.125rem);
-    --step-1: clamp(1.125rem, 1.0272rem + 0.4891vi, 1.4063rem);
-    --step-2: clamp(1.35rem, 1.2082rem + 0.7092vi, 1.7578rem);
-    --step-3: clamp(1.62rem, 1.4192rem + 1.0039vi, 2.1973rem);
-    --step-4: clamp(1.944rem, 1.6648rem + 1.3958vi, 2.7466rem);
-    --step-5: clamp(2.3328rem, 1.95rem + 1.9138vi, 3.4332rem);
-  }
-
-header {
+header, dashboard-button, #ingredients-list {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+fieldset {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+header {
     justify-content: space-between;
-    background-color: #A4947C;
-    flex-flow: nowrap;
+    background-color: var(--header-color, bisque);
     padding: 0.7rem;
 }
 
@@ -35,14 +36,11 @@ header h1 {
 }
 
 dashboard-button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
     justify-content: space-between;
     cursor: pointer;
     padding: 0.5rem;
     border: none;
-    font-size: var(--step--1);
+    font-size: var(--step-n1);
 }
 
 dashboard-button svg {
@@ -55,7 +53,7 @@ dashboard-button svg {
 
 body {
     margin: 0;
-    background-color: #FBFBF3;
+    background-color: var(-body-color, white);
     font-size: var(--step-0);
 }
 
@@ -64,17 +62,19 @@ h1 {
     margin: 0;
 }
 
-#sign-out-button {
+#sign-out-button, form-field button {
     text-decoration: none;
     color: white;
-    background-color: #3A4F39;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    border: none;
+    background-color: var(--button-color, darkgreen);
+    padding: 0.5rem 1rem;
     border-radius: 1rem;
+    font-size: var(--step-n1);
     transition: background-color 0.5s ease-out;
 }
 
-#sign-out-button:hover {
-    background-color: #2A3F29;
+#sign-out-button:hover, form-field button:hover {
+    background-color: var(--button-hover-color, green);
 }
 
 main {
@@ -90,39 +90,30 @@ main {
     font-weight: bold;
     text-align: left;
     padding: 0;
-    color: black;
+    color: var(--select-color, black);
     transition: border-bottom 0.3s ease;
     text-transform: uppercase;
 }
 
 #recipe-name:focus {
     outline: none;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--select-color, black);
     background-color: #f0f0f0;
-    color: black;
+    color: var(--select-color, black);
     cursor: text;
 }
 
 #recipe-name:hover {
-    border-bottom: 2px solid #573D06;
-    color: #573D06;
+    border-bottom: 2px solid var(--text-color, brown);
+    color: var(--text-color, brown);
     background-color: #f9f9f9;
 }
 
-#size-container input {
+#size-container input, #type-container input{
     display: none;
 }
 
-#size-container fieldset {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-.size-option {
+.size-option, .type-option {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,7 +122,7 @@ main {
     margin: 0.5rem;
     border-radius: 1rem;
     background-color: white;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.5rem var(--box-shadow-color, black);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
     width: 5.25rem;
     height: 5.25rem;
@@ -140,14 +131,14 @@ main {
 }
 
 .size-option:hover {
-    background-color: #D3C4B4;
+    background-color: var(--hover-color, blanchedalmond);
 
     & img {
         filter: brightness(0) saturate(100%);
     }
 
     & span {
-        color: black;
+        color: var(--select-color, black);
     }
 
 }
@@ -158,16 +149,17 @@ main {
 }
 
 .size-option span {
-    font-size: var(--step--2);
+    font-size: var(--step-n2);
     font-weight: bold;
-    color: #573D06;
+    color: var(--text-color, brown);
     transition: color 0.3s ease;
 }
 
-#size-container input:checked + label.size-option {
-    background-color: #D3C4B4;
-    box-shadow: 0 0 0 0.1rem black; 
-    border: 0.0625rem solid black;  
+#size-container input:checked + label.size-option, #type-container input:checked + label.type-option {
+    background-color: var(--hover-color, blanchedalmond);
+    box-shadow: 0 0 0 0.1rem var(--select-color, black); 
+    border: 0.0625rem solid var(--select-color, black);  
+    color: var(--select-color, black);
 }
 
 #size-container input:checked + label.size-option img {
@@ -175,52 +167,19 @@ main {
 }
 
 #size-container input:checked + label.size-option span {
-    color: black;
-}
-
-#type-container input {
-    display: none;
-}
-
-#type-container fieldset {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-    border: none;
-    margin: 0;
-    padding: 0;
+    color: var(--select-color, black);
 }
 
 .type-option {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--step--2);
+    font-size: var(--step-n2);
     font-weight: bold;
-    color: #573D06;
-    padding: 1.2rem;
-    margin: 0.5rem;
-    border-radius: 1rem;
-    background-color: white;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    width: 5.25rem;
+    color: var(--text-color, brown);
     height: 1.3125rem;
-    cursor: pointer;
-    border: none; 
 }
 
 .type-option:hover {
-    background-color: #D3C4B4;
-    color: black;
-}
-
-#type-container input:checked + label.type-option {
-    background-color: #D3C4B4;
-    box-shadow: 0 0 0 0.1rem black; 
-    border: 0.0625rem solid black;  
-    color: black;
+    background-color: var(--hover-color, blanchedalmond);
+    color: var(--select-color, black);
 }
 
 /* Ingredients Container Styles */
@@ -231,52 +190,34 @@ main {
 }
 
 #ingredients-list {
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
     gap: 0.5rem;
     max-width: 33rem;
 }
 
-#ingredients-list input {
+#ingredients-list input, #add-ingredient, #recipe {
     height: 2.625rem;
     border: 0.0625rem solid transparent;
     border-radius: 1rem;
     background-color: white;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.5rem var(--box-shadow-color, black);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    font-size: var(--step--1);
+    font-size: var(--step-n1);
     font-weight: bold;
-    color: #573D06;
+    color: var(--text-color, brown);
     text-transform: uppercase;
     text-align: center;
 }
 
-#ingredients-list input:hover {
-    cursor: pointer;
-    color: black;
-    background-color: #A4947C;
-}
-
-#ingredients-list input:focus {
-    background-color: #D3C4B4;
-    box-shadow: 0 0 0 0.0625rem black;
-    border: 0.0625rem solid black;
-    outline: none;
-    cursor: text;
-    color: black;
+#ingredients-list input:focus, #recipe:focus {
+    box-shadow: 0 0 0 0.0625rem var(--select-color, black);
+    cursor: text !important;
 }
 
 #add-ingredient {
-    padding: 0.5rem;
-    border: 0.0625rem solid transparent;
+    padding: 0;
     border-radius: 1.5rem;
-    background-color: white;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
     font-size: var(--step-2);
-    color: #573D06;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -285,16 +226,17 @@ main {
     height: 2.5rem;
 }
 
-#add-ingredient:hover {
-    background-color: #D3C4B4;
-    color: black;
+#add-ingredient:hover, #ingredients-list input:hover, #recipe:hover {
+    background-color: var(--hover-color, blanchedalmond);
+    color: var(--select-color, black);
+    cursor: pointer;
 }
 
-#add-ingredient:active {
-    background-color: #D3C4B4;
-    border: 0.0625rem solid black;
+#add-ingredient:active, #ingredients-list input:focus, #recipe:focus {
+    background-color: var(--hover-color, blanchedalmond);
+    border: 0.0625rem solid var(--select-color, black);
     outline: none;
-    color: black;
+    color: var(--select-color, black);
 }
 
 /* Recipe Textarea Styles */
@@ -307,31 +249,11 @@ main {
 
 #recipe {
     padding: 0.5rem 1rem;
-    border: 0.0625rem solid transparent;
     border-radius: 1.5rem;
-    background-color: white;
-    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    font-size: var(--step--1);
-    font-weight: bold;
-    color: #573D06;
+    color: var(--text-color, brown);
     resize: none;
-    text-transform: uppercase;
-}
-
-#recipe:hover {
-    cursor: pointer;
-    color: black;
-    background-color: #D3C4B4;
-}
-
-#recipe:focus {
-    background-color: #D3C4B4;
-    box-shadow: 0 0 0 0.0625rem black;
-    border: 0.0625rem solid black;
-    outline: none;
-    color: black;
-    cursor: text;
+    height: auto;
+    text-align: left;
 }
 
 form {
@@ -345,33 +267,12 @@ form form-field {
     margin: 1rem;
 }
 
-form-field button {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 1rem;
-    background-color: #3A4F39;
-    color: white;
-    font-size: var(--step--1);
-    cursor: pointer;
-    transition: background-color 0.5s ease-out;
-}
-
-form-field button:hover {
-    background-color: #2A3F29;
-}
-
 #submit-button {
     min-width: 100%;
+    cursor: pointer;
 }
 
-
 @media only screen and (min-width: 280px) and (max-width: 1024px) {
-    header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-wrap: wrap;
-    }
 
     header h1 {
         position: static;
@@ -382,57 +283,23 @@ form-field button:hover {
         margin-bottom: 1rem;
     }
 
-    #recipe-name {
+    #recipe-name, fieldset legend {
         text-align: center;
     }
 
-    #size-container fieldset{
+    form-field, fieldset, #ingredients-list, #recipe-container, form, header{
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-    }
-
-    #type-container fieldset{
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #ingredients-list {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    #recipe-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    form-field, fieldset {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    fieldset legend {
-        text-align: center;
     }
 
     form {
-        display: flex;
-        flex-direction: column;
         flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
+    }
+
+    #recipe {
+        text-align: center;
     }
 }
