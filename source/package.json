@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "start": "node app.js"
+    "start": "node app.js",
+    "custom-seed": "node commands/seed.js"
   },
   "author": "",
   "license": "ISC",
