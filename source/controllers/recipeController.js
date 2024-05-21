@@ -72,7 +72,6 @@ exports.getRecipes = async (request, response) => {
   }
 };
 
-
 /**
  * This function adds a new recipe.
  * @param request
