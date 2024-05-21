@@ -27,6 +27,7 @@ function addIngredient() {
     const input = document.createElement('input');
     input.type = 'text';
     input.name = 'ingredients';
+    input.required = true;
     container.insertBefore(input, this);
     updateIngredients();
 }

@@ -18,8 +18,14 @@ header {
     justify-content: space-between;
     background-color: #A4947C;
     flex-flow: nowrap;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 0.7rem;
+}
+
+header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 .dashboard-link {
@@ -91,13 +97,16 @@ main {
 
 #recipe-name:focus {
     outline: none;
-    border-bottom: 0.0625rem solid black;
+    border-bottom: 2px solid black;
+    background-color: #f0f0f0;
     color: black;
     cursor: text;
 }
 
 #recipe-name:hover {
-    color: #573D06
+    border-bottom: 2px solid #573D06;
+    color: #573D06;
+    background-color: #f9f9f9;
 }
 
 #size-container input {
@@ -200,7 +209,6 @@ main {
     height: 1.3125rem;
     cursor: pointer;
     border: none; 
-    transition: color 0.3s ease; 
 }
 
 .type-option:hover {
@@ -219,6 +227,7 @@ main {
 #ingredients-container {
     display: flex;
     flex-direction: column;
+    width: 100%
 }
 
 #ingredients-list {
@@ -227,6 +236,7 @@ main {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
+    max-width: 33rem;
 }
 
 #ingredients-list input {
@@ -331,11 +341,11 @@ form {
     max-width: 50%;
 }
 
-form form-field, form button {
+form form-field {
     margin: 1rem;
 }
 
-form button {
+form-field button {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 1rem;
@@ -346,8 +356,12 @@ form button {
     transition: background-color 0.5s ease-out;
 }
 
-form button:hover {
+form-field button:hover {
     background-color: #2A3F29;
+}
+
+#submit-button {
+    min-width: 100%;
 }
 
 
@@ -357,6 +371,11 @@ form button:hover {
         flex-direction: column;
         align-items: center;
         flex-wrap: wrap;
+    }
+
+    header h1 {
+        position: static;
+        transform: none;
     }
 
     #sign-out-button {
@@ -407,5 +426,13 @@ form button:hover {
 
     fieldset legend {
         text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
     }
 }

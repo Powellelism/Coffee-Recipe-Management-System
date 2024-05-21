@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel=stylesheet href="../css/customize.css">
-    <link rel=stylesheet href="../css/common.css">
-    <script src="../js/reviewRecipes.js" type="module"></script>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png" />
+    <link rel=stylesheet href="../styles/recipes.css">
+    <link rel=stylesheet href="../styles/common.css">
+    <script src="../scripts/reviewRecipes.js" type="module"></script>
     <title>Review Your Recipe</title>
 </head>
 <body>
@@ -51,13 +52,13 @@
                     <legend>Size</legend>
 
                     <input type="radio" id="tall" name="size" value="TALL" disabled>
-                    <label class="size-option" for="tall" required><img src="../images/svgs/tall.svg"><span>TALL</span></label>
+                    <label class="size-option" for="tall" required><img src="../assets/svgs/tall.svg"><span>TALL</span></label>
             
                     <input type="radio" id="grande" name="size" value="GRANDE" disabled>
-                    <label class="size-option" for="grande"><img src="../images/svgs/grande.svg"><span>GRANDE</span></label>
+                    <label class="size-option" for="grande"><img src="../assets/svgs/grande.svg"><span>GRANDE</span></label>
             
                     <input type="radio" id="venti" name="size" value="VENTI" disabled>
-                    <label class="size-option" for="venti"><img src="../images/svgs/venti.svg"><span>VENTI</span></label>
+                    <label class="size-option" for="venti"><img src="../assets/svgs/venti.svg"><span>VENTI</span></label>
                 </fieldset>
             </form-field>
             
@@ -81,7 +82,9 @@
                 <label for="recipe">Recipe</label>
                 <textarea id="recipe" name="recipe" rows="4" cols="50" readonly></textarea>
             </form-field>
-            <button type="submit">Save New Recipe</button>
+            <form-field>
+                <button id="submit-button" type="submit">Save New Recipe</button>
+            </form-field>
         </form>
     </main>
 </body>
