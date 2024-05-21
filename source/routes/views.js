@@ -19,9 +19,7 @@ router.get("/login", (req, res) => {
 
 // Serve register view
 router.get("/register", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../public/pages", "auth/register.html"),
-  );
+  res.sendFile(path.join(__dirname, "../public/pages", "auth/register.html"));
 });
 
 // Serve forgot password view
@@ -40,9 +38,7 @@ router.get("/dashboard", (req, res) => {
 });
 // serve preset customize view
 router.get("/preset/customize", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../public/pages", "presetCustomize.html"),
-  );
+  res.sendFile(path.join(__dirname, "../public/pages", "presetCustomize.html"));
 });
 
 // serve preset list view
@@ -52,22 +48,16 @@ router.get("/preset/list", (req, res) => {
 
 // serve recipe customization view
 router.get("/recipe/customize", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../public/pages", "customizeRecipe.html"),
-  );
+  res.sendFile(path.join(__dirname, "../public/pages", "customizeRecipe.html"));
 });
 
 // serve saved recipe view
 router.get("/recipe/saved", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../public/pages", "savedRecipes.html"),
-  );
+  res.sendFile(path.join(__dirname, "../public/pages", "savedRecipes.html"));
 });
 
 // serve recipe review view
 router.get("/recipe/review", (req, res) => {
-  res.sendFile(
-    path.join(__dirname, "../public/pages", "reviewRecipe.html"),
-  );
+  res.sendFile(path.join(__dirname, "../public/pages", "reviewRecipe.html"));
 });
 module.exports = router;
