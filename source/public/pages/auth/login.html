@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <script src="/js/login.js"></script>
+  <script src="../../scripts/auth/login.js"></script>
   <style>
     * {
       font-family: "Verdana", sans-serif;
@@ -9,12 +9,13 @@
       margin: 0;
       padding: 0;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 98vh;
       background-color: #fffbf3;
     }
-    .title {
+    h1 {
       color: #573d06;
       text-align: center;
       font-size: 28px;
@@ -96,8 +97,7 @@
     <title>Login</title>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="title">Login</div>
+      <h1>Login</h1>
       <form class="login-form" action="/auth/login" method="post">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required />
@@ -105,11 +105,10 @@
         <input type="password" id="password" name="password" required />
         <a class="forgot" href="/auth/forgot-password">Forgot Password?</a>
         <button type="submit">Login</button>
-        <div class="error-message"></div>
+        <output class="error-message"></output>
         <span class="signup"
           >Don't have an account? <a href="/register">Sign up</a></span
         >
       </form>
-    </div>
   </body>
 </html>

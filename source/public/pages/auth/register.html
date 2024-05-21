@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-  <script src="/js/register.js"></script>
+  <script src="../../scripts/auth/register.js"></script>
   <style>
     * {
       font-family: "Verdana", sans-serif;
@@ -14,7 +14,7 @@
       height: 98vh;
       background-color: #fffbf3;
     }
-    .title {
+    h1 {
       color: #573d06;
       text-align: center;
       font-size: 28px;
@@ -96,8 +96,7 @@
     <title>Register</title>
   </head>
   <body>
-    <div class="wrapper">
-      <div class="title">Register</div>
+      <h1>Register</h1>
       <form class="register-form" action="/auth/register" method="post">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required />
@@ -106,11 +105,10 @@
         <label for="confirm_password">Confirm Password</label>
         <input type="password" id="confirm_pass" name="confirm_pass" required />
         <button type="submit">Sign Up</button>
-        <div class="error-message"></div>
+        <output class="error-message"></output>
         <span class="login"
           >Already have an account? <a href="/login">Login</a></span
         >
       </form>
-    </div>
   </body>
 </html>
