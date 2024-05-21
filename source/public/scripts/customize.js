@@ -1,5 +1,8 @@
 window.addEventListener('DOMContentLoaded', init);
 
+/**
+ * Initialize the customize page's event listeners.
+ */
 function init() {
     
     // grabbers
@@ -14,6 +17,7 @@ function init() {
     });
     form.addEventListener('submit', saveFormDataToLocalStorage);
 
+    // for: if user clicks back button, the form is still populated
     if(localStorage.getItem('newRecipe')) {
         restorePopulatedForm();
     }
@@ -21,7 +25,9 @@ function init() {
 
 
 
-// functions for event listeners
+/**
+ * Add an ingredient input field to the form.
+ */
 function addIngredient() {
     const container = document.getElementById('ingredients-list');
     const input = document.createElement('input');
@@ -32,6 +38,9 @@ function addIngredient() {
     updateIngredients();
 }
 
+/**
+ * Update the ingredients list's event listeners.
+ */
 function updateIngredients() {
     let allIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
     allIngredients.forEach(input => {
@@ -40,12 +49,19 @@ function updateIngredients() {
     });
 }
 
+/**
+ * Remove an ingredient input field from the form if the user deletes the text.
+ */
 function removeInput() {
     if (this.value === '') {
         this.parentElement.removeChild(this);
     }
 }
 
+/**
+ * On form submission, save the form data to local storage and redirect to the review page.
+ * @param {event} event 
+ */
 function saveFormDataToLocalStorage(event) {
     event.preventDefault();
 
@@ -66,6 +82,9 @@ function saveFormDataToLocalStorage(event) {
     window.location.href = '/recipe/review';
 }
 
+/**
+ * Restore the form data if the user navigates back to the customize page.
+ */
 function restorePopulatedForm() {
     const formData = JSON.parse(localStorage.getItem('newRecipe'));
     if (formData) {

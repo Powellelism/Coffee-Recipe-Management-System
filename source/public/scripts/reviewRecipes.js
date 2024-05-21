@@ -1,10 +1,17 @@
 document.addEventListener('DOMContentLoaded', reviewRecipe);
 document.addEventListener('DOMContentLoaded', init);
 
+/**
+ * Initialize the review page's event listeners.
+ */
 function init() {
     let form = document.querySelector('form');
     form.addEventListener('submit', sendRecipeToDataBase);
 }
+
+/**
+ * Remake the form with the data from local storage, but disable all inputs.
+ */
 function reviewRecipe(){
     const formData = JSON.parse(localStorage.getItem('newRecipe'));
     if (formData) {
@@ -40,6 +47,10 @@ function reviewRecipe(){
     }
 };
 
+/**
+ * Persist recipes and store them in the database.
+ * @param {event} event 
+ */
 function sendRecipeToDataBase(event) {
     event.preventDefault();
     localStorage.removeItem('newRecipe');
