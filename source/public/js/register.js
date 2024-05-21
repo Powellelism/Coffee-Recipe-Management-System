@@ -1,18 +1,6 @@
-window.addEventListener("DOMContentLoaded", () => {
-  const currentURL = window.location.pathname;
-  const toggle = document.querySelector(".toggle");
-
-  // If the route is '/register', open sign up form
-  // If the route is '/login', open login form
-  if (currentURL === "/register") {
-    toggle.checked = true;
-  }
-});
-
 document.addEventListener("DOMContentLoaded", () => {
-  const back = document.querySelector(".flip-card-back");
-  const register_form = back.querySelector(".flip-card-form");
   let error_msg = document.querySelector(".error-message");
+  const register_form = document.querySelector(".register-form");
 
   register_form.addEventListener("submit", async (event) => {
     event.preventDefault();
