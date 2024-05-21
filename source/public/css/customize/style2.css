@@ -15,7 +15,7 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: #A4947C;
     flex-flow: nowrap;
     padding-left: 0.5rem;
@@ -328,7 +328,6 @@ form {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-items: left;
     max-width: 50%;
 }
 
