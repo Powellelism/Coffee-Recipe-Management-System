@@ -7,7 +7,7 @@ Coffee management system full stack conversion
 - Added login and sign up functionality but no final pages
 - Added authentication middleware which should be used to add authentication to routes with cookies
 - Added the connection to supabase
-
+- Added prisma for ORM
 ## How to get started
 
 - Run npm install in source folder
@@ -22,3 +22,19 @@ Coffee management system full stack conversion
 - Add the authentication by completing the middleware
 - Add the ability to save recipes to the database
 - Add the ability to save stores to the database
+
+## How to test API
+
+- Make get request to localhost:3000/api/get/recipes to get all recipes
+- Make post request to localhost:3000/api/post/recipes to add a recipe using following curl
+    ```bash
+  curl -X POST -H "Content-Type: application/json" -d '{
+  "name": "Iced Vanilla Latte",
+  "description": "A refreshing iced latte with vanilla syrup",
+  "foodId": 3,
+  "ingredients": ["Espresso", "Milk", "Ice", "Vanilla Syrup"],
+  "size": "LARGE",
+  "instructions": "1. Pull espresso shots\n2. Add vanilla syrup\n3. Pour cold milk\n4. Add ice\n5. Stir well",
+  "totalTime": 5
+  }' http://localhost:3000/api/post/recipe```
+- Make get request to localhost:3000/api/get/stores to get all stores

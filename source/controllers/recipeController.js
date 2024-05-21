@@ -71,3 +71,51 @@ exports.getRecipes = async (request, response) => {
     response.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+
+/**
+ * This function adds a new recipe.
+ * @param request
+ * @param response
+ * @returns {Promise<void>}
+ */
+exports.addRecipe = async (request, response) => {
+  try {
+    const {
+      name,
+      description,
+      foodId,
+      ingredients,
+      size,
+      instructions,
+      totalTime,
+    } = request.body;
+
+    // Create the recipe
+    const recipe = await prisma.recipe.create({
+      data: {
+        name,
+        description,
+        food: {
+          connect: {
+            id: foodId,
+          },
+        },
+        ingredients: {
+          connectOrCreate: ingredients.map((ingredient) => ({
+            where: { name: ingredient },
+            create: { name: ingredient },
+          })),
+        },
+        size,
+        instructions,
+        totalTime,
+      },
+    });
+
+    response.status(201).json(recipe);
+  } catch (error) {
+    console.error("Error adding recipe:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
