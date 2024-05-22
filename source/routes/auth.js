@@ -8,6 +8,4 @@ router.post("/register", authMiddleware.authenticate, authController.register);
 
 router.use(authMiddleware.authenticate);
 
-router.post("/some-protected-route", someController.someProtectedAction);
-
 module.exports = router;
