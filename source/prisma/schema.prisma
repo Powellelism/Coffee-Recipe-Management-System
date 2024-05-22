@@ -14,16 +14,17 @@ datasource db {
 }
 
 model Store {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
-  description String @default("")
-  address     String @default("")
-  city        String @default("")
-  state       String @default("")
-  zip         String @default("")
-  phone       String @default("")
-  email       String @default("")
+  description String  @default("")
+  address     String  @default("")
+  city        String  @default("")
+  state       String  @default("")
+  zip         String  @default("")
+  phone       String  @default("")
+  email       String  @default("")
   Food        Food[]
+  image       Image[]
 }
 
 enum SizeType {
@@ -42,6 +43,7 @@ model Food {
   type        String   @default("")
   size        SizeType
   Recipe      Recipe[]
+  image       Image[]
 }
 
 model Recipe {
@@ -54,6 +56,7 @@ model Recipe {
   size         SizeType
   ratings      Rating[]
   reviews      Review[]
+  image        Image[]
   instructions String       @default("")
   totalTime    Int          @default(0)
 }
@@ -64,6 +67,7 @@ model Ingredient {
   recipes Recipe[]
   ratings Rating[]
   reviews Review[]
+  Image   Image[]
 }
 
 model Rating {
@@ -86,4 +90,20 @@ model Review {
   recipeId       Int?
   Ingredient     Ingredient? @relation(fields: [ingredientId], references: [id])
   ingredientId   Int?
+}
+
+model Image {
+  id           Int         @id @default(autoincrement())
+  url          String
+  imagableId   Int
+  imagableType String
+  content      String
+  Store        Store?      @relation(fields: [storeId], references: [id])
+  storeId      Int?
+  Food         Food?       @relation(fields: [foodId], references: [id])
+  foodId       Int?
+  Recipe       Recipe?     @relation(fields: [recipeId], references: [id])
+  recipeId     Int?
+  Ingredient   Ingredient? @relation(fields: [ingredientId], references: [id])
+  ingredientId Int?
 }
