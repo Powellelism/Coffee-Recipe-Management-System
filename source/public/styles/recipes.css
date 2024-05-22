@@ -287,7 +287,6 @@ form form-field {
   cursor: pointer;
 }
 
-
 @media only screen and (width >= 280px) and (width <= 1024px) {
   header h1 {
     position: static;
