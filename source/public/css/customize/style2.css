@@ -364,12 +364,16 @@ form button:hover {
         text-align: center;
     }
 
-    #size-container fieldset{
+    fieldset {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #size-container fieldset {
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        flex-direction: row;
     }
 
     #type-container fieldset{
