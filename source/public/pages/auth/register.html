@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <script src="../../scripts/auth/register.js"></script>
+  <link rel="stylesheet" href="../../styles/auth.css" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+  </head>
+  <body>
+    <h1>Register</h1>
+    <form class="register-form" action="/auth/register" method="post">
+      <form-field>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </form-field>
+      <form-field>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </form-field>
+      <form-field>
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" id="confirm_pass" name="confirm_pass" required />
+      </form-field>
+      <form-field>
+        <button type="submit">Sign Up</button>
+      </form-field>
+      <form-field>
+        <output class="error-message"></output>
+        <span>Already have an account? <a href="/login">Login</a></span>
+      </form-field>
+    </form>
+  </body>
+</html>
