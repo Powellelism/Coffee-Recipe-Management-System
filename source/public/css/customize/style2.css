@@ -1,25 +1,24 @@
 /* @link https://utopia.fyi/type/calculator?c=320,15,1.2,1240,18,1.25,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 
 :root {
-    --step--2: clamp(0.651rem, 0.6271rem + 0.1199vi, 0.72rem);
-    --step--1: clamp(0.7813rem, 0.7399rem + 0.2065vi, 0.9rem);
+    --step-n2: clamp(0.651rem, 0.6271rem + 0.1199vi, 0.72rem);
+    --step-n1: clamp(0.7813rem, 0.7399rem + 0.2065vi, 0.9rem);
     --step-0: clamp(0.9375rem, 0.8723rem + 0.3261vi, 1.125rem);
     --step-1: clamp(1.125rem, 1.0272rem + 0.4891vi, 1.4063rem);
     --step-2: clamp(1.35rem, 1.2082rem + 0.7092vi, 1.7578rem);
     --step-3: clamp(1.62rem, 1.4192rem + 1.0039vi, 2.1973rem);
     --step-4: clamp(1.944rem, 1.6648rem + 1.3958vi, 2.7466rem);
     --step-5: clamp(2.3328rem, 1.95rem + 1.9138vi, 3.4332rem);
-  }
+}
 
 header {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     background-color: #A4947C;
-    flex-flow: nowrap;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+    flex-wrap: nowrap;
 }
 
 .dashboard-link {
@@ -36,7 +35,7 @@ dashboard-button {
     cursor: pointer;
     padding: 0.5rem;
     border: none;
-    font-size: var(--step--1);
+    font-size: var(--step-n1);
 }
 
 dashboard-button svg {
@@ -104,13 +103,16 @@ main {
     display: none;
 }
 
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
 #size-container fieldset {
     display: flex;
     align-items: flex-start;
     flex-direction: row;
-    border: none;
-    margin: 0;
-    padding: 0;
 }
 
 .size-option {
@@ -127,20 +129,7 @@ main {
     width: 5.25rem;
     height: 5.25rem;
     cursor: pointer;
-    border: none;  
-}
-
-.size-option:hover {
-    background-color: #D3C4B4;
-
-    & img {
-        filter: brightness(0) saturate(100%);
-    }
-
-    & span {
-        color: black;
-    }
-
+    border: none;
 }
 
 .size-option img {
@@ -149,16 +138,28 @@ main {
 }
 
 .size-option span {
-    font-size: var(--step--2);
+    font-size: var(--step-n2);
     font-weight: bold;
     color: #573D06;
     transition: color 0.3s ease;
 }
 
+.size-option:hover {
+    background-color: #D3C4B4;
+}
+
+.size-option:hover img {
+    filter: brightness(0) saturate(100%);
+}
+
+.size-option:hover span {
+    color: black;
+}
+
 #size-container input:checked + label.size-option {
     background-color: #D3C4B4;
-    box-shadow: 0 0 0 0.1rem black; 
-    border: 0.0625rem solid black;  
+    box-shadow: 0 0 0 0.1rem black;
+    border: 0.0625rem solid black;
 }
 
 #size-container input:checked + label.size-option img {
@@ -177,9 +178,6 @@ main {
     display: flex;
     align-items: flex-start;
     flex-direction: row;
-    border: none;
-    margin: 0;
-    padding: 0;
 }
 
 .type-option {
@@ -187,7 +185,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: var(--step--2);
+    font-size: var(--step-n2);
     font-weight: bold;
     color: #573D06;
     padding: 1.2rem;
@@ -199,8 +197,8 @@ main {
     width: 5.25rem;
     height: 1.3125rem;
     cursor: pointer;
-    border: none; 
-    transition: color 0.3s ease; 
+    border: none;
+    transition: color 0.3s ease;
 }
 
 .type-option:hover {
@@ -210,8 +208,8 @@ main {
 
 #type-container input:checked + label.type-option {
     background-color: #D3C4B4;
-    box-shadow: 0 0 0 0.1rem black; 
-    border: 0.0625rem solid black;  
+    box-shadow: 0 0 0 0.1rem black;
+    border: 0.0625rem solid black;
     color: black;
 }
 
@@ -236,7 +234,7 @@ main {
     background-color: white;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    font-size: var(--step--1);
+    font-size: var(--step-n1);
     font-weight: bold;
     color: #573D06;
     text-transform: uppercase;
@@ -302,7 +300,7 @@ main {
     background-color: white;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-    font-size: var(--step--1);
+    font-size: var(--step-n1);
     font-weight: bold;
     color: #573D06;
     resize: none;
@@ -341,7 +339,7 @@ form button {
     border-radius: 1rem;
     background-color: #3A4F39;
     color: white;
-    font-size: var(--step--1);
+    font-size: var(--step-n1);
     cursor: pointer;
     transition: background-color 0.5s ease-out;
 }
@@ -349,7 +347,6 @@ form button {
 form button:hover {
     background-color: #2A3F29;
 }
-
 
 @media only screen and (min-width: 280px) and (max-width: 1024px) {
     header {
