@@ -1,0 +1,88 @@
+@import url('vars.css');
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  background-color: #fffbf3;
+}
+h1 {
+  color: #573d06;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 580;
+  margin-bottom: 55px;
+}
+form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+label {
+  text-align: left;
+  align-self: stretch;
+  font-size: 13px;
+  font-weight: 400;
+  margin-top: 10px;
+  color: #573d06;
+}
+input {
+  width: 300px;
+  height: 30px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #5d5442;
+}
+button {
+  width: 313px;
+  height: 40px;
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #a08e67;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #847350;
+}
+a {
+  color: #1db4ff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+.forgot {
+  font-size: 12px;
+  margin-left: auto;
+}
+.login {
+  margin-top: 60px;
+  font-size: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  color: #573d06;
+}
+.error-message {
+  margin-top: 20px;
+  font-size: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 5px;
+  color: red;
+}
