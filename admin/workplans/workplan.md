@@ -1,9 +1,8 @@
 ### Sprint Overview
-- **Duration**: 2 weeks
-- **Objective**: Enhance UX/UI, develop backend functionalities, implement a recipe rating system, expand documentation, and standardize the codebase.
+- **Duration**: 2 weeks -- currently in second week.
+- **Objective**: Continue to enhance UX/UI, develop backend functionalities, implement a recipe rating system, expand documentation, and standardize the codebase.
 - **Tools**: GitHub for version control and project management.
 - **Team**: 10 members, working in pairs.
-
 
 ### Sprint Goals
 1. **Enhance User Interface (UI)**: Improve the aesthetics and functionality to enhance user experience.
@@ -12,50 +11,49 @@
 4. **Expand Documentation**: Provide detailed documentation for the new features and backend functionalities.
 5. **Standardize File Structure and Styling**: Organize the codebase to maintain consistency across the project.
 
-### Teams and Member Assignments
+### Teams and Member Assignments -- Some small adjustments from last week.
 
-#### Team Interface (UI/UX Design)
-- **Members**: Jenny, Steven
-- **Responsibilities**: Focus on user interface design and user experience enhancements.
-  - **Task**: Redesign the homepage to be more visually appealing and user-friendly. Include elements such as featured recipes and a search bar.
+#### Team Interface (UI/UX Design) (Update: in progress)
+- **Responsibilities**: Incorportate new UI design. Create recipe components. [#20]
+  - **Task**: Redesign the homepage. [#22]
     - **Estimate**: 3 days
-  - **Task**: Improve the responsiveness of the application on tablets and mobile devices.
+  - **Task**: Confirm the responsiveness of the application on various devices. [#21]
     - **Estimate**: 2 days
+  - **Task**: Create recipe components. [#33]
+    - **Estimate**: 1 day
 - **Priority**: Medium
 
-#### Team Backend (API Development)
-- **Members**: Lea, Rahul
-- **Responsibilities**: Develop and integrate backend functionalities.
-  - **Task**: Create RESTful API routes for adding and retrieving recipes from the database.
+#### Team Backend (API Development) (Update: in progress)
+- **Responsibilities**: Develop and integrate backend functionalities. [#23]
+  - **Task**: Enable adding and retrieving recipes from the database. [#24]
     - **Estimate**: 2 days
-  - **Task**: Develop API routes for shop management, allowing users to add and view shops.
+  - **Task**: Restructure/expand database to support broader drink categories. [#25]
     - **Estimate**: 2 days
 - **Priority**: High
 
 #### Team Ratings (Feature Implementation)
-- **Members**: Chau, Jenny
-- **Responsibilities**: Implement the recipe rating system.
-  - **Task**: Design and implement a database schema for storing user ratings.
+- **Responsibilities**: Implement the recipe rating system. [#26]
+  - **Task**: Add logic for recipe ratings: limit one per user. [#27]
     - **Estimate**: 1 day
-  - **Task**: Create API endpoints for submitting and retrieving ratings.
+  - **Task**: Add UI for rating out of 5 stars. [#28]
     - **Estimate**: 2 days
 - **Priority**: Medium
   
-#### Team Docs (Documentation)
-- **Members**: Mark, Sasha
-- **Responsibilities**: Update and maintain project documentation.
-  - **Task**: Document the newly created API routes and rating system functionalities.
+#### Team Docs (Documentation) (Update: in progress)
+- **Responsibilities**: Update and maintain project documentation. [#29]
+  - **Task**: Improve file structure. [#30]
     - **Estimate**: 2 days
-  - **Task**: Revise and update the README file and contribution guidelines to reflect recent changes.
+  - **Task**: Revise and update on_board.md to reflect recent changes. [#31]
+    - **Estimate**: 1 day
+  - **Task**: Add ADRs on why we chose Supabase & others. [#34]
     - **Estimate**: 1 day
 - **Priority**: High
   
-#### Team Refactor (Codebase Organization)
-- **Members**: Emin, Adarsh
-- **Responsibilities**: Standardize and refactor the codebase.
-  - **Task**: Restructure the project directory to separate concerns clearly (e.g., separating API logic from UI components).
-    - **Estimate**: 2 days
-  - **Task**: Establish and enforce a consistent styling guideline for CSS/SCSS files.
+#### Edit Recipe Creation & Review (Update: in progress)
+- **Responsibilities**: Update customize & review UI, and update file structure. [#35]
+  - **Task**: Refactor CSS file, add responsiveness. 
+    - **Estimate**: 1 day
+  - **Task**: Update file structure. [#30]
     - **Estimate**: 1 day
 - **Priority**: High
   
