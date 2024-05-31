@@ -9,10 +9,10 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
       return (f = r[b])
         ? f
         : "0" <= b && b <= "7"
-        ? parseInt(a.substring(1), 8)
-        : b === "u" || b === "x"
-        ? parseInt(a.substring(2), 16)
-        : a.charCodeAt(1);
+          ? parseInt(a.substring(1), 8)
+          : b === "u" || b === "x"
+            ? parseInt(a.substring(2), 16)
+            : a.charCodeAt(1);
     }
     function e(a) {
       if (a < 32) return (a < 16 ? "\\x0" : "\\x") + a.toString(16);
@@ -25,7 +25,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
         var f = a
             .substring(1, a.length - 1)
             .match(
-              /\\u[\dA-Fa-f]{4}|\\x[\dA-Fa-f]{2}|\\[0-3][0-7]{0,2}|\\[0-7]{1,2}|\\[\S\s]|[^\\]/g
+              /\\u[\dA-Fa-f]{4}|\\x[\dA-Fa-f]{2}|\\[0-3][0-7]{0,2}|\\[0-7]{1,2}|\\[\S\s]|[^\\]/g,
             ),
           a = [],
           b = [],
@@ -75,7 +75,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
     function y(a) {
       for (
         var f = a.source.match(
-            /\[(?:[^\\\]]|\\[\S\s])*]|\\u[\dA-Fa-f]{4}|\\x[\dA-Fa-f]{2}|\\\d+|\\[^\dux]|\(\?[!:=]|[()^]|[^()[\\^]+/g
+            /\[(?:[^\\\]]|\\[\S\s])*]|\\u[\dA-Fa-f]{4}|\\x[\dA-Fa-f]{2}|\\\d+|\\[^\dux]|\(\?[!:=]|[()^]|[^()[\\^]+/g,
           ),
           b = f.length,
           d = [],
@@ -121,7 +121,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
       if (g.ignoreCase) l = !0;
       else if (
         /[a-z]/i.test(
-          g.source.replace(/\\u[\da-f]{4}|\\x[\da-f]{2}|\\[^UXux]/gi, "")
+          g.source.replace(/\\u[\da-f]{4}|\\x[\da-f]{2}|\\[^UXux]/gi, ""),
         )
       ) {
         s = !0;
@@ -268,18 +268,18 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
           "'\"",
         ])
       : a.multiLineStrings
-      ? m.push([
-          "str",
-          /^(?:'(?:[^'\\]|\\[\S\s])*(?:'|$)|"(?:[^"\\]|\\[\S\s])*(?:"|$)|`(?:[^\\`]|\\[\S\s])*(?:`|$))/,
-          q,
-          "'\"`",
-        ])
-      : m.push([
-          "str",
-          /^(?:'(?:[^\n\r'\\]|\\.)*(?:'|$)|"(?:[^\n\r"\\]|\\.)*(?:"|$))/,
-          q,
-          "\"'",
-        ]);
+        ? m.push([
+            "str",
+            /^(?:'(?:[^'\\]|\\[\S\s])*(?:'|$)|"(?:[^"\\]|\\[\S\s])*(?:"|$)|`(?:[^\\`]|\\[\S\s])*(?:`|$))/,
+            q,
+            "'\"`",
+          ])
+        : m.push([
+            "str",
+            /^(?:'(?:[^\n\r'\\]|\\.)*(?:'|$)|"(?:[^\n\r"\\]|\\.)*(?:"|$))/,
+            q,
+            "\"'",
+          ]);
     a.verbatimStrings && e.push(["str", /^@"(?:[^"]|"")*(?:"|$)/, q]);
     var h = a.hashComments;
     h &&
@@ -322,7 +322,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
         "0123456789",
       ],
       ["pln", /^\\[\S\s]?/, q],
-      ["pun", /^.[^\s\w"-$'./@\\`]*/, q]
+      ["pun", /^.[^\s\w"-$'./@\\`]*/, q],
     );
     return x(m, e);
   }
@@ -539,9 +539,9 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
         ["lang-js", /^<script\b[^>]*>([\S\s]*?)(<\/script\b[^>]*>)/i],
         ["lang-css", /^<style\b[^>]*>([\S\s]*?)(<\/style\b[^>]*>)/i],
         ["lang-in.tag", /^(<\/?[a-z][^<>]*>)/i],
-      ]
+      ],
     ),
-    ["default-markup", "htm", "html", "mxml", "xhtml", "xml", "xsl"]
+    ["default-markup", "htm", "html", "mxml", "xhtml", "xml", "xsl"],
   );
   k(
     x(
@@ -560,9 +560,9 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
         ["lang-css", /^style\s*=\s*"([^"]+)"/i],
         ["lang-css", /^style\s*=\s*'([^']+)'/i],
         ["lang-css", /^style\s*=\s*([^\s"'>]+)/i],
-      ]
+      ],
     ),
-    ["in.tag"]
+    ["in.tag"],
   );
   k(x([], [["atv", /^[\S\s]+/]]), ["uq.val"]);
   k(u({ keywords: F, hashComments: !0, cStyleComments: !0, types: K }), [
@@ -582,7 +582,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
       verbatimStrings: !0,
       types: K,
     }),
-    ["cs"]
+    ["cs"],
   );
   k(u({ keywords: G, cStyleComments: !0 }), ["java"]);
   k(u({ keywords: v, hashComments: !0, multiLineStrings: !0 }), [
@@ -597,7 +597,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
       multiLineStrings: !0,
       tripleQuotedStrings: !0,
     }),
-    ["cv", "py"]
+    ["cv", "py"],
   );
   k(
     u({
@@ -607,7 +607,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
       multiLineStrings: !0,
       regexLiterals: !0,
     }),
-    ["perl", "pl", "pm"]
+    ["perl", "pl", "pm"],
   );
   k(
     u({
@@ -616,7 +616,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
       multiLineStrings: !0,
       regexLiterals: !0,
     }),
-    ["rb"]
+    ["rb"],
   );
   k(u({ keywords: w, cStyleComments: !0, regexLiterals: !0 }), ["js"]);
   k(
@@ -629,7 +629,7 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
       tripleQuotedStrings: !0,
       regexLiterals: !0,
     }),
-    ["coffee"]
+    ["coffee"],
   );
   k(x([], [["str", /^[\S\s]+/]]), ["regex"]);
   window.prettyPrintOne = function (a, m, e) {
@@ -662,10 +662,10 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
                       ? b
                       : c
                     : i === 3
-                    ? N.test(c.nodeValue)
-                      ? b
-                      : o
-                    : o;
+                      ? N.test(c.nodeValue)
+                        ? b
+                        : o
+                      : o;
             b = (f = o === b ? void 0 : o) && "CODE" === f.tagName;
           }
           b && (k = f.className.match(g));
