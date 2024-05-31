@@ -25,20 +25,20 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies on web
+        run: cd web && npm ci
         working-directory: ./source
 
-      - name: Run ESLint
-        run: npx eslint . --fix
+      - name: Run ESLint on web
+        run: cd web &&npx eslint . --fix
         working-directory: ./source
 
-      - name: Run Prettier
-        run: npx prettier --write .
+      - name: Run Prettier on web
+        run: cd web && npx prettier --write .
         working-directory: ./source
 
-      - name: Run Stylelint
-        run: npx stylelint "**/*.css" --fix
+      - name: Run Stylelint on web
+        run: cd web && npx stylelint "**/*.css" --fix
         working-directory: ./source
 
       - name: Commit changes
