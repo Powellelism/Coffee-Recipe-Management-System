@@ -11,6 +11,6 @@ export default [
       },
     },
   },
-  { ignores: ["test/*", "tests/*"] },
+  { ignores: ["test/*", "tests/*", "specs/*"] },
   pluginJs.configs.recommended,
 ];
