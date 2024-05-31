@@ -10,15 +10,15 @@ export const Task = {
 
 // should have a text field, might have model else default to '@cf/meta/llama-3-8b-instruct'
 export const TextGenerationInferenceRequest = {
-	text: String,
+	text: new Str({ required: true, default: "Give an epic journey story about the Scorching Salsa Stars" }),
 	model: new Str({ required: false, default: "@cf/meta/llama-3-8b-instruct" }),
 	key: String,
 }
 
 // should have an image field, might have model else default to '@cf/runwayml/stable-diffusion-v1-5-inpainting'
 export const ImageGenerationInferenceRequest = {
-	image: String,
-	model: new Str({ required: false, default: "@cf/runwayml/stable-diffusion-v1-5-inpainting" }),
+	image: new Str({ required: true, default: "A cup of Scorching Salsa Star" }),
+	model: new Str({ required: false, default: "@cf/lykon/dreamshaper-8-lcm" }),
 	key: String,
 }
 
