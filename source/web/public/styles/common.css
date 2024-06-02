@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Inknut Antiqua";
+  src: url("../assets/fonts/InknutAntiqua-Regular.ttf");
+}
+
+* {
+  font-family: "Inknut Antiqua", sans-serif;
+}
+
+body {
+  background-color: #fffbf3;
+}

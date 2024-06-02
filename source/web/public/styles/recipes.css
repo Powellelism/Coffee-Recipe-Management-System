@@ -1,0 +1,324 @@
+/* Import CSS vars */
+@import url("vars.css");
+
+header,
+dashboard-button,
+#ingredients-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+fieldset {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  justify-content: space-between;
+  background-color: var(--header-color, bisque);
+  padding: 0.7rem;
+}
+
+header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: var(--step-3);
+  margin: 0;
+}
+
+.dashboard-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+dashboard-button {
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.5rem;
+  border: none;
+  font-size: var(--step-n1);
+}
+
+dashboard-button svg {
+  height: 0.85rem;
+}
+
+.dashboard-button span {
+  margin-left: 0.25rem;
+}
+
+body {
+  margin: 0;
+  background-color: var(-body-color, white);
+  font-size: var(--step-0);
+}
+
+#sign-out-button,
+form-field button {
+  text-decoration: none;
+  color: white;
+  border: none;
+  background-color: var(--button-color, darkgreen);
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-size: var(--step-n1);
+  transition: background-color 0.5s ease-out;
+}
+
+#sign-out-button:hover,
+form-field button:hover {
+  background-color: var(--button-hover-color, green);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#recipe-name {
+  border: none;
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  font-size: var(--step-1);
+  font-weight: bold;
+  text-align: left;
+  padding: 0;
+  color: var(--select-color, black);
+  transition: border-bottom 0.3s ease;
+  text-transform: uppercase;
+}
+
+#recipe-name:focus {
+  outline: none;
+  border-bottom: 2px solid var(--select-color, black);
+  background-color: #f0f0f0;
+  color: var(--select-color, black);
+  cursor: text;
+}
+
+#recipe-name:hover {
+  border-bottom: 2px solid var(--text-color, brown);
+  color: var(--text-color, brown);
+  background-color: #f9f9f9;
+}
+
+#size-container input,
+#type-container input {
+  display: none;
+}
+
+.size-option,
+.type-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  margin: 0.5rem;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0 0.25rem 0.5rem var(--box-shadow-color, black);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    border 0.3s ease;
+  width: 5.25rem;
+  height: 5.25rem;
+  cursor: pointer;
+  border: none;
+}
+
+.size-option img {
+  margin-bottom: 0.5rem;
+  transition: filter 0.3s ease;
+}
+
+.size-option span {
+  font-size: var(--step-n2);
+  font-weight: bold;
+  color: var(--text-color, brown);
+  transition: color 0.3s ease;
+}
+
+.size-option:hover {
+  background-color: var(--hover-color, blanchedalmond);
+
+  & img {
+    filter: brightness(0) saturate(100%);
+  }
+
+  & span {
+    color: var(--select-color, black);
+  }
+}
+
+#size-container input:checked + label.size-option,
+#type-container input:checked + label.type-option {
+  background-color: var(--hover-color, blanchedalmond);
+  box-shadow: 0 0 0 0.1rem var(--select-color, black);
+  border: 0.0625rem solid var(--select-color, black);
+  color: var(--select-color, black);
+}
+
+#size-container input:checked + label.size-option img {
+  filter: brightness(0) saturate(100%);
+}
+
+#size-container input:checked + label.size-option span {
+  color: var(--select-color, black);
+}
+
+.type-option {
+  font-size: var(--step-n2);
+  font-weight: bold;
+  color: var(--text-color, brown);
+  height: 1.3125rem;
+}
+
+.type-option:hover {
+  background-color: var(--hover-color, blanchedalmond);
+  color: var(--select-color, black);
+}
+
+/* Ingredients Container Styles */
+#ingredients-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#ingredients-list {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 33rem;
+}
+
+#ingredients-list input,
+#add-ingredient,
+#recipe {
+  height: 2.625rem;
+  border: 0.0625rem solid transparent;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 0 0.25rem 0.5rem var(--box-shadow-color, black);
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
+    border 0.3s ease;
+  font-size: var(--step-n1);
+  font-weight: bold;
+  color: var(--text-color, brown);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#recipe {
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+  color: var(--text-color, brown);
+  resize: none;
+  height: auto;
+  text-align: left;
+}
+
+#ingredients-list input:focus,
+#recipe:focus {
+  box-shadow: 0 0 0 0.0625rem var(--select-color, black);
+  cursor: text !important;
+}
+
+#add-ingredient {
+  padding: 0;
+  border-radius: 1.5rem;
+  font-size: var(--step-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+#add-ingredient:hover,
+#ingredients-list input:hover,
+#recipe:hover {
+  background-color: var(--hover-color, blanchedalmond);
+  color: var(--select-color, black);
+  cursor: pointer;
+}
+
+#add-ingredient:active,
+#ingredients-list input:focus,
+#recipe:focus {
+  background-color: var(--hover-color, blanchedalmond);
+  border: 0.0625rem solid var(--select-color, black);
+  outline: none;
+  color: var(--select-color, black);
+}
+
+/* Recipe Textarea Styles */
+#recipe-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  max-width: 50%;
+}
+
+form form-field {
+  margin: 1rem;
+}
+
+#submit-button {
+  min-width: 100%;
+  cursor: pointer;
+}
+
+@media only screen and (width >= 280px) and (width <= 1024px) {
+  header h1 {
+    position: static;
+    transform: none;
+  }
+
+  #sign-out-button {
+    margin-bottom: 1rem;
+  }
+
+  #recipe-name,
+  fieldset legend {
+    text-align: center;
+  }
+
+  form-field,
+  fieldset,
+  #ingredients-list,
+  #recipe-container,
+  form,
+  header {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  form {
+    flex-wrap: nowrap;
+  }
+
+  #recipe {
+    text-align: center;
+  }
+}

@@ -2,5 +2,5 @@
 .vscode
 .DS_Store
 node_modules
-/source/.env
-source/.env
+*/.env
+/source/web/.env

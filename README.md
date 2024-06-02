@@ -1,9 +1,10 @@
 # Coffee Recipe Management System
 
-Want some coffee? [Website URL](https://alien-traveler.github.io/cse110-fa22-group39/webapp/)
+**Version 1:**
+[Website URL](https://alien-traveler.github.io/cse110-fa22-group39/webapp/)
 
-Know more about us: [Team Member Page](admin/team.md)
+Previous team: [Team Member Page](admin/team.md)
 
-Final video public version: [Youtube link](https://youtu.be/RhDT3CWEK6U)
+Version 1 final video public version: [Youtube link](https://youtu.be/RhDT3CWEK6U)
 
-Final video private version: [Youtube link](https://youtu.be/LgGZkp35zG4)
+Version 1 final video private version: [Youtube link](https://youtu.be/LgGZkp35zG4)

@@ -1,66 +1,50 @@
 ### Sprint Overview
-- **Duration**: 2 weeks
-- **Objective**: Enhance UX/UI, develop backend functionalities, implement a recipe rating system, expand documentation, and standardize the codebase.
+- **Duration**: 2 weeks -- Currently in the first week of Sprint 3.
+- **Objective**: Incorporate recipe generation, continue to enhance UX/UI so that recipes show up on home page, implement recipe rating system, and potentially offer recipe sorting.
 - **Tools**: GitHub for version control and project management.
-- **Team**: 10 members, working in pairs.
-
+- **Team**: 10 members, working in sub-teams and pairs.
 
 ### Sprint Goals
-1. **Enhance User Interface (UI)**: Improve the aesthetics and functionality to enhance user experience.
-2. **Develop Backend Routes**: Create robust backend routes for managing recipes and shops.
-3. **Implement Recipe Rating System**: Develop a system for users to rate recipes.
-4. **Expand Documentation**: Provide detailed documentation for the new features and backend functionalities.
-5. **Standardize File Structure and Styling**: Organize the codebase to maintain consistency across the project.
+1. **Update User Interface (UI)**: Continue to improve the aesthetics and functionality to enhance user experience, focusing on accessibility.
+  1.1. **Home Page Edits**: Update the home page to show recipes based on user ratings.
+3. **Incorporate Recipe Generation**: Add functionality for generating new recipes.
+4. **Implement Recipe Rating System**: Develop a system for users to rate recipes (pushed over from Sprint 2).
+5. **Implement Recipe Sorting**: Enable sorting of recipes by top-rated and most recent.
 
-### Teams and Member Assignments
-
-#### Team Interface (UI/UX Design)
-- **Members**: Jenny, Steven
-- **Responsibilities**: Focus on user interface design and user experience enhancements.
-  - **Task**: Redesign the homepage to be more visually appealing and user-friendly. Include elements such as featured recipes and a search bar.
-    - **Estimate**: 3 days
-  - **Task**: Improve the responsiveness of the application on tablets and mobile devices.
+#### UI/UX Design
+- **Responsibilities**: Maintain UI accessibility, integrate new components.
+  - **Task**: As we add more features, confirm the accessibility of the application on various devices.
     - **Estimate**: 2 days
-- **Priority**: Medium
-
-#### Team Backend (API Development)
-- **Members**: Lea, Rahul
-- **Responsibilities**: Develop and integrate backend functionalities.
-  - **Task**: Create RESTful API routes for adding and retrieving recipes from the database.
-    - **Estimate**: 2 days
-  - **Task**: Develop API routes for shop management, allowing users to add and view shops.
-    - **Estimate**: 2 days
+  - **Task**: Add recipe components to home page.
+    - **Estimate**: 3 day
 - **Priority**: High
 
-#### Team Ratings (Feature Implementation)
-- **Members**: Chau, Jenny
-- **Responsibilities**: Implement the recipe rating system.
-  - **Task**: Design and implement a database schema for storing user ratings.
+#### Recipe Generation
+- **Responsibilities**: Implement recipe generation.
+  - **Task**: Recipe generation functionality. 
     - **Estimate**: 1 day
-  - **Task**: Create API endpoints for submitting and retrieving ratings.
-    - **Estimate**: 2 days
-- **Priority**: Medium
-  
-#### Team Docs (Documentation)
-- **Members**: Mark, Sasha
-- **Responsibilities**: Update and maintain project documentation.
-  - **Task**: Document the newly created API routes and rating system functionalities.
-    - **Estimate**: 2 days
-  - **Task**: Revise and update the README file and contribution guidelines to reflect recent changes.
-    - **Estimate**: 1 day
+  - **Task**: Add UI for recipe generation.
+    - **Estimate**: 2 day
 - **Priority**: High
   
-#### Team Refactor (Codebase Organization)
-- **Members**: Emin, Adarsh
-- **Responsibilities**: Standardize and refactor the codebase.
-  - **Task**: Restructure the project directory to separate concerns clearly (e.g., separating API logic from UI components).
-    - **Estimate**: 2 days
-  - **Task**: Establish and enforce a consistent styling guideline for CSS/SCSS files.
+#### Recipe Ratings - Pushover from Sprint 2.
+- **Responsibilities**: Add recipe rating functionality.
+  - **Task**: Add logic for recipe ratings: limit one per user.
     - **Estimate**: 1 day
+  - **Task**: Add UI for rating out of 5 stars.
+    - **Estimate**: 2 days
 - **Priority**: High
+
+#### Recipe Sorting (If we have time)
+- **Responsibilities**: Add recipe sorting feature.
+  - **Task**: Sort recipes based on ratings (most rated) and time (most recent).
+    - **Estimate**: 2 days
+  - **Task**: UI for sorting: add a dropdown.
+    - **Estimate**: 1 day
+- **Priority**: Low
   
 ### Additional Considerations
 - **Twice Weekly Standup**: After Lecture
-- **Weekly Review**: Every thursday in-person
-- **End-of-Sprint Demo**: Last thursday of sprint
-- **Retrospective**: Last thursday of sprint
+- **Weekly Review**: Every Thursday in-person
+- **End-of-Sprint Demo**: Last Thursday of sprint
+- **Retrospective**: Last Thursday of sprint
