@@ -30,6 +30,7 @@
     "stylelint-config-standard": "^36.0.0"
   },
   "jest": {
-    "preset": "jest-puppeteer"
+    "preset": "jest-puppeteer",
+    "testMatch": ["<rootDir>/__tests__/current/**/*.test.js"]
   }
 }
