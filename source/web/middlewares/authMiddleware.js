@@ -1,7 +1,11 @@
-const {supabase, prisma} = require("../config/supabaseClient");
+const {supabase} = require("../config/supabaseClient");
 
 exports.authenticate = async (request, response, next) => {
-  const token = request.headers.authorization?.split(" ")[1];
+  // check if cookie exist
+  const cookies = request.cookies;
+
+  // check if cookies include token
+  const token = cookies.token
 
   // Allow access to login and register routes without a token
   if (request.path === "/login" || request.path === "/register") {
@@ -13,7 +17,7 @@ exports.authenticate = async (request, response, next) => {
   }
 
   try {
-    const { data: session, error } = await supabase.auth.api.getUser(token);
+    const { data: session, error } = await supabase.auth.getUser(token);
     if (error) {
       throw new Error("Token does not work");
     }
