@@ -1,4 +1,4 @@
-const {supabase, prisma} = require("../config/supabaseClient");
+const {supabase} = require("../config/supabaseClient");
 
 /**
  * This function logs the user in using Supabase authentication.
@@ -23,7 +23,7 @@ exports.login = async (request, response) => {
     } else {
       if (data.session && data.session.access_token) {
         const token = data.session.access_token;
-        response.cookie("token", token, { httpOnly: true, secure: true });
+        response.cookie("token", token, { httpOnly: true});
         response
             .status(200)
             .json({ status: "Registration successful." });
@@ -65,7 +65,7 @@ exports.register = async (request, response) => {
     } else {
       if (data.session && data.session.access_token) {
         const token = data.session.access_token;
-        response.cookie("token", token, { httpOnly: true, secure: true });
+        response.cookie("token", token, { httpOnly: true,});
         response
             .status(200)
             .json({ status: "Registration successful." });
