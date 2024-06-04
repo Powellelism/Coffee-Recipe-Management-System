@@ -1,4 +1,4 @@
-const supabase = require("../config/supabaseClient");
+const {supabase, prisma} = require("../config/supabaseClient");
 
 exports.authenticate = async (request, response, next) => {
   const token = request.headers.authorization?.split(" ")[1];
