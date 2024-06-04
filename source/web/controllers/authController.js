@@ -1,4 +1,4 @@
-const {supabase} = require("../config/supabaseClient");
+const { supabase } = require("../config/supabaseClient");
 
 /**
  * This function logs the user in using Supabase authentication.
@@ -23,10 +23,8 @@ exports.login = async (request, response) => {
     } else {
       if (data.session && data.session.access_token) {
         const token = data.session.access_token;
-        response.cookie("token", token, { httpOnly: true});
-        response
-            .status(200)
-            .json({ status: "Registration successful." });
+        response.cookie("token", token, { httpOnly: true });
+        response.status(200).json({ status: "Registration successful." });
       } else {
         console.error("Login error: Session or access token missing");
         response.status(500).json({ error: "Login failed. Please try again." });
@@ -65,10 +63,8 @@ exports.register = async (request, response) => {
     } else {
       if (data.session && data.session.access_token) {
         const token = data.session.access_token;
-        response.cookie("token", token, { httpOnly: true,});
-        response
-            .status(200)
-            .json({ status: "Registration successful." });
+        response.cookie("token", token, { httpOnly: true });
+        response.status(200).json({ status: "Registration successful." });
       } else {
         console.error("Registration error: Session or access token missing");
         response
