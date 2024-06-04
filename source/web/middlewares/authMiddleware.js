@@ -1,11 +1,11 @@
-const {supabase} = require("../config/supabaseClient");
+const { supabase } = require("../config/supabaseClient");
 
 exports.authenticate = async (request, response, next) => {
   // check if cookie exist
   const cookies = request.cookies;
 
   // check if cookies include token
-  const token = cookies.token
+  const token = cookies.token;
 
   // Allow access to login and register routes without a token
   if (request.path === "/login" || request.path === "/register") {
