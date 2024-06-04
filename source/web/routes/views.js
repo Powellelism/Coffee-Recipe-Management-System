@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const authMiddleware = require("../middlewares/authMiddleware");
 const router = express.Router();
 
 // Serve index view
@@ -32,32 +33,39 @@ router.get("/common/home", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "common.html"));
 });
 
+// ------- Authenticated Views
 // Serve dashboard view
-router.get("/dashboard", (req, res) => {
+router.get("/dashboard", authMiddleware.authenticate,
+    (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "dashboard.html"));
 });
 // serve preset customize view
-router.get("/preset/customize", (req, res) => {
+router.get("/preset/customize", authMiddleware.authenticate,
+    (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "presetCustomize.html"));
 });
 
 // serve preset list view
-router.get("/preset/list", (req, res) => {
+router.get("/preset/list", authMiddleware.authenticate,
+    (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "presetList.html"));
 });
 
 // serve recipe customization view
-router.get("/recipe/customize", (req, res) => {
+router.get("/recipe/customize", authMiddleware.authenticate,
+    (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "customizeRecipe.html"));
 });
 
 // serve saved recipe view
-router.get("/recipe/saved", (req, res) => {
+router.get("/recipe/saved", authMiddleware.authenticate,
+    (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "savedRecipes.html"));
 });
 
 // serve recipe review view
-router.get("/recipe/review", (req, res) => {
+router.get("/recipe/review", authMiddleware.authenticate,
+    (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "reviewRecipe.html"));
 });
 module.exports = router;
