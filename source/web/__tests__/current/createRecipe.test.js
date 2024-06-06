@@ -3,7 +3,10 @@ describe("Test customize recipe page functionality", () => {
     await page.goto("http://localhost:3000/recipe/customize");
     await page.waitForSelector("#add-ingredient");
     const addIngredientButton = await page.$("#add-ingredient");
-    await page.evaluate((button) => button.scrollIntoView(), addIngredientButton);
+    await page.evaluate(
+      (button) => button.scrollIntoView(),
+      addIngredientButton,
+    );
     await addIngredientButton.hover();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await addIngredientButton.click();
