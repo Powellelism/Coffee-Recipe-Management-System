@@ -41,7 +41,7 @@ describe("Test customize recipe page functionality", () => {
     await emailInput.type("123@123.com");
     await page.waitForSelector("#password");
     const passwordInput = await page.$("#password");
-    await passwordInput.type("123123");
+    await passwordInput.type("PkfUgyrsLtQfFvS");
     await page.click('form-field button[type="submit"]');
     await page.waitForNavigation();
   }, 60000);
