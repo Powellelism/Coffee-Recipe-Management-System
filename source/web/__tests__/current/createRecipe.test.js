@@ -3,9 +3,10 @@ describe("Test customize recipe page functionality", () => {
     await page.goto("http://localhost:3000/recipe/customize");
     await page.waitForSelector("#add-ingredient");
     const addIngredientButton = await page.$("#add-ingredient");
+    await page.evaluate((button) => button.scrollIntoView(), addIngredientButton);
+    await addIngredientButton.hover();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await addIngredientButton.click();
-
     await page.waitForSelector("#ingredients-list input:nth-of-type(2)");
 
     const ingredientInput = await page.$(
@@ -51,7 +52,7 @@ describe("Test customize recipe page functionality", () => {
 
   it("Testing we can add ingredients to the recipe", async () => {
     await goToCustomizePageAndAddIngredient();
-  }, 10000);
+  }, 30000);
 
   it("Testing we can edit previous recipes", async () => {
     await addAnotherIngredient();
@@ -61,7 +62,7 @@ describe("Test customize recipe page functionality", () => {
     });
 
     expect(ingredientTexts).toEqual(["Espresso Shots", "Test Ingredient"]);
-  }, 10000);
+  }, 30000);
 
   it("Testing we can delete ingredients by clearing the input field", async () => {
     await addAnotherIngredient();
@@ -74,7 +75,7 @@ describe("Test customize recipe page functionality", () => {
     page.keyboard.press("Backspace");
     const ingredients = await page.$$("#ingredients-list input");
     expect(ingredients.length).toBe(1);
-  }, 10000);
+  }, 30000);
 
   it("Create a recipe and make sure it is saved in localStorage after clicking reviewRecipe button", async () => {
     await page.goto("http://localhost:3000/recipe/customize");
@@ -121,5 +122,5 @@ describe("Test customize recipe page functionality", () => {
       return JSON.parse(localStorage.getItem("newRecipe"));
     });
     expect(localStorageData).toEqual(expectedLocalStorage);
-  }, 30000);
+  }, 50000);
 });

@@ -1,0 +1,32 @@
+name: Testing
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+      - full-stack-conversion
+  jobs:
+    testing:
+      runs-on: ubuntu-latest
+      permissions:
+        contents: read
+      steps:
+        - name: Install dependencies
+          run: |
+            cd web
+            npm install
+          working-directory: ./source
+
+        - name: Start server
+          run: |
+            cd web
+            npm run start & sleep 5
+          working-directory: ./source
+
+        - name: Run tests
+          run: |
+            cd web
+            npm run test
+          working-directory: ./source
