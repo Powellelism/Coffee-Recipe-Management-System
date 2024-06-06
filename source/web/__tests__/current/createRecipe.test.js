@@ -1,6 +1,6 @@
 describe("Test customize recipe page functionality", () => {
   const goToCustomizePageAndAddIngredient = async () => {
-    await page.goto("https://powellelism.site/recipe/customize");
+    await page.goto("http://localhost:3000/recipe/customize");
     await page.waitForSelector("#add-ingredient");
     const addIngredientButton = await page.$("#add-ingredient");
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -31,7 +31,7 @@ describe("Test customize recipe page functionality", () => {
 
   beforeAll(async () => {
     //Go to each site and login
-    await page.goto("https://powellelism.site/login");
+    await page.goto("http://localhost:3000/login");
     await page.waitForSelector("#email");
     const emailInput = await page.$("#email");
     await emailInput.type("123@123.com");
@@ -43,7 +43,7 @@ describe("Test customize recipe page functionality", () => {
   }, 60000);
 
   it("Testing on page load, editing the recipe name is autofocued", async () => {
-    await page.goto("https://powellelism.site/recipe/customize");
+    await page.goto("http://localhost:3000/recipe/customize");
     await page.waitForSelector("#recipe-name");
     const focusedElement = await page.evaluate(() => document.activeElement.id);
     expect(focusedElement).toBe("recipe-name");
@@ -77,7 +77,7 @@ describe("Test customize recipe page functionality", () => {
   }, 10000);
 
   it("Create a recipe and make sure it is saved in localStorage after clicking reviewRecipe button", async () => {
-    await page.goto("https://powellelism.site/recipe/customize");
+    await page.goto("http://localhost:3000/recipe/customize");
     await page.waitForSelector("#recipe-name");
     const recipeNameInput = await page.$("#recipe-name");
     await recipeNameInput.click({ clickCount: 3 });
