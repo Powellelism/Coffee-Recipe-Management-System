@@ -118,3 +118,42 @@ exports.addRecipe = async (request, response) => {
     response.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+exports.updateRecipe = async (request, response) => {
+  try {
+    const newInfo = request.body;
+
+    // Update the recipe
+    const recipe = await prisma.recipe.update({
+      where: {
+        id: newInfo.id,
+      },
+      data: {
+        newInfo
+      },
+    });
+
+    response.status(201).json(recipe);
+  } catch (error) {
+    console.error("Error adding recipe:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+exports.getSingleRecipe = async (request, response) => {
+  try {
+    const {id} = request.body;
+
+    // Get one recipe
+    const recipe = await prisma.recipe.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    response.status(201).json(recipe);
+  } catch (error) {
+    console.error("Error adding recipe:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
