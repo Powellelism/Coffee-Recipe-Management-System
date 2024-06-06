@@ -47,7 +47,9 @@ jobs:
       - name: Run tests
         run: |
           cd web
-          npm ci
+          npm install
+          npm run start &
+          npx wait-on http://localhost:3000 --timeout 30000
           npm run test
         working-directory: ./source
 
