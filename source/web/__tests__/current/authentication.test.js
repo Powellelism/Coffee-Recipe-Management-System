@@ -1,35 +1,42 @@
-describe("Test frontend and backend for logging in and registering", () => {
-  it("Test logging into existing account", async () => {
-    await page.goto("https://powellelism.site/login");
-    await page.waitForSelector("#email");
-    const emailInput = await page.$("#email");
-    await emailInput.type("123@123.com");
-    await page.waitForSelector("#password");
-    const passwordInput = await page.$("#password");
-    await passwordInput.type("123123");
-    await page.click('form-field button[type="submit"]');
-    await page.waitForNavigation();
-    const url = page.url();
-    expect(url).toBe("https://powellelism.site/dashboard");
-  }, 20000);
 
-  it("Test logging into nonexistent account", async () => {
-    await page.goto("https://powellelism.site/login");
-    await page.waitForSelector("#email");
-    const emailInput = await page.$("#email");
-    await emailInput.type("asldjkfalsk@aldskfjalsjdf.com");
-    await page.waitForSelector("#password");
-    const passwordInput = await page.$("#password");
-    await passwordInput.type("123123");
-    await page.click('form-field button[type="submit"]');
-    await page.waitForSelector("output.error-message");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const errorMessage = await page.$eval(
-      "output.error-message",
-      (el) => el.innerText,
-    );
-    expect(errorMessage).toBe("Incorrect email or password.");
-  });
+describe('Test frontend and backend for logging in and registering', () => {
+
+    beforeEach(async () => {
+        context = await browser.createIncognitoBrowserContext();
+    });
+
+    afterEach(async () => {
+        await context.close();
+    });
+
+    it('Test logging into existing account', async () => {
+        await page.goto("https://powellelism.site/login");
+        await page.waitForSelector('#email');
+        const emailInput = await page.$('#email');
+        await emailInput.type('123@123.com');
+        await page.waitForSelector('#password');
+        const passwordInput = await page.$('#password');
+        await passwordInput.type('123123');
+        await page.click('form-field button[type="submit"]');
+        await page.waitForNavigation();
+        const url = page.url();
+        expect(url).toBe('https://powellelism.site/dashboard');
+    }, 20000);
+
+    it('Test logging into nonexistent account', async () => {
+        await page.goto("https://powellelism.site/login");
+        await page.waitForSelector('#email');
+        const emailInput = await page.$('#email');
+        await emailInput.type('asldjkfalsk@aldskfjalsjdf.com');
+        await page.waitForSelector('#password');
+        const passwordInput = await page.$('#password');
+        await passwordInput.type('123123');
+        await page.click('form-field button[type="submit"]');
+        await page.waitForSelector('output.error-message');
+        const errorMessage = await page.$('output.error-message');
+        let errorMessageText = await page.evaluate(errorMessage => errorMessage.textContent, errorMessage);
+        expect(errorMessageText).toBe('Incorrect email or password.');
+    });
 
   it("Test forgot password and redirect toward login", async () => {
     await page.goto("https://powellelism.site/login");
