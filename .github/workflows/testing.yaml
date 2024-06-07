@@ -7,27 +7,27 @@ on:
     branches:
       - main
       - full-stack-conversion
-  jobs:
-    testing:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check out repository
-          uses: actions/checkout@v4
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-        - name: Install dependencies
-          run: |
-            cd web
-            npm install
-          working-directory: ./source
+      - name: Install dependencies
+        run: |
+          cd web
+          npm install
+        working-directory: ./source
 
-        - name: Start server
-          run: |
-            cd web
-            npm run start & sleep 5
-          working-directory: ./source
+      - name: Start server
+        run: |
+          cd web
+          npm run start & sleep 5
+        working-directory: ./source
 
-        - name: Run tests
-          run: |
-            cd web
-            npm run test
-          working-directory: ./source
+      - name: Run tests
+        run: |
+          cd web
+          npm run test
+        working-directory: ./source
