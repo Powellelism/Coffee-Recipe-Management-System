@@ -49,7 +49,7 @@ model Recipe {
   instructions String       @default("")
   totalTime    Int          @default(0)
   image        Image[]
-  ratings      Rating[]
+  rating       Int          @default(0)
   food         Food         @relation(fields: [foodId], references: [id])
   reviews      Review[]
   ingredients  Ingredient[] @relation("IngredientToRecipe")
