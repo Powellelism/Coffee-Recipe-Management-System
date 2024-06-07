@@ -10,11 +10,10 @@ on:
   jobs:
     testing:
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
       steps:
         - name: Check out repository
           uses: actions/checkout@v4
+
         - name: Install dependencies
           run: |
             cd web
