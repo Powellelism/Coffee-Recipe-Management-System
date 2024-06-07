@@ -78,7 +78,7 @@ exports.getRecipes = async (request, response) => {
  * @param response
  * @returns {Promise<void>}
  */
-exports.addRecipe = async (request, response) => {
+ exports.addRecipe = async (request, response) => {
   try {
     const {
       name,
@@ -88,6 +88,7 @@ exports.addRecipe = async (request, response) => {
       size,
       instructions,
       totalTime,
+      userId, //This is new if frontend needs to be updated
     } = request.body;
 
     // Create the recipe
@@ -109,6 +110,14 @@ exports.addRecipe = async (request, response) => {
         size,
         instructions,
         totalTime,
+      },
+    });
+
+    // Add the recipe to userRecipe table
+    await prisma.userRecipe.create({
+      data: {
+        userId,
+        recipeId: recipe.id,
       },
     });
 
