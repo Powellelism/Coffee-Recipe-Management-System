@@ -63,12 +63,12 @@ header {
 
 .nav div.main_list ul li {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   width: auto;
   height: 50px;
   padding: 0;
-  padding-right: 2rem;
+  padding-right: 1rem;
 }
 .create-button, .about-button, .saved-button {
   background-color: transparent;
@@ -221,17 +221,14 @@ h2 {
       overflow: hidden;
   }
   .nav div.show_list {
-      height: auto;
-      display: none;
+      height: 40vh;
   }
+  .nav div.show_list ul li{
+    padding-top: 2rem;
+}
   .nav div.main_list ul {
       flex-direction: column;
       width: 100%;
-      height: 100vh;
-      right: 0;
-      left: 0;
-      bottom: 0;
-      background-color: #111;
       background-position: center top;
   }
   .nav div.main_list ul li {
@@ -239,27 +236,21 @@ h2 {
       text-align: right;
   }
   .auth-buttons {
-    flex-direction: column;
-    width: 100%;
-      height: 100vh;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
   }
   .nav div.main_list ul li button {
+
       text-align: center;
-      width: 100%;
-      font-size: 2rem;
+      font-size: 1rem;
       padding: 20px;
       background-color: transparent;
       color: white;
       cursor: pointer;
       border: none;
       margin: 10px;
-  }
-  .nav div.media_button {
-      display: block;
   }
 }
 
@@ -273,8 +264,6 @@ h2 {
   margin: auto;
   position: absolute;
   right: 30px;
-  top: 0;
-  bottom: 0;
 }
 
 .navTrigger i {
