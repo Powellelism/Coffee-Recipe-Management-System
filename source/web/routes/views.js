@@ -34,7 +34,6 @@ router.get("/dashboard", authMiddleware.authenticate, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "dashboard.html"));
 });
 
-
 // serve recipe customization view
 router.get("/recipe/customize", authMiddleware.authenticate, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "customizeRecipe.html"));
