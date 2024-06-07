@@ -52,25 +52,4 @@ describe("Test frontend and backend for logging in and registering", () => {
     const loginURL = page.url();
     expect(loginURL).toBe("http://localhost:3000/login");
   }, 40000);
-
-  // it('Test to make sure clicking Create Recipe button or direct authenticated URLs while not logged in redirects to login page', async () => {
-  //     await page.goto("http://localhost:3000/recipe/customize");
-  //     await page.waitForNavigation();
-  //     const url = page.url();
-  //     expect(url).toBe('http://localhost:3000/login');
-
-  //     await page.goto("http://localhost:3000/dashboard");
-  //     await page.waitForNavigation();
-  //     const url2 = page.url();
-  //     expect(url2).toBe('http://localhost:3000/login');
-
-  //     await page.goto("http://localhost:3000");
-  //     await page.waitForNavigation();
-  //     await page.waitForSelector('#content + button');
-  //     const createRecipeButton = await page.$('#content + button');
-  //     await createRecipeButton.click();
-  //     await page.waitForNavigation();
-  //     const url3 = page.url();
-  //     expect(url3).toBe('http://localhost:3000/login');
-  // }, 40000);
 });
