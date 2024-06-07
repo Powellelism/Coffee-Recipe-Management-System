@@ -1,5 +1,4 @@
 describe("Test customize recipe page functionality", () => {
-  
   const goToCustomizePageAndAddIngredient = async () => {
     await page.goto("http://localhost:3000/recipe/customize");
     await page.waitForSelector("#add-ingredient");
