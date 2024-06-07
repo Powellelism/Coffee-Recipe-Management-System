@@ -36,7 +36,8 @@ Coffee management system full stack conversion
   "ingredients": ["Espresso", "Milk", "Ice", "Vanilla Syrup"],
   "size": "LARGE",
   "instructions": "1. Pull espresso shots\n2. Add vanilla syrup\n3. Pour cold milk\n4. Add ice\n5. Stir well",
-  "totalTime": 5
+  "totalTime": 5,
+  "userID": "85087d23-f95a-4ff3-b8fc-bedeedc61d74"
   }' http://localhost:3000/api/post/recipe```
   ````
 - Make get request to localhost:3000/api/get/stores to get all stores

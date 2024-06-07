@@ -11,10 +11,41 @@ router.post(
   authMiddleware.authenticate,
   recipeController.addRecipe,
 );
+
 router.get(
-  "/get/recipes",
+  "/get/ratingrecipes",
   authMiddleware.authenticate,
-  recipeController.getRecipes,
+  recipeController.getRatingRecipes,
+);
+
+router.get(
+  "/get/recentrecipes",
+  authMiddleware.authenticate,
+  recipeController.getRecentRecipes,
+);
+
+router.put(
+  "/update/recipe/:id",
+  authMiddleware.authenticate,
+  recipeController.updateRecipe,
+);
+
+router.get(
+  "/get/recipe/:id",
+  authMiddleware.authenticate,
+  recipeController.getSingleRecipe,
+);
+
+router.get(
+  "/get/recipe/:id/rating",
+  authMiddleware.authenticate,
+  recipeController.getRatingForRecipe,
+);
+
+router.put(
+  "/update/recipe/:id/rating",
+  authMiddleware.authenticate,
+  recipeController.updateRecipeRating,
 );
 
 module.exports = router;
