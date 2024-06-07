@@ -1,4 +1,5 @@
 describe("Test frontend and backend for logging in and registering", () => {
+  
   it("Test logging into existing account", async () => {
     await page.goto("http://localhost:3000/login");
     await page.waitForSelector("#email");

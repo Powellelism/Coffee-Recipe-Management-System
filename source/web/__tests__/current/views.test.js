@@ -1,4 +1,5 @@
 describe("Testing unauthenticated views", () => {
+    
   it("Testing serve index view", async () => {
     const response = await page.goto("http://localhost:3000/");
     const status = response.status();
