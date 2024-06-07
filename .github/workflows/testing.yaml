@@ -22,7 +22,7 @@ jobs:
 
       - name: Start server
         run: |
-          npm run start
+          npm run start & sleep 5
         working-directory: ./source/web
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
