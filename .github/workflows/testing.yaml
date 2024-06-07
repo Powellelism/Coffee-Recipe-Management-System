@@ -25,9 +25,19 @@ jobs:
           cd web
           npm run start & sleep 5
         working-directory: ./source
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PORT: 3000
 
       - name: Run tests
         run: |
           cd web
           npm run test
         working-directory: ./source
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          PORT: 3000
