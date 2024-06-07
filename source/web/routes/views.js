@@ -43,4 +43,5 @@ router.get("/recipe/customize", authMiddleware.authenticate, (req, res) => {
 router.get("/recipe/review", authMiddleware.authenticate, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "reviewRecipe.html"));
 });
+
 module.exports = router;

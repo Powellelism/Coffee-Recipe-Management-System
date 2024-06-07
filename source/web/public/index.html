@@ -1,28 +1,66 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.png" />
-    <link rel="stylesheet" href="/styles/home.css" />
     <link rel="stylesheet" href="/styles/common.css" />
-    <script src="/scripts/shops.js"></script>
   </head>
 
+  <header class="main-header">
+    <nav class="nav">
+      <div class="container">
+        <div class="logo">
+          <a href="/">Coffee Recipe Maker.</a>
+        </div>
+        <div id="mainListDiv" class="main_list">
+          <ul class="nav-links">
+            <li><button class="create-button">Create a Recipe</button></li>
+            <li><button class="about-button">About Us</button></li>
+            <div class="auth-buttons">
+              <li><button class="login-button">Log In</button></li>
+              <li>
+                <button
+                  class="register-button"
+                  style="background-color: #314a31; border-color: #314a31"
+                >
+                  Sign Up
+                </button>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <span class="navTrigger">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+      </div>
+    </nav>
+  </header>
+
   <body>
-    <div id="image" style="float: left">
-      <img
-        src="/assets/images/Team39-logo.png"
-        alt="Team Logo"
-        width="500"
-        height="500"
-      />
+    <h2>Top Ranked</h2>
+    <div
+      class="top-cards"
+      style="display: flex; flex-direction: row; overflow: hidden"
+    >
+      <recipe-card></recipe-card>
+      <recipe-card></recipe-card>
+      <recipe-card></recipe-card>
+      <recipe-card></recipe-card>
     </div>
-    <div id="content" style="float: right">
-      <button class="button">Create Recipe</button>
-      <button class="button">About</button>
-      <button class="button">Log In</button>
-      <button class="button">Sign Up</button>
+    <h2>Most Recent</h2>
+    <div
+      class="recent-cards"
+      style="display: flex; flex-direction: row; overflow: hidden"
+    >
+      <recipe-card></recipe-card>
+      <recipe-card></recipe-card>
+      <recipe-card></recipe-card>
+      <recipe-card></recipe-card>
     </div>
+    <script src="/scripts/shops.js"></script>
+    <script src="/scripts/recipeCard.js" type="module"></script>
   </body>
 </html>

@@ -54,3 +54,25 @@ async function getShops() {
     console.error(error);
   }
 }
+
+/**
+ * When screen is mobile size, make hamburger menu clickable
+ * and create black background for nav bar when we scroll
+ * to where nav bar is not visible
+ */
+document.querySelector(".navTrigger").addEventListener("click", function () {
+  this.classList.toggle("active");
+  console.log("Clicked menu");
+  var mainListDiv = document.getElementById("mainListDiv");
+  mainListDiv.classList.toggle("show_list");
+  mainListDiv.style.display = "block";
+});
+
+window.addEventListener("scroll", function () {
+  if (document.documentElement.scrollTop > 50) {
+    document.querySelector(".nav").classList.add("affix");
+    console.log("OK");
+  } else {
+    document.querySelector(".nav").classList.remove("affix");
+  }
+});

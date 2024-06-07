@@ -1,5 +1,15 @@
 /* Import CSS vars */
 @import url("vars.css");
+header {
+  background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0)), url('../assets/images/coffee.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: space-between;
+  background-color: var(--header-color, bisque);
+  padding: 0.7rem;
+  margin-bottom: 2rem;
+}
 
 header,
 dashboard-button,
@@ -18,25 +28,20 @@ fieldset {
   padding: 0;
 }
 
-header {
-  justify-content: space-between;
-  background-color: var(--header-color, bisque);
-  padding: 0.7rem;
-}
-
 header h1 {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: var(--step-3);
+  color: white;
   margin: 0;
 }
 
 .dashboard-link {
   display: block;
   text-decoration: none;
-  color: inherit;
+  color: white;
 }
 
 dashboard-button {
@@ -49,6 +54,10 @@ dashboard-button {
 
 dashboard-button svg {
   height: 0.85rem;
+  & path {
+    fill: white;
+  
+  }
 }
 
 .dashboard-button span {
@@ -57,8 +66,12 @@ dashboard-button svg {
 
 body {
   margin: 0;
-  background-color: var(-body-color, white);
+  background-color: var(--body-color, white);
   font-size: var(--step-0);
+}
+
+#sign-out-button {
+  margin: 1rem;
 }
 
 #sign-out-button,
@@ -67,7 +80,7 @@ form-field button {
   color: white;
   border: none;
   background-color: var(--button-color, darkgreen);
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
   border-radius: 1rem;
   font-size: var(--step-n1);
   transition: background-color 0.5s ease-out;
