@@ -28,11 +28,6 @@ router.get("/forgot", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "auth/forgot.html"));
 });
 
-// Serve common home view
-router.get("/common/home", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/pages", "common.html"));
-});
-
 // ------- Authenticated Views
 // Serve dashboard view
 router.get("/dashboard", authMiddleware.authenticate, (req, res) => {
@@ -42,11 +37,6 @@ router.get("/dashboard", authMiddleware.authenticate, (req, res) => {
 // serve recipe customization view
 router.get("/recipe/customize", authMiddleware.authenticate, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "customizeRecipe.html"));
-});
-
-// serve saved recipe view
-router.get("/recipe/saved", authMiddleware.authenticate, (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/pages", "savedRecipes.html"));
 });
 
 // serve recipe review view
