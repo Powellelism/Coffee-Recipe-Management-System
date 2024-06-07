@@ -55,6 +55,11 @@ async function getShops() {
   }
 }
 
+/**
+ * When screen is mobile size, make hamburger menu clickable
+ * and create black background for nav bar when we scroll
+ * to where nav bar is not visible
+ */
 document.querySelector(".navTrigger").addEventListener("click", function () {
   this.classList.toggle("active");
   console.log("Clicked menu");
