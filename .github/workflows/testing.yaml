@@ -18,6 +18,8 @@ jobs:
         run: |
           cd web
           npm install
+          prisma format
+          npx prisma generate
         working-directory: ./source
 
       - name: Start server
