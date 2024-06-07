@@ -22,9 +22,8 @@ jobs:
 
       - name: Start server
         run: |
-          cd web
-          npm run start & sleep 5
-        working-directory: ./source
+          npm run start
+        working-directory: ./source/web
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
@@ -33,9 +32,8 @@ jobs:
 
       - name: Run tests
         run: |
-          cd web
           npm run test
-        working-directory: ./source
+        working-directory: ./source/web
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
