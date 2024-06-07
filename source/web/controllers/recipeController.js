@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 /**
  * This function retrieves the recipes based on descending rating.
  * @param request None
- * @param response return a list of recipes in descending rating. 
+ * @param response return a list of recipes in descending rating.
  * Recipe is in json file including name, description, food, ingredients, size, rating, reviews, instructions, totalTime)
  * @returns {Promise<void>}
  */
@@ -71,7 +71,7 @@ exports.getRatingRecipes = async (request, response) => {
 /**
  * This function retrieves the recipes based on created time, most recent recipe will show up first.
  * @param request None
- * @param response return a list of recipes in descending id number. 
+ * @param response return a list of recipes in descending id number.
  * Recipe is in json file including name, description, food, ingredients, size, rating, reviews, instructions, totalTime)
  * @returns {Promise<void>}
  */
@@ -137,12 +137,12 @@ exports.getRecentRecipes = async (request, response) => {
 
 /**
  * This function adds a new recipe.
- * @param request JSON body of a recipe including 
+ * @param request JSON body of a recipe including
  * name, description, foodId, ingredients, size, intructions, totalTime, userID
- * @param response JSON file of the new created recipe 
+ * @param response JSON file of the new created recipe
  * @returns {Promise<void>}
  */
- exports.addRecipe = async (request, response) => {
+exports.addRecipe = async (request, response) => {
   try {
     const {
       name,
@@ -194,8 +194,8 @@ exports.getRecentRecipes = async (request, response) => {
 
 /**
  * This function updates a recipe information.
- * @param request JSON body key and value that needed to be updated. 
- * Example: {"name": "new Name", "size": "Small"} if you want to update 
+ * @param request JSON body key and value that needed to be updated.
+ * Example: {"name": "new Name", "size": "Small"} if you want to update
  * the name of this recipe to "new Name" and the size to "Small"
  * @param response JSON file of the recipe with new updated information
  * @returns {Promise<void>}
@@ -260,7 +260,7 @@ exports.getRatingForRecipe = async (request, response) => {
         id: id,
       },
     });
-    
+
     // Return the rating
     response.status(201).json(recipe.rating);
   } catch (error) {
@@ -278,7 +278,7 @@ exports.getRatingForRecipe = async (request, response) => {
  */
 exports.updateRecipeRating = async (request, response) => {
   try {
-    const {newRating} = request.body;
+    const { newRating } = request.body;
     const id = parseInt(request.params.id);
 
     // Update the recipe rating
@@ -290,7 +290,7 @@ exports.updateRecipeRating = async (request, response) => {
         rating: newRating,
       },
     });
-    
+
     response.status(201).json(recipe.rating);
   } catch (error) {
     console.error("Error updating rating:", error);
