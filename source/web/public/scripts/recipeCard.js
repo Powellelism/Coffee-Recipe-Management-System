@@ -1,13 +1,12 @@
-class recipeCard extends HTMLElement {
-  constructor() {
+export default class recipeCard extends HTMLElement {
+  constructor(userName, recipeImage, recipeName, recipeRating, recipe) {
     super();
     this.attachShadow({ mode: "open" });
-    this.userName = "Jacob R.";
-    this.recipeImage = "../assets/images/diy-coffee.jpg";
-    this.recipeName = "Refreshing Mint Coffee";
-    this.recipeRating = 4;
-    this.recipe =
-      "Combine 4 cups water, 4 shots of espresso, and 2 leaves of mint. Add ice. Enjoy!";
+    this.userName = userName || "Jacob R.";
+    this.recipeImage = recipeImage || "../assets/images/diy-coffee.jpg";
+    this.recipeName = recipeName || "Refreshing Mint Coffee";
+    this.recipeRating = recipeRating || 4;
+    this.recipe = recipe || "Combine 4 cups water, 4 shots of espresso, and 2 leaves of mint. Add ice. Enjoy!";
   }
 
   render() {
@@ -23,11 +22,8 @@ class recipeCard extends HTMLElement {
                 </section>
                 <a>${recipeName}</a>
                     <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+                        ${[...Array(5)].map((_, i) => `
+                          <i class="fa-solid fa-star ${i < recipeRating ? 'active' : ''}"></i>`).join('')}
                     </div>
             <section class="ingredients">
                     ${recipe}

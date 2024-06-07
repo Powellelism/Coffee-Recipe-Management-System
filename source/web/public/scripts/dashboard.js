@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", init);
-
+import recipeCard from './recipeCard.js';
 /**
  * read data of coffee shops and add events for buttons on home page
  */
@@ -54,6 +54,51 @@ async function getShops() {
     console.error(error);
   }
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+  // Your existing code here
+  try {
+    const response = await fetch("api/get/ratingrecipes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch recipes");
+    }
+
+    const recipes = await response.json();
+    console.log("Fetched recipes:", recipes); // Log fetched data for debugging
+
+    const topCardsContainer = document.querySelector(".top-cards");
+    const recentCardsContainer = document.querySelector(".recent-cards");
+
+    // Clear any existing content in the containers
+    topCardsContainer.innerHTML = "";
+    recentCardsContainer.innerHTML = "";
+
+    // Populate the top-ranked recipes
+    recipes.forEach((recipe, index) => {
+      const recipeCardElement = new recipeCard();
+      recipeCardElement.userName = "Jacob R."; // Default user name or you can use recipe.authorName if available
+      recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeName = recipe.recipeName;
+      recipeCardElement.recipeRating = recipe.rating;
+      recipeCardElement.recipe = recipe.instructions;
+
+      if (index < 4) {
+        topCardsContainer.appendChild(recipeCardElement);
+      }
+    });
+
+    console.log("Recipe cards added to the DOM"); // Log confirmation
+  } catch (error) {
+    console.error("Error loading recipes:", error);
+  }
+});
+
 
 document.querySelector(".navTrigger").addEventListener("click", function () {
   this.classList.toggle("active");
