@@ -13,24 +13,19 @@ async function init() {
   let createButtonEl = document.querySelectorAll("button")[0];
   // add click event to the button for create new recipes
   createButtonEl.addEventListener("click", () => {
-    window.location = "/preset/customize";
+    window.location = "/recipe/customize";
   });
-  let saveButtonEl = document.querySelectorAll("button")[1];
-  //add click event to the button for view the saved recipes
-  saveButtonEl.addEventListener("click", () => {
-    window.location = "/recipe/saved";
-  });
-  let aboutButtonEl = document.querySelectorAll("button")[2];
+  let aboutButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
   aboutButtonEl.addEventListener("click", () => {
     window.location = "/about";
   });
-  let loginButtonEl = document.querySelectorAll("button")[3];
+  let loginButtonEl = document.querySelectorAll("button")[2];
   //add click event to the button for view the login page
   loginButtonEl.addEventListener("click", () => {
     window.location = "/login";
   });
-  let signUpButtonEl = document.querySelectorAll("button")[4];
+  let signUpButtonEl = document.querySelectorAll("button")[3];
   //add click event to the button for view the sign up page
   signUpButtonEl.addEventListener("click", () => {
     window.location = "/register";
