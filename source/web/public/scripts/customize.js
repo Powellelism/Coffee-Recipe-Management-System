@@ -142,12 +142,36 @@ async function generateRecipe(event) {
 
   // Define the data to be sent in the request body.
   // TODO; Should the user be able to specify certain things, like give a title?
-  const requestData = {
-    text: "Create a simple coffee recipe. Include a title, drink size, drink type (hot or cold).",
-    key: "lrRJqZf7lCAZA7FExKd5L927bskzVfgE" // Replace with your API key
+
+  const url = 'https://ai.powellelism.site/api/text-generate';
+  const requestBody = {
+    text: "Give 3 sentences about math",
+    model: "@cf/meta/llama-3-8b-instruct",
+    key: "lrRJqZf7lCAZA7FExKd5L927bskzVfgE"
   };
 
-  try {
+  // Create a mock request object
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBody),
+    mode: 'no-cors' 
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const responseData = await response.text();
+  console.log(responseData);
+
+
+  console.log('Response:', responseData);
+
+  /* try {
     // Make a POST request to the text generation endpoint
     const response = await fetch("/api/text-generate/", {
       method: "POST",
@@ -172,5 +196,5 @@ async function generateRecipe(event) {
     }
   } catch (error) {
     console.error("Fetch error: ", error);
-  }
+  } */
 }
