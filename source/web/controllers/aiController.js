@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { post } = require("../routes/api");
+//const { post } = require("../routes/api");
 
 exports.generateRecipe = async (request, response) => {
     const {recipeName, category, ingredients} = request.body;
