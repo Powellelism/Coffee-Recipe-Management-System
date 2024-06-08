@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Populate the top-ranked recipes
     recipes.forEach((recipe, index) => {
       const recipeCardElement = new recipeCard();
-      recipeCardElement.userName = "Jacob R."; // Default user name or you can use recipe.authorName if available
+      recipeCardElement.userName = recipe.userEmail || "Jacob R."; // Default user name or you can use recipe.authorName if available
       recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
