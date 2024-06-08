@@ -79,15 +79,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     topCardsContainer.innerHTML = "";
     recentCardsContainer.innerHTML = "";
 
+
+
     // Populate the top-ranked recipes
     recipes.forEach((recipe, index) => {
       const recipeCardElement = new recipeCard();
-      recipeCardElement.userName = recipe.userEmail || "Jacob R."; // Default user name or you can use recipe.authorName if available
+      recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
       recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
       topCardsContainer.appendChild(recipeCardElement);
+
+      
         
       const scrollAmount = 800;
     document.querySelector(".scroll-button.left").addEventListener("click", () => {
