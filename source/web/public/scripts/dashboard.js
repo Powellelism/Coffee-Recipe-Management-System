@@ -98,6 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     recipes1.forEach((recipe, index) => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+      recipeCardElement.recipeid = recipe.recipeId;
       recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
@@ -122,6 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
+      recipeCardElement.recipeid = recipe.recipeId;
       console.log(recipeCardElement.userName);
       recentCardsContainer.appendChild(recipeCardElement);
   

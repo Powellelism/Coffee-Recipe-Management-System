@@ -1,5 +1,5 @@
 export default class recipeCard extends HTMLElement {
-  constructor(userName, recipeImage, recipeName, recipeRating, recipe) {
+  constructor(userName, recipeImage, recipeName, recipeRating, recipe, recipeid) {
     super();
     this.attachShadow({ mode: "open" });
     this.userName = userName || "Jacob R.";
@@ -7,10 +7,11 @@ export default class recipeCard extends HTMLElement {
     this.recipeName = recipeName || "Refreshing Mint Coffee";
     this.recipeRating = recipeRating || 4;
     this.recipe = recipe || "Combine 4 cups water, 4 shots of espresso, and 2 leaves of mint. Add ice. Enjoy!";
+    this.recipeid = recipeid;
   }
 
   render() {
-    const { userName, recipeImage, recipeName, recipeRating, recipe } = this;
+    const { userName, recipeImage, recipeName, recipeRating, recipe, recipeid } = this;
     this.shadowRoot.innerHTML = `
         <article class="recipe-component">
             <span>${userName}</span>
@@ -38,6 +39,8 @@ export default class recipeCard extends HTMLElement {
             });
         </script>
       `;
+      this.setAttribute("data-id", recipeid);
+      console.log(recipeid);
 
     // Create a link element for the external stylesheet
     const linkElement = document.createElement("link");
