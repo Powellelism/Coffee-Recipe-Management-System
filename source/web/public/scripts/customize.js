@@ -131,8 +131,8 @@ function restorePopulatedForm() {
  */
 async function generateRecipe(event) {
   event.preventDefault();
-  const url = '/api/post/generateRecipe';
   let recipeName = document.getElementById("recipe-name");
+  let generateButton = document.getElementById("generate-button");
 
   // If the user hasn't entered a recipe name, do not do anything
   if (recipeName.value === "" || recipeName.value === "Recipe Name") {
@@ -140,7 +140,11 @@ async function generateRecipe(event) {
     return;
   }
 
-  // Clean up the previous generated ingredients
+  // Disable the generate button while generating
+  generateButton.disabled = true;
+  generateButton.textContent = "Magic brewing...";
+
+  // Remove any previously existing ingredients
   let cleanIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
   cleanIngredients.forEach((input) => {
     input.value = "";
@@ -148,25 +152,34 @@ async function generateRecipe(event) {
   });
   updateIngredients();
 
-  // Makes 3 requests to the AI
-  const size = await makeRequest("Size", recipeName.value);
-  const type = await makeRequest("Type", recipeName.value);
-  const ingredients = await makeRequest("Ingredients", recipeName.value);
-  const recipe = await makeRequest("Recipe", recipeName.value, ingredients);
-
+  // Makes 4 requests to the AI
+  const size = await requestText("Size", recipeName.value);
+  const type = await requestText("Type", recipeName.value);
+  const ingredients = await requestText("Ingredients", recipeName.value);
+  const recipe = await requestText("Recipe", recipeName.value, ingredients);
+  
+  // Fill out form with generated text
   fillForm('select', size);
   fillForm('select', type);
   fillForm('list', ingredients);
   fillForm('fill', recipe);
+
+  const imageURL = await requestImage(recipeName.value);
+  console.log("image URL: " + imageURL);
+
+  // Reset generate button, indicating generation complete
+  generateButton.disabled = false;
+  generateButton.textContent = "Generate";
 }
 
 /**
- * Makes POST request to LLM.
+ * Makes POST text generate request to LLM.
  * @param {string} c: category
  * @param {string} recName: recipe name
  * @param {string} ing: ingredients
+ * @returns {string}
  */
-async function makeRequest(c, recName, ing) {
+async function requestText(c, recName, ing) {
   const url = '/api/post/generateRecipe';
   const requestT = {
     recipeName: recName,
@@ -189,6 +202,33 @@ async function makeRequest(c, recName, ing) {
   // Slice response, convert to desired format
   const resText = await responseT.text();
   return resText.split(":")[1].slice(1, -2).toLowerCase();
+}
+
+/**
+ * Makes POST image generate request to LLM.
+ * @param {string} recName: recipe name
+ * @returns {string}
+ */
+async function requestImage(recName) {
+  const url = '/api/post/generateImage';
+  const requestT = {
+    recipeName: recName
+  };
+
+  const responseT = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestT),
+  });
+
+  // Ensure that the response is clean
+  if (!responseT.ok) throw new Error('Failed to fetch data for image');
+
+  // Return image URL
+  return await responseT.text();
 }
 
 /**
@@ -222,7 +262,7 @@ function fillForm(category, id) {
       });
 
       break;
-    
+
     case 'fill':
       const textarea = document.getElementById('recipe');
       textarea.value = id;

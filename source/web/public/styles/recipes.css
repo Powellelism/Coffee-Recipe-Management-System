@@ -1,5 +1,9 @@
 /* Import CSS vars */
 @import url("vars.css");
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 header {
   background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0)), url('../assets/images/coffee.jpg');
   background-position: center;
@@ -322,7 +326,7 @@ form form-field {
   form,
   header {
     display: flex;
-    flex-flow: column wrap;
+    /* flex-flow: column wrap; */
     justify-content: center;
     align-items: center;
   }
@@ -334,4 +338,23 @@ form form-field {
   #recipe {
     text-align: center;
   }
+}
+
+#generate-button {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 20em;
+  height: 4em;
+  width: 10em;
+  cursor: pointer;
+}
+
+#generate-button:hover {
+  background-color: grey;
+}
+
+#generate-button:disabled {
+  background-color: brown;
+  cursor: wait;
 }

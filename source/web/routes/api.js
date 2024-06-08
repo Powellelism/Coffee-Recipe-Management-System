@@ -5,7 +5,6 @@ const storeController = require("../controllers/storeController");
 const recipeController = require("../controllers/recipeController");
 const aiController = require("../controllers/aiController")
 
-
 router.get("/get/shops", authMiddleware.authenticate, storeController.getShops);
 
 router.post(
@@ -54,6 +53,12 @@ router.post(
   "/post/generateRecipe",
   authMiddleware.authenticate,
   aiController.generateRecipe,
+);
+
+router.post(
+  "/post/generateImage",
+  authMiddleware.authenticate,
+  aiController.generateImage,
 );
 
 module.exports = router;
