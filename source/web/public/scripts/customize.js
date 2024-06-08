@@ -18,7 +18,7 @@ function init() {
     input.addEventListener("input", removeInput);
   });
   form.addEventListener("submit", saveFormDataToLocalStorage);
-  generateButton.addEventListener("click", callRoute);
+  generateButton.addEventListener("click", generateRecipe);
 
   // for: if user clicks back button, the form is still populated
   if (localStorage.getItem("newRecipe")) {
@@ -129,10 +129,9 @@ function restorePopulatedForm() {
  * Generate a recipe and when the user clicks "generate".
  * @param {event} event
  */
-async function callRoute(event) {
-  
+async function generateRecipe(event) {
   event.preventDefault();
- let recipeName = document.getElementById("recipe-name");
+  let recipeName = document.getElementById("recipe-name");
 
   // If the user hasn't entered a recipe name, do not do anything
   if (recipeName.value === "" || recipeName.value === "Recipe Name") {
@@ -141,21 +140,25 @@ async function callRoute(event) {
     return;
   }
 
+  // Makes 3 requests to the AI
   const url = '/api/post/generateRecipe';
-  // Define the data to be sent in the request body.
+  // First request to generate a size, ie Tall, Grande, Venti
   const requestSize = {
     recipeName: recipeName.value,
     category: "Size"
   }; 
+  // Second request to generate type, ie Hot or Ice
   const requestType = {
     recipeName: recipeName.value,
     category: "Type"
   }; 
+  // Third request to generate a list of ingredients
   const requestIngredients = {
     recipeName: recipeName.value,
     category: "Ingredients"
   }; 
 
+  // Fetching the requests
   const responseSize = await fetch(url, {
     method: 'POST',
     headers: {
@@ -181,27 +184,31 @@ async function callRoute(event) {
     body: JSON.stringify(requestIngredients),
   });
 
+  // Ensure that all 3 responses are clean
   if (!responseType.ok || !responseSize.ok || !responseIngredients.ok) {
     throw new Error('Failed to fetch data');
   }
-  /*const responseA = JSON.parse(responseSize);
-  const responseAValue = jsonObject.response;
-  console.log("Print", responseAValue); */
 
+  // Transform the responses to text
   const responseSizeText = await responseSize.text();
   const responseTypeText = await responseType.text();
   const responseIngredientsText = await responseIngredients.text();
 
-  const responseSizeTextFinal = responseSizeText.split(":")[1].slice(1, -2)
-  const responseTypeTextFinal = responseTypeText.split(":")[1].slice(1, -2)
+  // Truncates the quotation marks and brackets
+  const responseSizeTextFinal = responseSizeText.split(":")[1].slice(1, -2);
+  const responseTypeTextFinal = responseTypeText.split(":")[1].slice(1, -2);
+  const responseIngredientsTextFinal = responseIngredientsText.split(":")[1].slice(1, -2);
 
+  // Turn the ingredient string into a list of ingreident strings
+  const responseIngredientsArr = responseIngredientsTextFinal.split(",");
+  console.log(responseIngredientsArr);
 
-  console.log(responseTypeTextFinal);
-
+  // Display the generated size and type
   let size = document.getElementById(responseSizeTextFinal.toLowerCase());
   let type = document.getElementById(responseTypeTextFinal.toLowerCase());
   size.click();
   type.click();
+
 
   //const responseData = "Let's create a recipe for a refreshing Iced Latte!\n\nDrink Size: Venti\nDrink Type: Cold\n\nIngredients: 2% milk, 1 shot of espresso, 3 pumps of vanilla syrup, 3 pumps of caramel syrup, ice, and whipped cream\n\n**How to Make:**\n\nIn this recipe, we'll brew a shot of rich espresso and combine it with 2% milk, vanilla, and caramel syrup to create a sweet and creamy drink. To make this refreshing treat, start by brewing a shot of espresso into a cup. Add 3 pumps of vanilla syrup and 3 pumps of caramel syrup, stirring well to combine. Pour in 8 ounces of 2% milk, stirring gently to create a smooth and creamy blend. Fill a venti glass with ice and pour the iced latte over the ice. Top with whipped cream and a drizzle of caramel syrup, if desired. Stir gently and serve immediately. Enjoy your delicious and refreshing Iced Latte!";
 
