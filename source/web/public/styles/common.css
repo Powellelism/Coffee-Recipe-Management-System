@@ -245,10 +245,10 @@ h2 {
 }
 
 @media screen and (width <= 768px) {
-
   .nav div.logo {
     margin-left: 15px;
   }
+
   .nav-trigger {
     display: block;
   }
