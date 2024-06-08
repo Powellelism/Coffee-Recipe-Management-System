@@ -25,57 +25,64 @@
     <a href="/login" id="sign-out-button">Sign Out</a>
   </header>
   <main>
-    <form action="/recipe/review" method="post" id="wrapper">
-      <div class="header-wrapper">
-        <form-field>
-          <input type="text" id="recipe-name" name="recipe_name" value="Recipe Name" required autofocus />
-        </form-field>
-        <button id="generate-button">Generate</button>
-      </div>
-      <div>
-        <form-field id="size-container">
-          <fieldset>
-            <legend>Size</legend>
-
-            <input type="radio" id="tall" name="size" value="TALL" required />
-            <label class="size-option" for="tall"><img src="../assets/svgs/tall.svg"
-                alt="svg of a tall cup" /><span>TALL</span></label>
-
-            <input type="radio" id="grande" name="size" value="GRANDE" />
-            <label class="size-option" for="grande"><img src="../assets/svgs/grande.svg"
-                alt="svg of a grande cup" /><span>GRANDE</span></label>
-
-            <input type="radio" id="venti" name="size" value="VENTI" />
-            <label class="size-option" for="venti"><img src="../assets/svgs/venti.svg"
-                alt="svg of a venti" /><span>VENTI</span></label>
-          </fieldset>
-        </form-field>
-
-        <form-field id="type-container">
-          <fieldset>
-            <legend>Type</legend>
-            <input type="radio" id="hot" name="drink-type" value="HOT" required />
-            <label class="type-option" for="hot">HOT</label>
-
-            <input type="radio" id="cold" name="drink-type" value="COLD" />
-            <label class="type-option" for="cold">COLD</label>
-          </fieldset>
-        </form-field>
-        <form-field id="ingredients-container">
-          <label>Ingredients</label>
-          <div id="ingredients-list">
-            <input type="text" name="ingredients" value="CREAMER" id="ingredients" required />
-            <button type="button" id="add-ingredient">+</button>
+    <div class="main">
+      <div class="left">
+        <form action="/recipe/review" method="post" id="wrapper">
+          <div class="header-wrapper">
+            <form-field>
+              <input type="text" id="recipe-name" name="recipe_name" value="Recipe Name" required autofocus />
+            </form-field>
+            <button id="generate-button">Generate</button>
           </div>
-        </form-field>
+          <div>
+            <form-field id="size-container">
+              <fieldset>
+                <legend>Size</legend>
+
+                <input type="radio" id="tall" name="size" value="TALL" required />
+                <label class="size-option" for="tall"><img src="../assets/svgs/tall.svg"
+                    alt="svg of a tall cup" /><span>TALL</span></label>
+
+                <input type="radio" id="grande" name="size" value="GRANDE" />
+                <label class="size-option" for="grande"><img src="../assets/svgs/grande.svg"
+                    alt="svg of a grande cup" /><span>GRANDE</span></label>
+
+                <input type="radio" id="venti" name="size" value="VENTI" />
+                <label class="size-option" for="venti"><img src="../assets/svgs/venti.svg"
+                    alt="svg of a venti" /><span>VENTI</span></label>
+              </fieldset>
+            </form-field>
+
+            <form-field id="type-container">
+              <fieldset>
+                <legend>Type</legend>
+                <input type="radio" id="hot" name="drink-type" value="HOT" required />
+                <label class="type-option" for="hot">HOT</label>
+
+                <input type="radio" id="cold" name="drink-type" value="COLD" />
+                <label class="type-option" for="cold">COLD</label>
+              </fieldset>
+            </form-field>
+            <form-field id="ingredients-container">
+              <label>Ingredients</label>
+              <div id="ingredients-list">
+                <input type="text" name="ingredients" value="CREAMER" id="ingredients" required />
+                <button type="button" id="add-ingredient">+</button>
+              </div>
+            </form-field>
+          </div>
+      </div>
+      <div class="right">
+        <img id="image" src=""></img>
         <form-field id="recipe-container">
           <label for="recipe">Recipe</label>
-          <textarea id="recipe" name="recipe" rows="4" cols="50" required></textarea>
+          <textarea id="recipe" name="recipe" rows="25" cols="50" required></textarea>
         </form-field>
         <form-field>
           <button id="submit-button" type="submit">Review Recipe</button>
         </form-field>
-    </form>
+        </div>
+      </form>
     </div>
   </main>
 </body>

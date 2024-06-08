@@ -152,20 +152,22 @@ async function generateRecipe(event) {
   });
   updateIngredients();
 
-  // Makes 4 requests to the AI
+  // Makes 4 requests to text generator
   const size = await requestText("Size", recipeName.value);
   const type = await requestText("Type", recipeName.value);
   const ingredients = await requestText("Ingredients", recipeName.value);
   const recipe = await requestText("Recipe", recipeName.value, ingredients);
-  
+
   // Fill out form with generated text
   fillForm('select', size);
   fillForm('select', type);
   fillForm('list', ingredients);
   fillForm('fill', recipe);
 
-  const imageURL = await requestImage(recipeName.value);
-  console.log("image URL: " + imageURL);
+  // Make an image generation request
+  const imgURL = await requestImage(recipeName.value);
+  let img = document.getElementById("image");
+  img.src = JSON.parse(imgURL).url;
 
   // Reset generate button, indicating generation complete
   generateButton.disabled = false;
@@ -199,9 +201,10 @@ async function requestText(c, recName, ing) {
   // Ensure that the response is clean
   if (!responseT.ok) throw new Error('Failed to fetch data for ' + c + ' category');
 
-  // Slice response, convert to desired format
-  const resText = await responseT.text();
-  return resText.split(":")[1].slice(1, -2).toLowerCase();
+  // Parse response, convert to desired format
+  const responseString = await responseT.text();
+  const responseValue = JSON.parse(responseString).response;
+  return responseValue.toLowerCase();
 }
 
 /**
