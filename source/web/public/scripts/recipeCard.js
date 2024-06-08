@@ -11,7 +11,7 @@ class recipeCard extends HTMLElement {
   }
 
   render() {
-    const { userName, recipeImage, recipeName, recipeRating, recipe } = this;
+    const { userName, recipeImage, recipeName, recipe } = this;
     this.shadowRoot.innerHTML = `
         <head>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
