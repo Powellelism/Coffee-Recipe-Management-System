@@ -2,8 +2,8 @@ const axios = require("axios");
 const { post } = require("../routes/api");
 
 exports.generateRecipe = async (request, response) => {
-    //const drinkName = request.body
-    const {recipeName, category} = request.body;
+    const {recipeName, category, ingredients} = request.body;
+
     const postData = {
         text: "",
         model: "@cf/meta/llama-3-8b-instruct",
@@ -18,6 +18,9 @@ exports.generateRecipe = async (request, response) => {
             break;
         case "Ingredients":
             postData.text = "A list of " + recipeName + " ingredients separated by a comma. Respond with the ingredients only, no more than 8 ingredients.";
+            break;
+        case "Recipe":
+            postData.text = "Given the following ingredients: " + ingredients + ". Give a 3-4 sentences paragraph on how to make a " + recipeName;
             break;
     };
     const requestOptions = {

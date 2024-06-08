@@ -199,6 +199,25 @@ async function generateRecipe(event) {
   const responseTypeTextFinal = responseTypeText.split(":")[1].slice(1, -2);
   const responseIngredientsTextFinal = responseIngredientsText.split(":")[1].slice(1, -2);
 
+  const requestRecipe = {
+    recipeName: recipeName.value,
+    category: "Recipe",
+    ingredients: responseIngredientsTextFinal
+  }; 
+  const responseRecipe = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestRecipe),
+  });
+
+  const responseRecipeText = await responseRecipe.text();
+  const responseRecipeTextFinal = responseRecipeText.split(":")[1].slice(1, -2);
+  console.log("11: ", responseRecipeTextFinal)
+
+
   // Display the generated size and type
   let size = document.getElementById(responseSizeTextFinal.toLowerCase());
   let type = document.getElementById(responseTypeTextFinal.toLowerCase());
@@ -220,13 +239,7 @@ async function generateRecipe(event) {
     input.value = responseIngredientsArr[counter];
     counter++;
   });
-}
 
-/*
- * Helper function to parse generated string.
- */
-function extractContent(pattern, text) {
-  const regex = new RegExp(pattern, 's');
-  const match = text.match(regex);
-  return match ? match[1].trim() : null;
+  const textarea = document.getElementById('recipe');
+  textarea.value = responseRecipeTextFinal;
 }
