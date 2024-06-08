@@ -141,36 +141,71 @@ async function callRoute(event) {
     return;
   }
 
-  // Define the data to be sent in the request body.
-  const requestBody = {
-    text: "Create short recipe for drink named" + recipeName.value
-      + ". Pick a drink size: tall, grande, or venti;"
-      + " a type: hot, or cold; a list of ingredients and their measurements separated by a comma;"
-      + " a short recipe; a description of how to make the drink in paragraph form.",
-    model: "@cf/meta/llama-3-8b-instruct",
-  };
-
-  // Create a mock request object
   const url = '/api/post/generateRecipe';
-  const response = await fetch(url, {
+  // Define the data to be sent in the request body.
+  const requestSize = {
+    recipeName: recipeName.value,
+    category: "Size"
+  }; 
+  const requestType = {
+    recipeName: recipeName.value,
+    category: "Type"
+  }; 
+  const requestIngredients = {
+    recipeName: recipeName.value,
+    category: "Ingredients"
+  }; 
+
+  const responseSize = await fetch(url, {
     method: 'POST',
     headers: {
       'accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(requestBody),
+    body: JSON.stringify(requestSize),
+  });
+  const responseType = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestType),
+  });
+  const responseIngredients = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestIngredients),
   });
 
-  if (!response.ok) {
+  if (!responseType.ok || !responseSize.ok || !responseIngredients.ok) {
     throw new Error('Failed to fetch data');
   }
+  /*const responseA = JSON.parse(responseSize);
+  const responseAValue = jsonObject.response;
+  console.log("Print", responseAValue); */
 
-  const responseData = await response.text();
+  const responseSizeText = await responseSize.text();
+  const responseTypeText = await responseType.text();
+  const responseIngredientsText = await responseIngredients.text();
+
+  const responseSizeTextFinal = responseSizeText.split(":")[1].slice(1, -2)
+  const responseTypeTextFinal = responseTypeText.split(":")[1].slice(1, -2)
+
+
+  console.log(responseTypeTextFinal);
+
+  let size = document.getElementById(responseSizeTextFinal.toLowerCase());
+  let type = document.getElementById(responseTypeTextFinal.toLowerCase());
+  size.click();
+  type.click();
 
   //const responseData = "Let's create a recipe for a refreshing Iced Latte!\n\nDrink Size: Venti\nDrink Type: Cold\n\nIngredients: 2% milk, 1 shot of espresso, 3 pumps of vanilla syrup, 3 pumps of caramel syrup, ice, and whipped cream\n\n**How to Make:**\n\nIn this recipe, we'll brew a shot of rich espresso and combine it with 2% milk, vanilla, and caramel syrup to create a sweet and creamy drink. To make this refreshing treat, start by brewing a shot of espresso into a cup. Add 3 pumps of vanilla syrup and 3 pumps of caramel syrup, stirring well to combine. Pour in 8 ounces of 2% milk, stirring gently to create a smooth and creamy blend. Fill a venti glass with ice and pour the iced latte over the ice. Top with whipped cream and a drizzle of caramel syrup, if desired. Stir gently and serve immediately. Enjoy your delicious and refreshing Iced Latte!";
 
-  console.log('Response:', responseData);
-  fillFormWithGeneratedRecipe(responseData);
+  //fillFormWithGeneratedRecipe(responseData);
 }
 
 /*
