@@ -161,6 +161,15 @@ header {
   margin: 10px 0;
 }
 
+.nav-trigger i {
+  background-color: #fff;
+  border-radius: 2px;
+  content: '';
+  display: block;
+  width: 100%;
+  height: 4px;
+}
+
 .recipe-component .stars i {
   color: grey;
   margin: 0 2px;
@@ -202,11 +211,6 @@ h2 {
 
 .stars i.active {
   color: #ff9c1a;
-}
-
-/* Home Section */
-.nav-trigger {
-  display: none;
 }
 
 /* Media qurey section */
@@ -273,55 +277,47 @@ h2 {
   margin: auto;
   position: absolute;
   right: 30px;
-}
-
-.nav-trigger i {
-  background-color: #fff;
-  border-radius: 2px;
-  content: '';
-  display: block;
-  width: 100%;
-  height: 4px;
+  display: none;
 }
 
 .nav-trigger i:nth-child(1) {
-  -webkit-animation: out-T 0.8s backwards;
-  animation: out-T 0.8s backwards;
+  -webkit-animation: out-t 0.8s backwards;
+  animation: out-t 0.8s backwards;
   -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 
 .nav-trigger i:nth-child(2) {
   margin: 5px 0;
-  -webkit-animation: out-M 0.8s backwards;
-  animation: out-M 0.8s backwards;
+  -webkit-animation: out-m 0.8s backwards;
+  animation: out-m 0.8s backwards;
   -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 
 .nav-trigger i:nth-child(3) {
-  -webkit-animation: out-Btm 0.8s backwards;
-  animation: out-Btm 0.8s backwards;
+  -webkit-animation: out-btm 0.8s backwards;
+  animation: out-btm 0.8s backwards;
   -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 
 .nav-trigger.active i:nth-child(1) {
-  -webkit-animation: in-T 0.8s forwards;
-  animation: in-T 0.8s forwards;
+  -webkit-animation: in-t 0.8s forwards;
+  animation: in-t 0.8s forwards;
 }
 
 .nav-trigger.active i:nth-child(2) {
-  -webkit-animation: in-M 0.8s forwards;
-  animation: in-M 0.8s forwards;
+  -webkit-animation: in-m 0.8s forwards;
+  animation: in-m 0.8s forwards;
 }
 
 .nav-trigger.active i:nth-child(3) {
-  -webkit-animation: in-Btm 0.8s forwards;
-  animation: in-Btm 0.8s forwards;
+  -webkit-animation: in-btm 0.8s forwards;
+  animation: in-btm 0.8s forwards;
 }
 
-@-webkit-keyframes in-M {
+@-webkit-keyframes in-m {
   50% {
       -webkit-transform: rotate(0deg);
   }
@@ -330,7 +326,7 @@ h2 {
   }
 }
 
-@keyframes in-M {
+@keyframes in-m {
   50% {
       transform: rotate(0deg);
   }
@@ -339,7 +335,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes out-M {
+@-webkit-keyframes out-m {
   50% {
       -webkit-transform: rotate(0deg);
   }
@@ -348,7 +344,7 @@ h2 {
   }
 }
 
-@keyframes out-M {
+@keyframes out-m {
   50% {
       transform: rotate(0deg);
   }
@@ -357,7 +353,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes in-T {
+@-webkit-keyframes in-t {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -369,7 +365,7 @@ h2 {
   }
 }
 
-@keyframes in-T {
+@keyframes in-t {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -381,7 +377,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes out-T {
+@-webkit-keyframes out-t {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -393,7 +389,7 @@ h2 {
   }
 }
 
-@keyframes out-T {
+@keyframes out-t {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -405,7 +401,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes in-Btm {
+@-webkit-keyframes in-btm {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -417,7 +413,7 @@ h2 {
   }
 }
 
-@keyframes in-Btm {
+@keyframes in-btm {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -429,7 +425,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes out-Btm {
+@-webkit-keyframes out-btm {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -441,7 +437,7 @@ h2 {
   }
 }
 
-@keyframes out-Btm {
+@keyframes out-btm {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -459,18 +455,18 @@ h2 {
   top: 0;
 }
 
-.my-H2 {
+.my-h2 {
 text-align:center;
 font-size: 4rem;
 }
-.my-P {
+.my-p {
 text-align: justify;
 padding-left:15%;
 padding-right:15%;
 font-size: 20px;
 }
 @media all and (max-width:700px){
-.my-P {
+.my-p {
   padding:2%;
 }
 }
