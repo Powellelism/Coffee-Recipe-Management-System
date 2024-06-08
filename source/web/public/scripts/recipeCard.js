@@ -12,9 +12,6 @@ export default class recipeCard extends HTMLElement {
   render() {
     const { userName, recipeImage, recipeName, recipeRating, recipe } = this;
     this.shadowRoot.innerHTML = `
-        <head>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-        </head>
         <article class="recipe-component">
             <span>${userName}</span>
                 <section class="recipe-image-container">
