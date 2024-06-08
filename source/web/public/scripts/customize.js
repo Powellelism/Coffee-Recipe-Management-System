@@ -10,6 +10,7 @@ function init() {
     '#ingredients-list input[type="text"]',
   );
   const form = document.querySelector("form");
+  const generateButton = document.getElementById("generate-button");
 
   // event listeners
   addIngredientButton.addEventListener("click", addIngredient);
@@ -17,6 +18,7 @@ function init() {
     input.addEventListener("input", removeInput);
   });
   form.addEventListener("submit", saveFormDataToLocalStorage);
+  generateButton.addEventListener("click", generateRecipe);
 
   // for: if user clicks back button, the form is still populated
   if (localStorage.getItem("newRecipe")) {
@@ -120,5 +122,55 @@ function restorePopulatedForm() {
 
     let recipe = document.getElementById("recipe");
     recipe.value = formData.recipe;
+  }
+}
+
+/**
+ * Generate a recipe and fill in the form when the user clicks "generate".
+ * @param {event} event
+ */
+async function generateRecipe(event) {
+  event.preventDefault();
+
+  // Disable field input requirements so user can generate without errors
+  const requiredFields = document.querySelectorAll("[required]");
+  requiredFields.forEach(field => field.removeAttribute("required"));
+
+  let recipeName = document.getElementById("recipe-name");
+  let recipe = document.getElementById("recipe");
+  recipeName.value = 'generated';
+
+  // Define the data to be sent in the request body.
+  // TODO; Should the user be able to specify certain things, like give a title?
+  const requestData = {
+    text: "Create a simple coffee recipe. Include a title, drink size, drink type (hot or cold).",
+    key: "lrRJqZf7lCAZA7FExKd5L927bskzVfgE" // Replace with your API key
+  };
+
+  try {
+    // Make a POST request to the text generation endpoint
+    const response = await fetch("/api/text-generate/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestData)
+    });
+
+    if (!response.ok) {
+      recipe.value = 'error';
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+
+    if (data.success) {
+      const generatedText = data.result.answer;
+
+    } else {
+      console.error("Error generating text: ", data.error);
+    }
+  } catch (error) {
+    console.error("Fetch error: ", error);
   }
 }
