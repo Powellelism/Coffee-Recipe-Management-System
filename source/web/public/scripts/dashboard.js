@@ -18,7 +18,7 @@ async function init() {
   let savedButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
   savedButtonEl.addEventListener("click", () => {
-    window.location = "/recipe/saved";
+    window.location = "/recipe/foryou";
   });
   let aboutButtonEl = document.querySelectorAll("button")[2];
   //add click event to the button for view the saved recipes
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-document.querySelector(".navTrigger").addEventListener("click", function () {
+document.querySelector(".nav-trigger").addEventListener("click", function () {
   this.classList.toggle("active");
   console.log("Clicked menu");
   var mainListDiv = document.getElementById("mainListDiv");

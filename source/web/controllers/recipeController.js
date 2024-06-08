@@ -226,67 +226,6 @@ exports.getRatingRecipes = async (request, response) => {
     response.status(500).json({ error: "Internal Server Error" });
   }
 };
-/*
-exports.getRecentRecipes = async (request, response) => {
-  try {
-    const recipes = await prisma.recipe.findMany({
-      include: {
-        food: {
-          select: {
-            name: true,
-            description: true,
-            price: true,
-            store: {
-              select: {
-                name: true,
-              },
-            },
-            type: true,
-            size: true,
-          },
-        },
-        ingredients: {
-          select: {
-            name: true,
-          },
-        },
-        reviews: {
-          select: {
-            content: true,
-          },
-        },
-      },
-      orderBy: {
-        id: "desc",
-      },
-    });
-
-    const formattedRecipes = recipes.map((recipe) => ({
-      recipeName: recipe.name,
-      description: recipe.description,
-      food: {
-        name: recipe.food.name,
-        description: recipe.food.description,
-        price: recipe.food.price,
-        store: recipe.food.store.name,
-        type: recipe.food.type,
-        size: recipe.food.size,
-      },
-      ingredients: recipe.ingredients.map((ingredient) => ingredient.name),
-      size: recipe.size,
-      rating: recipe.rating,
-      reviews: recipe.reviews.map((review) => review.content),
-      instructions: recipe.instructions,
-      totalTime: recipe.totalTime,
-    }));
-    cache.set(cacheKey, formattedRecipes);
-    response.json(formattedRecipes);
-  } catch (error) {
-    console.error("Error retrieving recipes:", error);
-    response.status(500).json({ error: "Internal Server Error" });
-  }
-};
-*/
 /**
  * This function adds a new recipe.
  * @param request JSON body of a recipe including
@@ -463,6 +402,53 @@ exports.updateRecipeRating = async (request, response) => {
     response.status(201).json(recipe.rating);
   } catch (error) {
     console.error("Error updating rating:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+exports.getUserRecipes = async (request, response) => {
+  try {
+    const userUUID = request.user.id;
+
+    const user = await prisma.users.findUnique({
+      where: {
+        id: userUUID,
+      },
+      select: {
+        id: true,
+      },
+    });
+    if (!user) {
+      return response.status(404).json({ error: "User not found" });
+    }
+
+    const userId = user.id;
+    
+    const userRecipes = await prisma.userRecipes.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        recipe: true,
+      },
+    });
+    console.log("userRecipes", userRecipes)
+    const formattedRecipes = userRecipes.map((userRecipe) => {
+      const recipe = userRecipe.recipe;
+      return {
+        recipeId: recipe.id,
+        recipeName: recipe.name,
+        ingredients: recipe.ingredients.map((ingredient) => ingredient.name),
+        size: recipe.size,
+        rating: recipe.rating,
+        reviews: recipe.reviews.map((review) => review.content),
+        instructions: recipe.instructions,
+      };
+    });
+
+    response.json(formattedRecipes);
+  } catch (error) {
+    console.error("Error retrieving user recipes:", error);
     response.status(500).json({ error: "Internal Server Error" });
   }
 };
