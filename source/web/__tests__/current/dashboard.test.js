@@ -44,4 +44,25 @@ describe('Testing home page', () => {
         const aboutURL = page.url();
         expect(aboutURL).toBe('http://localhost:3000/about');
     }, 30000);
+
+    it('Test top ranked recipes are in correct order on page load', async () => {
+        await login();
+        await page.goto('http://localhost:3000/');
+        await page.waitForSelector('.top-cards recipe-card');
+
+        const recipes = await page.evaluate(() => {
+            const recipeCards = document.querySelectorAll('.top-cards recipe-card');
+            const cards = Array.from(recipeCards);
+            return cards.map(card => {
+                const shadowRoot = card.shadowRoot;
+                const recipeName = shadowRoot.querySelector('a');
+                const rating = shadowRoot.querySelectorAll('.fa-star.active').length;
+                return { recipeName, rating};
+            });
+        });
+
+        for(let i = 0; i < recipes.length - 1; i++) {
+            expect(recipes[i].rating).toBeGreaterThanOrEqual(recipes[i + 1].rating);
+        }
+    }, 90000);
 });

@@ -63,6 +63,13 @@ describe("Testing authenticated views", () => {
     const status = response.status();
     expect([200, 304]).toContain(status);
   }, 20000);
+
+  it("Testing for you page view", async () => {
+    await login();
+    const response = await page.goto("http://localhost:3000/recipe/foryou");
+    const status = response.status();
+    expect([200, 304]).toContain(status);
+  }, 20000);
 });
 
 describe("Testing views that don't exist", () => {
