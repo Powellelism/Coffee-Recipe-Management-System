@@ -7,7 +7,8 @@
   box-sizing: border-box;
 }
 
-body, header {
+body,
+header {
   background-color: #fffbf3;
   margin: 0;
   padding: 0;
@@ -17,13 +18,16 @@ header {
   position: relative;
   width: 100%;
   height: 7rem;
-  background-size: cover;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0)), url('../assets/images/coffee.jpg');
+  background-image: linear-gradient(
+      rgb(255 255 255 / 30%),
+      rgb(255 255 255 / 0%)
+    ),
+    url("../assets/images/coffee.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -32,14 +36,16 @@ header {
 .nav {
   position: fixed;
   width: 100%;
-  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
+
 .container {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
 .nav div.logo {
   float: left;
   width: auto;
@@ -87,7 +93,10 @@ header {
   padding: 0;
   padding-right: 1rem;
 }
-.create-button, .about-button, .saved-button {
+
+.create-button,
+.about-button,
+.saved-button {
   background-color: transparent;
   color: white;
   cursor: pointer;
@@ -95,13 +104,16 @@ header {
   margin: 10px;
   font-size: large;
 }
+
 .auth-buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-left: auto;
 }
-.login-button, .register-button {
+
+.login-button,
+.register-button {
   background-color: transparent;
   border: 2px solid white;
   border-radius: 8px;
@@ -127,7 +139,7 @@ header {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
   margin: 10px;
   flex: 1 1 calc(25% - 20px); /* 4 cards per row */
   box-sizing: border-box;
@@ -164,7 +176,7 @@ header {
 .nav-trigger i {
   background-color: #fff;
   border-radius: 2px;
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 4px;
@@ -201,7 +213,9 @@ h2 {
   margin-right: 15px;
   padding: 1rem;
 }
-.top-cards, .recent-cards {
+
+.top-cards,
+.recent-cards {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -215,58 +229,64 @@ h2 {
 
 /* Media qurey section */
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@media screen and (width >= 768px) and (width <= 1024px) {
   .container {
-      margin: 0;
+    margin: 0;
   }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (width <= 768px) {
   .nav-trigger {
-      display: block;
+    display: block;
   }
+
   .nav div.logo {
-      margin-left: 15px;
+    margin-left: 15px;
   }
+
   .nav div.main-list {
-      width: 100%;
-      height: 0;
-      overflow: hidden;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
   }
+
   .nav div.show-list {
-      height: 40vh;
+    height: 40vh;
   }
-  .nav div.show-list ul li{
+
+  .nav div.show-list ul li {
     padding-top: 2rem;
-}
+  }
+
   .nav div.main-list ul {
-      flex-direction: column;
-      width: 100%;
-      background-position: center top;
+    flex-direction: column;
+    width: 100%;
+    background-position: center top;
   }
-  .nav div.main-list ul li {
-      width: 100%;
-      text-align: right;
-  }
-  .auth-buttons {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      width: 100%;
-  }
-  .nav div.main-list ul li button {
 
-      text-align: center;
-      font-size: 1rem;
-      padding: 20px;
-      background-color: transparent;
-      color: white;
-      cursor: pointer;
-      border: none;
-      margin: 10px;
+  .nav div.main-list ul li {
+    width: 100%;
+    text-align: right;
+  }
+
+  .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+  }
+
+  .nav div.main-list ul li button {
+    text-align: center;
+    font-size: 1rem;
+    padding: 20px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
   }
 }
-
 
 /* Animation */
 
@@ -281,171 +301,191 @@ h2 {
 }
 
 .nav-trigger i:nth-child(1) {
-  -webkit-animation: out-t 0.8s backwards;
   animation: out-t 0.8s backwards;
-  -webkit-animation-direction: reverse;
+  animation: out-t 0.8s backwards;
+  animation-direction: reverse;
   animation-direction: reverse;
 }
 
 .nav-trigger i:nth-child(2) {
   margin: 5px 0;
-  -webkit-animation: out-m 0.8s backwards;
   animation: out-m 0.8s backwards;
-  -webkit-animation-direction: reverse;
+  animation: out-m 0.8s backwards;
+  animation-direction: reverse;
   animation-direction: reverse;
 }
 
 .nav-trigger i:nth-child(3) {
-  -webkit-animation: out-btm 0.8s backwards;
   animation: out-btm 0.8s backwards;
-  -webkit-animation-direction: reverse;
+  animation: out-btm 0.8s backwards;
+  animation-direction: reverse;
   animation-direction: reverse;
 }
 
 .nav-trigger.active i:nth-child(1) {
-  -webkit-animation: in-t 0.8s forwards;
+  animation: in-t 0.8s forwards;
   animation: in-t 0.8s forwards;
 }
 
 .nav-trigger.active i:nth-child(2) {
-  -webkit-animation: in-m 0.8s forwards;
+  animation: in-m 0.8s forwards;
   animation: in-m 0.8s forwards;
 }
 
 .nav-trigger.active i:nth-child(3) {
-  -webkit-animation: in-btm 0.8s forwards;
+  animation: in-btm 0.8s forwards;
   animation: in-btm 0.8s forwards;
 }
 
-@-webkit-keyframes in-m {
+@keyframes in-m {
   50% {
-      -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 }
 
 @keyframes in-m {
   50% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
-  100% {
-      transform: rotate(45deg);
-  }
-}
 
-@-webkit-keyframes out-m {
-  50% {
-      -webkit-transform: rotate(0deg);
-  }
   100% {
-      -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 }
 
 @keyframes out-m {
   50% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 }
 
-@-webkit-keyframes in-t {
-  0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
-  }
+@keyframes out-m {
   50% {
-      -webkit-transform: translateY(9px) rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(9px) rotate(135deg);
+    transform: rotate(45deg);
   }
 }
 
 @keyframes in-t {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
-@-webkit-keyframes out-t {
+@keyframes in-t {
   0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      -webkit-transform: translateY(9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
 @keyframes out-t {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
-@-webkit-keyframes in-btm {
+@keyframes out-t {
   0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      -webkit-transform: translateY(-9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(-9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
 @keyframes in-btm {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(-9px) rotate(0deg);
+    transform: translateY(-9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(-9px) rotate(135deg);
+    transform: translateY(-9px) rotate(135deg);
   }
 }
 
-@-webkit-keyframes out-btm {
+@keyframes in-btm {
   0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      -webkit-transform: translateY(-9px) rotate(0deg);
+    transform: translateY(-9px) rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(-9px) rotate(135deg);
+    transform: translateY(-9px) rotate(135deg);
   }
 }
 
 @keyframes out-btm {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(-9px) rotate(0deg);
+    transform: translateY(-9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(-9px) rotate(135deg);
+    transform: translateY(-9px) rotate(135deg);
+  }
+}
+
+@keyframes out-btm {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-9px) rotate(135deg);
   }
 }
 
@@ -456,17 +496,19 @@ h2 {
 }
 
 .my-h2 {
-text-align:center;
-font-size: 4rem;
+  text-align: center;
+  font-size: 4rem;
 }
+
 .my-p {
-text-align: justify;
-padding-left:15%;
-padding-right:15%;
-font-size: 20px;
+  text-align: justify;
+  padding-left: 15%;
+  padding-right: 15%;
+  font-size: 20px;
 }
-@media all and (max-width:700px){
-.my-p {
-  padding:2%;
-}
+
+@media all and (width <= 700px) {
+  .my-p {
+    padding: 2%;
+  }
 }
