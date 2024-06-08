@@ -40,11 +40,13 @@
 
   <body>
     <h2>Top Ranked</h2>
-    <div
-      class="top-cards"
-      style="display: flex; flex-direction: row; overflow: hidden"
-    >
-    </div>
+    <div class="recipe-container">
+      <button class="scroll-button left">&#60;</button>
+      <div class="top-cards" style="display: flex; flex-direction: row; overflow-x: auto; scroll-behavior: smooth;">
+          <!-- Recipe cards will be added here -->
+      </div>
+      <button class="scroll-button right">&#62;</button>
+  </div>
     <h2>Most Recent</h2>
     <div
       class="recent-cards"

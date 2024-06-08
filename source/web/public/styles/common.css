@@ -174,11 +174,38 @@ h2 {
   margin-right: 15px;
   padding: 1rem;
 }
+.recipe-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 .top-cards, .recent-cards {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
 }
+.scroll-button {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+.scroll-button.left {
+  left: 0;
+}
+.scroll-button.right {
+  right: 0;
+}
+.top-cards::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for WebKit browsers */
+}
+
+
 
 /* Rating star system */
 .stars {
@@ -208,7 +235,7 @@ h2 {
   transition: all 0.4s ease;
 }
 
-/* Media qurey section */
+/* Media query section */
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .container {

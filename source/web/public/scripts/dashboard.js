@@ -87,10 +87,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
+      topCardsContainer.appendChild(recipeCardElement);
+        
+      const scrollAmount = 800;
+    document.querySelector(".scroll-button.left").addEventListener("click", () => {
+      topCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
 
-      if (index < 4) {
-        topCardsContainer.appendChild(recipeCardElement);
-      }
+    document.querySelector(".scroll-button.right").addEventListener("click", () => {
+      topCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
     });
 
     console.log("Recipe cards added to the DOM"); // Log confirmation
