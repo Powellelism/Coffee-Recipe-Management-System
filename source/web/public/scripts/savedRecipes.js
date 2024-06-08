@@ -56,11 +56,12 @@ async function renderUserRecipes() {
 
         recipes.forEach((recipe) => {
             const recipeCardElement = new recipeCard();
+            recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+            recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
             recipeCardElement.recipeName = recipe.recipeName;
-            recipeCardElement.recipeid = recipe.recipeId;
-            recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Replace with actual image URL if available
             recipeCardElement.recipeRating = recipe.rating;
             recipeCardElement.recipe = recipe.instructions;
+            recipeCardElement.recipeid = recipe.recipeId;
             yourCardsContainer.appendChild(recipeCardElement);
         });
 

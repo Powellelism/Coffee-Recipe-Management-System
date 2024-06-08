@@ -437,7 +437,7 @@ exports.getUserRecipes = async (request, response) => {
     const formattedRecipes = userRecipes.map((userRecipe) => {
       const recipe = userRecipe.recipe;
       return {
-        recipeId: recipe.recipeId,
+        recipeId: recipe.id,
         recipeName: recipe.name,
         rating: recipe.rating,
         instructions: recipe.instructions,
