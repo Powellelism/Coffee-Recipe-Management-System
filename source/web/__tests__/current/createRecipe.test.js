@@ -116,7 +116,7 @@ describe("Test customize recipe page functionality", () => {
     await page.click("#submit-button");
     const expectedLocalStorage = {
       recipe_name: "Test Recipe",
-      size: "TALL",
+      size: "SMALL",
       drink_type: "COLD",
       ingredients: ["CREAMER", "Test Ingredient"],
       recipe: "Test Description",
