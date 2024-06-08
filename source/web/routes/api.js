@@ -54,7 +54,6 @@ router.post(
   "/post/generateRecipe",
   authMiddleware.authenticate,
   aiController.generateRecipe,
-
 );
 
 module.exports = router;

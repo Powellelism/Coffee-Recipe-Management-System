@@ -126,32 +126,32 @@ function restorePopulatedForm() {
 }
 
 /**
- * Generate a recipe and fill in the form when the user clicks "generate".
+ * Generate a recipe and when the user clicks "generate".
  * @param {event} event
  */
 async function callRoute(event) {
   
   event.preventDefault();
-  const userInput = window.prompt("Please enter your input:");
-  console.log("User input:", userInput);
+ let recipeName = document.getElementById("recipe-name");
 
-
-  // Disable field input requirements so user can generate without errors
-
-  let recipeName = document.getElementById("recipe-name");
-  let recipe = document.getElementById("recipe");
-
+  // If the user hasn't entered a recipe name, do not do anything
+  if (recipeName.value === "" || recipeName.value === "Recipe Name") {
+    window.confirm("Please enter a recipe title, so we know what to generate!");
+    console.log("Recipe name cannot be blank.");
+    return;
+  }
 
   // Define the data to be sent in the request body.
-  // TODO; Should the user be able to specify certain things, like give a title?
-
-  const url = '/api/post/generateRecipe';
   const requestBody = {
-    text: "Give 3 sentences about math",
+    text: "Create short recipe for drink named" + recipeName.value
+      + ". Pick a drink size: tall, grande, or venti;"
+      + " a type: hot, or cold; a list of ingredients and their measurements separated by a comma;"
+      + " a short recipe; a description of how to make the drink in paragraph form.",
     model: "@cf/meta/llama-3-8b-instruct",
   };
 
   // Create a mock request object
+  const url = '/api/post/generateRecipe';
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -166,37 +166,40 @@ async function callRoute(event) {
   }
 
   const responseData = await response.text();
-  console.log(responseData);
 
+  //const responseData = "Let's create a recipe for a refreshing Iced Latte!\n\nDrink Size: Venti\nDrink Type: Cold\n\nIngredients: 2% milk, 1 shot of espresso, 3 pumps of vanilla syrup, 3 pumps of caramel syrup, ice, and whipped cream\n\n**How to Make:**\n\nIn this recipe, we'll brew a shot of rich espresso and combine it with 2% milk, vanilla, and caramel syrup to create a sweet and creamy drink. To make this refreshing treat, start by brewing a shot of espresso into a cup. Add 3 pumps of vanilla syrup and 3 pumps of caramel syrup, stirring well to combine. Pour in 8 ounces of 2% milk, stirring gently to create a smooth and creamy blend. Fill a venti glass with ice and pour the iced latte over the ice. Top with whipped cream and a drizzle of caramel syrup, if desired. Stir gently and serve immediately. Enjoy your delicious and refreshing Iced Latte!";
 
   console.log('Response:', responseData);
+  fillFormWithGeneratedRecipe(responseData);
+}
 
-  /* try {
-    // Make a POST request to the text generation endpoint
-    const response = await fetch("/api/text-generate/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(requestData)
-    });
+/*
+ * Fills out the "create recipe" form using generated recipe.
+ */
+function fillFormWithGeneratedRecipe(responseData) {
+  const genSize = extractContent(/\*\*Drink Size:\*\* (.+?)\n/, responseData);
+  console.log('Size:', genSize);
+  const genType = extractContent(/\*\*Type:\*\* (.+?)\n/, responseData);
+  console.log('Type:', genType);
+  const genIngredients = extractContent(/\*\*Ingredients:\*\*(.+?)\n\n/, responseData)
+    .split(',');
+  console.log('Ingredients:', genIngredients);
+  const genRecipe = extractContent(/\*\*How to Make:\*\*\n\n(.+?)/, responseData);
+  console.log('Recipe:', genRecipe);
 
-    if (!response.ok) {
-      recipe.value = 'error';
-      throw new Error("Network response was not ok");
-    }
+  let size = document.getElementById(genSize.toLowerCase());
+  let type = document.getElementById(genType.toLowerCase());
 
-    const data = await response.json();
+  size.click();
+  type.click();
+  genIngredients.forEach(addIngredient);
+}
 
-    if (data.success) {
-      const generatedText = data.result.answer;
-
-    } else {
-      console.error("Error generating text: ", data.error);
-    }
-  } catch (error) {
-    console.error("Fetch error: ", error);
-  } */
-
-  
+/*
+ * Helper function to parse generated string.
+ */
+function extractContent(pattern, text) {
+  const regex = new RegExp(pattern, 's');
+  const match = text.match(regex);
+  return match ? match[1].trim() : null;
 }
