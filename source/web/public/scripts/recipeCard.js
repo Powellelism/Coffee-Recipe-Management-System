@@ -61,10 +61,16 @@ export default class recipeCard extends HTMLElement {
           index1 >= index2
             ? star.classList.add("active")
             : star.classList.remove("active");
+            const rating = this.calculateRating(stars);
+            console.log(rating);
         });
       });
     });
   }
+
+  calculateRating(stars) {
+    return Array.from(stars).filter(star => star.classList.contains("active")).length;
+}
 
   connectedCallback() {
     this.render();
