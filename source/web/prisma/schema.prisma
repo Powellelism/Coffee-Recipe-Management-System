@@ -41,19 +41,20 @@ model Food {
 }
 
 model Recipe {
-  id           Int          @id @default(autoincrement())
+  id           Int           @id @default(autoincrement())
   name         String
-  description  String       @default("")
+  description  String        @default("")
   foodId       Int
   size         SizeType
-  instructions String       @default("")
-  totalTime    Int          @default(0)
+  instructions String        @default("")
+  totalTime    Int           @default(0)
   image        Image[]
-  rating       Int          @default(0)
-  food         Food         @relation(fields: [foodId], references: [id])
+  rating       Int           @default(0)
+  food         Food          @relation(fields: [foodId], references: [id])
   reviews      Review[]
-  ingredients  Ingredient[] @relation("IngredientToRecipe")
-  userRecipes userRecipes[]
+  ingredients  Ingredient[]  @relation("IngredientToRecipe")
+  userRecipes  userRecipes[]
+  Rating       Rating[]
 
   @@schema("public")
 }
@@ -114,14 +115,14 @@ model Image {
 }
 
 model userRecipes {
-  userId    String  @db.Uuid
-  recipeId  Int
+  userId   String @db.Uuid
+  recipeId Int
 
-  user      users   @relation(fields: [userId], references: [id])
-  recipe    Recipe  @relation(fields: [recipeId], references: [id])
+  user   users  @relation(fields: [userId], references: [id])
+  recipe Recipe @relation(fields: [recipeId], references: [id])
 
-  @@schema("public")
   @@unique([userId, recipeId])
+  @@schema("public")
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -411,7 +412,7 @@ model users {
   mfa_factors                 mfa_factors[]
   one_time_tokens             one_time_tokens[]
   sessions                    sessions[]
-  userRecipes userRecipes[]
+  userRecipes                 userRecipes[]
 
   @@index([instance_id])
   @@index([is_anonymous])

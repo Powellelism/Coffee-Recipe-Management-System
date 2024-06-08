@@ -18,7 +18,7 @@ function init() {
     input.addEventListener("input", removeInput);
   });
   form.addEventListener("submit", saveFormDataToLocalStorage);
-  generateButton.addEventListener("click", generateRecipe);
+  generateButton.addEventListener("click", callRoute);
 
   // for: if user clicks back button, the form is still populated
   if (localStorage.getItem("newRecipe")) {
@@ -129,7 +129,7 @@ function restorePopulatedForm() {
  * Generate a recipe and fill in the form when the user clicks "generate".
  * @param {event} event
  */
-async function generateRecipe(event) {
+async function callRoute(event) {
   event.preventDefault();
 
   // Disable field input requirements so user can generate without errors
@@ -143,11 +143,10 @@ async function generateRecipe(event) {
   // Define the data to be sent in the request body.
   // TODO; Should the user be able to specify certain things, like give a title?
 
-  const url = 'https://ai.powellelism.site/api/text-generate';
+  const url = '/api/post/generateRecipe';
   const requestBody = {
     text: "Give 3 sentences about math",
     model: "@cf/meta/llama-3-8b-instruct",
-    key: "lrRJqZf7lCAZA7FExKd5L927bskzVfgE"
   };
 
   // Create a mock request object
@@ -158,7 +157,6 @@ async function generateRecipe(event) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(requestBody),
-    mode: 'no-cors' 
   });
 
   if (!response.ok) {
@@ -197,4 +195,6 @@ async function generateRecipe(event) {
   } catch (error) {
     console.error("Fetch error: ", error);
   } */
+
+  
 }

@@ -3,6 +3,8 @@ const router = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 const storeController = require("../controllers/storeController");
 const recipeController = require("../controllers/recipeController");
+const customizeRecipe = require("../controllers/aiController")
+
 
 router.get("/get/shops", authMiddleware.authenticate, storeController.getShops);
 
@@ -46,6 +48,13 @@ router.put(
   "/update/recipe/:id/rating",
   authMiddleware.authenticate,
   recipeController.updateRecipeRating,
+);
+
+router.post(
+  "/post/generateRecipe",
+  authMiddleware.authenticate,
+  customizeRecipe.generateRecipe,
+
 );
 
 module.exports = router;
