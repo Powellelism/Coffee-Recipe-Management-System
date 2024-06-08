@@ -64,8 +64,20 @@ export default class recipeCard extends HTMLElement {
             const rating = this.calculateRating(stars);
             console.log(rating);
         });
+
+        const rating = this.calculateRating(stars);
+        // get the recipe id
+        const recipeid = this.getAttribute("data-id");
+        console.log(recipeid);
+        fetch("/api/update/recipe/" + recipeid+"/rating", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ newRating: rating }),
       });
     });
+  });
   }
 
   calculateRating(stars) {
