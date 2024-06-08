@@ -130,15 +130,17 @@ function restorePopulatedForm() {
  * @param {event} event
  */
 async function callRoute(event) {
+  
   event.preventDefault();
+  const userInput = window.prompt("Please enter your input:");
+  console.log("User input:", userInput);
+
 
   // Disable field input requirements so user can generate without errors
-  const requiredFields = document.querySelectorAll("[required]");
-  requiredFields.forEach(field => field.removeAttribute("required"));
 
   let recipeName = document.getElementById("recipe-name");
   let recipe = document.getElementById("recipe");
-  recipeName.value = 'generated';
+
 
   // Define the data to be sent in the request body.
   // TODO; Should the user be able to specify certain things, like give a title?
