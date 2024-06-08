@@ -149,7 +149,7 @@ document.querySelector(".navTrigger").addEventListener("click", function () {
   this.classList.toggle("active");
   console.log("Clicked menu");
   var mainListDiv = document.getElementById("mainListDiv");
-  mainListDiv.classList.toggle("show_list");
+  mainListDiv.classList.toggle("show-list");
   mainListDiv.style.display = "block";
 });
 
