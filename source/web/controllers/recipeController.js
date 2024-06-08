@@ -146,25 +146,27 @@ exports.addRecipe = async (request, response) => {
   try {
     const {
       name,
-      description,
-      foodId,
       ingredients,
       size,
-      instructions,
-      totalTime,
-      userId, //This is new if frontend needs to be updated
+      instructions
     } = request.body;
 
+    const userId = request.user.id;
     // Create the recipe
+    const user = await prisma.users.findUnique({
+      where: { id: userId },
+      select: { email: true },
+    });
+
+    if (!user) {
+      return response.status(404).json({ error: "User not found" });
+    }
+
+    const userEmail = user.email;
+
     const recipe = await prisma.recipe.create({
       data: {
         name,
-        description,
-        food: {
-          connect: {
-            id: foodId,
-          },
-        },
         ingredients: {
           connectOrCreate: ingredients.map((ingredient) => ({
             where: { name: ingredient },
@@ -173,17 +175,21 @@ exports.addRecipe = async (request, response) => {
         },
         size,
         instructions,
-        totalTime,
+        userRecipes: {
+          create: {
+            userId: userId,
+          }
+        }
       },
     });
 
-    // Add the recipe to userRecipe table
-    await prisma.userRecipe.create({
-      data: {
-        userId,
-        recipeId: recipe.id,
-      },
-    });
+    // // Add the recipe to userRecipe table
+    // await prisma.userRecipe.create({
+    //   data: {
+    //     userId,
+    //     recipeId: recipe.id,
+    //   },
+    // });
 
     response.status(201).json(recipe);
   } catch (error) {
