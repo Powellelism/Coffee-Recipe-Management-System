@@ -131,12 +131,12 @@ function restorePopulatedForm() {
  */
 async function generateRecipe(event) {
   event.preventDefault();
+  const url = '/api/post/generateRecipe';
   let recipeName = document.getElementById("recipe-name");
 
   // If the user hasn't entered a recipe name, do not do anything
   if (recipeName.value === "" || recipeName.value === "Recipe Name") {
     window.confirm("Please enter a recipe title, so we know what to generate!");
-    console.log("Recipe name cannot be blank.");
     return;
   }
 
@@ -149,103 +149,83 @@ async function generateRecipe(event) {
   updateIngredients();
 
   // Makes 3 requests to the AI
+  const size = await makeRequest("Size", recipeName.value);
+  const type = await makeRequest("Type", recipeName.value);
+  const ingredients = await makeRequest("Ingredients", recipeName.value);
+  const recipe = await makeRequest("Recipe", recipeName.value, ingredients);
+
+  fillForm('select', size);
+  fillForm('select', type);
+  fillForm('list', ingredients);
+  fillForm('fill', recipe);
+}
+
+/**
+ * Makes POST request to LLM.
+ * @param {string} c: category
+ * @param {string} recName: recipe name
+ * @param {string} ing: ingredients
+ */
+async function makeRequest(c, recName, ing) {
   const url = '/api/post/generateRecipe';
-  // First request to generate a size, ie Tall, Grande, Venti
-  const requestSize = {
-    recipeName: recipeName.value,
-    category: "Size"
-  }; 
-  // Second request to generate type, ie Hot or Ice
-  const requestType = {
-    recipeName: recipeName.value,
-    category: "Type"
-  }; 
-  // Third request to generate a list of ingredients
-  const requestIngredients = {
-    recipeName: recipeName.value,
-    category: "Ingredients"
-  }; 
+  const requestT = {
+    recipeName: recName,
+    category: c,
+    ingredients: ing
+  };
 
-  // Fetching the requests
-  const responseSize = await fetch(url, {
+  const responseT = await fetch(url, {
     method: 'POST',
     headers: {
       'accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(requestSize),
-  });
-  const responseType = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestType),
-  });
-  const responseIngredients = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestIngredients),
+    body: JSON.stringify(requestT),
   });
 
-  // Ensure that all 3 responses are clean
-  if (!responseType.ok || !responseSize.ok || !responseIngredients.ok) {
-    throw new Error('Failed to fetch data');
-  }
+  // Ensure that the response is clean
+  if (!responseT.ok) throw new Error('Failed to fetch data for ' + c + ' category');
 
-  // Transform the responses to text
-  const responseSizeText = await responseSize.text();
-  const responseTypeText = await responseType.text();
-  const responseIngredientsText = await responseIngredients.text();
+  // Slice response, convert to desired format
+  const resText = await responseT.text();
+  return resText.split(":")[1].slice(1, -2).toLowerCase();
+}
 
-  // Truncates the quotation marks and brackets
-  const responseSizeTextFinal = responseSizeText.split(":")[1].slice(1, -2);
-  const responseTypeTextFinal = responseTypeText.split(":")[1].slice(1, -2);
-  const responseIngredientsTextFinal = responseIngredientsText.split(":")[1].slice(1, -2);
+/**
+ * Fills out the form based on generated data.
+ * @param {string} category: one of 'select', 'list', or 'fill'
+ * @param {event} id: id of element to be filled out. Ex: grande, hot, recipe
+ */
+function fillForm(category, id) {
+  switch (category) {
+    case 'select':
+      let button = document.getElementById(id);
+      button.click();
 
-  const requestRecipe = {
-    recipeName: recipeName.value,
-    category: "Recipe",
-    ingredients: responseIngredientsTextFinal
-  }; 
-  const responseRecipe = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestRecipe),
-  });
+      break;
 
-  const responseRecipeText = await responseRecipe.text();
-  const responseRecipeTextFinal = responseRecipeText.split(":")[1].slice(1, -2);
+    case 'list':
+      // Turn the ingredient string into an array of ingreident strings
+      const ingredientsArr = id.split(",");
+      const adder = document.getElementById("add-ingredient");
 
-  // Display the generated size and type
-  let size = document.getElementById(responseSizeTextFinal.toLowerCase());
-  let type = document.getElementById(responseTypeTextFinal.toLowerCase());
-  size.click();
-  type.click();
+      // Iterate over the array of ingredients, add them one by one
+      for (let i = 0; i < ingredientsArr.length - 1; i++) {
+        adder.click();
+      }
 
-  // Turn the ingredient string into an array of ingreident strings
-  const responseIngredientsArr = responseIngredientsTextFinal.split(",");
-  const addIngredientButton = document.getElementById("add-ingredient");
-  const container = document.getElementById("ingredients-list");
+      let counter = 0;
+      let allIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
+      allIngredients.forEach((input) => {
+        input.value = ingredientsArr[counter];
+        counter++;
+      });
 
-  // Iterate over the array of ingredients, add them one by one
-  for (let i = 0; i < responseIngredientsArr.length - 1; i++) {
-    addIngredientButton.click();
-  }
-  let counter = 0;
-  let allIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
-  allIngredients.forEach((input) => {
-    input.value = responseIngredientsArr[counter];
-    counter++;
-  });
-
-  const textarea = document.getElementById('recipe');
-  textarea.value = responseRecipeTextFinal;
+      break;
+    
+    case 'fill':
+      const textarea = document.getElementById('recipe');
+      textarea.value = id;
+      break;
+  };
 }
