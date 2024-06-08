@@ -1,5 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const NodeCache = require("node-cache");
+const cache = new NodeCache({ stdTTL: 900 });
 
 /**
  * This function retrieves the recipes based on descending rating.
@@ -10,6 +12,12 @@ const prisma = new PrismaClient();
  */
 exports.getRatingRecipes = async (request, response) => {
   try {
+    const cacheKey = 'ratingRecipes';
+    const cachedRecipes = cache.get(cacheKey);
+
+    if (cachedRecipes) {
+      return response.json(cachedRecipes);
+    }
     const recipes = await prisma.recipe.findMany({
       include: {
         food: {
@@ -97,9 +105,9 @@ exports.getRatingRecipes = async (request, response) => {
         //totalTime: recipe.totalTime,
         userEmail,
       }
-      
-    });
 
+    });
+    cache.set(cacheKey, formattedRecipes);
     response.json(formattedRecipes);
   } catch (error) {
     console.error("Error retrieving recipes:", error);
@@ -116,6 +124,12 @@ exports.getRatingRecipes = async (request, response) => {
  */
  exports.getRecentRecipes = async (request, response) => {
   try {
+    const cacheKey = 'recentRecipes';
+    const cachedRecipes = cache.get(cacheKey);
+
+    if (cachedRecipes) {
+      return response.json(cachedRecipes);
+    }
     const recipes = await prisma.recipe.findMany({
       include: {
         food: {
@@ -203,7 +217,7 @@ exports.getRatingRecipes = async (request, response) => {
         //totalTime: recipe.totalTime,
         userEmail,
       }
-      
+
     });
 
     response.json(formattedRecipes);
@@ -265,7 +279,7 @@ exports.getRecentRecipes = async (request, response) => {
       instructions: recipe.instructions,
       totalTime: recipe.totalTime,
     }));
-
+    cache.set(cacheKey, formattedRecipes);
     response.json(formattedRecipes);
   } catch (error) {
     console.error("Error retrieving recipes:", error);
@@ -326,7 +340,7 @@ exports.addRecipe = async (request, response) => {
     //     recipeId: recipe.id,
     //   },
     // });
-
+    cache.flushAll();
     response.status(201).json(recipe);
   } catch (error) {
     console.error("Error adding recipe:", error);
@@ -354,7 +368,7 @@ exports.updateRecipe = async (request, response) => {
       },
       data: newInfo,
     });
-
+    cache.flushAll();
     response.status(201).json(recipe);
   } catch (error) {
     console.error("Error update recipe:", error);
@@ -372,13 +386,20 @@ exports.getSingleRecipe = async (request, response) => {
   try {
     const id = parseInt(request.params.id);
 
+    const cacheKey = 'recipe_' + id + '_' + 'single';
+    const cachedRecipes = cache.get(cacheKey);
+
+    if (cachedRecipes) {
+      return response.json(cachedRecipes);
+    }
+
     // Get one recipe
     const recipe = await prisma.recipe.findUnique({
       where: {
         id: id,
       },
     });
-
+    cache.set(cacheKey, recipe);
     response.status(201).json(recipe);
   } catch (error) {
     console.error("Error getting recipe:", error);
@@ -395,6 +416,12 @@ exports.getSingleRecipe = async (request, response) => {
 exports.getRatingForRecipe = async (request, response) => {
   try {
     const id = parseInt(request.params.id);
+    const cacheKey = 'recipe_' + id + '_' + 'rating';
+    const cachedRecipes = cache.get(cacheKey);
+
+    if (cachedRecipes) {
+      return response.json(cachedRecipes);
+    }
 
     // Get recipe
     const recipe = await prisma.recipe.findUnique({
@@ -402,7 +429,7 @@ exports.getRatingForRecipe = async (request, response) => {
         id: id,
       },
     });
-
+    cache.set(cacheKey, recipe.rating);
     // Return the rating
     response.status(201).json(recipe.rating);
   } catch (error) {
@@ -432,7 +459,7 @@ exports.updateRecipeRating = async (request, response) => {
         rating: newRating,
       },
     });
-
+    cache.flushAll();
     response.status(201).json(recipe.rating);
   } catch (error) {
     console.error("Error updating rating:", error);
