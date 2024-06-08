@@ -17,7 +17,7 @@ exports.generateRecipe = async (request, response) => {
             postData.text = "Pick one from {Hot or Cold}. Then respond with that only";
             break;
         case "Ingredients":
-            postData.text = "A list of " + recipeName + " ingredients separated by a comma. Respond with the ingredients only.";
+            postData.text = "A list of " + recipeName + " ingredients separated by a comma. Respond with the ingredients only, no more than 8 ingredients.";
             break;
     };
     const requestOptions = {

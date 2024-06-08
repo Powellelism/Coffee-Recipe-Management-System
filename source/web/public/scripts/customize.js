@@ -199,42 +199,27 @@ async function generateRecipe(event) {
   const responseTypeTextFinal = responseTypeText.split(":")[1].slice(1, -2);
   const responseIngredientsTextFinal = responseIngredientsText.split(":")[1].slice(1, -2);
 
-  // Turn the ingredient string into a list of ingreident strings
-  const responseIngredientsArr = responseIngredientsTextFinal.split(",");
-  console.log(responseIngredientsArr);
-
   // Display the generated size and type
   let size = document.getElementById(responseSizeTextFinal.toLowerCase());
   let type = document.getElementById(responseTypeTextFinal.toLowerCase());
   size.click();
   type.click();
 
+  // Turn the ingredient string into an array of ingreident strings
+  const responseIngredientsArr = responseIngredientsTextFinal.split(",");
+  const addIngredientButton = document.getElementById("add-ingredient");
+  const container = document.getElementById("ingredients-list");
 
-  //const responseData = "Let's create a recipe for a refreshing Iced Latte!\n\nDrink Size: Venti\nDrink Type: Cold\n\nIngredients: 2% milk, 1 shot of espresso, 3 pumps of vanilla syrup, 3 pumps of caramel syrup, ice, and whipped cream\n\n**How to Make:**\n\nIn this recipe, we'll brew a shot of rich espresso and combine it with 2% milk, vanilla, and caramel syrup to create a sweet and creamy drink. To make this refreshing treat, start by brewing a shot of espresso into a cup. Add 3 pumps of vanilla syrup and 3 pumps of caramel syrup, stirring well to combine. Pour in 8 ounces of 2% milk, stirring gently to create a smooth and creamy blend. Fill a venti glass with ice and pour the iced latte over the ice. Top with whipped cream and a drizzle of caramel syrup, if desired. Stir gently and serve immediately. Enjoy your delicious and refreshing Iced Latte!";
-
-  //fillFormWithGeneratedRecipe(responseData);
-}
-
-/*
- * Fills out the "create recipe" form using generated recipe.
- */
-function fillFormWithGeneratedRecipe(responseData) {
-  const genSize = extractContent(/\*\*Drink Size:\*\* (.+?)\n/, responseData);
-  console.log('Size:', genSize);
-  const genType = extractContent(/\*\*Type:\*\* (.+?)\n/, responseData);
-  console.log('Type:', genType);
-  const genIngredients = extractContent(/\*\*Ingredients:\*\*(.+?)\n\n/, responseData)
-    .split(',');
-  console.log('Ingredients:', genIngredients);
-  const genRecipe = extractContent(/\*\*How to Make:\*\*\n\n(.+?)/, responseData);
-  console.log('Recipe:', genRecipe);
-
-  let size = document.getElementById(genSize.toLowerCase());
-  let type = document.getElementById(genType.toLowerCase());
-
-  size.click();
-  type.click();
-  genIngredients.forEach(addIngredient);
+  // Iterate over the array of ingredients, add them one by one
+  for (let i = 0; i < responseIngredientsArr.length - 1; i++) {
+    addIngredientButton.click();
+  }
+  let counter = 0;
+  let allIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
+  allIngredients.forEach((input) => {
+    input.value = responseIngredientsArr[counter];
+    counter++;
+  });
 }
 
 /*
