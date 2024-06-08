@@ -1,5 +1,16 @@
 window.addEventListener("DOMContentLoaded", init);
 
+const sizeToDB = {
+  "TALL": "SMALL",
+  "GRANDE": "MEDIUM",
+  "VENTI": "LARGE",
+}
+
+const DBtoSize = {
+  "SMALL": "tall",
+  "MEDIUM": "grande",
+  "LARGE": "venti",
+}
 /**
  * Initialize the customize page's event listeners.
  */
@@ -75,7 +86,7 @@ function saveFormDataToLocalStorage(event) {
 
   const formData = {
     recipe_name: document.getElementById("recipe-name").value,
-    size: document.querySelector('input[name="size"]:checked')?.value,
+    size: sizeToDB[document.querySelector('input[name="size"]:checked')?.value],
     drink_type: document.querySelector('input[name="drink-type"]:checked')
       ?.value,
     ingredients: ingredients,
@@ -96,7 +107,7 @@ function restorePopulatedForm() {
     recipeName.value = formData.recipe_name;
 
     if (formData.size) {
-      let size = document.getElementById(formData.size.toLowerCase());
+      let size = document.getElementById(DBtoSize[formData.size]);
       size.checked = true;
     }
 

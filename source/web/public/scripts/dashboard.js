@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", init);
-
+import recipeCard from './recipeCard.js';
 /**
  * read data of coffee shops and add events for buttons on home page
  */
@@ -18,7 +18,7 @@ async function init() {
   let savedButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
   savedButtonEl.addEventListener("click", () => {
-    window.location = "/recipe/saved";
+    window.location = "/recipe/foryou";
   });
   let aboutButtonEl = document.querySelectorAll("button")[2];
   //add click event to the button for view the saved recipes
@@ -55,11 +55,101 @@ async function getShops() {
   }
 }
 
-document.querySelector(".navTrigger").addEventListener("click", function () {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Your existing code here
+  try {
+    const response1 = await fetch("api/get/ratingrecipes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response1.ok) {
+      throw new Error("Failed to fetch recipes");
+    }
+
+    const response2 = await fetch("api/get/recentrecipes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response2.ok) {
+      throw new Error("Failed to fetch recipes");
+    }
+
+    const recipes1 = await response1.json();
+    const recipes2 = await response2.json();
+    console.log("Fetched recipes:", recipes1); // Log fetched data for debugging
+    console.log("Fetched recipes:", recipes2); 
+
+    const topCardsContainer = document.querySelector(".top-cards");
+    const recentCardsContainer = document.querySelector(".recent-cards");
+
+    // Clear any existing content in the containers
+    topCardsContainer.innerHTML = "";
+    recentCardsContainer.innerHTML = "";
+
+
+
+    // Populate the top-ranked recipes
+    recipes1.forEach((recipe, index) => {
+      const recipeCardElement = new recipeCard();
+      recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+      recipeCardElement.recipeid = recipe.recipeId;
+      recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeName = recipe.recipeName;
+      recipeCardElement.recipeRating = recipe.rating;
+      recipeCardElement.recipe = recipe.instructions;
+      topCardsContainer.appendChild(recipeCardElement);
+  
+      const scrollAmount = 800;
+    document.querySelector(".scroll-button1.left").addEventListener("click", () => {
+      topCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    document.querySelector(".scroll-button1.right").addEventListener("click", () => {
+      topCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+    });
+
+    // Populate the recent recipes
+    recipes2.forEach((recipe, index) => {
+      const recipeCardElement = new recipeCard();
+      recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+      recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeName = recipe.recipeName;
+      recipeCardElement.recipeRating = recipe.rating;
+      recipeCardElement.recipe = recipe.instructions;
+      recipeCardElement.recipeid = recipe.recipeId;
+      console.log(recipeCardElement.userName);
+      recentCardsContainer.appendChild(recipeCardElement);
+  
+      const scrollAmount = 800;
+    document.querySelector(".scroll-button2.left").addEventListener("click", () => {
+      recentCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    document.querySelector(".scroll-button2.right").addEventListener("click", () => {
+      recentCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+    });
+
+    console.log("Recipe cards added to the DOM"); // Log confirmation
+  } catch (error) {
+    console.error("Error loading recipes:", error);
+  }
+
+});
+
+
+document.querySelector(".nav-trigger").addEventListener("click", function () {
   this.classList.toggle("active");
   console.log("Clicked menu");
   var mainListDiv = document.getElementById("mainListDiv");
-  mainListDiv.classList.toggle("show_list");
+  mainListDiv.classList.toggle("show-list");
   mainListDiv.style.display = "block";
 });
 
