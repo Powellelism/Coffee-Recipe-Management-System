@@ -115,13 +115,14 @@ model Image {
 }
 
 model userRecipes {
+  id       Int    @id @default(autoincrement())
   userId   String @db.Uuid
   recipeId Int
 
   user   users  @relation(fields: [userId], references: [id])
   recipe Recipe @relation(fields: [recipeId], references: [id])
 
-  @@unique([userId, recipeId])
+  @@unique([id])
   @@schema("public")
 }
 
