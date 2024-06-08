@@ -53,11 +53,11 @@ exports.generateImage = async (request, response) => {
 
     try {
         const postData = {
-            text: "A(n) " + recipeName + " drink",
+            image: "A(n) " + recipeName + " drink on a boat",
             model: "@cf/lykon/dreamshaper-8-lcm",
             key: process.env.API_KEY
         };
-        console.log(postData.text);
+        console.log(postData.image);
 
         const requestOptions = {
             method: 'POST',
@@ -65,8 +65,8 @@ exports.generateImage = async (request, response) => {
                 'Content-Type': 'application/json'
             }
         };
-        const responseA = await axios.post(process.env.API_IMGGEN_URL, postData, requestOptions);
-        response.status(200).json(responseA.data);
+        const responseB = await axios.post(process.env.API_IMGGEN_URL, postData, requestOptions);
+        response.status(200).json(responseB.data);
     } catch (error) {
         console.error("Image generation error: ", error);
     }
