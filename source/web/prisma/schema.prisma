@@ -44,7 +44,7 @@ model Recipe {
   id           Int          @id @default(autoincrement())
   name         String
   description  String       @default("")
-  foodId       Int
+  foodId       Int?
   size         SizeType
   instructions String       @default("")
   totalTime    Int          @default(0)
