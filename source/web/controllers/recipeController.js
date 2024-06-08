@@ -114,6 +114,105 @@ exports.getRatingRecipes = async (request, response) => {
  * Recipe is in json file including name, description, food, ingredients, size, rating, reviews, instructions, totalTime)
  * @returns {Promise<void>}
  */
+ exports.getRecentRecipes = async (request, response) => {
+  try {
+    const recipes = await prisma.recipe.findMany({
+      include: {
+        food: {
+          select: {
+            name: true,
+            description: true,
+            price: true,
+            store: {
+              select: {
+                name: true,
+              },
+            },
+            type: true,
+            size: true,
+          },
+        },
+        ingredients: {
+          select: {
+            name: true,
+          },
+        },
+        reviews: {
+          select: {
+            content: true,
+          },
+        },
+      },
+      orderBy: {
+        id: "desc",
+      },
+    });
+    const recipeIds = recipes.map((recipe) => recipe.id);
+    const userRecipes = await prisma.userRecipes.findMany({
+      where: {
+        recipeId: {
+          in: recipeIds,
+        },
+      },
+      select: {
+        recipeId: true,
+        userId: true,
+      },
+    });
+
+    const userIds = userRecipes.map((userRecipe) => userRecipe.userId);
+    const users = await prisma.users.findMany({
+      where: {
+        id: {
+          in: userIds,
+        },
+      },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
+
+    const userMap = users.reduce((acc, user) => {
+      acc[user.id] = user.email;
+      return acc;
+    }, {});
+
+
+    const formattedRecipes = recipes.map((recipe) => {
+      const userRecipe = userRecipes.find((ur) => ur.recipeId === recipe.id);
+      const userEmail = userRecipe ? userMap[userRecipe.userId] : null;
+
+      return{
+        recipeId: recipe.id,
+        recipeName: recipe.name,
+        //description: recipe.description,
+        // food: {
+        //   name: recipe.food.name,
+        //   description: recipe.food.description,
+        //   price: recipe.food.price,
+        //   store: recipe.food.store.name,
+        //   type: recipe.food.type,
+        //   size: recipe.food.size,
+        // },
+        ingredients: recipe.ingredients.map((ingredient) => ingredient.name),
+        size: recipe.size,
+        rating: recipe.rating,
+        reviews: recipe.reviews.map((review) => review.content),
+        instructions: recipe.instructions,
+        //totalTime: recipe.totalTime,
+        userEmail,
+      }
+      
+    });
+
+    response.json(formattedRecipes);
+  } catch (error) {
+    console.error("Error retrieving recipes:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
+/*
 exports.getRecentRecipes = async (request, response) => {
   try {
     const recipes = await prisma.recipe.findMany({
@@ -173,7 +272,7 @@ exports.getRecentRecipes = async (request, response) => {
     response.status(500).json({ error: "Internal Server Error" });
   }
 };
-
+*/
 /**
  * This function adds a new recipe.
  * @param request JSON body of a recipe including

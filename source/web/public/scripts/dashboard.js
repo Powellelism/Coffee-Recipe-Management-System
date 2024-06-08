@@ -58,19 +58,32 @@ async function getShops() {
 document.addEventListener("DOMContentLoaded", async () => {
   // Your existing code here
   try {
-    const response = await fetch("api/get/ratingrecipes", {
+    const response1 = await fetch("api/get/ratingrecipes", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    if (!response.ok) {
+    if (!response1.ok) {
       throw new Error("Failed to fetch recipes");
     }
 
-    const recipes = await response.json();
-    console.log("Fetched recipes:", recipes); // Log fetched data for debugging
+    const response2 = await fetch("api/get/recentrecipes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response2.ok) {
+      throw new Error("Failed to fetch recipes");
+    }
+
+    const recipes1 = await response1.json();
+    const recipes2 = await response2.json();
+    console.log("Fetched recipes:", recipes1); // Log fetched data for debugging
+    console.log("Fetched recipes:", recipes2); 
 
     const topCardsContainer = document.querySelector(".top-cards");
     const recentCardsContainer = document.querySelector(".recent-cards");
@@ -82,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     // Populate the top-ranked recipes
-    recipes.forEach((recipe, index) => {
+    recipes1.forEach((recipe, index) => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
       recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
@@ -90,16 +103,35 @@ document.addEventListener("DOMContentLoaded", async () => {
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
       topCardsContainer.appendChild(recipeCardElement);
-
-      
-        
+  
       const scrollAmount = 800;
-    document.querySelector(".scroll-button.left").addEventListener("click", () => {
+    document.querySelector(".scroll-button1.left").addEventListener("click", () => {
       topCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     });
 
-    document.querySelector(".scroll-button.right").addEventListener("click", () => {
+    document.querySelector(".scroll-button1.right").addEventListener("click", () => {
       topCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+    });
+
+    // Populate the recent recipes
+    recipes2.forEach((recipe, index) => {
+      const recipeCardElement = new recipeCard();
+      recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+      recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeName = recipe.recipeName;
+      recipeCardElement.recipeRating = recipe.rating;
+      recipeCardElement.recipe = recipe.instructions;
+      console.log(recipeCardElement.userName);
+      recentCardsContainer.appendChild(recipeCardElement);
+  
+      const scrollAmount = 800;
+    document.querySelector(".scroll-button2.left").addEventListener("click", () => {
+      recentCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    document.querySelector(".scroll-button2.right").addEventListener("click", () => {
+      recentCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
     });
     });
 
@@ -107,6 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error loading recipes:", error);
   }
+
 });
 
 

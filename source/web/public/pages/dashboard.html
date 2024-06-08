@@ -40,24 +40,22 @@
 
   <body>
     <h2>Top Ranked</h2>
-    <div class="recipe-container">
-      <button class="scroll-button left">&#60;</button>
+    <div class="recipe-container" style="position: relative;">
+      <button class="scroll-button scroll-button1 left">&#60;</button>
       <div class="top-cards" style="display: flex; flex-direction: row; overflow-x: auto; scroll-behavior: smooth;">
           <!-- Recipe cards will be added here -->
       </div>
-      <button class="scroll-button right">&#62;</button>
-  </div>
+      <button class="scroll-button scroll-button1 right">&#62;</button>
+    </div>
     <h2>Most Recent</h2>
-    <div
-      class="recent-cards"
-      style="display: flex; flex-direction: row; overflow: hidden"
-    >
-      <recipe-card></recipe-card>
-      <recipe-card></recipe-card>
-      <recipe-card></recipe-card>
-      <recipe-card></recipe-card>
+    <div class="recipe-container" style="position: relative;">
+      <button class="scroll-button scroll-button2 left">&#60;</button>
+      <div class="recent-cards" style="display: flex; flex-direction: row; overflow-x: auto; scroll-behavior: smooth;">
+          <!-- Recipe cards will be added here -->
+      </div>
+      <button class="scroll-button scroll-button2 right">&#62;</button>
     </div>
     <script src="/scripts/dashboard.js" type="module"></script>
     <script src="/scripts/recipeCard.js" type="module"></script>
-  </body>
+</body>
 </html>
