@@ -61,11 +61,12 @@ async function sendRecipeToDataBase(event) {
   event.preventDefault();
 
   const recipeData = JSON.parse(localStorage.getItem("newRecipe"));
+  console.log(recipeData);
   let newBody = {
-    "name": recipeData.recipe_name,
-    "instructions": recipeData.recipe,
-    "ingredients": recipeData.ingredients,
-    "size": recipeData.size,
+    name: recipeData.recipe_name,
+    instructions: recipeData.recipe,
+    ingredients: recipeData.ingredients,
+    size: recipeData.size,
   };
   const response = await fetch('/api/post/recipe', {
     method: 'POST',

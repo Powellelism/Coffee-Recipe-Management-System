@@ -45,14 +45,14 @@ exports.getRatingRecipes = async (request, response) => {
     const formattedRecipes = recipes.map((recipe) => ({
       recipeName: recipe.name,
       description: recipe.description,
-      food: {
-        name: recipe.food.name,
-        description: recipe.food.description,
-        price: recipe.food.price,
-        store: recipe.food.store.name,
-        type: recipe.food.type,
-        size: recipe.food.size,
-      },
+      // food: {
+      //   name: recipe.food.name,
+      //   description: recipe.food.description,
+      //   price: recipe.food.price,
+      //   store: recipe.food.store.name,
+      //   type: recipe.food.type,
+      //   size: recipe.food.size,
+      // },
       ingredients: recipe.ingredients.map((ingredient) => ingredient.name),
       size: recipe.size,
       rating: recipe.rating,
@@ -150,7 +150,7 @@ exports.addRecipe = async (request, response) => {
       size,
       instructions
     } = request.body;
-
+    console.log(request.body);
     const userId = request.user.id;
     // Create the recipe
     const user = await prisma.users.findUnique({
@@ -161,8 +161,6 @@ exports.addRecipe = async (request, response) => {
     if (!user) {
       return response.status(404).json({ error: "User not found" });
     }
-
-    const userEmail = user.email;
 
     const recipe = await prisma.recipe.create({
       data: {
@@ -183,7 +181,7 @@ exports.addRecipe = async (request, response) => {
       },
     });
 
-    // // Add the recipe to userRecipe table
+    // Add the recipe to userRecipe table
     // await prisma.userRecipe.create({
     //   data: {
     //     userId,
