@@ -423,6 +423,7 @@ exports.getUserRecipes = async (request, response) => {
     }
 
     const userId = user.id;
+    console.log(userId);
     
     const userRecipes = await prisma.userRecipes.findMany({
       where: {
@@ -436,12 +437,9 @@ exports.getUserRecipes = async (request, response) => {
     const formattedRecipes = userRecipes.map((userRecipe) => {
       const recipe = userRecipe.recipe;
       return {
-        recipeId: recipe.id,
+        recipeId: recipe.recipeId,
         recipeName: recipe.name,
-        ingredients: recipe.ingredients.map((ingredient) => ingredient.name),
-        size: recipe.size,
         rating: recipe.rating,
-        reviews: recipe.reviews.map((review) => review.content),
         instructions: recipe.instructions,
       };
     });

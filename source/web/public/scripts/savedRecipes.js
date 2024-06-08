@@ -57,10 +57,11 @@ async function renderUserRecipes() {
         recipes.forEach((recipe) => {
             const recipeCardElement = new recipeCard();
             recipeCardElement.recipeName = recipe.recipeName;
+            recipeCardElement.recipeid = recipe.recipeId;
             recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Replace with actual image URL if available
             recipeCardElement.recipeRating = recipe.rating;
             recipeCardElement.recipe = recipe.instructions;
-            savedCardsContainer.appendChild(recipeCardElement);
+            yourCardsContainer.appendChild(recipeCardElement);
         });
 
         console.log("User recipes rendered successfully");
