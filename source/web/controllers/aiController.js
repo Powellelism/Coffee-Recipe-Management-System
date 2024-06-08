@@ -11,10 +11,10 @@ exports.generateRecipe = async (request, response) => {
     };
     switch (category) {
         case "Size":
-            postData.text = "Pick one from {Tall or Grande or Venti}. Then respond with that only";
+            postData.text = "Pick one from {Tall or Grande or Venti} based on this drink " + recipeName + ". Then respond with that only";
             break;
         case "Type":
-            postData.text = "Pick one from {Hot or Cold}. Then respond with that only";
+            postData.text = "Pick one from {Hot or Cold} based on this drink " + recipeName + ". Then respond with that only";
             break;
         case "Ingredients":
             postData.text = "A list of " + recipeName + " ingredients separated by a comma. Respond with the ingredients only, no more than 8 ingredients.";

@@ -140,6 +140,14 @@ async function generateRecipe(event) {
     return;
   }
 
+  // Clean up the previous generated ingredients
+  let cleanIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
+  cleanIngredients.forEach((input) => {
+    input.value = "";
+    input.parentElement.removeChild(input);
+  });
+  updateIngredients();
+
   // Makes 3 requests to the AI
   const url = '/api/post/generateRecipe';
   // First request to generate a size, ie Tall, Grande, Venti
@@ -215,8 +223,6 @@ async function generateRecipe(event) {
 
   const responseRecipeText = await responseRecipe.text();
   const responseRecipeTextFinal = responseRecipeText.split(":")[1].slice(1, -2);
-  console.log("11: ", responseRecipeTextFinal)
-
 
   // Display the generated size and type
   let size = document.getElementById(responseSizeTextFinal.toLowerCase());
