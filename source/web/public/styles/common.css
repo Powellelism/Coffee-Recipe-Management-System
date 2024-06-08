@@ -32,6 +32,8 @@ header {
 .nav {
   position: fixed;
   width: 100%;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
 }
 .container {
   display: flex;
@@ -45,6 +47,14 @@ header {
   padding-left: 3rem;
 }
 
+.recipe-component a {
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;
+}
+
 .nav div.logo a {
   text-decoration: none;
   color: white;
@@ -54,12 +64,12 @@ header {
   margin-right: 15px;
 }
 
-.nav div.main_list {
+.nav div.main-list {
   height: 50px;
   width: 100%;
 }
 
-.nav div.main_list ul {
+.nav div.main-list ul {
   width: 100%;
   height: 50px;
   display: flex;
@@ -68,7 +78,7 @@ header {
   padding: 0;
 }
 
-.nav div.main_list ul li {
+.nav div.main-list ul li {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -130,6 +140,21 @@ header {
   border-radius: 8px;
 }
 
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.stars i {
+  color: #e6e6e6;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
 .recipe-component .stars {
   display: flex;
   justify-content: center;
@@ -158,13 +183,6 @@ header {
   margin-bottom: 10px;
 }
 
-.recipe-component a {
-  font-size: 20px;
-  color: #333;
-  text-decoration: none;
-  display: block;
-  margin: 10px 0;
-}
 /* Web Component flexbox */
 h2 {
   color: black;
@@ -181,31 +199,14 @@ h2 {
 }
 
 /* Rating star system */
-.stars {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
-.stars i {
-  color: #e6e6e6;
-  font-size: 20px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
+
 .stars i.active {
   color: #ff9c1a;
 }
 
 /* Home Section */
-.navTrigger {
+.nav-trigger {
   display: none;
-}
-
-.nav {
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
 }
 
 /* Media qurey section */
@@ -217,29 +218,29 @@ h2 {
 }
 
 @media screen and (max-width:768px) {
-  .navTrigger {
+  .nav-trigger {
       display: block;
   }
   .nav div.logo {
       margin-left: 15px;
   }
-  .nav div.main_list {
+  .nav div.main-list {
       width: 100%;
       height: 0;
       overflow: hidden;
   }
-  .nav div.show_list {
+  .nav div.show-list {
       height: 40vh;
   }
-  .nav div.show_list ul li{
+  .nav div.show-list ul li{
     padding-top: 2rem;
 }
-  .nav div.main_list ul {
+  .nav div.main-list ul {
       flex-direction: column;
       width: 100%;
       background-position: center top;
   }
-  .nav div.main_list ul li {
+  .nav div.main-list ul li {
       width: 100%;
       text-align: right;
   }
@@ -249,7 +250,7 @@ h2 {
       position: relative;
       width: 100%;
   }
-  .nav div.main_list ul li button {
+  .nav div.main-list ul li button {
 
       text-align: center;
       font-size: 1rem;
@@ -265,7 +266,7 @@ h2 {
 
 /* Animation */
 
-.navTrigger {
+.nav-trigger {
   cursor: pointer;
   width: 30px;
   height: 25px;
@@ -274,7 +275,7 @@ h2 {
   right: 30px;
 }
 
-.navTrigger i {
+.nav-trigger i {
   background-color: #fff;
   border-radius: 2px;
   content: '';
@@ -283,44 +284,44 @@ h2 {
   height: 4px;
 }
 
-.navTrigger i:nth-child(1) {
-  -webkit-animation: outT 0.8s backwards;
-  animation: outT 0.8s backwards;
+.nav-trigger i:nth-child(1) {
+  -webkit-animation: out-T 0.8s backwards;
+  animation: out-T 0.8s backwards;
   -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 
-.navTrigger i:nth-child(2) {
+.nav-trigger i:nth-child(2) {
   margin: 5px 0;
-  -webkit-animation: outM 0.8s backwards;
-  animation: outM 0.8s backwards;
+  -webkit-animation: out-M 0.8s backwards;
+  animation: out-M 0.8s backwards;
   -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 
-.navTrigger i:nth-child(3) {
-  -webkit-animation: outBtm 0.8s backwards;
-  animation: outBtm 0.8s backwards;
+.nav-trigger i:nth-child(3) {
+  -webkit-animation: out-Btm 0.8s backwards;
+  animation: out-Btm 0.8s backwards;
   -webkit-animation-direction: reverse;
   animation-direction: reverse;
 }
 
-.navTrigger.active i:nth-child(1) {
-  -webkit-animation: inT 0.8s forwards;
-  animation: inT 0.8s forwards;
+.nav-trigger.active i:nth-child(1) {
+  -webkit-animation: in-T 0.8s forwards;
+  animation: in-T 0.8s forwards;
 }
 
-.navTrigger.active i:nth-child(2) {
-  -webkit-animation: inM 0.8s forwards;
-  animation: inM 0.8s forwards;
+.nav-trigger.active i:nth-child(2) {
+  -webkit-animation: in-M 0.8s forwards;
+  animation: in-M 0.8s forwards;
 }
 
-.navTrigger.active i:nth-child(3) {
-  -webkit-animation: inBtm 0.8s forwards;
-  animation: inBtm 0.8s forwards;
+.nav-trigger.active i:nth-child(3) {
+  -webkit-animation: in-Btm 0.8s forwards;
+  animation: in-Btm 0.8s forwards;
 }
 
-@-webkit-keyframes inM {
+@-webkit-keyframes in-M {
   50% {
       -webkit-transform: rotate(0deg);
   }
@@ -329,7 +330,7 @@ h2 {
   }
 }
 
-@keyframes inM {
+@keyframes in-M {
   50% {
       transform: rotate(0deg);
   }
@@ -338,7 +339,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes outM {
+@-webkit-keyframes out-M {
   50% {
       -webkit-transform: rotate(0deg);
   }
@@ -347,7 +348,7 @@ h2 {
   }
 }
 
-@keyframes outM {
+@keyframes out-M {
   50% {
       transform: rotate(0deg);
   }
@@ -356,7 +357,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes inT {
+@-webkit-keyframes in-T {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -368,7 +369,7 @@ h2 {
   }
 }
 
-@keyframes inT {
+@keyframes in-T {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -380,7 +381,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes outT {
+@-webkit-keyframes out-T {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -392,7 +393,7 @@ h2 {
   }
 }
 
-@keyframes outT {
+@keyframes out-T {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -404,7 +405,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes inBtm {
+@-webkit-keyframes in-Btm {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -416,7 +417,7 @@ h2 {
   }
 }
 
-@keyframes inBtm {
+@keyframes in-Btm {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -428,7 +429,7 @@ h2 {
   }
 }
 
-@-webkit-keyframes outBtm {
+@-webkit-keyframes out-Btm {
   0% {
       -webkit-transform: translateY(0px) rotate(0deg);
   }
@@ -440,7 +441,7 @@ h2 {
   }
 }
 
-@keyframes outBtm {
+@keyframes out-Btm {
   0% {
       transform: translateY(0px) rotate(0deg);
   }
@@ -458,19 +459,18 @@ h2 {
   top: 0;
 }
 
-
-.myH2 {
+.my-H2 {
 text-align:center;
 font-size: 4rem;
 }
-.myP {
+.my-P {
 text-align: justify;
 padding-left:15%;
 padding-right:15%;
 font-size: 20px;
 }
 @media all and (max-width:700px){
-.myP {
+.my-P {
   padding:2%;
 }
 }
