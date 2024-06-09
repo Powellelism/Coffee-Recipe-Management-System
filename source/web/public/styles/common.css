@@ -37,6 +37,7 @@ header {
   position: fixed;
   width: 100%;
   transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
 }
 
 .container {
@@ -131,6 +132,10 @@ header {
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 20px;
+  position: relative;
+  width: 100%; 
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .recipe-component {
@@ -151,7 +156,18 @@ header {
   border-radius: 8px;
 }
 
+.recipe-component .stars {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
 .stars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -164,12 +180,6 @@ header {
   font-size: 20px;
   cursor: pointer;
   transition: color 0.2s ease;
-}
-
-.recipe-component .stars {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
 }
 
 .nav-trigger {
@@ -222,12 +232,6 @@ h2 {
   margin-right: 15px;
   padding: 1rem;
 }
-.recipe-container {
-  position: relative;
-  width: 100%; /* Ensure full width */
-  margin: 0 auto; /* Centering the container */
-  overflow: hidden; /* Ensures no overflow */
-}
 
 .top-cards, .recent-cards {
   display: flex;
@@ -265,31 +269,14 @@ h2 {
 
 
 /* Rating star system */
-.stars {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
-.stars i {
-  color: #e6e6e6;
-  font-size: 20px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
+
 .stars i.active {
   color: #ff9c1a;
 }
 
 /* Home Section */
-.navTrigger {
+.nav-trigger {
   display: none;
-}
-
-.nav {
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
 }
 
 /* Media query section */
