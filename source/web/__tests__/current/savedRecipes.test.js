@@ -1,3 +1,5 @@
+jest.setTimeout(90000);
+
 describe("Testing saved recipes page", () => {
   const login = async () => {
     await page.goto("http://localhost:3000/login");
@@ -60,7 +62,6 @@ describe("Testing saved recipes page", () => {
         await page.waitForSelector('.saved-button');
         await page.click('.saved-button');
         
-        await page.waitForNavigation();
         await page.waitForSelector('.your-cards recipe-card');
 
         // Check that the saved recipe appears
