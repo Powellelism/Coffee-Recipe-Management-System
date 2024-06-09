@@ -145,6 +145,7 @@ async function generateRecipe(event) {
   event.preventDefault();
   let recipeName = document.getElementById("recipe-name");
   let generateButton = document.getElementById("generate-button");
+  let reviewButton = document.getElementById("submit-button");
 
   // If the user hasn't entered a recipe name, do not do anything
   if (recipeName.value === "" || recipeName.value === "Recipe Name") {
@@ -154,6 +155,7 @@ async function generateRecipe(event) {
 
   // Disable the generate button while generating
   generateButton.disabled = true;
+  reviewButton.disabled = true;
   generateButton.textContent = "Magic brewing...";
 
   // Remove any previously existing ingredients
@@ -178,7 +180,8 @@ async function generateRecipe(event) {
 
   // Reset generate button, indicating generation complete
   generateButton.disabled = false;
-  generateButton.textContent = "Generate";
+  reviewButton.disabled = false;
+  generateButton.textContent = "Generate again pls <3";
 }
 
 /**

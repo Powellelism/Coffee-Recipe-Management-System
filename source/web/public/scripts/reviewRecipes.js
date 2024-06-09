@@ -11,7 +11,9 @@ const DBtoSize = {
  */
 function init() {
   let form = document.querySelector("form");
+  let regenButton = document.getElementById("generate-button");
   form.addEventListener("submit", sendRecipeToDataBase);
+  regenButton.addEventListener("click", regenerateImage);
 }
 
 /**
@@ -23,7 +25,12 @@ async function reviewRecipe() {
 
   // Disable save button while image generates
   const saveButton = document.getElementById("submit-button");
+  const img = document.getElementById("image");
+  const regenButton = document.getElementById("generate-button");
+
   saveButton.disabled = true;
+  img.style.display = 'none';
+  regenButton.disabled = true;
 
   if (formData) {
     let recipeName = document.getElementById("recipe-name");
@@ -57,12 +64,37 @@ async function reviewRecipe() {
     recipe.value = formData.recipe;
     recipe.readOnly = true;
 
-  // Make an image generation request and emable save button once done
+    // Make an image generation request and emable save button once done
     const imgURL = await requestImage(recipeName.value);
-    let img = document.getElementById("image");
     img.src = JSON.parse(imgURL).url;
+
+    // Unblock any disabled UI elements 
+    img.style.display = 'block';
     saveButton.disabled = false;
+    regenButton.disabled = false;
   }
+}
+
+/**
+ * Regenerates the image given the recipe name.
+ */
+async function regenerateImage() {
+  const recipeName = document.getElementById("recipe-name");
+  const img = document.getElementById("image");
+  const regenButton = document.getElementById("generate-button");
+  const submitButton = document.getElementById("submit-button");
+
+  // Disable buttons
+  submitButton.disabled = true;
+  regenButton.disabled = true;
+
+  // Make image request
+  const imgURL = await requestImage(recipeName);
+  img.src = JSON.parse(imgURL).url;
+  
+  // Re-enable buttons
+  submitButton.disabled = false;
+  regenButton.disabled = false;
 }
 
 /**
@@ -92,7 +124,7 @@ async function sendRecipeToDataBase(event) {
   });
 
   console.log("Saved: " + response);
-  
+
   if (!response.ok) {
     console.error('Failed to save recipe to database');
   }

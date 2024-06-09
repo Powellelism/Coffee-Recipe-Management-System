@@ -17,7 +17,7 @@
       border-bottom: none;
     }
 
-    form *:not(button[type="submit"]) {
+    form-field *:not(button[type="submit"]):not(#generate-button) {
       pointer-events: none;
     }
 
@@ -34,6 +34,10 @@
 
     #add-ingredient {
       display: none;
+    }
+
+    #recipe-container {
+      height: 25%;
     }
   </style>
   <header>
@@ -52,13 +56,12 @@
   </header>
   <main>
     <div class="main">
-      <div class="left">
-        <form action="/recipe/review" method="post" id="wrapper">
+      <form action="/recipe/review" method="post" id="wrapper">
+        <div class="left">
           <div class="header-wrapper">
             <form-field>
               <input type="text" id="recipe-name" name="recipe_name" value="Recipe Name" required autofocus />
             </form-field>
-            <button id="generate-button">Generate</button>
           </div>
           <div>
             <form-field id="size-container">
@@ -92,21 +95,24 @@
             <form-field id="ingredients-container">
               <label>Ingredients</label>
               <div id="ingredients-list">
-                <input type="text" name="ingredients" value="CREAMER" id="ingredients" required />
                 <button type="button" id="add-ingredient">+</button>
               </div>
             </form-field>
           </div>
-      </div>
-      <div class="right">
-        <img id="image" src=""></img>
-        <form-field id="recipe-container">
-          <label for="recipe">Recipe</label>
-          <textarea id="recipe" name="recipe" rows="25" cols="50" required></textarea>
-        </form-field>
-        <form-field>
-          <button id="submit-button" type="submit">Save Recipe</button>
-        </form-field>
+        </div>
+        <div class="right">
+          <div class="img-container">
+            <h6>Generating an image for you!</h6>
+            <img id="image" src=""></img>
+          </div>
+          <form-field id="recipe-container">
+            <label for="recipe">Recipe</label>
+            <textarea id="recipe" name="recipe" rows="25" cols="50" required></textarea>
+          </form-field>
+          <form-field style="display: flex; flex-direction: row;">
+            <button id="generate-button" type="button">Regenerate Image</button>
+            <button id="submit-button" type="submit">Save Recipe</button>
+          </form-field>
         </div>
       </form>
     </div>
