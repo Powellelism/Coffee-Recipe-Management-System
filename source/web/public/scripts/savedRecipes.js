@@ -55,7 +55,7 @@ async function renderUserRecipes() {
           ? recipe.userEmail.split("@")[0]
           : recipe.userEmail
         : "Jacob R.";
-      recipeCardElement.recipeImage = '/assets/images/diy-coffee.jpg'; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeImage = "/assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
