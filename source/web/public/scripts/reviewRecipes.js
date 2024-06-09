@@ -50,6 +50,9 @@ function reviewRecipe() {
     let recipe = document.getElementById("recipe");
     recipe.value = formData.recipe;
     recipe.readOnly = true;
+
+    let img = document.getElementById("image");
+    img.src = formData.image;
   }
 }
 
@@ -67,6 +70,7 @@ async function sendRecipeToDataBase(event) {
     instructions: recipeData.recipe,
     ingredients: recipeData.ingredients,
     size: recipeData.size,
+    image: recipeData.image
   };
   const response = await fetch('/api/post/recipe', {
     method: 'POST',

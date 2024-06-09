@@ -290,7 +290,7 @@ exports.getRecentRecipes = async (request, response) => {
 /**
  * This function adds a new recipe.
  * @param request JSON body of a recipe including
- * name, description, foodId, ingredients, size, intructions, totalTime, userID
+ * name, description, foodId, ingredients, size, intructions, totalTime, userID, image URL
  * @param response JSON file of the new created recipe
  * @returns {Promise<void>}
  */
@@ -300,7 +300,8 @@ exports.addRecipe = async (request, response) => {
       name,
       ingredients,
       size,
-      instructions
+      instructions,
+      image
     } = request.body;
     console.log(request.body);
     const userId = request.user.id;
@@ -325,6 +326,7 @@ exports.addRecipe = async (request, response) => {
         },
         size,
         instructions,
+        image,
         userRecipes: {
           create: {
             userId: userId,

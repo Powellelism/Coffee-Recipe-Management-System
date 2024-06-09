@@ -1,138 +1,116 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png" />
-    <link rel="stylesheet" href="../styles/recipes.css" />
-    <script src="../scripts/reviewRecipes.js" type="module"></script>
-    <title>Review Your Recipe</title>
-  </head>
-  <body>
-    <style>
-      /* Remove anything to make it look like you can edit form fields*/
-      form input[type="text"]:focus {
-        outline: none;
-        border-bottom: none;
-      }
-      form *:not(button[type="submit"]) {
-        pointer-events: none;
-      }
-      form button[type="submit"] {
-        pointer-events: auto;
-      }
-      form input[type="radio"]:hover,
-      form input[type="checkbox"]:hover,
-      form label:hover,
-      form textarea:hover {
-        pointer-events: none;
-      }
-      #add-ingredient {
-        display: none;
-      }
-    </style>
-    <header>
-      <a href="/recipe/customize" class="dashboard-link">
-        <dashboard-button>
-          <svg
-            width="53"
-            height="33"
-            viewBox="0 0 53 33"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M53 16.5C53 16.0138 52.8006 15.5476 52.4456 15.2038C52.0907 14.8601 51.6092 14.6669 51.1073 14.6669H6.46519L18.3781 3.13321C18.554 2.96278 18.6936 2.76045 18.7889 2.53777C18.8841 2.31509 18.9331 2.07642 18.9331 1.83539C18.9331 1.59436 18.8841 1.3557 18.7889 1.13302C18.6936 0.910338 18.554 0.708005 18.3781 0.537573C18.2021 0.367141 17.9932 0.231948 17.7632 0.139711C17.5333 0.0474739 17.2869 0 17.038 0C16.7891 0 16.5427 0.0474739 16.3128 0.139711C16.0828 0.231948 15.8739 0.367141 15.698 0.537573L0.556062 15.2022C0.379799 15.3725 0.239952 15.5747 0.144534 15.7974C0.0491157 16.0201 0 16.2589 0 16.5C0 16.7411 0.0491157 16.9799 0.144534 17.2026C0.239952 17.4253 0.379799 17.6275 0.556062 17.7978L15.698 32.4624C15.8739 32.6329 16.0828 32.7681 16.3128 32.8603C16.5427 32.9525 16.7891 33 17.038 33C17.2869 33 17.5333 32.9525 17.7632 32.8603C17.9932 32.7681 18.2021 32.6329 18.3781 32.4624C18.554 32.292 18.6936 32.0897 18.7889 31.867C18.8841 31.6443 18.9331 31.4056 18.9331 31.1646C18.9331 30.9236 18.8841 30.6849 18.7889 30.4622C18.6936 30.2396 18.554 30.0372 18.3781 29.8668L6.46519 18.3331H51.1073C51.6092 18.3331 52.0907 18.1399 52.4456 17.7962C52.8006 17.4524 53 16.9862 53 16.5Z"
-              fill="black"
-            />
-          </svg>
-          <span>Back To Create</span>
-        </dashboard-button>
-      </a>
-      <h1>Review Your Recipe</h1>
-      <a href="/login" id="sign-out-button">Sign Out</a>
-    </header>
-    <main>
-      <form action="/post/review" method="post">
-        <form-field>
-          <input
-            type="text"
-            id="recipe-name"
-            name="recipe_name"
-            value="Recipe Name"
-            readonly
-          />
-        </form-field>
-        <form-field id="size-container">
-          <fieldset>
-            <legend>Size</legend>
 
-            <input type="radio" id="tall" name="size" value="SMALL" disabled />
-            <label class="size-option" for="tall" required
-              ><img src="../assets/svgs/tall.svg" /><span>TALL</span></label
-            >
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png" />
+  <link rel="stylesheet" href="../styles/recipes.css" />
+  <script src="../scripts/reviewRecipes.js" type="module"></script>
+  <title>Review Your Recipe</title>
+</head>
 
-            <input
-              type="radio"
-              id="grande"
-              name="size"
-              value="MEDIUM"
-              disabled
-            />
-            <label class="size-option" for="grande"
-              ><img src="../assets/svgs/grande.svg" /><span>GRANDE</span></label
-            >
+<body>
+  <style>
+    /* Remove anything to make it look like you can edit form fields*/
+    form input[type="text"]:focus {
+      outline: none;
+      border-bottom: none;
+    }
 
-            <input type="radio" id="venti" name="size" value="LARGE" disabled />
-            <label class="size-option" for="venti"
-              ><img src="../assets/svgs/venti.svg" /><span>VENTI</span></label
-            >
-          </fieldset>
-        </form-field>
+    form *:not(button[type="submit"]) {
+      pointer-events: none;
+    }
 
-        <form-field id="type-container">
-          <fieldset>
-            <legend>Type</legend>
-            <input
-              type="radio"
-              id="hot"
-              name="drink-type"
-              value="HOT"
-              disabled
-            />
-            <label class="type-option" for="hot">HOT</label>
+    form button[type="submit"] {
+      pointer-events: auto;
+    }
 
-            <input
-              type="radio"
-              id="cold"
-              name="drink-type"
-              value="COLD"
-              disabled
-            />
-            <label class="type-option" for="cold">COLD</label>
-          </fieldset>
-        </form-field>
-        <form-field id="ingredients-container">
-          <label for="ingredients">Ingredients</label>
-          <div id="ingredients-list">
-            <button type="button" id="add-ingredient" disabled>+</button>
+    form input[type="radio"]:hover,
+    form input[type="checkbox"]:hover,
+    form label:hover,
+    form textarea:hover {
+      pointer-events: none;
+    }
+
+    #add-ingredient {
+      display: none;
+    }
+  </style>
+  <header>
+    <a href="/recipe/customize" class="dashboard-link">
+      <dashboard-button>
+        <svg width="53" height="33" viewBox="0 0 53 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M53 16.5C53 16.0138 52.8006 15.5476 52.4456 15.2038C52.0907 14.8601 51.6092 14.6669 51.1073 14.6669H6.46519L18.3781 3.13321C18.554 2.96278 18.6936 2.76045 18.7889 2.53777C18.8841 2.31509 18.9331 2.07642 18.9331 1.83539C18.9331 1.59436 18.8841 1.3557 18.7889 1.13302C18.6936 0.910338 18.554 0.708005 18.3781 0.537573C18.2021 0.367141 17.9932 0.231948 17.7632 0.139711C17.5333 0.0474739 17.2869 0 17.038 0C16.7891 0 16.5427 0.0474739 16.3128 0.139711C16.0828 0.231948 15.8739 0.367141 15.698 0.537573L0.556062 15.2022C0.379799 15.3725 0.239952 15.5747 0.144534 15.7974C0.0491157 16.0201 0 16.2589 0 16.5C0 16.7411 0.0491157 16.9799 0.144534 17.2026C0.239952 17.4253 0.379799 17.6275 0.556062 17.7978L15.698 32.4624C15.8739 32.6329 16.0828 32.7681 16.3128 32.8603C16.5427 32.9525 16.7891 33 17.038 33C17.2869 33 17.5333 32.9525 17.7632 32.8603C17.9932 32.7681 18.2021 32.6329 18.3781 32.4624C18.554 32.292 18.6936 32.0897 18.7889 31.867C18.8841 31.6443 18.9331 31.4056 18.9331 31.1646C18.9331 30.9236 18.8841 30.6849 18.7889 30.4622C18.6936 30.2396 18.554 30.0372 18.3781 29.8668L6.46519 18.3331H51.1073C51.6092 18.3331 52.0907 18.1399 52.4456 17.7962C52.8006 17.4524 53 16.9862 53 16.5Z"
+            fill="black" />
+        </svg>
+        <span>Back To Create</span>
+      </dashboard-button>
+    </a>
+    <h1>Review Your Recipe</h1>
+    <a href="/login" id="sign-out-button">Sign Out</a>
+  </header>
+  <main>
+    <div class="main">
+      <div class="left">
+        <form action="/recipe/review" method="post" id="wrapper">
+          <div class="header-wrapper">
+            <form-field>
+              <input type="text" id="recipe-name" name="recipe_name" value="Recipe Name" required autofocus />
+            </form-field>
+            <button id="generate-button">Generate</button>
           </div>
-        </form-field>
+          <div>
+            <form-field id="size-container">
+              <fieldset>
+                <legend>Size</legend>
+
+                <input type="radio" id="tall" name="size" value="TALL" required />
+                <label class="size-option" for="tall"><img src="../assets/svgs/tall.svg"
+                    alt="svg of a tall cup" /><span>TALL</span></label>
+
+                <input type="radio" id="grande" name="size" value="GRANDE" />
+                <label class="size-option" for="grande"><img src="../assets/svgs/grande.svg"
+                    alt="svg of a grande cup" /><span>GRANDE</span></label>
+
+                <input type="radio" id="venti" name="size" value="VENTI" />
+                <label class="size-option" for="venti"><img src="../assets/svgs/venti.svg"
+                    alt="svg of a venti" /><span>VENTI</span></label>
+              </fieldset>
+            </form-field>
+
+            <form-field id="type-container">
+              <fieldset>
+                <legend>Type</legend>
+                <input type="radio" id="hot" name="drink-type" value="HOT" required />
+                <label class="type-option" for="hot">HOT</label>
+
+                <input type="radio" id="cold" name="drink-type" value="COLD" />
+                <label class="type-option" for="cold">COLD</label>
+              </fieldset>
+            </form-field>
+            <form-field id="ingredients-container">
+              <label>Ingredients</label>
+              <div id="ingredients-list">
+                <input type="text" name="ingredients" value="CREAMER" id="ingredients" required />
+                <button type="button" id="add-ingredient">+</button>
+              </div>
+            </form-field>
+          </div>
+      </div>
+      <div class="right">
+        <img id="image" src=""></img>
         <form-field id="recipe-container">
           <label for="recipe">Recipe</label>
-          <textarea
-            id="recipe"
-            name="recipe"
-            rows="4"
-            cols="50"
-            readonly
-          ></textarea>
+          <textarea id="recipe" name="recipe" rows="25" cols="50" required></textarea>
         </form-field>
         <form-field>
-          <button id="submit-button" type="submit">Save New Recipe</button>
+          <button id="submit-button" type="submit">Save Recipe</button>
         </form-field>
+        </div>
       </form>
-    </main>
-  </body>
+    </div>
+  </main>
+</body>
+
 </html>
