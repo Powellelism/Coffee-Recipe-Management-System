@@ -82,6 +82,7 @@ function saveFormDataToLocalStorage(event) {
       ?.value,
     ingredients: ingredients,
     recipe: document.getElementById("recipe").value,
+    image: document.getElementById("image")?.src
   };
 
   localStorage.setItem("newRecipe", JSON.stringify(formData));
@@ -122,6 +123,9 @@ function restorePopulatedForm() {
 
     let recipe = document.getElementById("recipe");
     recipe.value = formData.recipe;
+
+    let img = document.getElementById("image");
+    img.src = formData.image;
   }
 }
 
