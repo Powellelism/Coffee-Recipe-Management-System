@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     // Populate the top-ranked recipes
-    recipes1.forEach((recipe, index) => {
+    recipes1.forEach((recipe) => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
       recipeCardElement.recipeid = recipe.recipeId;
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Populate the recent recipes
-    recipes2.forEach((recipe, index) => {
+    recipes2.forEach((recipe) => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
       recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available

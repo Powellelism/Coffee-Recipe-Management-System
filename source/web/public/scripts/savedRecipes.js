@@ -4,11 +4,6 @@ import recipeCard from './recipeCard.js';
  * read data of coffee shops and add events for buttons on home page
  */
 async function init() {
-  try {
-    getShops();
-  } catch (error) {
-    console.log(error);
-  }
 
   let createButtonEl = document.querySelectorAll("button")[0];
   // add click event to the button for create new recipes
