@@ -12,7 +12,7 @@ const cache = new NodeCache({ stdTTL: 900 });
  */
 exports.getRatingRecipes = async (request, response) => {
   try {
-    const cacheKey = 'ratingRecipes';
+    const cacheKey = "ratingRecipes";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -80,12 +80,11 @@ exports.getRatingRecipes = async (request, response) => {
       return acc;
     }, {});
 
-
     const formattedRecipes = recipes.map((recipe) => {
       const userRecipe = userRecipes.find((ur) => ur.recipeId === recipe.id);
       const userEmail = userRecipe ? userMap[userRecipe.userId] : null;
 
-      return{
+      return {
         recipeId: recipe.id,
         recipeName: recipe.name,
         //description: recipe.description,
@@ -104,8 +103,7 @@ exports.getRatingRecipes = async (request, response) => {
         instructions: recipe.instructions,
         //totalTime: recipe.totalTime,
         userEmail,
-      }
-
+      };
     });
     cache.set(cacheKey, formattedRecipes);
     response.json(formattedRecipes);
@@ -122,9 +120,9 @@ exports.getRatingRecipes = async (request, response) => {
  * Recipe is in json file including name, description, food, ingredients, size, rating, reviews, instructions, totalTime)
  * @returns {Promise<void>}
  */
- exports.getRecentRecipes = async (request, response) => {
+exports.getRecentRecipes = async (request, response) => {
   try {
-    const cacheKey = 'recentRecipes';
+    const cacheKey = "recentRecipes";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -192,12 +190,11 @@ exports.getRatingRecipes = async (request, response) => {
       return acc;
     }, {});
 
-
     const formattedRecipes = recipes.map((recipe) => {
       const userRecipe = userRecipes.find((ur) => ur.recipeId === recipe.id);
       const userEmail = userRecipe ? userMap[userRecipe.userId] : null;
 
-      return{
+      return {
         recipeId: recipe.id,
         recipeName: recipe.name,
         //description: recipe.description,
@@ -216,8 +213,7 @@ exports.getRatingRecipes = async (request, response) => {
         instructions: recipe.instructions,
         //totalTime: recipe.totalTime,
         userEmail,
-      }
-
+      };
     });
 
     response.json(formattedRecipes);
@@ -235,12 +231,7 @@ exports.getRatingRecipes = async (request, response) => {
  */
 exports.addRecipe = async (request, response) => {
   try {
-    const {
-      name,
-      ingredients,
-      size,
-      instructions
-    } = request.body;
+    const { name, ingredients, size, instructions } = request.body;
     console.log(request.body);
     const userId = request.user.id;
     // Create the recipe
@@ -267,8 +258,8 @@ exports.addRecipe = async (request, response) => {
         userRecipes: {
           create: {
             userId: userId,
-          }
-        }
+          },
+        },
       },
     });
 
@@ -325,7 +316,7 @@ exports.getSingleRecipe = async (request, response) => {
   try {
     const id = parseInt(request.params.id);
 
-    const cacheKey = 'recipe_' + id + '_' + 'single';
+    const cacheKey = "recipe_" + id + "_" + "single";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -355,7 +346,7 @@ exports.getSingleRecipe = async (request, response) => {
 exports.getRatingForRecipe = async (request, response) => {
   try {
     const id = parseInt(request.params.id);
-    const cacheKey = 'recipe_' + id + '_' + 'rating';
+    const cacheKey = "recipe_" + id + "_" + "rating";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -424,7 +415,7 @@ exports.getUserRecipes = async (request, response) => {
 
     const userId = user.id;
     console.log(userId);
-    
+
     const userRecipes = await prisma.userRecipes.findMany({
       where: {
         userId,

@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", init);
-import recipeCard from './recipeCard.js';
+import recipeCard from "./recipeCard.js";
 /**
  * read data of coffee shops and add events for buttons on home page
  */
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const recipes1 = await response1.json();
     const recipes2 = await response2.json();
     console.log("Fetched recipes:", recipes1); // Log fetched data for debugging
-    console.log("Fetched recipes:", recipes2); 
+    console.log("Fetched recipes:", recipes2);
 
     const topCardsContainer = document.querySelector(".top-cards");
     const recentCardsContainer = document.querySelector(".recent-cards");
@@ -92,33 +92,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     topCardsContainer.innerHTML = "";
     recentCardsContainer.innerHTML = "";
 
-
-
     // Populate the top-ranked recipes
     recipes1.forEach((recipe) => {
       const recipeCardElement = new recipeCard();
-      recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+      recipeCardElement.userName = recipe.userEmail
+        ? recipe.userEmail.includes("@")
+          ? recipe.userEmail.split("@")[0]
+          : recipe.userEmail
+        : "Jacob R.";
       recipeCardElement.recipeid = recipe.recipeId;
       recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
       topCardsContainer.appendChild(recipeCardElement);
-  
-      const scrollAmount = 800;
-    document.querySelector(".scroll-button1.left").addEventListener("click", () => {
-      topCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
 
-    document.querySelector(".scroll-button1.right").addEventListener("click", () => {
-      topCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
+      const scrollAmount = 800;
+      document
+        .querySelector(".scroll-button1.left")
+        .addEventListener("click", () => {
+          topCardsContainer.scrollBy({
+            left: -scrollAmount,
+            behavior: "smooth",
+          });
+        });
+
+      document
+        .querySelector(".scroll-button1.right")
+        .addEventListener("click", () => {
+          topCardsContainer.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth",
+          });
+        });
     });
 
     // Populate the recent recipes
     recipes2.forEach((recipe) => {
       const recipeCardElement = new recipeCard();
-      recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+      recipeCardElement.userName = recipe.userEmail
+        ? recipe.userEmail.includes("@")
+          ? recipe.userEmail.split("@")[0]
+          : recipe.userEmail
+        : "Jacob R.";
       recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
@@ -126,24 +142,32 @@ document.addEventListener("DOMContentLoaded", async () => {
       recipeCardElement.recipeid = recipe.recipeId;
       console.log(recipeCardElement.userName);
       recentCardsContainer.appendChild(recipeCardElement);
-  
-      const scrollAmount = 800;
-    document.querySelector(".scroll-button2.left").addEventListener("click", () => {
-      recentCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
 
-    document.querySelector(".scroll-button2.right").addEventListener("click", () => {
-      recentCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
+      const scrollAmount = 800;
+      document
+        .querySelector(".scroll-button2.left")
+        .addEventListener("click", () => {
+          recentCardsContainer.scrollBy({
+            left: -scrollAmount,
+            behavior: "smooth",
+          });
+        });
+
+      document
+        .querySelector(".scroll-button2.right")
+        .addEventListener("click", () => {
+          recentCardsContainer.scrollBy({
+            left: scrollAmount,
+            behavior: "smooth",
+          });
+        });
     });
 
     console.log("Recipe cards added to the DOM"); // Log confirmation
   } catch (error) {
     console.error("Error loading recipes:", error);
   }
-
 });
-
 
 document.querySelector(".nav-trigger").addEventListener("click", function () {
   this.classList.toggle("active");
