@@ -44,13 +44,13 @@ model Recipe {
   id           Int           @id @default(autoincrement())
   name         String
   description  String        @default("")
-  foodId       Int
+  foodId       Int?
   size         SizeType
   instructions String        @default("")
   totalTime    Int           @default(0)
   image        Image[]
   rating       Int           @default(0)
-  food         Food          @relation(fields: [foodId], references: [id])
+  food         Food?         @relation(fields: [foodId], references: [id])
   reviews      Review[]
   ingredients  Ingredient[]  @relation("IngredientToRecipe")
   userRecipes  userRecipes[]
@@ -115,13 +115,14 @@ model Image {
 }
 
 model userRecipes {
+  id       Int    @id @default(autoincrement())
   userId   String @db.Uuid
   recipeId Int
 
   user   users  @relation(fields: [userId], references: [id])
   recipe Recipe @relation(fields: [recipeId], references: [id])
 
-  @@unique([userId, recipeId])
+  @@unique([id])
   @@schema("public")
 }
 

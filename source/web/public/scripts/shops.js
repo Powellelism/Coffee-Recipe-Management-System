@@ -60,11 +60,11 @@ async function getShops() {
  * and create black background for nav bar when we scroll
  * to where nav bar is not visible
  */
-document.querySelector(".navTrigger").addEventListener("click", function () {
+document.querySelector(".nav-trigger").addEventListener("click", function () {
   this.classList.toggle("active");
   console.log("Clicked menu");
   var mainListDiv = document.getElementById("mainListDiv");
-  mainListDiv.classList.toggle("show_list");
+  mainListDiv.classList.toggle("show-list");
   mainListDiv.style.display = "block";
 });
 

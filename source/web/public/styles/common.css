@@ -7,7 +7,8 @@
   box-sizing: border-box;
 }
 
-body, header {
+body,
+header {
   background-color: #fffbf3;
   margin: 0;
   padding: 0;
@@ -17,13 +18,16 @@ header {
   position: relative;
   width: 100%;
   height: 7rem;
-  background-size: cover;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0)), url('../assets/images/coffee.jpg');
+  background-image: linear-gradient(
+      rgb(255 255 255 / 30%),
+      rgb(255 255 255 / 0%)
+    ),
+    url("../assets/images/coffee.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -32,17 +36,28 @@ header {
 .nav {
   position: fixed;
   width: 100%;
+  transition: all 0.4s ease;
 }
+
 .container {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
 .nav div.logo {
   float: left;
   width: auto;
   height: auto;
   padding-left: 3rem;
+}
+
+.recipe-component a {
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;
 }
 
 .nav div.logo a {
@@ -54,12 +69,12 @@ header {
   margin-right: 15px;
 }
 
-.nav div.main_list {
+.nav div.main-list {
   height: 50px;
   width: 100%;
 }
 
-.nav div.main_list ul {
+.nav div.main-list ul {
   width: 100%;
   height: 50px;
   display: flex;
@@ -68,7 +83,7 @@ header {
   padding: 0;
 }
 
-.nav div.main_list ul li {
+.nav div.main-list ul li {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -77,7 +92,10 @@ header {
   padding: 0;
   padding-right: 1rem;
 }
-.create-button, .about-button, .saved-button {
+
+.create-button,
+.about-button,
+.saved-button {
   background-color: transparent;
   color: white;
   cursor: pointer;
@@ -85,13 +103,16 @@ header {
   margin: 10px;
   font-size: large;
 }
+
 .auth-buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-left: auto;
 }
-.login-button, .register-button {
+
+.login-button,
+.register-button {
   background-color: transparent;
   border: 2px solid white;
   border-radius: 8px;
@@ -117,7 +138,7 @@ header {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
   margin: 10px;
   flex: 1 1 calc(25% - 20px); /* 4 cards per row */
   box-sizing: border-box;
@@ -130,10 +151,34 @@ header {
   border-radius: 8px;
 }
 
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.stars i {
+  color: #e6e6e6;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
 .recipe-component .stars {
   display: flex;
   justify-content: center;
   margin: 10px 0;
+}
+
+.nav-trigger i {
+  background-color: #fff;
+  border-radius: 2px;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
 }
 
 .recipe-component .stars i {
@@ -158,13 +203,6 @@ header {
   margin-bottom: 10px;
 }
 
-.recipe-component a {
-  font-size: 20px;
-  color: #333;
-  text-decoration: none;
-  display: block;
-  margin: 10px 0;
-}
 /* Web Component flexbox */
 h2 {
   color: black;
@@ -174,11 +212,47 @@ h2 {
   margin-right: 15px;
   padding: 1rem;
 }
+.recipe-container {
+  position: relative;
+  width: 100%; /* Ensure full width */
+  margin: 0 auto; /* Centering the container */
+  overflow: hidden; /* Ensures no overflow */
+}
+
 .top-cards, .recent-cards {
   display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
 }
+
+.scroll-button {
+  position: absolute;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Adjust size for better clicking */
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.scroll-button.left {
+  left: 10px; /* adjust as needed */
+}
+
+.scroll-button.right {
+  right: 10px; /* adjust as needed */
+}
+
+.top-cards::-webkit-scrollbar, .recent-cards::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for cleaner look */
+}
+
+
+
 
 /* Rating star system */
 .stars {
@@ -208,247 +282,256 @@ h2 {
   transition: all 0.4s ease;
 }
 
-/* Media qurey section */
+/* Media query section */
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+@media screen and (width >= 768px) and (width <= 1024px) {
   .container {
-      margin: 0;
+    margin: 0;
   }
 }
 
-@media screen and (max-width:768px) {
-  .navTrigger {
-      display: block;
+@media screen and (width <= 768px) {
+  .nav-trigger {
+    display: block;
   }
+
   .nav div.logo {
-      margin-left: 15px;
+    margin-left: 15px;
   }
-  .nav div.main_list {
-      width: 100%;
-      height: 0;
-      overflow: hidden;
+
+  .nav div.main-list {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
   }
-  .nav div.show_list {
-      height: 40vh;
+
+  .nav div.show-list {
+    height: 40vh;
   }
-  .nav div.show_list ul li{
+
+  .nav div.show-list ul li {
     padding-top: 2rem;
-}
-  .nav div.main_list ul {
-      flex-direction: column;
-      width: 100%;
-      background-position: center top;
   }
-  .nav div.main_list ul li {
-      width: 100%;
-      text-align: right;
+
+  .nav div.main-list ul {
+    flex-direction: column;
+    width: 100%;
+    background-position: center top;
   }
+
+  .nav div.main-list ul li {
+    width: 100%;
+    text-align: right;
+  }
+
   .auth-buttons {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
   }
-  .nav div.main_list ul li button {
 
-      text-align: center;
-      font-size: 1rem;
-      padding: 20px;
-      background-color: transparent;
-      color: white;
-      cursor: pointer;
-      border: none;
-      margin: 10px;
+  .nav div.main-list ul li button {
+    text-align: center;
+    font-size: 1rem;
+    padding: 20px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
   }
 }
-
 
 /* Animation */
 
-.navTrigger {
+.nav-trigger {
   cursor: pointer;
   width: 30px;
   height: 25px;
   margin: auto;
   position: absolute;
   right: 30px;
+  display: none;
 }
 
-.navTrigger i {
-  background-color: #fff;
-  border-radius: 2px;
-  content: '';
-  display: block;
-  width: 100%;
-  height: 4px;
-}
-
-.navTrigger i:nth-child(1) {
-  -webkit-animation: outT 0.8s backwards;
-  animation: outT 0.8s backwards;
-  -webkit-animation-direction: reverse;
+.nav-trigger i:nth-child(1) {
+  animation: out-t 0.8s backwards;
   animation-direction: reverse;
 }
 
-.navTrigger i:nth-child(2) {
+.nav-trigger i:nth-child(2) {
   margin: 5px 0;
-  -webkit-animation: outM 0.8s backwards;
-  animation: outM 0.8s backwards;
-  -webkit-animation-direction: reverse;
+  animation: out-m 0.8s backwards;
   animation-direction: reverse;
 }
 
-.navTrigger i:nth-child(3) {
-  -webkit-animation: outBtm 0.8s backwards;
-  animation: outBtm 0.8s backwards;
-  -webkit-animation-direction: reverse;
+.nav-trigger i:nth-child(3) {
+  animation: out-btm 0.8s backwards;
   animation-direction: reverse;
 }
 
-.navTrigger.active i:nth-child(1) {
-  -webkit-animation: inT 0.8s forwards;
-  animation: inT 0.8s forwards;
+.nav-trigger.active i:nth-child(1) {
+  animation: in-t 0.8s forwards;
 }
 
-.navTrigger.active i:nth-child(2) {
-  -webkit-animation: inM 0.8s forwards;
-  animation: inM 0.8s forwards;
+.nav-trigger.active i:nth-child(2) {
+  animation: in-m 0.8s forwards;
 }
 
-.navTrigger.active i:nth-child(3) {
-  -webkit-animation: inBtm 0.8s forwards;
-  animation: inBtm 0.8s forwards;
+.nav-trigger.active i:nth-child(3) {
+  animation: in-btm 0.8s forwards;
 }
 
-@-webkit-keyframes inM {
+@keyframes in-m {
   50% {
-      -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 }
 
-@keyframes inM {
+@keyframes in-m {
   50% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 }
 
-@-webkit-keyframes outM {
+@keyframes out-m {
   50% {
-      -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 }
 
-@keyframes outM {
+@keyframes out-m {
   50% {
-      transform: rotate(0deg);
+    transform: rotate(0deg);
   }
+
   100% {
-      transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 }
 
-@-webkit-keyframes inT {
+@keyframes in-t {
   0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      -webkit-transform: translateY(9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
-@keyframes inT {
+@keyframes in-t {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
-@-webkit-keyframes outT {
+@keyframes out-t {
   0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      -webkit-transform: translateY(9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
-@keyframes outT {
+@keyframes out-t {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(9px) rotate(0deg);
+    transform: translateY(9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(9px) rotate(135deg);
+    transform: translateY(9px) rotate(135deg);
   }
 }
 
-@-webkit-keyframes inBtm {
+@keyframes in-btm {
   0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      -webkit-transform: translateY(-9px) rotate(0deg);
+    transform: translateY(-9px) rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(-9px) rotate(135deg);
+    transform: translateY(-9px) rotate(135deg);
   }
 }
 
-@keyframes inBtm {
+@keyframes in-btm {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(-9px) rotate(0deg);
+    transform: translateY(-9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(-9px) rotate(135deg);
+    transform: translateY(-9px) rotate(135deg);
   }
 }
 
-@-webkit-keyframes outBtm {
+@keyframes out-btm {
   0% {
-      -webkit-transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      -webkit-transform: translateY(-9px) rotate(0deg);
+    transform: translateY(-9px) rotate(0deg);
   }
+
   100% {
-      -webkit-transform: translateY(-9px) rotate(135deg);
+    transform: translateY(-9px) rotate(135deg);
   }
 }
 
-@keyframes outBtm {
+@keyframes out-btm {
   0% {
-      transform: translateY(0px) rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
+
   50% {
-      transform: translateY(-9px) rotate(0deg);
+    transform: translateY(-9px) rotate(0deg);
   }
+
   100% {
-      transform: translateY(-9px) rotate(135deg);
+    transform: translateY(-9px) rotate(135deg);
   }
 }
 
@@ -456,21 +539,23 @@ h2 {
   padding: 0.2rem;
   background-color: #111;
   top: 0;
+  z-index: 50;
 }
 
+.my-h2 {
+  text-align: center;
+  font-size: 4rem;
+}
 
-.myH2 {
-text-align:center;
-font-size: 4rem;
+.my-p {
+  text-align: justify;
+  padding-left: 15%;
+  padding-right: 15%;
+  font-size: 20px;
 }
-.myP {
-text-align: justify;
-padding-left:15%;
-padding-right:15%;
-font-size: 20px;
-}
-@media all and (max-width:700px){
-.myP {
-  padding:2%;
-}
+
+@media all and (width <= 700px) {
+  .my-p {
+    padding: 2%;
+  }
 }

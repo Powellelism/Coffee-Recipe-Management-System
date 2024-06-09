@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", reviewRecipe);
 document.addEventListener("DOMContentLoaded", init);
 
+const DBtoSize = {
+  "SMALL": "tall",
+  "MEDIUM": "grande",
+  "LARGE": "venti",
+}
 /**
  * Initialize the review page's event listeners.
  */
@@ -18,9 +23,8 @@ function reviewRecipe() {
     let recipeName = document.getElementById("recipe-name");
     recipeName.value = formData.recipe_name;
     recipeName.readOnly = true;
-
     if (formData.size) {
-      let size = document.getElementById(formData.size.toLowerCase());
+      let size = document.getElementById(DBtoSize[formData.size]);
       size.checked = true;
       size.disabled = true;
     }
@@ -53,9 +57,30 @@ function reviewRecipe() {
  * Persist recipes and store them in the database.
  * @param {event} event
  */
-function sendRecipeToDataBase(event) {
+async function sendRecipeToDataBase(event) {
   event.preventDefault();
-  localStorage.removeItem("newRecipe");
-  window.href = "/recipe/saved";
-  // connect to db and send data, may need new route
+
+  const recipeData = JSON.parse(localStorage.getItem("newRecipe"));
+  console.log(recipeData);
+  let newBody = {
+    name: recipeData.recipe_name,
+    instructions: recipeData.recipe,
+    ingredients: recipeData.ingredients,
+    size: recipeData.size,
+  };
+  const response = await fetch('/api/post/recipe', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newBody),
+  });
+  
+  if (!response.ok) {
+    console.error('Failed to save recipe to database');
+  }
+  else {
+    localStorage.removeItem('newRecipe');
+    window.location = '/dashboard';
+  }
 }
