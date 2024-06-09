@@ -107,9 +107,9 @@ exports.getRatingRecipes = async (request, response) => {
         reviews: recipe.reviews.map((review) => review.content),
         instructions: recipe.instructions,
         image: recipe.image.map((img) => img.url),
-        //totalTime: recipe.totalTime,
-        userEmail,
-      };
+        //totalTime: recipe.totalTime,=======
+        userEmail: userEmail,
+      }
     });
     cache.set(cacheKey, formattedRecipes);
     response.json(formattedRecipes);
@@ -224,8 +224,8 @@ exports.getRecentRecipes = async (request, response) => {
         instructions: recipe.instructions,
         image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,
-        userEmail,
-      };
+        userEmail: userEmail,
+      }
     });
 
     response.json(formattedRecipes);

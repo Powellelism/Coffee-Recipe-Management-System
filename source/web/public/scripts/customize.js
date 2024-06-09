@@ -224,13 +224,13 @@ async function requestText(c, recName, ing) {
  */
 function fillForm(category, id) {
   switch (category) {
-    case 'select':
+    case 'select':{
       let button = document.getElementById(id);
       button.click();
-
       break;
+    }
 
-    case 'list':
+    case 'list': {
       // Turn the ingredient string into an array of ingreident strings
       const ingredientsArr = id.split(",");
       const adder = document.getElementById("add-ingredient");
@@ -248,10 +248,12 @@ function fillForm(category, id) {
       });
 
       break;
+    }
 
-    case 'fill':
+    case 'fill': {
       const textarea = document.getElementById('recipe');
       textarea.value = id;
       break;
+    }
   };
 }
