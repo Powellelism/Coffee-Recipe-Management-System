@@ -44,4 +44,9 @@ router.get("/recipe/review", authMiddleware.authenticate, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "reviewRecipe.html"));
 });
 
+//serve saved recipes view
+router.get("/recipe/foryou", authMiddleware.authenticate, (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/pages", "forYou.html"));
+});
+
 module.exports = router;

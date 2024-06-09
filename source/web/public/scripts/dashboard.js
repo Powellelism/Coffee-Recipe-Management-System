@@ -18,7 +18,7 @@ async function init() {
   let savedButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
   savedButtonEl.addEventListener("click", () => {
-    window.location = "/recipe/saved";
+    window.location = "/recipe/foryou";
   });
   let aboutButtonEl = document.querySelectorAll("button")[2];
   //add click event to the button for view the saved recipes
@@ -56,7 +56,6 @@ async function getShops() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Your existing code here
   try {
     const response1 = await fetch("api/get/ratingrecipes", {
       method: "GET",
@@ -92,15 +91,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     topCardsContainer.innerHTML = "";
     recentCardsContainer.innerHTML = "";
 
-
-
     // Populate the top-ranked recipes
     recipes1.forEach((recipe, index) => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
       recipeCardElement.recipeid = recipe.recipeId;
       // recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
-      recipeCardElement.recipeImage = recipe.imageUrl;
+      recipeCardElement.recipeImage = recipe.image;
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
@@ -121,7 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
       // recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
-      recipeCardElement.recipeImage = recipe.imageUrl; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeImage = recipe.image; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
@@ -147,7 +144,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-document.querySelector(".navTrigger").addEventListener("click", function () {
+document.querySelector(".nav-trigger").addEventListener("click", function () {
   this.classList.toggle("active");
   console.log("Clicked menu");
   var mainListDiv = document.getElementById("mainListDiv");

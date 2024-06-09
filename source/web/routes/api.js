@@ -61,4 +61,10 @@ router.post(
   aiController.generateImage,
 );
 
+router.get(
+  "/get/userRecipes",
+  authMiddleware.authenticate,
+  recipeController.getUserRecipes,
+)
+
 module.exports = router;

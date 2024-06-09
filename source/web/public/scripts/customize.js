@@ -93,7 +93,7 @@ function saveFormDataToLocalStorage(event) {
       ?.value,
     ingredients: ingredients,
     recipe: document.getElementById("recipe").value,
-    image: document.getElementById("image")?.src
+    // imageUrl: document.getElementById("image").src
   };
 
   localStorage.setItem("newRecipe", JSON.stringify(formData));
@@ -134,9 +134,6 @@ function restorePopulatedForm() {
 
     let recipe = document.getElementById("recipe");
     recipe.value = formData.recipe;
-
-    let img = document.getElementById("image");
-    img.src = formData.image;
   }
 }
 
@@ -179,11 +176,6 @@ async function generateRecipe(event) {
   fillForm('list', ingredients);
   fillForm('fill', recipe);
 
-  // Make an image generation request
-  const imgURL = await requestImage(recipeName.value);
-  let img = document.getElementById("image");
-  img.src = JSON.parse(imgURL).url;
-
   // Reset generate button, indicating generation complete
   generateButton.disabled = false;
   generateButton.textContent = "Generate";
@@ -220,33 +212,6 @@ async function requestText(c, recName, ing) {
   const responseString = await responseT.text();
   const responseValue = JSON.parse(responseString).response;
   return responseValue.toLowerCase();
-}
-
-/**
- * Makes POST image generate request to LLM.
- * @param {string} recName: recipe name
- * @returns {string}
- */
-async function requestImage(recName) {
-  const url = '/api/post/generateImage';
-  const requestT = {
-    recipeName: recName
-  };
-
-  const responseT = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestT),
-  });
-
-  // Ensure that the response is clean
-  if (!responseT.ok) throw new Error('Failed to fetch data for image');
-
-  // Return image URL
-  return await responseT.text();
 }
 
 /**

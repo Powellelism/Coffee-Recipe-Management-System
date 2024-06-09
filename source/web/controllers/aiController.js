@@ -53,7 +53,7 @@ exports.generateImage = async (request, response) => {
 
     try {
         const postData = {
-            image: "A(n) " + recipeName + " drink with flowers",
+            image: "A(n) " + recipeName + " drink with flowers, in a coffee shop",
             model: "@cf/lykon/dreamshaper-8-lcm",
             key: process.env.API_KEY
         };

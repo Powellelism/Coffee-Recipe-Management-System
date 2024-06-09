@@ -44,6 +44,11 @@ exports.getRatingRecipes = async (request, response) => {
             content: true,
           },
         },
+        image: {
+          select: {
+            url: true,
+          },
+        },
       },
       orderBy: {
         rating: "desc",
@@ -85,7 +90,7 @@ exports.getRatingRecipes = async (request, response) => {
       const userRecipe = userRecipes.find((ur) => ur.recipeId === recipe.id);
       const userEmail = userRecipe ? userMap[userRecipe.userId] : null;
 
-      return{
+      return {
         recipeId: recipe.id,
         recipeName: recipe.name,
         //description: recipe.description,
@@ -102,6 +107,7 @@ exports.getRatingRecipes = async (request, response) => {
         rating: recipe.rating,
         reviews: recipe.reviews.map((review) => review.content),
         instructions: recipe.instructions,
+        image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,
         userEmail,
       }
@@ -122,7 +128,7 @@ exports.getRatingRecipes = async (request, response) => {
  * Recipe is in json file including name, description, food, ingredients, size, rating, reviews, instructions, totalTime)
  * @returns {Promise<void>}
  */
- exports.getRecentRecipes = async (request, response) => {
+exports.getRecentRecipes = async (request, response) => {
   try {
     const cacheKey = 'recentRecipes';
     const cachedRecipes = cache.get(cacheKey);
@@ -154,6 +160,11 @@ exports.getRatingRecipes = async (request, response) => {
         reviews: {
           select: {
             content: true,
+          },
+        },
+        image: {
+          select: {
+            url: true,
           },
         },
       },
@@ -197,7 +208,7 @@ exports.getRatingRecipes = async (request, response) => {
       const userRecipe = userRecipes.find((ur) => ur.recipeId === recipe.id);
       const userEmail = userRecipe ? userMap[userRecipe.userId] : null;
 
-      return{
+      return {
         recipeId: recipe.id,
         recipeName: recipe.name,
         //description: recipe.description,
@@ -214,6 +225,7 @@ exports.getRatingRecipes = async (request, response) => {
         rating: recipe.rating,
         reviews: recipe.reviews.map((review) => review.content),
         instructions: recipe.instructions,
+        image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,
         userEmail,
       }
@@ -226,67 +238,6 @@ exports.getRatingRecipes = async (request, response) => {
     response.status(500).json({ error: "Internal Server Error" });
   }
 };
-/*
-exports.getRecentRecipes = async (request, response) => {
-  try {
-    const recipes = await prisma.recipe.findMany({
-      include: {
-        food: {
-          select: {
-            name: true,
-            description: true,
-            price: true,
-            store: {
-              select: {
-                name: true,
-              },
-            },
-            type: true,
-            size: true,
-          },
-        },
-        ingredients: {
-          select: {
-            name: true,
-          },
-        },
-        reviews: {
-          select: {
-            content: true,
-          },
-        },
-      },
-      orderBy: {
-        id: "desc",
-      },
-    });
-
-    const formattedRecipes = recipes.map((recipe) => ({
-      recipeName: recipe.name,
-      description: recipe.description,
-      food: {
-        name: recipe.food.name,
-        description: recipe.food.description,
-        price: recipe.food.price,
-        store: recipe.food.store.name,
-        type: recipe.food.type,
-        size: recipe.food.size,
-      },
-      ingredients: recipe.ingredients.map((ingredient) => ingredient.name),
-      size: recipe.size,
-      rating: recipe.rating,
-      reviews: recipe.reviews.map((review) => review.content),
-      instructions: recipe.instructions,
-      totalTime: recipe.totalTime,
-    }));
-    cache.set(cacheKey, formattedRecipes);
-    response.json(formattedRecipes);
-  } catch (error) {
-    console.error("Error retrieving recipes:", error);
-    response.status(500).json({ error: "Internal Server Error" });
-  }
-};
-*/
 /**
  * This function adds a new recipe.
  * @param request JSON body of a recipe including
@@ -303,8 +254,10 @@ exports.addRecipe = async (request, response) => {
       instructions,
       image
     } = request.body;
-    console.log(request.body);
+
+    console.log("Image: " + image);
     const userId = request.user.id;
+
     // Create the recipe
     const user = await prisma.users.findUnique({
       where: { id: userId },
@@ -326,7 +279,14 @@ exports.addRecipe = async (request, response) => {
         },
         size,
         instructions,
-        image,
+        image: {
+          create: {
+            url: image,
+            imagableId: 0,
+            imagableType: "generated",
+            content: name
+          }
+        },
         userRecipes: {
           create: {
             userId: userId,
@@ -465,6 +425,52 @@ exports.updateRecipeRating = async (request, response) => {
     response.status(201).json(recipe.rating);
   } catch (error) {
     console.error("Error updating rating:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+exports.getUserRecipes = async (request, response) => {
+  try {
+    const userUUID = request.user.id;
+
+    const user = await prisma.users.findUnique({
+      where: {
+        id: userUUID,
+      },
+      select: {
+        id: true,
+      },
+    });
+    if (!user) {
+      return response.status(404).json({ error: "User not found" });
+    }
+
+    const userId = user.id;
+    //console.log(userId);
+
+    const userRecipes = await prisma.userRecipes.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        recipe: true,
+      },
+    });
+    const formattedRecipes = userRecipes.map((userRecipe) => {
+      const recipe = userRecipe.recipe;
+      console.log("recipe image: " + recipe.imageUrl);
+      return {
+        recipeId: recipe.id,
+        recipeName: recipe.name,
+        rating: recipe.rating,
+        instructions: recipe.instructions,
+        imageUrl: recipe.image
+      };
+    });
+
+    response.json(formattedRecipes);
+  } catch (error) {
+    console.error("Error retrieving user recipes:", error);
     response.status(500).json({ error: "Internal Server Error" });
   }
 };

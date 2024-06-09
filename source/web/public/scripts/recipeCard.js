@@ -40,7 +40,7 @@ export default class recipeCard extends HTMLElement {
         </script>
       `;
       this.setAttribute("data-id", recipeid);
-      console.log(recipeid);
+      console.log("Recipe card added to the DOM", recipeid);
 
     // Create a link element for the external stylesheet
     const linkElement = document.createElement("link");
