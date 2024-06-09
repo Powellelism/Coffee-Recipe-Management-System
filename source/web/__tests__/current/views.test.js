@@ -1,3 +1,6 @@
+// This test suite ensures every view is correctly working
+
+// This test ensures users can access views that don't need authentication.
 describe("Testing unauthenticated views", () => {
   it("Testing serve index view", async () => {
     const response = await page.goto("http://localhost:3000/");
@@ -30,6 +33,7 @@ describe("Testing unauthenticated views", () => {
   }, 20000);
 });
 
+// This test ensures users can access views that need authentication.
 describe("Testing authenticated views", () => {
   const login = async () => {
     await page.goto("http://localhost:3000/login");
@@ -72,6 +76,7 @@ describe("Testing authenticated views", () => {
   }, 20000);
 });
 
+// This test ensures users cannot access views that don't exist.
 describe("Testing views that don't exist", () => {
   it("Testing serve non-existent view", async () => {
     const response = await page.goto("http://localhost:3000/thisdoesnotexist");

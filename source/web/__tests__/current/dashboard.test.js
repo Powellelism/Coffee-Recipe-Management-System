@@ -1,4 +1,8 @@
+// This test suite ensures functionality of buttons on the page as well as order of the recipes on the page.
 describe("Testing home page", () => {
+  /**
+   * Login to the website.
+   */
   const login = async () => {
     await page.goto("http://localhost:3000/login");
     await page.waitForSelector("#email");
@@ -14,6 +18,8 @@ describe("Testing home page", () => {
   it("Test home button on page load", async () => {
     await login();
     await page.goto("http://localhost:3000/");
+
+    // Wait for the home button to appear and click it.
     await page.waitForSelector('a[href="/"]');
     const homeButton = await page.$('a[href="/"]');
     await homeButton.click();
@@ -25,6 +31,8 @@ describe("Testing home page", () => {
   it("Test Create Recipe button on home page", async () => {
     await login();
     await page.goto("http://localhost:3000/");
+
+    // Wait for the create recipe button to appear and click it.
     await page.waitForSelector(".create-button");
     const createRecipeButton = await page.$(".create-button");
     await createRecipeButton.click();
@@ -36,6 +44,8 @@ describe("Testing home page", () => {
   it("Test About button on home page", async () => {
     await login();
     await page.goto("http://localhost:3000/");
+
+    // Wait for the about button to appear and click it.
     await page.waitForSelector(".about-button");
     const aboutButton = await page.$(".about-button");
     await aboutButton.click();
@@ -47,8 +57,11 @@ describe("Testing home page", () => {
   it("Test top ranked recipes are in correct order on page load", async () => {
     await login();
     await page.goto("http://localhost:3000/");
+
+    // Wait for the top ranked recipes to appear.
     await page.waitForSelector(".top-cards recipe-card");
 
+    // Get the top ranked recipes and check that they are in order.
     const recipes = await page.evaluate(() => {
       const recipeCards = document.querySelectorAll(".top-cards recipe-card");
       const cards = Array.from(recipeCards);

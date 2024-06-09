@@ -397,6 +397,12 @@ exports.updateRecipeRating = async (request, response) => {
   }
 };
 
+/**
+ * This function gets only the recipes that the currently logged in user has created.
+ * @param request On page load to /foryou, we request the user's recipes, specificall their id.
+ * @param response A list of the user's recipes in JSON format.
+ * @returns {Promise<void>}
+ */
 exports.getUserRecipes = async (request, response) => {
   try {
     const userUUID = request.user.id;

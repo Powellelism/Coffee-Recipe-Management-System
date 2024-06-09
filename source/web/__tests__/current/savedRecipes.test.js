@@ -1,6 +1,11 @@
-jest.setTimeout(90000);
+// This test suite ensures the user's saved recipe page is personalized correctly.
+
+jest.setTimeout(90000); //needed for ci/cd pipeline to run
 
 describe("Testing saved recipes page", () => {
+  /**
+   * Login to the website.
+   */
   const login = async () => {
     await page.goto("http://localhost:3000/login");
     await page.waitForSelector("#email");
@@ -27,6 +32,7 @@ describe("Testing saved recipes page", () => {
     await page.keyboard.press("Backspace");
     await recipeNameInput.type("Test Recipe");
 
+    // Select the recipe type
     await page.waitForSelector('label[for="tall"]');
     await page.click('label[for="tall"]');
 
@@ -76,6 +82,7 @@ describe("Testing saved recipes page", () => {
       });
     });
 
+    // Check that our new recipe appears in the saved Recipes.
     expect(recipes).toContainEqual(
       expect.objectContaining({ recipeName: "Test Recipe" }),
     );

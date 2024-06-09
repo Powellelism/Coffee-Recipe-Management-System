@@ -1,6 +1,12 @@
+// This test suite focuses on creating recipes and customizing them.
 describe("Test customize recipe page functionality", () => {
+  /**
+   * Go to the customize page and add an ingredient
+   */
   const goToCustomizePageAndAddIngredient = async () => {
     await page.goto("http://localhost:3000/recipe/customize");
+
+    // Click the plus button on the screen
     await page.waitForSelector("#add-ingredient");
     const addIngredientButton = await page.$("#add-ingredient");
     await page.evaluate(
@@ -10,6 +16,8 @@ describe("Test customize recipe page functionality", () => {
     await addIngredientButton.hover();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await addIngredientButton.click();
+
+    // Wait for the second input ingredient box to appear and type into it.
     await page.waitForSelector("#ingredients-list input:nth-of-type(2)");
 
     const ingredientInput = await page.$(
@@ -22,6 +30,7 @@ describe("Test customize recipe page functionality", () => {
     expect(ingredientInputs.length).toBe(2);
   };
 
+  // Add another ingredient to the recipe
   const addAnotherIngredient = async () => {
     await goToCustomizePageAndAddIngredient();
     await page.waitForSelector("#ingredients-list input:nth-of-type(1)");
@@ -46,7 +55,7 @@ describe("Test customize recipe page functionality", () => {
     await page.waitForNavigation();
   }, 60000);
 
-  it("Testing on page load, editing the recipe name is autofocued", async () => {
+  it("Testing on page load, editing the recipe name is autofocused", async () => {
     await page.goto("http://localhost:3000/recipe/customize");
     await page.waitForSelector("#recipe-name");
     const focusedElement = await page.evaluate(() => document.activeElement.id);
@@ -59,6 +68,8 @@ describe("Test customize recipe page functionality", () => {
 
   it("Testing we can edit previous recipes", async () => {
     await addAnotherIngredient();
+
+    // Check that the ingredients are correct after editing them
     const ingredientTexts = await page.evaluate(() => {
       const inputs = document.querySelectorAll("#ingredients-list input");
       return Array.from(inputs).map((input) => input.value);
@@ -69,6 +80,8 @@ describe("Test customize recipe page functionality", () => {
 
   it("Testing we can delete ingredients by clearing the input field", async () => {
     await addAnotherIngredient();
+
+    // Get the second ingredient and remove its text, which should delete it.
     await page.waitForSelector("#ingredients-list input:nth-of-type(2)");
     const ingredientInput = await page.$(
       "#ingredients-list input:nth-of-type(2)",
@@ -77,17 +90,21 @@ describe("Test customize recipe page functionality", () => {
     await ingredientInput.click({ clickCount: 3 });
     page.keyboard.press("Backspace");
     const ingredients = await page.$$("#ingredients-list input");
+
     expect(ingredients.length).toBe(1);
   }, 30000);
 
   it("Create a recipe and make sure it is saved in localStorage after clicking reviewRecipe button", async () => {
     await page.goto("http://localhost:3000/recipe/customize");
+
+    // Add a recipe name
     await page.waitForSelector("#recipe-name");
     const recipeNameInput = await page.$("#recipe-name");
     await recipeNameInput.click({ clickCount: 3 });
     await page.keyboard.press("Backspace");
     await recipeNameInput.type("Test Recipe");
 
+    // Select the size
     await page.waitForSelector('label[for="tall"]');
     await page.click('label[for="tall"]');
 
