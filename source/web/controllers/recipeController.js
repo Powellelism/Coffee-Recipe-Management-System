@@ -439,6 +439,7 @@ exports.getUserRecipes = async (request, response) => {
       },
       select: {
         id: true,
+        email: true,
       },
     });
     if (!user) {
@@ -446,7 +447,7 @@ exports.getUserRecipes = async (request, response) => {
     }
 
     const userId = user.id;
-    //console.log(userId);
+    console.log("User email:" + user.email);
 
     const userRecipes = await prisma.userRecipes.findMany({
       where: {
@@ -468,6 +469,7 @@ exports.getUserRecipes = async (request, response) => {
         rating: recipe.rating,
         instructions: recipe.instructions,
         image: recipe.image.map((img) => img.url),
+        userEmail: user.email,
       };
     });
 

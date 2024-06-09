@@ -53,7 +53,6 @@ async function renderUserRecipes() {
     }
 
     const recipes = await response.json();
-    //console.log(recipes);
 
     const yourCardsContainer = document.querySelector(".your-cards");
     yourCardsContainer.innerHTML = "";
@@ -61,8 +60,7 @@ async function renderUserRecipes() {
     recipes.forEach((recipe) => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
-      //recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
-      recipeCardElement.recipeImage = recipe.image; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeImage = recipe.image;
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
