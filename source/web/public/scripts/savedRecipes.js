@@ -1,10 +1,9 @@
 window.addEventListener("DOMContentLoaded", init);
-import recipeCard from './recipeCard.js';
+import recipeCard from "./recipeCard.js";
 /**
  * read data of coffee shops and add events for buttons on home page
  */
 async function init() {
-
   let createButtonEl = document.querySelectorAll("button")[0];
   // add click event to the button for create new recipes
   createButtonEl.addEventListener("click", () => {
@@ -26,44 +25,46 @@ async function init() {
     window.location = "/";
   });
 
-    // Get the saved recipes
-    await renderUserRecipes();
+  // Get the saved recipes
+  await renderUserRecipes();
 }
 
 async function renderUserRecipes() {
-    try {
-        const response = await fetch("/api/get/userRecipes", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-        
-        if(!response.ok) {
-            throw new Error('Failed to fetch user recipes');
-        }
+  try {
+    const response = await fetch("/api/get/userRecipes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        const recipes = await response.json();
-        console.log(recipes);
-
-        const yourCardsContainer = document.querySelector(".your-cards");
-        yourCardsContainer.innerHTML = "";
-
-        recipes.forEach((recipe) => {
-          const recipeCardElement = new recipeCard();
-          recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
-          recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
-          recipeCardElement.recipeName = recipe.recipeName;
-          recipeCardElement.recipeRating = recipe.rating;
-          recipeCardElement.recipe = recipe.instructions;
-          recipeCardElement.recipeid = recipe.recipeId;
-          yourCardsContainer.appendChild(recipeCardElement);
-        });
-
-        console.log("User recipes rendered successfully");
+    if (!response.ok) {
+      throw new Error("Failed to fetch user recipes");
     }
-    catch(error) {
-        console.error(error);
-    }
+
+    const recipes = await response.json();
+    console.log(recipes);
+
+    const yourCardsContainer = document.querySelector(".your-cards");
+    yourCardsContainer.innerHTML = "";
+
+    recipes.forEach((recipe) => {
+      const recipeCardElement = new recipeCard();
+      recipeCardElement.userName = recipe.userEmail
+        ? recipe.userEmail.includes("@")
+          ? recipe.userEmail.split("@")[0]
+          : recipe.userEmail
+        : "Jacob R.";
+      recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeName = recipe.recipeName;
+      recipeCardElement.recipeRating = recipe.rating;
+      recipeCardElement.recipe = recipe.instructions;
+      recipeCardElement.recipeid = recipe.recipeId;
+      yourCardsContainer.appendChild(recipeCardElement);
+    });
+
+    console.log("User recipes rendered successfully");
+  } catch (error) {
+    console.error(error);
+  }
 }
-

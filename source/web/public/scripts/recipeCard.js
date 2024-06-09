@@ -1,17 +1,33 @@
 export default class recipeCard extends HTMLElement {
-  constructor(userName, recipeImage, recipeName, recipeRating, recipe, recipeid) {
+  constructor(
+    userName,
+    recipeImage,
+    recipeName,
+    recipeRating,
+    recipe,
+    recipeid,
+  ) {
     super();
     this.attachShadow({ mode: "open" });
     this.userName = userName || "Jacob R.";
     this.recipeImage = recipeImage || "../assets/images/diy-coffee.jpg";
     this.recipeName = recipeName || "Refreshing Mint Coffee";
     this.recipeRating = recipeRating || 4;
-    this.recipe = recipe || "Combine 4 cups water, 4 shots of espresso, and 2 leaves of mint. Add ice. Enjoy!";
+    this.recipe =
+      recipe ||
+      "Combine 4 cups water, 4 shots of espresso, and 2 leaves of mint. Add ice. Enjoy!";
     this.recipeid = recipeid;
   }
 
   render() {
-    const { userName, recipeImage, recipeName, recipeRating, recipe, recipeid } = this;
+    const {
+      userName,
+      recipeImage,
+      recipeName,
+      recipeRating,
+      recipe,
+      recipeid,
+    } = this;
     this.shadowRoot.innerHTML = `
         <article class="recipe-component">
             <span>${userName}</span>
@@ -20,8 +36,12 @@ export default class recipeCard extends HTMLElement {
                 </section>
                 <a>${recipeName}</a>
                     <div class="stars">
-                        ${[...Array(5)].map((_, i) => `
-                          <i class="fa-solid fa-star ${i < recipeRating ? 'active' : ''}"></i>`).join('')}
+                        ${[...Array(5)]
+                          .map(
+                            (_, i) => `
+                          <i class="fa-solid fa-star ${i < recipeRating ? "active" : ""}"></i>`,
+                          )
+                          .join("")}
                     </div>
             <section class="ingredients">
                     ${recipe}
@@ -39,8 +59,8 @@ export default class recipeCard extends HTMLElement {
             });
         </script>
       `;
-      this.setAttribute("data-id", recipeid);
-      console.log("Recipe card added to the DOM", recipeid);
+    this.setAttribute("data-id", recipeid);
+    console.log("Recipe card added to the DOM", recipeid);
 
     // Create a link element for the external stylesheet
     const linkElement = document.createElement("link");
@@ -61,28 +81,29 @@ export default class recipeCard extends HTMLElement {
           index1 >= index2
             ? star.classList.add("active")
             : star.classList.remove("active");
-            const rating = this.calculateRating(stars);
-            console.log(rating);
+          const rating = this.calculateRating(stars);
+          console.log(rating);
         });
 
         const rating = this.calculateRating(stars);
         // get the recipe id
         const recipeid = this.getAttribute("data-id");
         console.log(recipeid);
-        fetch("/api/update/recipe/" + recipeid+"/rating", {
+        fetch("/api/update/recipe/" + recipeid + "/rating", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ newRating: rating }),
+        });
       });
     });
-  });
   }
 
   calculateRating(stars) {
-    return Array.from(stars).filter(star => star.classList.contains("active")).length;
-}
+    return Array.from(stars).filter((star) => star.classList.contains("active"))
+      .length;
+  }
 
   connectedCallback() {
     this.render();

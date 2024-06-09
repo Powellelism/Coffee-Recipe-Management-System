@@ -2,10 +2,10 @@ document.addEventListener("DOMContentLoaded", reviewRecipe);
 document.addEventListener("DOMContentLoaded", init);
 
 const DBtoSize = {
-  "SMALL": "tall",
-  "MEDIUM": "grande",
-  "LARGE": "venti",
-}
+  SMALL: "tall",
+  MEDIUM: "grande",
+  LARGE: "venti",
+};
 /**
  * Initialize the review page's event listeners.
  */
@@ -68,19 +68,18 @@ async function sendRecipeToDataBase(event) {
     ingredients: recipeData.ingredients,
     size: recipeData.size,
   };
-  const response = await fetch('/api/post/recipe', {
-    method: 'POST',
+  const response = await fetch("/api/post/recipe", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(newBody),
   });
-  
+
   if (!response.ok) {
-    console.error('Failed to save recipe to database');
-  }
-  else {
-    localStorage.removeItem('newRecipe');
-    window.location = '/dashboard';
+    console.error("Failed to save recipe to database");
+  } else {
+    localStorage.removeItem("newRecipe");
+    window.location = "/dashboard";
   }
 }

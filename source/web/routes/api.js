@@ -52,6 +52,6 @@ router.get(
   "/get/userRecipes",
   authMiddleware.authenticate,
   recipeController.getUserRecipes,
-)
+);
 
 module.exports = router;
