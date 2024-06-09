@@ -61,8 +61,6 @@ describe("Testing saved recipes page", () => {
     // Click on saved recipes
     await page.waitForSelector(".saved-button");
     await page.click(".saved-button");
-
-    await page.waitForNavigation();
     await page.waitForSelector(".your-cards recipe-card");
     // Navigate back to the home page
     // Click on saved recipes
