@@ -56,11 +56,11 @@ describe("Testing saved recipes page", () => {
 
     await page.waitForSelector('form-field button[type="submit"]');
     await page.click('form-field button[type="submit"]');
-    
+
     // Navigate to the saved recipes page
     await page.goto("http://localhost:3000/recipe/foryou");
-    
-    await page.waitForSelector('.your-cards recipe-card');
+
+    await page.waitForSelector(".your-cards recipe-card");
     // Check that the saved recipe appears
     const recipes = await page.evaluate(() => {
       const recipeCards = document.querySelectorAll("recipe-card");
