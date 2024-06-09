@@ -156,12 +156,6 @@ header {
   border-radius: 8px;
 }
 
-.recipe-component .stars {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-}
-
 .stars {
   display: flex;
   align-items: center;
@@ -180,6 +174,12 @@ header {
   font-size: 20px;
   cursor: pointer;
   transition: color 0.2s ease;
+}
+
+.recipe-component .stars {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
 }
 
 .nav-trigger {
@@ -272,11 +272,6 @@ h2 {
 
 .stars i.active {
   color: #ff9c1a;
-}
-
-/* Home Section */
-.nav-trigger {
-  display: none;
 }
 
 /* Media query section */
