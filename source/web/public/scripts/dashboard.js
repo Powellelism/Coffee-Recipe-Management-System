@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", init);
-import recipeCard from "./recipeCard.js";
+import recipeCard from "/scripts/recipeCard.js";
 /**
  * read data of coffee shops and add events for buttons on home page
  */
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           : recipe.userEmail
         : "Jacob R.";
       recipeCardElement.recipeid = recipe.recipeId;
-      recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeImage = '/assets/images/diy-coffee.jpg'; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ? recipe.userEmail.split("@")[0]
           : recipe.userEmail
         : "Jacob R.";
-      recipeCardElement.recipeImage = "../assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeImage = '/assets/images/diy-coffee.jpg'; // Default image or you can use recipe.imageUrl if available
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
