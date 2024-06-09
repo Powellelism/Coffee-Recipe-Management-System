@@ -1,15 +1,9 @@
 window.addEventListener("DOMContentLoaded", init);
-import recipeCard from './recipeCard.js';
+import recipeCard from "/scripts/recipeCard.js";
 /**
  * Read data of coffee shops and add events for buttons on home page.
  */
 async function init() {
-  try {
-    getShops();
-  } catch (error) {
-    console.log(error);
-  }
-
   let createButtonEl = document.querySelectorAll("button")[0];
 
   // add click event to the button for create new recipes
@@ -59,7 +53,11 @@ async function renderUserRecipes() {
 
     recipes.forEach((recipe) => {
       const recipeCardElement = new recipeCard();
-      recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
+      recipeCardElement.userName = recipe.userEmail
+        ? recipe.userEmail.includes("@")
+          ? recipe.userEmail.split("@")[0]
+          : recipe.userEmail
+        : "Jacob R.";
       recipeCardElement.recipeImage = (Object.keys(recipe.image).length > 0) ? recipe.image : "../assets/images/diy-coffee.jpg";
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
@@ -83,4 +81,3 @@ async function renderUserRecipes() {
     console.error(error);
   }
 }
-

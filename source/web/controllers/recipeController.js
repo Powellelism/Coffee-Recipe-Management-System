@@ -12,7 +12,7 @@ const cache = new NodeCache({ stdTTL: 900 });
  */
 exports.getRatingRecipes = async (request, response) => {
   try {
-    const cacheKey = 'ratingRecipes';
+    const cacheKey = "ratingRecipes";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -85,7 +85,6 @@ exports.getRatingRecipes = async (request, response) => {
       return acc;
     }, {});
 
-
     const formattedRecipes = recipes.map((recipe) => {
       const userRecipe = userRecipes.find((ur) => ur.recipeId === recipe.id);
       const userEmail = userRecipe ? userMap[userRecipe.userId] : null;
@@ -110,8 +109,7 @@ exports.getRatingRecipes = async (request, response) => {
         image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,
         userEmail,
-      }
-
+      };
     });
     cache.set(cacheKey, formattedRecipes);
     response.json(formattedRecipes);
@@ -130,7 +128,7 @@ exports.getRatingRecipes = async (request, response) => {
  */
 exports.getRecentRecipes = async (request, response) => {
   try {
-    const cacheKey = 'recentRecipes';
+    const cacheKey = "recentRecipes";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -203,7 +201,6 @@ exports.getRecentRecipes = async (request, response) => {
       return acc;
     }, {});
 
-
     const formattedRecipes = recipes.map((recipe) => {
       const userRecipe = userRecipes.find((ur) => ur.recipeId === recipe.id);
       const userEmail = userRecipe ? userMap[userRecipe.userId] : null;
@@ -228,8 +225,7 @@ exports.getRecentRecipes = async (request, response) => {
         image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,
         userEmail,
-      }
-
+      };
     });
 
     response.json(formattedRecipes);
@@ -290,8 +286,8 @@ exports.addRecipe = async (request, response) => {
         userRecipes: {
           create: {
             userId: userId,
-          }
-        }
+          },
+        },
       },
     });
 
@@ -348,7 +344,7 @@ exports.getSingleRecipe = async (request, response) => {
   try {
     const id = parseInt(request.params.id);
 
-    const cacheKey = 'recipe_' + id + '_' + 'single';
+    const cacheKey = "recipe_" + id + "_" + "single";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -378,7 +374,7 @@ exports.getSingleRecipe = async (request, response) => {
 exports.getRatingForRecipe = async (request, response) => {
   try {
     const id = parseInt(request.params.id);
-    const cacheKey = 'recipe_' + id + '_' + 'rating';
+    const cacheKey = "recipe_" + id + "_" + "rating";
     const cachedRecipes = cache.get(cacheKey);
 
     if (cachedRecipes) {
@@ -429,6 +425,12 @@ exports.updateRecipeRating = async (request, response) => {
   }
 };
 
+/**
+ * This function gets only the recipes that the currently logged in user has created.
+ * @param request On page load to /foryou, we request the user's recipes, specificall their id.
+ * @param response A list of the user's recipes in JSON format.
+ * @returns {Promise<void>}
+ */
 exports.getUserRecipes = async (request, response) => {
   try {
     const userUUID = request.user.id;
@@ -447,7 +449,7 @@ exports.getUserRecipes = async (request, response) => {
     }
 
     const userId = user.id;
-    console.log("User email:" + user.email);
+    console.log(userId);
 
     const userRecipes = await prisma.userRecipes.findMany({
       where: {
@@ -461,7 +463,23 @@ exports.getUserRecipes = async (request, response) => {
         }
       },
     });
+
+    console.log(userRecipes);
+    const userIds = userRecipes.map((userRecipe) => userRecipe.userId);
+    const users = await prisma.users.findMany({
+      where: {
+        id: {
+          in: userIds,
+        },
+      },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
+
     const formattedRecipes = userRecipes.map((userRecipe) => {
+      const userEmail = users ? users[0].email : null;
       const recipe = userRecipe.recipe;
       return {
         recipeId: recipe.id,
@@ -472,7 +490,6 @@ exports.getUserRecipes = async (request, response) => {
         userEmail: user.email,
       };
     });
-
     response.json(formattedRecipes);
   } catch (error) {
     console.error("Error retrieving user recipes:", error);

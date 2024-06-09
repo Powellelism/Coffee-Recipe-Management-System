@@ -1,16 +1,16 @@
 window.addEventListener("DOMContentLoaded", init);
 
 const sizeToDB = {
-  "TALL": "SMALL",
-  "GRANDE": "MEDIUM",
-  "VENTI": "LARGE",
-}
+  TALL: "SMALL",
+  GRANDE: "MEDIUM",
+  VENTI: "LARGE",
+};
 
 const DBtoSize = {
-  "SMALL": "tall",
-  "MEDIUM": "grande",
-  "LARGE": "venti",
-}
+  SMALL: "tall",
+  MEDIUM: "grande",
+  LARGE: "venti",
+};
 /**
  * Initialize the customize page's event listeners.
  */
