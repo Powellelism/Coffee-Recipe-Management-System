@@ -57,6 +57,13 @@ describe("Testing saved recipes page", () => {
     await page.waitForSelector('form-field button[type="submit"]');
     await page.click('form-field button[type="submit"]');
 
+    // Navigate back to the home page
+    // Click on saved recipes
+    await page.waitForSelector(".saved-button");
+    await page.click(".saved-button");
+
+    await page.waitForNavigation();
+    await page.waitForSelector(".your-cards recipe-card");
         // Navigate back to the home page    
         // Click on saved recipes
         await page.waitForSelector('.saved-button');
@@ -64,22 +71,26 @@ describe("Testing saved recipes page", () => {
         
         await page.waitForSelector('.your-cards recipe-card');
 
-        // Check that the saved recipe appears
-        const recipes = await page.evaluate(() => {
-            const recipeCards = document.querySelectorAll('recipe-card');
-            return Array.from(recipeCards).map(card => {
-                const shadowRoot = card.shadowRoot;
-                const recipeNameElement = shadowRoot.querySelector('a');
-                const createdByElement = shadowRoot.querySelector('article span');
-                const recipeName = recipeNameElement ? recipeNameElement.innerText : null;
-                const createdBy = createdByElement ? createdByElement.innerText : null;
-                return { recipeName, createdBy };
-            });
-        });
+    // Check that the saved recipe appears
+    const recipes = await page.evaluate(() => {
+      const recipeCards = document.querySelectorAll("recipe-card");
+      return Array.from(recipeCards).map((card) => {
+        const shadowRoot = card.shadowRoot;
+        const recipeNameElement = shadowRoot.querySelector("a");
+        const createdByElement = shadowRoot.querySelector("article span");
+        const recipeName = recipeNameElement
+          ? recipeNameElement.innerText
+          : null;
+        const createdBy = createdByElement ? createdByElement.innerText : null;
+        return { recipeName, createdBy };
+      });
+    });
 
-        expect(recipes).toContainEqual(expect.objectContaining({ recipeName: 'Test Recipe' }));
-        for (const recipe of recipes) {
-            expect(recipe.createdBy).toBe('123');
-        }
-    }, 90000);
+    expect(recipes).toContainEqual(
+      expect.objectContaining({ recipeName: "Test Recipe" }),
+    );
+    for (const recipe of recipes) {
+      expect(recipe.createdBy).toBe("123");
+    }
+  }, 90000);
 });
