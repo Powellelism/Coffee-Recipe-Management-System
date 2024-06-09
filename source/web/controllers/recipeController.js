@@ -433,17 +433,31 @@ exports.getUserRecipes = async (request, response) => {
         recipe: true,
       },
     });
-    console.log("userRecipes", userRecipes)
+
+    console.log(userRecipes);
+    const userIds = userRecipes.map((userRecipe) => userRecipe.userId);
+    const users = await prisma.users.findMany({
+      where: {
+        id: {
+          in: userIds,
+        },
+      },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
     const formattedRecipes = userRecipes.map((userRecipe) => {
+      const userEmail = users ? users[0].email : null;
       const recipe = userRecipe.recipe;
       return {
         recipeId: recipe.id,
         recipeName: recipe.name,
         rating: recipe.rating,
         instructions: recipe.instructions,
+        userEmail,
       };
     });
-
     response.json(formattedRecipes);
   } catch (error) {
     console.error("Error retrieving user recipes:", error);
