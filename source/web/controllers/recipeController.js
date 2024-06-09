@@ -255,7 +255,6 @@ exports.addRecipe = async (request, response) => {
       image
     } = request.body;
 
-    console.log("Image: " + image);
     const userId = request.user.id;
 
     // Create the recipe
@@ -370,7 +369,7 @@ exports.getSingleRecipe = async (request, response) => {
 };
 
 /**
- * This function get rating by recipe based on recipe id
+ * This function gets rating by recipe based on recipe id
  * @param request None
  * @param response int of the current rating of the recipe
  * @returns {Promise<void>}
@@ -392,6 +391,7 @@ exports.getRatingForRecipe = async (request, response) => {
       },
     });
     cache.set(cacheKey, recipe.rating);
+
     // Return the rating
     response.status(201).json(recipe.rating);
   } catch (error) {
@@ -412,17 +412,62 @@ exports.updateRecipeRating = async (request, response) => {
     const { newRating } = request.body;
     const id = parseInt(request.params.id);
 
+    // Find current rating
+    const recipeRatings = await prisma.recipe.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        Rating: true,
+      },
+    });
+
+    console.log("Current rating: " + recipeRatings.rating);
+
+    // Determine current number of ratings
+    let numRatings = recipeRatings.Rating.length;
+    console.log("Number of ratings before: " + numRatings);
+
+    // Multiply current number of ratings with current score to get total sum
+    let sumRatings = numRatings * recipeRatings.rating;
+    console.log("Sum of ratings before: " + sumRatings);
+
+    // Add the new rating to the total sum of ratings
+    sumRatings += newRating;
+    console.log("Sum of ratings with new rating: " + sumRatings);
+
+    // Add the new rating to db. This increments the total number of ratings
+    const newRatingRecord = await prisma.rating.create({
+      data: {
+        rateableId: id,
+        rateableType: 'recipe',
+        score: newRating,
+        recipeId: id,
+      },
+    });
+
+    // Increment the total number of ratings
+    numRatings++;
+    console.log("New number of ratings: " + numRatings);
+
+    // Find the new average rating. Control for division by zero edge case.
+    const newScore = (numRatings > 0) ? (sumRatings / numRatings) : console.error("Division by 0: number of ratings is 0.");
+
+    console.log("New score: " + newScore);
+
     // Update the recipe rating
     const recipe = await prisma.recipe.update({
       where: {
         id: id,
       },
       data: {
-        rating: newRating,
+        rating: newScore,
       },
     });
-    cache.flushAll();
-    response.status(201).json(recipe.rating);
+
+    //cache.flushAll();
+    response.status(201).json(newScore);
+
   } catch (error) {
     console.error("Error updating rating:", error);
     response.status(500).json({ error: "Internal Server Error" });
@@ -447,7 +492,6 @@ exports.getUserRecipes = async (request, response) => {
     }
 
     const userId = user.id;
-    console.log("User email:" + user.email);
 
     const userRecipes = await prisma.userRecipes.findMany({
       where: {

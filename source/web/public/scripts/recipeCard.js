@@ -39,8 +39,8 @@ export default class recipeCard extends HTMLElement {
             });
         </script>
       `;
-      this.setAttribute("data-id", recipeid);
-      console.log("Recipe card added to the DOM", recipeid);
+    this.setAttribute("data-id", recipeid);
+    console.log("Recipe card added to the DOM", recipeid);
 
     // Create a link element for the external stylesheet
     const linkElement = document.createElement("link");
@@ -53,36 +53,58 @@ export default class recipeCard extends HTMLElement {
     this.addStarRatingFunctionality();
   }
 
-  addStarRatingFunctionality() {
+  async addStarRatingFunctionality() {
     const stars = this.shadowRoot.querySelectorAll(".stars i");
     stars.forEach((star, index1) => {
-      star.addEventListener("click", () => {
+      star.addEventListener("click", async () => {
         stars.forEach((star, index2) => {
           index1 >= index2
             ? star.classList.add("active")
             : star.classList.remove("active");
-            const rating = this.calculateRating(stars);
-            console.log(rating);
+          const rating = this.calculateRating(stars);
+          console.log(rating);
         });
 
-        const rating = this.calculateRating(stars);
         // get the recipe id
+        const rating = this.calculateRating(stars);
         const recipeid = this.getAttribute("data-id");
+
         console.log(recipeid);
-        fetch("/api/update/recipe/" + recipeid+"/rating", {
+        const response = await fetch("/api/update/recipe/" + recipeid + "/rating", {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ newRating: rating }),
+        });
+
+        if (response.ok) {
+          const newScore = await response.json();
+          console.log("returns: " + newScore);
+          this.updateStars(newScore);
+        } else {
+          console.error("Failed to update rating");
+        }
       });
     });
-  });
   }
 
+  /*
+   * Updates the stars after user places a rating.
+   */
+  updateStars(newRating) {
+    const stars = this.shadowRoot.querySelectorAll(".stars i");
+    stars.forEach((star, index) => {
+      index < newRating ? star.classList.add("active") : star.classList.remove("active");
+    });
+  }
+
+  /*
+   * Calculates current rating based on stars.
+   */
   calculateRating(stars) {
     return Array.from(stars).filter(star => star.classList.contains("active")).length;
-}
+  }
 
   connectedCallback() {
     this.render();
