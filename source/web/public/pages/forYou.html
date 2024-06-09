@@ -1,50 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-    <link rel="stylesheet" href="/styles/common.css" />
-  </head>
 
-  <header class="main-header">
-    <nav class="nav">
-      <div class="container">
-        <div class="logo">
-          <a href="/">Coffee Recipe Maker.</a>
-        </div>
-        <div id="mainListDiv" class="main-list">
-          <ul class="nav-links">
-            <li><button class="create-button">Create a Recipe</button></li>
-            <li><button class="saved-button">Saved Recipes</button></li>
-            <li><button class="about-button">About Us</button></li>
-            <div class="auth-buttons">
-              <li>
-                <button
-                  class="register-button"
-                  style="background-color: #314a31; border-color: #314a31"
-                >
-                  Sign Out
-                </button>
-              </li>
-            </div>
-          </ul>
-        </div>
-        <span class="nav-trigger">
-          <i></i>
-          <i></i>
-          <i></i>
-        </span>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+  <link rel="stylesheet" href="/styles/common.css" />
+</head>
+
+<header class="main-header">
+  <nav class="nav">
+    <div class="container">
+      <div class="logo">
+        <a href="/">Coffee Recipe Maker.</a>
       </div>
-    </nav>
-  </header>
-
-  <body>
-    <h1>Your Cards</h1>
-    <div class="your-cards">
-        
+      <div id="mainListDiv" class="main-list">
+        <ul class="nav-links">
+          <li><button class="create-button">Create a Recipe</button></li>
+          <li><button class="saved-button">Saved Recipes</button></li>
+          <li><button class="about-button">About Us</button></li>
+          <div class="auth-buttons">
+            <li>
+              <button class="register-button" style="background-color: #314a31; border-color: #314a31">
+                Sign Out
+              </button>
+            </li>
+          </div>
+        </ul>
+      </div>
+      <span class="nav-trigger">
+        <i></i>
+        <i></i>
+        <i></i>
+      </span>
     </div>
-    <script src="../scripts/savedRecipes.js" type="module" defer></script>
-    <script src="../scripts/recipeCard.js" type="module" defer></script>
+  </nav>
+</header>
+
+<body>
+  <h1>Your Cards</h1>
+  <div class="recipe-container" style="position: relative;">
+    <button class="scroll-button scroll-button1 left">&#60;</button>
+    <div class="your-cards" style="display: flex; flex-direction: row; overflow-x: auto; scroll-behavior: smooth;">
+      <!-- Recipe cards will be added here -->
+    </div>
+    <button class="scroll-button scroll-button1 right">&#62;</button>
+  </div>
+  </div>
+  <script src="../scripts/savedRecipes.js" type="module" defer></script>
+  <script src="../scripts/recipeCard.js" type="module" defer></script>
 </body>
+
 </html>

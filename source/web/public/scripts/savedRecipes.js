@@ -11,25 +11,25 @@ async function init() {
   }
 
   let createButtonEl = document.querySelectorAll("button")[0];
-  
+
   // add click event to the button for create new recipes
   createButtonEl.addEventListener("click", () => {
     window.location = "/recipe/customize";
   });
   let savedButtonEl = document.querySelectorAll("button")[1];
-  
+
   //add click event to the button for view the saved recipes
   savedButtonEl.addEventListener("click", () => {
     window.location = "/recipe/foryou";
   });
   let aboutButtonEl = document.querySelectorAll("button")[2];
-  
+
   //add click event to the button for view the saved recipes
   aboutButtonEl.addEventListener("click", () => {
     window.location = "/about";
   });
   let signOutButtonEl = document.querySelectorAll("button")[3];
-  
+
   //add click event to the button for view the sign up page
   signOutButtonEl.addEventListener("click", () => {
     window.location = "/";
@@ -60,12 +60,21 @@ async function renderUserRecipes() {
     recipes.forEach((recipe) => {
       const recipeCardElement = new recipeCard();
       recipeCardElement.userName = recipe.userEmail ? (recipe.userEmail.includes('@') ? recipe.userEmail.split('@')[0] : recipe.userEmail) : "Jacob R.";
-      recipeCardElement.recipeImage = recipe.image;
+      recipeCardElement.recipeImage = (Object.keys(recipe.image).length > 0) ? recipe.image : "../assets/images/diy-coffee.jpg";
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
       recipeCardElement.recipeid = recipe.recipeId;
       yourCardsContainer.appendChild(recipeCardElement);
+    });
+
+    const scrollAmount = 800;
+    document.querySelector(".scroll-button2.left").addEventListener("click", () => {
+      yourCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    document.querySelector(".scroll-button2.right").addEventListener("click", () => {
+      yourCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
     });
 
     console.log("User recipes rendered successfully");
