@@ -479,7 +479,6 @@ exports.getUserRecipes = async (request, response) => {
     });
 
     const formattedRecipes = userRecipes.map((userRecipe) => {
-      const userEmail = users ? users[0].email : null;
       const recipe = userRecipe.recipe;
       return {
         recipeId: recipe.id,
