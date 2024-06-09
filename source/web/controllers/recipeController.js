@@ -453,18 +453,21 @@ exports.getUserRecipes = async (request, response) => {
         userId,
       },
       include: {
-        recipe: true,
+        recipe: {
+          include: {
+            image: true,
+          }
+        }
       },
     });
     const formattedRecipes = userRecipes.map((userRecipe) => {
       const recipe = userRecipe.recipe;
-      console.log("recipe image: " + recipe.imageUrl);
       return {
         recipeId: recipe.id,
         recipeName: recipe.name,
         rating: recipe.rating,
         instructions: recipe.instructions,
-        imageUrl: recipe.image
+        image: recipe.image.map((img) => img.url),
       };
     });
 
