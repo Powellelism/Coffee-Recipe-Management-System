@@ -33,8 +33,8 @@ describe("Testing saved recipes page", () => {
     await recipeNameInput.type("Test Recipe");
 
     // Select the recipe type
-    await page.waitForSelector('label[for="tall"]');
-    await page.click('label[for="tall"]');
+    await page.waitForSelector('label[for="grande"]');
+    await page.click('label[for="grande"]');
 
     // Select the drink type
     await page.waitForSelector('label[for="cold"]');

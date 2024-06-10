@@ -1,15 +1,14 @@
 /* Import CSS vars */
 @import url("vars.css");
+
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
-  background-image: linear-gradient(
-      rgb(255 255 255 / 30%),
-      rgb(255 255 255 / 0%)
-    ),
-    url("/public/assets/images/coffee.jpg");
+  background-image: linear-gradient(rgb(255 255 255 / 30%),
+      rgb(255 255 255 / 0%)),
+    url("/assets/images/coffee.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -181,19 +180,19 @@ main {
   }
 }
 
-#size-container input:checked + label.size-option,
-#type-container input:checked + label.type-option {
+#size-container input:checked+label.size-option,
+#type-container input:checked+label.type-option {
   background-color: var(--hover-color, blanchedalmond);
   box-shadow: 0 0 0 0.1rem var(--select-color, black);
   border: 0.0625rem solid var(--select-color, black);
   color: var(--select-color, black);
 }
 
-#size-container input:checked + label.size-option img {
+#size-container input:checked+label.size-option img {
   filter: brightness(0) saturate(100%);
 }
 
-#size-container input:checked + label.size-option span {
+#size-container input:checked+label.size-option span {
   color: var(--select-color, black);
 }
 
@@ -310,14 +309,15 @@ form form-field {
   margin: 1rem;
 }
 
-#submit-button, #generate-button {
+#submit-button,
+#generate-button {
   min-width: 45%;
   cursor: pointer;
   /* margin: 0.5rem; */
   margin-right: 0.5rem;
 }
 
-@media only screen and (width >= 280px) and (width <= 1024px) {
+@media only screen and (width >=280px) and (width <=1024px) {
   header h1 {
     position: static;
     transform: none;
