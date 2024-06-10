@@ -56,9 +56,8 @@ async function getShops() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // Your existing code here
   try {
-    const response1 = await fetch("api/get/ratingrecipes", {
+    const response1 = await fetch("/api/get/ratingrecipes", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("Failed to fetch recipes");
     }
 
-    const response2 = await fetch("api/get/recentrecipes", {
+    const response2 = await fetch("/api/get/recentrecipes", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -82,8 +81,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const recipes1 = await response1.json();
     const recipes2 = await response2.json();
-    console.log("Fetched recipes:", recipes1); // Log fetched data for debugging
-    console.log("Fetched recipes:", recipes2);
 
     const topCardsContainer = document.querySelector(".top-cards");
     const recentCardsContainer = document.querySelector(".recent-cards");
@@ -101,7 +98,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           : recipe.userEmail
         : "Jacob R.";
       recipeCardElement.recipeid = recipe.recipeId;
-      recipeCardElement.recipeImage = "/assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeImage =
+        Object.keys(recipe.image).length > 0
+          ? recipe.image
+          : "/assets/images/diy-coffee.jpg";
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
@@ -135,12 +135,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           ? recipe.userEmail.split("@")[0]
           : recipe.userEmail
         : "Jacob R.";
-      recipeCardElement.recipeImage = "/assets/images/diy-coffee.jpg"; // Default image or you can use recipe.imageUrl if available
+      recipeCardElement.recipeImage =
+        Object.keys(recipe.image).length > 0
+          ? recipe.image
+          : "/assets/images/diy-coffee.jpg";
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
       recipeCardElement.recipeid = recipe.recipeId;
-      console.log(recipeCardElement.userName);
       recentCardsContainer.appendChild(recipeCardElement);
 
       const scrollAmount = 800;
@@ -162,8 +164,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           });
         });
     });
-
-    console.log("Recipe cards added to the DOM"); // Log confirmation
   } catch (error) {
     console.error("Error loading recipes:", error);
   }
@@ -171,7 +171,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 document.querySelector(".nav-trigger").addEventListener("click", function () {
   this.classList.toggle("active");
-  console.log("Clicked menu");
   var mainListDiv = document.getElementById("mainListDiv");
   mainListDiv.classList.toggle("show-list");
   mainListDiv.style.display = "block";
@@ -180,7 +179,6 @@ document.querySelector(".nav-trigger").addEventListener("click", function () {
 window.addEventListener("scroll", function () {
   if (document.documentElement.scrollTop > 50) {
     document.querySelector(".nav").classList.add("affix");
-    console.log("OK");
   } else {
     document.querySelector(".nav").classList.remove("affix");
   }

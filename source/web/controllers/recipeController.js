@@ -44,6 +44,11 @@ exports.getRatingRecipes = async (request, response) => {
             content: true,
           },
         },
+        image: {
+          select: {
+            url: true,
+          },
+        },
       },
       orderBy: {
         rating: "desc",
@@ -101,8 +106,9 @@ exports.getRatingRecipes = async (request, response) => {
         rating: recipe.rating,
         reviews: recipe.reviews.map((review) => review.content),
         instructions: recipe.instructions,
-        //totalTime: recipe.totalTime,
-        userEmail,
+        image: recipe.image.map((img) => img.url),
+        //totalTime: recipe.totalTime,=======
+        userEmail: userEmail,
       };
     });
     cache.set(cacheKey, formattedRecipes);
@@ -152,6 +158,11 @@ exports.getRecentRecipes = async (request, response) => {
         reviews: {
           select: {
             content: true,
+          },
+        },
+        image: {
+          select: {
+            url: true,
           },
         },
       },
@@ -211,8 +222,9 @@ exports.getRecentRecipes = async (request, response) => {
         rating: recipe.rating,
         reviews: recipe.reviews.map((review) => review.content),
         instructions: recipe.instructions,
+        image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,
-        userEmail,
+        userEmail: userEmail,
       };
     });
 
@@ -225,15 +237,16 @@ exports.getRecentRecipes = async (request, response) => {
 /**
  * This function adds a new recipe.
  * @param request JSON body of a recipe including
- * name, description, foodId, ingredients, size, intructions, totalTime, userID
+ * name, description, foodId, ingredients, size, intructions, totalTime, userID, image URL
  * @param response JSON file of the new created recipe
  * @returns {Promise<void>}
  */
 exports.addRecipe = async (request, response) => {
   try {
-    const { name, ingredients, size, instructions } = request.body;
-    console.log(request.body);
+    const { name, ingredients, size, instructions, image } = request.body;
+
     const userId = request.user.id;
+
     // Create the recipe
     const user = await prisma.users.findUnique({
       where: { id: userId },
@@ -255,6 +268,14 @@ exports.addRecipe = async (request, response) => {
         },
         size,
         instructions,
+        image: {
+          create: {
+            url: image,
+            imagableId: 0,
+            imagableType: "generated",
+            content: name,
+          },
+        },
         userRecipes: {
           create: {
             userId: userId,
@@ -413,6 +434,7 @@ exports.getUserRecipes = async (request, response) => {
       },
       select: {
         id: true,
+        email: true,
       },
     });
     if (!user) {
@@ -420,39 +442,29 @@ exports.getUserRecipes = async (request, response) => {
     }
 
     const userId = user.id;
-    console.log(userId);
 
     const userRecipes = await prisma.userRecipes.findMany({
       where: {
         userId,
       },
       include: {
-        recipe: true,
+        recipe: {
+          include: {
+            image: true,
+          },
+        },
       },
     });
 
-    console.log(userRecipes);
-    const userIds = userRecipes.map((userRecipe) => userRecipe.userId);
-    const users = await prisma.users.findMany({
-      where: {
-        id: {
-          in: userIds,
-        },
-      },
-      select: {
-        id: true,
-        email: true,
-      },
-    });
     const formattedRecipes = userRecipes.map((userRecipe) => {
-      const userEmail = users ? users[0].email : null;
       const recipe = userRecipe.recipe;
       return {
         recipeId: recipe.id,
         recipeName: recipe.name,
         rating: recipe.rating,
         instructions: recipe.instructions,
-        userEmail,
+        image: recipe.image.map((img) => img.url),
+        userEmail: user.email,
       };
     });
     response.json(formattedRecipes);

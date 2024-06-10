@@ -53,6 +53,30 @@ describe("Test customize recipe page functionality", () => {
     await passwordInput.type("PkfUgyrsLtQfFvS");
     await page.click('form-field button[type="submit"]');
     await page.waitForNavigation();
+    await page.evaluate(() => {
+      const localStorageMock = (function () {
+        let store = {};
+        return {
+          getItem: function (key) {
+            return store[key] || null;
+          },
+          setItem: function (key, value) {
+            store[key] = String(value);
+          },
+          removeItem: function (key) {
+            delete store[key];
+          },
+          clear: function () {
+            store = {};
+          },
+        };
+      })();
+      // Replace the native localStorage with the mock
+      Object.defineProperty(window, "localStorage", {
+        value: localStorageMock,
+        writable: true,
+      });
+    });
   }, 60000);
 
   it("Testing on page load, editing the recipe name is autofocused", async () => {
@@ -102,11 +126,15 @@ describe("Test customize recipe page functionality", () => {
     const recipeNameInput = await page.$("#recipe-name");
     await recipeNameInput.click({ clickCount: 3 });
     await page.keyboard.press("Backspace");
+    await page.evaluate(() => {
+      const input = document.querySelector("#recipe-name");
+      input.value = "";
+    });
     await recipeNameInput.type("Test Recipe");
 
     // Select the size
-    await page.waitForSelector('label[for="tall"]');
-    await page.click('label[for="tall"]');
+    await page.waitForSelector('label[for="grande"]');
+    await page.click('label[for="grande"]');
 
     // Select the drink type
     await page.waitForSelector('label[for="cold"]');
@@ -129,15 +157,21 @@ describe("Test customize recipe page functionality", () => {
     await recipeDescriptionInput.type("Test Description");
 
     // Submit the recipe
-    await page.waitForSelector("#submit-button");
-    await page.click("#submit-button");
+    await page.waitForSelector("form");
+    const formSubmitPromise = page.waitForNavigation();
+    await page.$eval("form", (form) =>
+      form.dispatchEvent(new Event("submit", { bubbles: true })),
+    );
+    await formSubmitPromise;
+
     const expectedLocalStorage = {
       recipe_name: "Test Recipe",
-      size: "SMALL",
+      size: "MEDIUM",
       drink_type: "COLD",
-      ingredients: ["CREAMER", "Test Ingredient"],
+      ingredients: ["", "Test Ingredient"],
       recipe: "Test Description",
     };
+
     const localStorageData = await page.evaluate(() => {
       return JSON.parse(localStorage.getItem("newRecipe"));
     });

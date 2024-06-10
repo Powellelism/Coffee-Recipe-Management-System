@@ -1,15 +1,22 @@
-@import url("vars.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Inknut Antiqua";
+  src: url("/assets/fonts/InknutAntiqua-Black.ttf") format("truetype");
+}
+
+body {
+  font-family: Roboto, Helvetica, sans-serif;
+  font-weight: 100;
+}
+
 body,
 header {
-  background-color: #fffbf3;
+  background-color: #e0ddd7;
   margin: 0;
   padding: 0;
 }
@@ -22,27 +29,73 @@ header {
   justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-  background-image: linear-gradient(
-      rgb(255 255 255 / 30%),
-      rgb(255 255 255 / 0%)
-    ),
-    url("/assets/images/coffee.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.nav {
-  position: fixed;
-  width: 100%;
-  transition: all 0.4s ease;
+.main-header {
+  text-align: center;
 }
 
-.container {
+.main-header li {
+  list-style: none;
+}
+
+/* Home Section */
+.nav {
+  transition: all 0.4s ease;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  justify-content: center; /* Centers the children horizontally */
+  align-items: center; /* Centers the children vertically */
+  width: 100%;
+  padding-top: 8vh;
+  padding-bottom: 1vh;
+  position: fixed;
+}
+
+.nav .container {
+  display: flex;
+  justify-content: center; /* Centers the children horizontally */
+  align-items: center; /* Centers the children vertically */
+}
+
+.nav .main-list {
+  display: flex;
+  justify-content: center; /* Centers the children horizontally */
+}
+
+.nav .nav-links {
+  display: flex;
+  justify-content: center; /* Centers the children horizontally */
+  list-style: none;
+  padding: 0;
+}
+
+.nav .nav-links li {
+  margin: 0 10px;
+}
+
+.create-button,
+.about-button,
+.saved-button,
+.login-button {
+  background-color: transparent;
+  color: black;
+  cursor: pointer;
+  border: none;
+  margin: 3rem;
+  font-size: medium;
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  font-family: Roboto, sans-serif;
+}
+
+.create-button:hover,
+.about-button:hover,
+.saved-button:hover,
+.login-button:hover {
+  color: grey;
 }
 
 .nav div.logo {
@@ -62,14 +115,38 @@ header {
 
 .nav div.logo a {
   text-decoration: none;
-  color: white;
-  font-size: 26px;
+  color: black;
+  font-size: 36px;
+  font-family: Prata, serif;
   font-weight: bold;
-  letter-spacing: -3px;
-  margin-right: 15px;
+  letter-spacing: -4px;
+}
+
+.join-fun h1 {
+  color: black;
+  font-size: 5vw;
+  font-weight: bold;
+  padding-left: 3rem;
+}
+
+.join-fun {
+  display: flex;
+  flex-direction: row;
+  padding-top: 3rem;
+  align-items: center; /* Align items vertically centered */
+  justify-content: space-between; /* Distribute space between items */
+}
+
+.join-fun img {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  object-position: bottom;
+  padding-right: 2rem;
 }
 
 .nav div.main-list {
+  padding-top: 1rem;
   height: 50px;
   width: 100%;
 }
@@ -93,17 +170,6 @@ header {
   padding-right: 1rem;
 }
 
-.create-button,
-.about-button,
-.saved-button {
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  border: none;
-  margin: 10px;
-  font-size: large;
-}
-
 .auth-buttons {
   display: flex;
   flex-direction: row;
@@ -111,21 +177,26 @@ header {
   margin-left: auto;
 }
 
-.login-button,
-.register-button {
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  margin: 5px;
-  outline: none;
-  padding: 13px 30px;
-  text-align: center;
-  width: auto;
+/* Rating star system */
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
-/* Web Component styling */
+.stars i {
+  color: #e6e6e6;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.stars i.active {
+  color: #ff9c1a;
+}
+
 .recipe-container {
   display: flex;
   flex-wrap: wrap;
@@ -155,35 +226,10 @@ header {
   border-radius: 8px;
 }
 
-.stars {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
-
-.stars i {
-  color: #e6e6e6;
-  font-size: 20px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
 .recipe-component .stars {
   display: flex;
   justify-content: center;
   margin: 10px 0;
-}
-
-.nav-trigger {
-  cursor: pointer;
-  width: 30px;
-  height: 25px;
-  margin: auto;
-  position: absolute;
-  right: 30px;
-  display: none;
 }
 
 .nav-trigger i {
@@ -261,12 +307,6 @@ h2 {
   display: none; /* Hide scrollbar for cleaner look */
 }
 
-/* Rating star system */
-
-.stars i.active {
-  color: #ff9c1a;
-}
-
 /* Media query section */
 
 @media screen and (width >= 768px) and (width <= 1024px) {
@@ -276,18 +316,15 @@ h2 {
 }
 
 @media screen and (width <= 768px) {
-  .nav div.logo {
-    margin-left: 15px;
-  }
-
   .nav-trigger {
     display: block;
   }
 
+  .nav div.logo {
+    margin-left: 15px;
+  }
+
   .nav div.main-list {
-    position: absolute;
-    top: 35px;
-    right: 0;
     width: 100%;
     height: 0;
     overflow: hidden;
@@ -298,8 +335,7 @@ h2 {
   }
 
   .nav div.show-list ul li {
-    background-color: #111;
-    align-items: center;
+    padding-top: 2rem;
   }
 
   .nav div.main-list ul {
@@ -316,12 +352,33 @@ h2 {
   .auth-buttons {
     display: flex;
     flex-direction: column;
+    position: relative;
     width: 100%;
-    align-items: center;
+  }
+
+  .nav div.main-list ul li button {
+    text-align: center;
+    font-size: 1rem;
+    padding: 20px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
   }
 }
 
 /* Animation */
+
+.nav-trigger {
+  cursor: pointer;
+  width: 30px;
+  height: 25px;
+  margin: auto;
+  position: absolute;
+  right: 30px;
+  display: none;
+}
 
 .nav-trigger i:nth-child(1) {
   animation: out-t 0.8s backwards;

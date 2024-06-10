@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
@@ -44,7 +45,21 @@
 
   <body>
     <h1>Your Cards</h1>
-    <div class="your-cards"></div>
+    <div class="recipe-container" style="position: relative">
+      <button class="scroll-button scroll-button1 left">&#60;</button>
+      <div
+        class="your-cards"
+        style="
+          display: flex;
+          flex-direction: row;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+        "
+      >
+        <!-- Recipe cards will be added here -->
+      </div>
+      <button class="scroll-button scroll-button1 right">&#62;</button>
+    </div>
     <script src="/scripts/savedRecipes.js" type="module" defer></script>
     <script src="/scripts/recipeCard.js" type="module" defer></script>
   </body>

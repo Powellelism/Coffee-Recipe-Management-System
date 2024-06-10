@@ -38,4 +38,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          API_KEY: ${{ secrets.API_KEY }}
+          API_TEXTGEN_URL: ${{ secrets.API_TEXTGEN_URL }}
+          API_IMGGEN_URL: ${{ secrets.API_IMGGEN_URL }}
           PORT: 3000
