@@ -6,8 +6,10 @@
 }
 
 header {
-  background-image: linear-gradient(rgb(255 255 255 / 30%),
-      rgb(255 255 255 / 0%)),
+  background-image: linear-gradient(
+      rgb(255 255 255 / 30%),
+      rgb(255 255 255 / 0%)
+    ),
     url("/assets/images/coffee.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -113,6 +115,7 @@ main {
   padding: 0;
   color: var(--select-color, black);
   transition: border-bottom 0.3s ease;
+
   /* text-transform: uppercase; */
 }
 
@@ -133,6 +136,39 @@ main {
 #size-container input,
 #type-container input {
   display: none;
+}
+
+.img-container {
+  height: 60%;
+  border-radius: 1.5rem;
+  margin: 1rem;
+  background-color: var(--hover-color, blanchedalmond);
+  box-shadow: 0 0 0 0.1rem var(--select-color, black);
+  border: 0.0625rem solid var(--select-color, black);
+  color: var(--select-color, black);
+  position: relative;
+}
+
+.img-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: 1.5rem;
+}
+
+.img-container h6 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  z-index: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .size-option,
@@ -180,19 +216,19 @@ main {
   }
 }
 
-#size-container input:checked+label.size-option,
-#type-container input:checked+label.type-option {
+#size-container input:checked + label.size-option,
+#type-container input:checked + label.type-option {
   background-color: var(--hover-color, blanchedalmond);
   box-shadow: 0 0 0 0.1rem var(--select-color, black);
   border: 0.0625rem solid var(--select-color, black);
   color: var(--select-color, black);
 }
 
-#size-container input:checked+label.size-option img {
+#size-container input:checked + label.size-option img {
   filter: brightness(0) saturate(100%);
 }
 
-#size-container input:checked+label.size-option span {
+#size-container input:checked + label.size-option span {
   color: var(--select-color, black);
 }
 
@@ -246,7 +282,7 @@ main {
 
 #recipe {
   padding: 0.5rem 1rem;
-  margin: 0 0 1rem 0;
+  margin: 0 0 1rem;
   border-radius: 1.5rem;
   color: var(--text-color, brown);
   resize: none;
@@ -313,6 +349,7 @@ form form-field {
 #generate-button {
   min-width: 45%;
   cursor: pointer;
+
   /* margin: 0.5rem; */
   margin-right: 0.5rem;
 }
@@ -339,6 +376,7 @@ form form-field {
   form,
   header {
     display: flex;
+
     /* flex-flow: column wrap; */
     justify-content: center;
     align-items: center;
@@ -362,42 +400,8 @@ form form-field {
 
 .main {
   display: flex;
-  flex-direction: row;
-  flex-wrap: vertical;
+  flex-flow: row vertical;
   width: 60%;
-}
-
-.img-container {
-  height: 60%;
-  border-radius: 1.5rem;
-  margin: 1rem;
-  background-color: var(--hover-color, blanchedalmond);
-  box-shadow: 0 0 0 0.1rem var(--select-color, black);
-  border: 0.0625rem solid var(--select-color, black);
-  color: var(--select-color, black);
-  position: relative;
-}
-
-.img-container img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 1;
-  border-radius: 1.5rem;
-}
-
-.img-container h6 {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  z-index: 0;
-  text-align: center;
-  width: 100%;
 }
 
 #generate-container {
@@ -413,7 +417,7 @@ form form-field {
   overflow-wrap: column;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   #wrapper {
     flex-direction: column;
   }

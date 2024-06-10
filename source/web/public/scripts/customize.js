@@ -159,7 +159,9 @@ async function generateRecipe(event) {
   generateButton.textContent = "Magic brewing...";
 
   // Remove any previously existing ingredients
-  let cleanIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
+  let cleanIngredients = document.querySelectorAll(
+    '#ingredients-list input[type="text"]',
+  );
   cleanIngredients.forEach((input) => {
     input.value = "";
     input.parentElement.removeChild(input);
@@ -173,10 +175,10 @@ async function generateRecipe(event) {
   const recipe = await requestText("Recipe", recipeName.value, ingredients);
 
   // Fill out form with generated text
-  fillForm('select', size);
-  fillForm('select', type);
-  fillForm('list', ingredients);
-  fillForm('fill', recipe);
+  fillForm("select", size);
+  fillForm("select", type);
+  fillForm("list", ingredients);
+  fillForm("fill", recipe);
 
   // Reset generate button, indicating generation complete
   generateButton.disabled = false;
@@ -192,24 +194,25 @@ async function generateRecipe(event) {
  * @returns {string}
  */
 async function requestText(c, recName, ing) {
-  const url = '/api/post/generateRecipe';
+  const url = "/api/post/generateRecipe";
   const requestT = {
     recipeName: recName,
     category: c,
-    ingredients: ing
+    ingredients: ing,
   };
 
   const responseT = await fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json'
+      accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(requestT),
   });
 
   // Ensure that the response is clean
-  if (!responseT.ok) throw new Error('Failed to fetch data for ' + c + ' category');
+  if (!responseT.ok)
+    throw new Error("Failed to fetch data for " + c + " category");
 
   // Parse response, convert to desired format
   const responseString = await responseT.text();
@@ -224,13 +227,13 @@ async function requestText(c, recName, ing) {
  */
 function fillForm(category, id) {
   switch (category) {
-    case 'select':{
+    case "select": {
       let button = document.getElementById(id);
       button.click();
       break;
     }
 
-    case 'list': {
+    case "list": {
       // Turn the ingredient string into an array of ingreident strings
       const ingredientsArr = id.split(",");
       const adder = document.getElementById("add-ingredient");
@@ -241,7 +244,9 @@ function fillForm(category, id) {
       }
 
       let counter = 0;
-      let allIngredients = document.querySelectorAll('#ingredients-list input[type="text"]');
+      let allIngredients = document.querySelectorAll(
+        '#ingredients-list input[type="text"]',
+      );
       allIngredients.forEach((input) => {
         input.value = ingredientsArr[counter];
         counter++;
@@ -250,10 +255,10 @@ function fillForm(category, id) {
       break;
     }
 
-    case 'fill': {
-      const textarea = document.getElementById('recipe');
+    case "fill": {
+      const textarea = document.getElementById("recipe");
       textarea.value = id;
       break;
     }
-  };
+  }
 }

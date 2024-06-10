@@ -3,7 +3,7 @@ const router = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 const storeController = require("../controllers/storeController");
 const recipeController = require("../controllers/recipeController");
-const aiController = require("../controllers/aiController")
+const aiController = require("../controllers/aiController");
 
 router.get("/get/shops", authMiddleware.authenticate, storeController.getShops);
 
