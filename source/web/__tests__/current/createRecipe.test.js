@@ -44,16 +44,7 @@ describe("Test customize recipe page functionality", () => {
 
   beforeAll(async () => {
     //Go to each site and login
-    await page.goto("http://localhost:3000/login");
-    await page.waitForSelector("#email");
-    const emailInput = await page.$("#email");
-    await emailInput.type("123@123.com");
-    await page.waitForSelector("#password");
-    const passwordInput = await page.$("#password");
-    await passwordInput.type("PkfUgyrsLtQfFvS");
-    await page.click('form-field button[type="submit"]');
-    await page.waitForNavigation();
-    await page.evaluate(() => {
+    await page.evaluateOnNewDocument(() => {
       const localStorageMock = (function() {
         let store = {};
         return {
@@ -71,9 +62,18 @@ describe("Test customize recipe page functionality", () => {
           }
         };
       })();
-      // Replace the native localStorage with the mock
-      Object.defineProperty(window, 'localStorage', { value: localStorageMock, writable: true });
+      Object.defineProperty(window, 'localStorage', { value: localStorageMock, writable: true, configurable: true });
     });
+    await page.goto("http://localhost:3000/login");
+    await page.goto("http://localhost:3000/login");
+    await page.waitForSelector("#email");
+    const emailInput = await page.$("#email");
+    await emailInput.type("123@123.com");
+    await page.waitForSelector("#password");
+    const passwordInput = await page.$("#password");
+    await passwordInput.type("PkfUgyrsLtQfFvS");
+    await page.click('form-field button[type="submit"]');
+    await page.waitForNavigation();
   }, 60000);
 
   it("Testing on page load, editing the recipe name is autofocused", async () => {
