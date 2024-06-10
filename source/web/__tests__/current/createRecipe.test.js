@@ -44,27 +44,6 @@ describe("Test customize recipe page functionality", () => {
 
   beforeAll(async () => {
     //Go to each site and login
-    await page.evaluateOnNewDocument(() => {
-      const localStorageMock = (function() {
-        let store = {};
-        return {
-          getItem: function(key) {
-            return store[key] || null;
-          },
-          setItem: function(key, value) {
-            store[key] = String(value);
-          },
-          removeItem: function(key) {
-            delete store[key];
-          },
-          clear: function() {
-            store = {};
-          }
-        };
-      })();
-      Object.defineProperty(window, 'localStorage', { value: localStorageMock, writable: true, configurable: true });
-    });
-    await page.goto("http://localhost:3000/login");
     await page.goto("http://localhost:3000/login");
     await page.waitForSelector("#email");
     const emailInput = await page.$("#email");
@@ -74,6 +53,30 @@ describe("Test customize recipe page functionality", () => {
     await passwordInput.type("PkfUgyrsLtQfFvS");
     await page.click('form-field button[type="submit"]');
     await page.waitForNavigation();
+    await page.evaluate(() => {
+      const localStorageMock = (function () {
+        let store = {};
+        return {
+          getItem: function (key) {
+            return store[key] || null;
+          },
+          setItem: function (key, value) {
+            store[key] = String(value);
+          },
+          removeItem: function (key) {
+            delete store[key];
+          },
+          clear: function () {
+            store = {};
+          },
+        };
+      })();
+      // Replace the native localStorage with the mock
+      Object.defineProperty(window, "localStorage", {
+        value: localStorageMock,
+        writable: true,
+      });
+    });
   }, 60000);
 
   it("Testing on page load, editing the recipe name is autofocused", async () => {
