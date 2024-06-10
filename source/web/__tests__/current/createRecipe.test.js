@@ -10,8 +10,8 @@ describe("Test customize recipe page functionality", () => {
     await page.waitForSelector("#add-ingredient");
     const addIngredientButton = await page.$("#add-ingredient");
     await page.evaluate(
-      (button) => button.scrollIntoView(),
-      addIngredientButton,
+        (button) => button.scrollIntoView(),
+        addIngredientButton,
     );
     await addIngredientButton.hover();
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -21,7 +21,7 @@ describe("Test customize recipe page functionality", () => {
     await page.waitForSelector("#ingredients-list input:nth-of-type(2)");
 
     const ingredientInput = await page.$(
-      "#ingredients-list input:nth-of-type(2)",
+        "#ingredients-list input:nth-of-type(2)",
     );
     await ingredientInput.click();
     await ingredientInput.type("Test Ingredient");
@@ -35,7 +35,7 @@ describe("Test customize recipe page functionality", () => {
     await goToCustomizePageAndAddIngredient();
     await page.waitForSelector("#ingredients-list input:nth-of-type(1)");
     const recipeNameInput = await page.$(
-      "#ingredients-list input:nth-of-type(1)",
+        "#ingredients-list input:nth-of-type(1)",
     );
     await recipeNameInput.click();
     await recipeNameInput.click({ clickCount: 3 });
@@ -108,7 +108,7 @@ describe("Test customize recipe page functionality", () => {
     // Get the second ingredient and remove its text, which should delete it.
     await page.waitForSelector("#ingredients-list input:nth-of-type(2)");
     const ingredientInput = await page.$(
-      "#ingredients-list input:nth-of-type(2)",
+        "#ingredients-list input:nth-of-type(2)",
     );
     await ingredientInput.click();
     await ingredientInput.click({ clickCount: 3 });
@@ -126,6 +126,10 @@ describe("Test customize recipe page functionality", () => {
     const recipeNameInput = await page.$("#recipe-name");
     await recipeNameInput.click({ clickCount: 3 });
     await page.keyboard.press("Backspace");
+    await page.evaluate(() => {
+      const input = document.querySelector("#recipe-name");
+      input.value = '';
+    });
     await recipeNameInput.type("Test Recipe");
 
     // Select the size
@@ -141,7 +145,7 @@ describe("Test customize recipe page functionality", () => {
     await page.click("#add-ingredient");
     await page.waitForSelector("#ingredients-list input:nth-of-type(2)");
     const ingredientInput = await page.$(
-      "#ingredients-list input:nth-of-type(2)",
+        "#ingredients-list input:nth-of-type(2)",
     );
     await ingredientInput.click();
     await ingredientInput.type("Test Ingredient");
@@ -156,7 +160,7 @@ describe("Test customize recipe page functionality", () => {
     await page.waitForSelector("form");
     const formSubmitPromise = page.waitForNavigation();
     await page.$eval("form", (form) =>
-      form.dispatchEvent(new Event("submit", { bubbles: true })),
+        form.dispatchEvent(new Event("submit", { bubbles: true })),
     );
     await formSubmitPromise;
 
