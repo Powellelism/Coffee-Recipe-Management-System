@@ -80,7 +80,6 @@ export default class recipeCard extends HTMLElement {
           index1 >= index2
             ? star.classList.add("active")
             : star.classList.remove("active");
-          const rating = this.calculateRating(stars);
         });
 
         const rating = this.calculateRating(stars);
