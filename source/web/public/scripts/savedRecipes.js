@@ -85,7 +85,6 @@ async function renderUserRecipes() {
         yourCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
       });
 
-    console.log("User recipes rendered successfully");
   } catch (error) {
     console.error(error);
   }

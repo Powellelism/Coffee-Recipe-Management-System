@@ -62,7 +62,6 @@ async function getShops() {
  */
 document.querySelector(".nav-trigger").addEventListener("click", function () {
   this.classList.toggle("active");
-  console.log("Clicked menu");
   var mainListDiv = document.getElementById("mainListDiv");
   mainListDiv.classList.toggle("show-list");
   mainListDiv.style.display = "block";
@@ -71,7 +70,6 @@ document.querySelector(".nav-trigger").addEventListener("click", function () {
 window.addEventListener("scroll", function () {
   if (document.documentElement.scrollTop > 50) {
     document.querySelector(".nav").classList.add("affix");
-    console.log("OK");
   } else {
     document.querySelector(".nav").classList.remove("affix");
   }

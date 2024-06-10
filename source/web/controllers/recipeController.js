@@ -245,7 +245,6 @@ exports.addRecipe = async (request, response) => {
   try {
     const { name, ingredients, size, instructions, image } = request.body;
 
-    console.log("Image: " + image);
     const userId = request.user.id;
 
     // Create the recipe
@@ -443,7 +442,6 @@ exports.getUserRecipes = async (request, response) => {
     }
 
     const userId = user.id;
-    console.log(userId);
 
     const userRecipes = await prisma.userRecipes.findMany({
       where: {
@@ -457,8 +455,6 @@ exports.getUserRecipes = async (request, response) => {
         },
       },
     });
-
-    console.log(userRecipes);
 
     const formattedRecipes = userRecipes.map((userRecipe) => {
       const recipe = userRecipe.recipe;

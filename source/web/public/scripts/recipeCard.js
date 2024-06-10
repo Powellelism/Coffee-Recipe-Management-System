@@ -60,7 +60,6 @@ export default class recipeCard extends HTMLElement {
         </script>
       `;
     this.setAttribute("data-id", recipeid);
-    console.log("Recipe card added to the DOM", recipeid);
 
     // Create a link element for the external stylesheet
     const linkElement = document.createElement("link");
@@ -82,13 +81,11 @@ export default class recipeCard extends HTMLElement {
             ? star.classList.add("active")
             : star.classList.remove("active");
           const rating = this.calculateRating(stars);
-          console.log(rating);
         });
 
         const rating = this.calculateRating(stars);
         // get the recipe id
         const recipeid = this.getAttribute("data-id");
-        console.log(recipeid);
         fetch("/api/update/recipe/" + recipeid + "/rating", {
           method: "PUT",
           headers: {
