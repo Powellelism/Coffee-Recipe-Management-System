@@ -145,5 +145,4 @@ describe("Test customize recipe page functionality", () => {
     });
     expect(localStorageData).toEqual(expectedLocalStorage);
   }, 50000);
-
 });

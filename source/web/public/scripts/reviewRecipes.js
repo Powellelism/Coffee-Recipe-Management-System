@@ -29,7 +29,7 @@ async function reviewRecipe() {
   const regenButton = document.getElementById("generate-button");
 
   saveButton.disabled = true;
-  img.style.display = 'none';
+  img.style.display = "none";
   regenButton.disabled = true;
 
   if (formData) {
@@ -68,8 +68,8 @@ async function reviewRecipe() {
     const imgURL = await requestImage(recipeName.value);
     img.src = JSON.parse(imgURL).url;
 
-    // Unblock any disabled UI elements 
-    img.style.display = 'block';
+    // Unblock any disabled UI elements
+    img.style.display = "block";
     saveButton.disabled = false;
     regenButton.disabled = false;
   }
@@ -91,7 +91,7 @@ async function regenerateImage() {
   // Make image request
   const imgURL = await requestImage(recipeName);
   img.src = JSON.parse(imgURL).url;
-  
+
   // Re-enable buttons
   submitButton.disabled = false;
   regenButton.disabled = false;
@@ -112,10 +112,10 @@ async function sendRecipeToDataBase(event) {
     instructions: recipeData.recipe,
     ingredients: recipeData.ingredients,
     size: recipeData.size,
-    image: img.src
+    image: img.src,
   };
-  const response = await fetch('/api/post/recipe', {
-    method: 'POST',
+  const response = await fetch("/api/post/recipe", {
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
@@ -136,22 +136,22 @@ async function sendRecipeToDataBase(event) {
  * @returns {string} image URL
  */
 async function requestImage(recName) {
-  const url = '/api/post/generateImage';
+  const url = "/api/post/generateImage";
   const requestT = {
-    recipeName: recName
+    recipeName: recName,
   };
 
   const responseT = await fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'accept': 'application/json',
-      'Content-Type': 'application/json'
+      accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(requestT),
   });
 
   // Ensure that the response is clean
-  if (!responseT.ok) throw new Error('Failed to fetch data for image');
+  if (!responseT.ok) throw new Error("Failed to fetch data for image");
 
   return await responseT.text();
 }

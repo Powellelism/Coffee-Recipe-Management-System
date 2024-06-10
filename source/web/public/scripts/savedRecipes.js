@@ -43,7 +43,7 @@ async function renderUserRecipes() {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to fetch user recipes');
+      throw new Error("Failed to fetch user recipes");
     }
 
     const recipes = await response.json();
@@ -58,7 +58,10 @@ async function renderUserRecipes() {
           ? recipe.userEmail.split("@")[0]
           : recipe.userEmail
         : "Jacob R.";
-      recipeCardElement.recipeImage = (Object.keys(recipe.image).length > 0) ? recipe.image : "../assets/images/diy-coffee.jpg";
+      recipeCardElement.recipeImage =
+        Object.keys(recipe.image).length > 0
+          ? recipe.image
+          : "../assets/images/diy-coffee.jpg";
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
@@ -67,17 +70,23 @@ async function renderUserRecipes() {
     });
 
     const scrollAmount = 800;
-    document.querySelector(".scroll-button2.left").addEventListener("click", () => {
-      yourCardsContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
+    document
+      .querySelector(".scroll-button2.left")
+      .addEventListener("click", () => {
+        yourCardsContainer.scrollBy({
+          left: -scrollAmount,
+          behavior: "smooth",
+        });
+      });
 
-    document.querySelector(".scroll-button2.right").addEventListener("click", () => {
-      yourCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
+    document
+      .querySelector(".scroll-button2.right")
+      .addEventListener("click", () => {
+        yourCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      });
 
     console.log("User recipes rendered successfully");
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
   }
 }

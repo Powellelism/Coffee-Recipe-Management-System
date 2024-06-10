@@ -109,7 +109,7 @@ exports.getRatingRecipes = async (request, response) => {
         image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,=======
         userEmail: userEmail,
-      }
+      };
     });
     cache.set(cacheKey, formattedRecipes);
     response.json(formattedRecipes);
@@ -225,7 +225,7 @@ exports.getRecentRecipes = async (request, response) => {
         image: recipe.image.map((img) => img.url),
         //totalTime: recipe.totalTime,
         userEmail: userEmail,
-      }
+      };
     });
 
     response.json(formattedRecipes);
@@ -243,13 +243,7 @@ exports.getRecentRecipes = async (request, response) => {
  */
 exports.addRecipe = async (request, response) => {
   try {
-    const {
-      name,
-      ingredients,
-      size,
-      instructions,
-      image
-    } = request.body;
+    const { name, ingredients, size, instructions, image } = request.body;
 
     console.log("Image: " + image);
     const userId = request.user.id;
@@ -280,8 +274,8 @@ exports.addRecipe = async (request, response) => {
             url: image,
             imagableId: 0,
             imagableType: "generated",
-            content: name
-          }
+            content: name,
+          },
         },
         userRecipes: {
           create: {
@@ -459,8 +453,8 @@ exports.getUserRecipes = async (request, response) => {
         recipe: {
           include: {
             image: true,
-          }
-        }
+          },
+        },
       },
     });
 
