@@ -466,17 +466,6 @@ exports.getUserRecipes = async (request, response) => {
 
     console.log(userRecipes);
     const userIds = userRecipes.map((userRecipe) => userRecipe.userId);
-    const users = await prisma.users.findMany({
-      where: {
-        id: {
-          in: userIds,
-        },
-      },
-      select: {
-        id: true,
-        email: true,
-      },
-    });
 
     const formattedRecipes = userRecipes.map((userRecipe) => {
       const recipe = userRecipe.recipe;

@@ -57,7 +57,7 @@ async function getShops() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const response1 = await fetch("api/get/ratingrecipes", {
+    const response1 = await fetch("/api/get/ratingrecipes", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("Failed to fetch recipes");
     }
 
-    const response2 = await fetch("api/get/recentrecipes", {
+    const response2 = await fetch("/api/get/recentrecipes", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

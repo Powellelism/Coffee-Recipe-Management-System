@@ -9,7 +9,7 @@ header {
       rgb(255 255 255 / 30%),
       rgb(255 255 255 / 0%)
     ),
-    url("../assets/images/coffee.jpg");
+    url("/public/assets/images/coffee.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

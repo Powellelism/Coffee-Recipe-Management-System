@@ -6,7 +6,7 @@
   
   @font-face {
     font-family: 'Inknut Antiqua';
-    src: url('../assets/fonts/InknutAntiqua-Black.ttf') format('truetype');
+    src: url('/assets/fonts/InknutAntiqua-Black.ttf') format('truetype');
   }
   
   body {
@@ -190,20 +190,6 @@
     justify-content: center;
     margin-left: auto;
   }
-  
-  /* .login-button,
-  .register-button {
-    background-color: transparent;
-    border: 2px solid white;
-    border-radius: 8px;
-    color: white;
-    cursor: pointer;
-    margin: 5px;
-    outline: none;
-    padding: 13px 30px;
-    text-align: center;
-    width: auto;
-  } */
   
   /* Web Component styling */
   .recipe-container {
