@@ -71,7 +71,7 @@ async function renderUserRecipes() {
 
     const scrollAmount = 800;
     document
-      .querySelector(".scroll-button2.left")
+      .querySelector(".scroll-button1.left")
       .addEventListener("click", () => {
         yourCardsContainer.scrollBy({
           left: -scrollAmount,
@@ -80,7 +80,7 @@ async function renderUserRecipes() {
       });
 
     document
-      .querySelector(".scroll-button2.right")
+      .querySelector(".scroll-button1.right")
       .addEventListener("click", () => {
         yourCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
       });
