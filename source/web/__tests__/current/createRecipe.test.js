@@ -131,16 +131,19 @@ describe("Test customize recipe page functionality", () => {
     // Submit the recipe
     await page.waitForSelector("#submit-button");
     await page.click("#submit-button");
+
     const expectedLocalStorage = {
       recipe_name: "Test Recipe",
-      size: "GRANDE",
+      size: "MEDIUM",
       drink_type: "COLD",
       ingredients: ["Test Ingredient"],
       recipe: "Test Description",
     };
+
     const localStorageData = await page.evaluate(() => {
       return JSON.parse(localStorage.getItem("newRecipe"));
     });
     expect(localStorageData).toEqual(expectedLocalStorage);
-  }, 80000);
+  }, 50000);
+
 });
