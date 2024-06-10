@@ -84,7 +84,6 @@ async function renderUserRecipes() {
       .addEventListener("click", () => {
         yourCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
       });
-
   } catch (error) {
     console.error(error);
   }

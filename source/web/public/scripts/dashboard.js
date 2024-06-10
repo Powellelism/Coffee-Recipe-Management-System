@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       recipeCardElement.recipeImage =
         Object.keys(recipe.image).length > 0
           ? recipe.image
-          : '/assets/images/diy-coffee.jpg';
+          : "/assets/images/diy-coffee.jpg";
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       recipeCardElement.recipeImage =
         Object.keys(recipe.image).length > 0
           ? recipe.image
-          : '/assets/images/diy-coffee.jpg';
+          : "/assets/images/diy-coffee.jpg";
       recipeCardElement.recipeName = recipe.recipeName;
       recipeCardElement.recipeRating = recipe.rating;
       recipeCardElement.recipe = recipe.instructions;
