@@ -24,8 +24,6 @@ exports.authenticate = async (request, response, next) => {
     request.user = session.user;
     next();
   } catch (error) {
-    return response
-      .status(401)
-      .send({ message: "Authentication failed: " + error.message });
+    return response.redirect("/login");
   }
 };

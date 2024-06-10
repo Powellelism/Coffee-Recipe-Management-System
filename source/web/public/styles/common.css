@@ -1,12 +1,529 @@
-@font-face {
-  font-family: "Inknut Antiqua";
-  src: url("../assets/fonts/InknutAntiqua-Regular.ttf");
-}
+@import url("vars.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css");
 
 * {
-  font-family: "Inknut Antiqua", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body {
+body,
+header {
   background-color: #fffbf3;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: relative;
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: linear-gradient(
+      rgb(255 255 255 / 30%),
+      rgb(255 255 255 / 0%)
+    ),
+    url("/assets/images/coffee.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  transition: all 0.4s ease;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.nav div.logo {
+  float: left;
+  width: auto;
+  height: auto;
+  padding-left: 3rem;
+}
+
+.recipe-component a {
+  font-size: 20px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;
+}
+
+.nav div.logo a {
+  text-decoration: none;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  letter-spacing: -3px;
+  margin-right: 15px;
+}
+
+.nav div.main-list {
+  height: 50px;
+  width: 100%;
+}
+
+.nav div.main-list ul {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav div.main-list ul li {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: auto;
+  height: 50px;
+  padding: 0;
+  padding-right: 1rem;
+}
+
+.create-button,
+.about-button,
+.saved-button {
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  border: none;
+  margin: 10px;
+  font-size: large;
+}
+
+.auth-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.login-button,
+.register-button {
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+  outline: none;
+  padding: 13px 30px;
+  text-align: center;
+  width: auto;
+}
+
+/* Web Component styling */
+.recipe-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.recipe-component {
+  width: 325px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 10%);
+  margin: 10px;
+  flex: 1 1 calc(25% - 20px); /* 4 cards per row */
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.recipe-component img.recipe-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.stars i {
+  color: #e6e6e6;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.recipe-component .stars {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.nav-trigger {
+  cursor: pointer;
+  width: 30px;
+  height: 25px;
+  margin: auto;
+  position: absolute;
+  right: 30px;
+  display: none;
+}
+
+.nav-trigger i {
+  background-color: #fff;
+  border-radius: 2px;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 4px;
+}
+
+.recipe-component .stars i {
+  color: grey;
+  margin: 0 2px;
+}
+
+.recipe-component .ingredients {
+  margin-top: 10px;
+  max-width: 100%;
+  max-height: 75px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.recipe-component span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Web Component flexbox */
+h2 {
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  margin-right: 15px;
+  padding: 1rem;
+}
+
+.top-cards,
+.recent-cards {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+}
+
+.scroll-button {
+  position: absolute;
+  z-index: 10;
+  background-color: rgb(0 0 0 / 50%);
+  color: white;
+  border: none;
+  padding: 10px 20px; /* Adjust size for better clicking */
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.scroll-button.left {
+  left: 10px; /* adjust as needed */
+}
+
+.scroll-button.right {
+  right: 10px; /* adjust as needed */
+}
+
+.top-cards::-webkit-scrollbar,
+.recent-cards::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for cleaner look */
+}
+
+/* Rating star system */
+
+.stars i.active {
+  color: #ff9c1a;
+}
+
+/* Media query section */
+
+@media screen and (width >= 768px) and (width <= 1024px) {
+  .container {
+    margin: 0;
+  }
+}
+
+@media screen and (width <= 768px) {
+  .nav div.logo {
+    margin-left: 15px;
+  }
+
+  .nav-trigger {
+    display: block;
+  }
+
+  .nav div.main-list {
+    position: absolute;
+    top: 35px;
+    right: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .nav div.show-list {
+    height: 40vh;
+  }
+
+  .nav div.show-list ul li {
+    background-color: #111;
+    align-items: center;
+  }
+
+  .nav div.main-list ul {
+    flex-direction: column;
+    width: 100%;
+    background-position: center top;
+  }
+
+  .nav div.main-list ul li {
+    width: 100%;
+    text-align: right;
+  }
+
+  .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+/* Animation */
+
+.nav-trigger i:nth-child(1) {
+  animation: out-t 0.8s backwards;
+  animation-direction: reverse;
+}
+
+.nav-trigger i:nth-child(2) {
+  margin: 5px 0;
+  animation: out-m 0.8s backwards;
+  animation-direction: reverse;
+}
+
+.nav-trigger i:nth-child(3) {
+  animation: out-btm 0.8s backwards;
+  animation-direction: reverse;
+}
+
+.nav-trigger.active i:nth-child(1) {
+  animation: in-t 0.8s forwards;
+}
+
+.nav-trigger.active i:nth-child(2) {
+  animation: in-m 0.8s forwards;
+}
+
+.nav-trigger.active i:nth-child(3) {
+  animation: in-btm 0.8s forwards;
+}
+
+@keyframes in-m {
+  50% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes in-m {
+  50% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes out-m {
+  50% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes out-m {
+  50% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes in-t {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(9px) rotate(135deg);
+  }
+}
+
+@keyframes in-t {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(9px) rotate(135deg);
+  }
+}
+
+@keyframes out-t {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(9px) rotate(135deg);
+  }
+}
+
+@keyframes out-t {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(9px) rotate(135deg);
+  }
+}
+
+@keyframes in-btm {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-9px) rotate(135deg);
+  }
+}
+
+@keyframes in-btm {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-9px) rotate(135deg);
+  }
+}
+
+@keyframes out-btm {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-9px) rotate(135deg);
+  }
+}
+
+@keyframes out-btm {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-9px) rotate(135deg);
+  }
+}
+
+.affix {
+  padding: 0.2rem;
+  background-color: #111;
+  top: 0;
+  z-index: 50;
+}
+
+.my-h2 {
+  text-align: center;
+  font-size: 4rem;
+}
+
+.my-p {
+  text-align: justify;
+  padding-left: 15%;
+  padding-right: 15%;
+  font-size: 20px;
+}
+
+@media all and (width <= 700px) {
+  .my-p {
+    padding: 2%;
+  }
 }

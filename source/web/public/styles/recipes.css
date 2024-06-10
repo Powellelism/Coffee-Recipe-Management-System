@@ -1,6 +1,25 @@
 /* Import CSS vars */
 @import url("vars.css");
 
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  background-image: linear-gradient(
+      rgb(255 255 255 / 30%),
+      rgb(255 255 255 / 0%)
+    ),
+    url("/assets/images/coffee.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: space-between;
+  background-color: var(--header-color, bisque);
+  padding: 0.7rem;
+  margin-bottom: 2rem;
+}
+
 header,
 dashboard-button,
 #ingredients-list {
@@ -18,25 +37,20 @@ fieldset {
   padding: 0;
 }
 
-header {
-  justify-content: space-between;
-  background-color: var(--header-color, bisque);
-  padding: 0.7rem;
-}
-
 header h1 {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
   font-size: var(--step-3);
+  color: white;
   margin: 0;
 }
 
 .dashboard-link {
   display: block;
   text-decoration: none;
-  color: inherit;
+  color: white;
 }
 
 dashboard-button {
@@ -49,6 +63,10 @@ dashboard-button {
 
 dashboard-button svg {
   height: 0.85rem;
+
+  & path {
+    fill: white;
+  }
 }
 
 .dashboard-button span {
@@ -57,8 +75,12 @@ dashboard-button svg {
 
 body {
   margin: 0;
-  background-color: var(-body-color, white);
+  background-color: var(--body-color, white);
   font-size: var(--step-0);
+}
+
+#sign-out-button {
+  margin: 1rem;
 }
 
 #sign-out-button,
@@ -67,7 +89,7 @@ form-field button {
   color: white;
   border: none;
   background-color: var(--button-color, darkgreen);
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   border-radius: 1rem;
   font-size: var(--step-n1);
   transition: background-color 0.5s ease-out;
@@ -93,7 +115,8 @@ main {
   padding: 0;
   color: var(--select-color, black);
   transition: border-bottom 0.3s ease;
-  text-transform: uppercase;
+
+  /* text-transform: uppercase; */
 }
 
 #recipe-name:focus {
@@ -113,6 +136,39 @@ main {
 #size-container input,
 #type-container input {
   display: none;
+}
+
+.img-container {
+  height: 60%;
+  border-radius: 1.5rem;
+  margin: 1rem;
+  background-color: var(--hover-color, blanchedalmond);
+  box-shadow: 0 0 0 0.1rem var(--select-color, black);
+  border: 0.0625rem solid var(--select-color, black);
+  color: var(--select-color, black);
+  position: relative;
+}
+
+.img-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  border-radius: 1.5rem;
+}
+
+.img-container h6 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  z-index: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .size-option,
@@ -198,7 +254,7 @@ main {
 #ingredients-list {
   flex-wrap: wrap;
   gap: 0.5rem;
-  max-width: 33rem;
+  width: 26rem;
 }
 
 #ingredients-list input,
@@ -220,13 +276,20 @@ main {
   text-align: center;
 }
 
+#ingredients-list input {
+  width: 45%;
+}
+
 #recipe {
   padding: 0.5rem 1rem;
+  margin: 0 0 1rem;
   border-radius: 1.5rem;
   color: var(--text-color, brown);
   resize: none;
   height: auto;
   text-align: left;
+  text-transform: none;
+  font-weight: normal;
 }
 
 #ingredients-list input:focus,
@@ -282,12 +345,16 @@ form form-field {
   margin: 1rem;
 }
 
-#submit-button {
-  min-width: 100%;
+#submit-button,
+#generate-button {
+  min-width: 45%;
   cursor: pointer;
+
+  /* margin: 0.5rem; */
+  margin-right: 0.5rem;
 }
 
-@media only screen and (width >= 280px) and (width <= 1024px) {
+@media only screen and (width >=280px) and (width <=1024px) {
   header h1 {
     position: static;
     transform: none;
@@ -309,7 +376,8 @@ form form-field {
   form,
   header {
     display: flex;
-    flex-flow: column wrap;
+
+    /* flex-flow: column wrap; */
     justify-content: center;
     align-items: center;
   }
@@ -320,5 +388,37 @@ form form-field {
 
   #recipe {
     text-align: center;
+  }
+}
+
+#generate-button:disabled,
+#submit-button:disabled {
+  cursor: wait;
+  color: pink;
+  background-color: grey;
+}
+
+.main {
+  display: flex;
+  flex-flow: row vertical;
+  width: 60%;
+}
+
+#generate-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding: 0.25rem;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  overflow-wrap: column;
+}
+
+@media (width <= 768px) {
+  #wrapper {
+    flex-direction: column;
   }
 }

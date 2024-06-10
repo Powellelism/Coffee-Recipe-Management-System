@@ -1,4 +1,5 @@
 import { OpenAPIRouter } from "@cloudflare/itty-router-openapi";
+import { imageGenerateSaving} from "./endpoints/imageGenerateSaving";
 import { imageGenerate } from "./endpoints/imageGenerate";
 import { textGenerate } from "./endpoints/textGenerate";
 
@@ -8,6 +9,7 @@ export const router = OpenAPIRouter({
 
 router.post("/api/text-generate/", textGenerate);
 router.post("/api/image-generate/", imageGenerate);
+router.post("/api/image-generate-saving/", imageGenerateSaving);
 
 // 404 for everything else
 router.all("*", () =>

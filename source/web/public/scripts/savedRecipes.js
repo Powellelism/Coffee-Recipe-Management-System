@@ -1,167 +1,90 @@
 window.addEventListener("DOMContentLoaded", init);
-window.onload = function () {
-  this.loadHome();
-};
-
+import recipeCard from "/scripts/recipeCard.js";
 /**
- * add View/Edit and delete buttons for each recipes in allSavedRecipes
- * page. For View/Edit button, it will direct to CustomizeRecipe.html
- * and load the corresponding coffee recipes data into that page. For
- * delete button, it will remove the corresponding data of coffee recipes
- * from localStorage, and remove from this page as well.
+ * Read data of coffee shops and add events for buttons on home page.
  */
-function init() {
-  //add all the saved recipes to the page
-  localStorage.setItem("Condition", "Edit");
-  let recipes = getRecipesFromStorage();
-  if (recipes == null) {
-    return;
-  }
-  addRecipesToDocument(recipes);
+async function init() {
+  let createButtonEl = document.querySelectorAll("button")[0];
 
-  //prevent loading data from preset coffee recipes
-  localStorage.removeItem("index");
+  // add click event to the button for create new recipes
+  createButtonEl.addEventListener("click", () => {
+    window.location = "/recipe/customize";
+  });
+  let savedButtonEl = document.querySelectorAll("button")[1];
 
-  //add buttons for each coffee recipes
-  for (let i = 0; i < recipes.length; i++) {
-    let reviewButtonEl = document.getElementById(`recipe${i}`);
-    let removeButtonEl = document.getElementById(`remove${i}`);
-    //jumps to cutomize page when the "view" button is clicked
-    reviewButtonEl.addEventListener("click", () => {
-      localStorage.setItem("Condition", "Edit");
-      window.location = "/recipe/customize";
-      localStorage.setItem("savedIndex", i);
+  //add click event to the button for view the saved recipes
+  savedButtonEl.addEventListener("click", () => {
+    window.location = "/recipe/foryou";
+  });
+  let aboutButtonEl = document.querySelectorAll("button")[2];
+
+  //add click event to the button for view the saved recipes
+  aboutButtonEl.addEventListener("click", () => {
+    window.location = "/about";
+  });
+  let signOutButtonEl = document.querySelectorAll("button")[3];
+
+  //add click event to the button for view the sign up page
+  signOutButtonEl.addEventListener("click", () => {
+    window.location = "/";
+  });
+
+  // Get the saved recipes
+  await renderUserRecipes();
+}
+
+async function renderUserRecipes() {
+  try {
+    const response = await fetch("/api/get/userRecipes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-    //deletes the recipe when the "delete" button is clicked
-    removeButtonEl.addEventListener("click", (event) => {
-      removeEachRecipes(event.target.name);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user recipes");
+    }
+
+    const recipes = await response.json();
+
+    const yourCardsContainer = document.querySelector(".your-cards");
+    yourCardsContainer.innerHTML = "";
+
+    recipes.forEach((recipe) => {
+      const recipeCardElement = new recipeCard();
+      recipeCardElement.userName = recipe.userEmail
+        ? recipe.userEmail.includes("@")
+          ? recipe.userEmail.split("@")[0]
+          : recipe.userEmail
+        : "Jacob R.";
+      recipeCardElement.recipeImage =
+        Object.keys(recipe.image).length > 0
+          ? recipe.image
+          : "../assets/images/diy-coffee.jpg";
+      recipeCardElement.recipeName = recipe.recipeName;
+      recipeCardElement.recipeRating = recipe.rating;
+      recipeCardElement.recipe = recipe.instructions;
+      recipeCardElement.recipeid = recipe.recipeId;
+      yourCardsContainer.appendChild(recipeCardElement);
     });
-  }
 
-  scrollable();
-}
+    const scrollAmount = 800;
+    document
+      .querySelector(".scroll-button1.left")
+      .addEventListener("click", () => {
+        yourCardsContainer.scrollBy({
+          left: -scrollAmount,
+          behavior: "smooth",
+        });
+      });
 
-/**
- * Remove the corresponding data of coffee recipes from localStorage if
- * users click the delete button right after the View/Edit button.
- * @param {string} name the name of the recipes
- * @param {array} savedArr all saved recipes array
- */
-function removeEachRecipes(name) {
-  //defined and set all the needed elements
-  let savedArr = JSON.parse(localStorage.getItem("savedRecipes"));
-  let nameRecipes = localStorage.getItem("nameRecipes");
-  let tbl = document.querySelector("table");
-
-  nameRecipes = nameRecipes.split(",");
-
-  //delete the corresponding data of coffee recipe iteratively
-  for (let i = 0; i < savedArr.length; ++i) {
-    if (savedArr[i]["recipeName"] == name) {
-      //delete data from all saved recipes array
-      savedArr.splice(i, 1);
-      nameRecipes.splice(i, 1);
-      //delete from SavedRecipes.html page
-      tbl.deleteRow(i + 1);
-      break;
-    }
-  }
-
-  localStorage.removeItem(name);
-  //update the data from localStorage and push them back
-  if (nameRecipes.length != 0) {
-    localStorage.setItem("nameRecipes", nameRecipes.toString());
-  } else {
-    localStorage.removeItem("nameRecipes");
-  }
-  localStorage.setItem("savedRecipes", JSON.stringify(savedArr));
-}
-
-/**
- * Makes the table storing all the saved recipes scrollable
- */
-function scrollable() {
-  document.querySelector("table").style.overflowY = "scroll";
-}
-
-/**
- * Get data of coffee recipes whose key is "savedRecipes" from localStorage
- * @returns {array} an array of all the coffee recipes from localStorage
- */
-function getRecipesFromStorage() {
-  return JSON.parse(window.localStorage.getItem("savedRecipes"));
-}
-
-/**
- * Add rows to the table on this SavedRecipes.html page for each recipes
- * @param {array} recipes an array of coffee recipes needed to be added
- * to SavedRecipes.html page
- */
-function addRecipesToDocument(recipes) {
-  if (recipes == null) {
-    return;
-  }
-  let tbl = document.querySelector("table");
-  for (let i = 0; i < recipes.length; i++) {
-    //add View/Edit and delete button for each recipe
-    tbl.insertRow(-1).innerHTML = `<td><div>${recipes[i].recipeName}</div></td>
-      <td>
-        <button class="button" id="recipe${i}">View/Edit</button>
-      </td>
-      <td>
-        <button class="button" id="remove${i}" name = "${recipes[i].recipeName}">Delete</button>
-      </td>`;
+    document
+      .querySelector(".scroll-button1.right")
+      .addEventListener("click", () => {
+        yourCardsContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      });
+  } catch (error) {
+    console.error(error);
   }
 }
-
-/**
- * This function is used to create the search bar feature, ie this allows the users
- * to search all the saved recipes by the names
- * Eslint can't parse HTML files, so we ignore the warning that this function is not used
- */
-/* eslint-disable no-unused-vars */
-function lookUp() {
-  //define and set all needed variables
-  let input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("input");
-  filter = input.value.toUpperCase();
-  table = document.querySelector("table");
-  tr = table.getElementsByTagName("tr");
-
-  //when searching, hide the words "All saved recipes"
-  if (filter.length != 0) {
-    tr[0].style.display = "none";
-    //when search bar has no character, display everything
-  } else {
-    for (let i = 0; i < tr.length; i++) {
-      tr[i].style.display = "";
-    }
-  }
-
-  //traverse over all the saved recipes
-  for (let i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      //get the name of saved recipe
-      txtValue = td.textContent.toUpperCase() || td.innerText.toUpperCase();
-      let match = true;
-      //this "if" make sure the program won't crahsed when overloaded with search
-      if (filter.length <= txtValue.length) {
-        //traverse through all characters in the search bar
-        for (let j = 0; j < filter.length; j++) {
-          //if any character unmatch, hide this recipe
-          if (txtValue[j] != filter[j]) {
-            tr[i].style.display = "none";
-            match = false;
-            break;
-          }
-        }
-        //if every thing matches so far, keep showing this recipe
-        if (match) {
-          tr[i].style.display = "";
-        }
-      }
-    }
-  }
-}
-/* eslint-enable no-unused-vars */

@@ -13,24 +13,19 @@ async function init() {
   let createButtonEl = document.querySelectorAll("button")[0];
   // add click event to the button for create new recipes
   createButtonEl.addEventListener("click", () => {
-    window.location = "/preset/customize";
+    window.location = "/recipe/customize";
   });
-  let saveButtonEl = document.querySelectorAll("button")[1];
-  //add click event to the button for view the saved recipes
-  saveButtonEl.addEventListener("click", () => {
-    window.location = "/recipe/saved";
-  });
-  let aboutButtonEl = document.querySelectorAll("button")[2];
+  let aboutButtonEl = document.querySelectorAll("button")[1];
   //add click event to the button for view the saved recipes
   aboutButtonEl.addEventListener("click", () => {
     window.location = "/about";
   });
-  let loginButtonEl = document.querySelectorAll("button")[3];
+  let loginButtonEl = document.querySelectorAll("button")[2];
   //add click event to the button for view the login page
   loginButtonEl.addEventListener("click", () => {
     window.location = "/login";
   });
-  let signUpButtonEl = document.querySelectorAll("button")[4];
+  let signUpButtonEl = document.querySelectorAll("button")[3];
   //add click event to the button for view the sign up page
   signUpButtonEl.addEventListener("click", () => {
     window.location = "/register";
@@ -59,3 +54,23 @@ async function getShops() {
     console.error(error);
   }
 }
+
+/**
+ * When screen is mobile size, make hamburger menu clickable
+ * and create black background for nav bar when we scroll
+ * to where nav bar is not visible
+ */
+document.querySelector(".nav-trigger").addEventListener("click", function () {
+  this.classList.toggle("active");
+  var mainListDiv = document.getElementById("mainListDiv");
+  mainListDiv.classList.toggle("show-list");
+  mainListDiv.style.display = "block";
+});
+
+window.addEventListener("scroll", function () {
+  if (document.documentElement.scrollTop > 50) {
+    document.querySelector(".nav").classList.add("affix");
+  } else {
+    document.querySelector(".nav").classList.remove("affix");
+  }
+});

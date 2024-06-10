@@ -1,13 +1,82 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/styles/common.css" />
   </head>
+
+  <header class="main-header">
+    <nav class="nav">
+      <div class="container">
+        <div class="logo">
+          <a href="/">Coffee Recipe Maker.</a>
+        </div>
+        <div id="mainListDiv" class="main-list">
+          <ul class="nav-links">
+            <li><button class="create-button">Create a Recipe</button></li>
+            <li><button class="saved-button">Saved Recipes</button></li>
+            <li><button class="about-button">About Us</button></li>
+            <div class="auth-buttons">
+              <li>
+                <button
+                  class="register-button"
+                  style="background-color: #314a31; border-color: #314a31"
+                >
+                  Sign Out
+                </button>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <span class="nav-trigger">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+      </div>
+    </nav>
+  </header>
+
   <body>
-    <p>You were able to login</p>
-    <a href="/">Main Page</a>
-    <a href="/recipe/create">Create Recipe</a>
-    <a href="/recipe/saved">Saved Recipes</a>
+    <h2>Top Ranked</h2>
+    <div class="recipe-container" style="position: relative">
+      <button class="scroll-button scroll-button1 left">&#60;</button>
+      <div
+        class="top-cards"
+        style="
+          display: flex;
+          flex-direction: row;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+        "
+      >
+        <!-- Recipe cards will be added here -->
+      </div>
+      <button class="scroll-button scroll-button1 right">&#62;</button>
+    </div>
+    <h2>Most Recent</h2>
+    <div class="recipe-container" style="position: relative">
+      <button class="scroll-button scroll-button2 left">&#60;</button>
+      <div
+        class="recent-cards"
+        style="
+          display: flex;
+          flex-direction: row;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+        "
+      >
+        <!-- Recipe cards will be added here -->
+      </div>
+      <button class="scroll-button scroll-button2 right">&#62;</button>
+    </div>
+    <script src="/scripts/dashboard.js" type="module" defer></script>
+    <script src="/scripts/recipeCard.js" type="module" defer></script>
   </body>
 </html>
