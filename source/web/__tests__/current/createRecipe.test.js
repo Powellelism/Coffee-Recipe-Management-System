@@ -54,25 +54,28 @@ describe("Test customize recipe page functionality", () => {
     await page.click('form-field button[type="submit"]');
     await page.waitForNavigation();
     await page.evaluate(() => {
-      const localStorageMock = (function() {
+      const localStorageMock = (function () {
         let store = {};
         return {
-          getItem: function(key) {
+          getItem: function (key) {
             return store[key] || null;
           },
-          setItem: function(key, value) {
+          setItem: function (key, value) {
             store[key] = String(value);
           },
-          removeItem: function(key) {
+          removeItem: function (key) {
             delete store[key];
           },
-          clear: function() {
+          clear: function () {
             store = {};
-          }
+          },
         };
       })();
       // Replace the native localStorage with the mock
-      Object.defineProperty(window, 'localStorage', { value: localStorageMock, writable: true });
+      Object.defineProperty(window, "localStorage", {
+        value: localStorageMock,
+        writable: true,
+      });
     });
   }, 60000);
 
