@@ -11,6 +11,7 @@ router.post("/api/text-generate/", textGenerate);
 router.post("/api/image-generate/", imageGenerate);
 router.post("/api/image-generate-saving/", imageGenerateSaving);
 
+
 // 404 for everything else
 router.all("*", () =>
 	Response.json(
