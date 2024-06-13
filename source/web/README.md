@@ -17,13 +17,6 @@ Coffee management system full stack conversion
 - Run npm run start in source folder
 - Go to localhost:3000 to see the website
 
-## What's next
-
-- Add the login and sign up pages
-- Add the authentication by completing the middleware
-- Add the ability to save recipes to the database
-- Add the ability to save stores to the database
-
 ## How to test API
 
 - Make get request to localhost:3000/api/get/recipes to get all recipes
