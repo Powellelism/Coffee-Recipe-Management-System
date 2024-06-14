@@ -3,6 +3,8 @@
 ## Description
 This project uses Express.js for the backend Supabase for DB and Prisma for ORM. Cloudflare worker's with Open API schema is used to handle for AI inference. Repo is organized into AI-Worker and web sections. All cloudflare worker code is in Ai-Worker and express js and front end code is in web.
 
+[Team Public Video](https://youtu.be/R2Cw1NZH7bc)
+
 ## Directory Structure
 - **source/**: Source files for the Express.js application and Cloudflare Worker
   - **ai-worker/**: Contains the Cloudflare worker code
